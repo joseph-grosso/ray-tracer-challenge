@@ -23,5 +23,20 @@ int main() {
     cout << equalByEpsilon(a.y, -4.2) << endl;
     cout << equalByEpsilon(a.z, 3.1) << endl;
     cout << equalByEpsilon(a.w, 1.0) << endl;
+    cout << a.isPoint() << endl;
+    cout << !a.isVector() << endl;
+
+
+    // Scenario: A tuple with w=0 is a vector
+    // page 4
+    Tuple b(4.3, -4.2, 3.1, 0.0);
+
+    cout << equalByEpsilon(b.x, 4.3) << endl;
+    cout << equalByEpsilon(b.y, -4.2) << endl;
+    cout << equalByEpsilon(b.z, 3.1) << endl;
+    cout << equalByEpsilon(b.w, 0) << endl;
+    cout << !b.isPoint() << endl;
+    cout << b.isVector() << endl;
+
     return 0;
 }
