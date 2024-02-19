@@ -32,7 +32,6 @@ int main() {
     cout << !b.isPoint() << endl;
     cout << b.isVector() << endl;
 
-
     // Scenario: point() creates tuples with w=1
     // p4
     Tuple p = point(4, -4, 3);
@@ -41,6 +40,10 @@ int main() {
 
     // Scenario: vector() creates tuples with w=0
     // p4
+    Tuple v = vector(4, -4, 3);
+    Tuple expected_vector = Tuple(4, -4, 3, 0);
+    cout << (expected_vector == v) << endl;
+
 
     return 0;
 }
