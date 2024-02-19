@@ -67,5 +67,31 @@ int main() {
     Tuple actual_3 = p1 - v1;
     Tuple expected_3 = point(-2, -4, -6);
     cout << (actual_3 == expected_3) << endl;
+
+    // Scenario: Subtracting two vectors
+    // p7
+    Tuple v_1 = vector(3, 2, 1);
+    Tuple v_2 = vector(5, 6, 7);
+    Tuple actual_4 = v_1 - v_2;
+    Tuple expected_4 = vector(-2, -4, -6);
+    cout << (actual_4 == expected_4) << endl;
+
+    // Scenario: Subtracting a vector from the zero vector
+    // p7
+    Tuple zero = vector(0, 0, 0);
+    Tuple v_3 = vector(1, -2, 3);
+    Tuple actual_5 = zero - v_3;
+    Tuple expected_5 = vector(-1, 2, -3);
+    cout << (actual_5 == expected_5) << endl;
+
+    // Scenario: Negating a tuple
+    Tuple a3(1, -2, 3, -4);
+    Tuple actual_6 = -a3;
+    Tuple expected_6(-1, 2, -3, 4);
+    cout << (actual_6 == expected_6) << endl;
+
+
+    cout << "End tests" << endl;
     return 0;
+
 }

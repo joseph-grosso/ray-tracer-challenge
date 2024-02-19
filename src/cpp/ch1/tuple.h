@@ -10,6 +10,7 @@ class Tuple {
         bool operator== (Tuple & rhs);
         Tuple operator+(Tuple & rhs);
         Tuple operator-(Tuple & rhs);
+        Tuple operator-();
 };
 
 bool equalByEpsilon(float a, float b, float epsilon = 0.00001);

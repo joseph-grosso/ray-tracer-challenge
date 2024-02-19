@@ -56,3 +56,12 @@ Tuple Tuple::operator-(Tuple & rhs) {
         this->w  - rhs.w
     );
 }
+
+Tuple Tuple::operator-() {
+    return Tuple(
+        -this->x,
+        -this->y,
+        -this->z,
+        -this->w
+    );
+}
