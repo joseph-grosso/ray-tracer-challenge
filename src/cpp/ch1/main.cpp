@@ -1,15 +1,9 @@
 #include <iostream>
-#include <cmath>
 
 #include "tuple.h"
 
 using namespace std;
 
-
-bool equalByEpsilon(float a, float b, float epsilon = 0.00001) {
-    // return a <= b + epsilon && a >= b - epsilon;
-    return std::abs(a - b) <= epsilon;
-}
 
 
 int main() {
@@ -37,6 +31,16 @@ int main() {
     cout << equalByEpsilon(b.w, 0) << endl;
     cout << !b.isPoint() << endl;
     cout << b.isVector() << endl;
+
+
+    // Scenario: point() creates tuples with w=1
+    // p4
+    Tuple p = point(4, -4, 3);
+    Tuple expected_point = Tuple(4, -4, 3, 1);
+    cout << (expected_point == p) << endl;
+
+    // Scenario: vector() creates tuples with w=0
+    // p4
 
     return 0;
 }
