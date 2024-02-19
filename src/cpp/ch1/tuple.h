@@ -8,6 +8,8 @@ class Tuple {
         bool isPoint();
         bool isVector();
         bool operator== (Tuple & rhs);
+        Tuple operator+(Tuple & rhs);
+        Tuple operator-(Tuple & rhs);
 };
 
 bool equalByEpsilon(float a, float b, float epsilon = 0.00001);

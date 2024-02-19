@@ -38,3 +38,21 @@ bool Tuple::operator==(Tuple & rhs) {
         && equalByEpsilon(this->z, rhs.z)
         && equalByEpsilon(this->w, rhs.w);
 }
+
+Tuple Tuple::operator+(Tuple & rhs) { 
+    return Tuple(
+        this->x  + rhs.x,
+        this->y  + rhs.y,
+        this->z  + rhs.z,
+        this->w  + rhs.w
+    );
+}
+
+Tuple Tuple::operator-(Tuple & rhs) {
+    return Tuple(
+        this->x  - rhs.x,
+        this->y  - rhs.y,
+        this->z  - rhs.z,
+        this->w  - rhs.w
+    );
+}

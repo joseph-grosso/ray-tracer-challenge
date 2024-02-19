@@ -44,6 +44,28 @@ int main() {
     Tuple expected_vector = Tuple(4, -4, 3, 0);
     cout << (expected_vector == v) << endl;
 
+    // Scenario: Adding two tuples
+    // p6
+    Tuple a1(3, -2, 5, 1);
+    Tuple a2(-2, 3, 1, 0);
+    Tuple actual = a1 + a2;
+    Tuple expected(1, 1, 6, 1);
+    cout << (expected == actual) << endl;
 
+    // Scenario: Subtracting two points
+    // p6
+    Tuple b1 = point(3, 2, 1);
+    Tuple b2 = point(5, 6, 7);
+    Tuple actual_2 = b1 - b2;
+    Tuple expected_2 = vector(-2, -4, -6);
+    cout << (expected_2 == actual_2) << endl;
+
+    // Scenario: Subtracting a vector from a point
+    // p6
+    Tuple p1 = point(3, 2, 1);
+    Tuple v1 = vector(5, 6, 7);
+    Tuple actual_3 = p1 - v1;
+    Tuple expected_3 = point(-2, -4, -6);
+    cout << (actual_3 == expected_3) << endl;
     return 0;
 }
