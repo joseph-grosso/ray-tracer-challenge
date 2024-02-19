@@ -1,28 +1,27 @@
 #include <iostream>
+#include <cmath>
+
+#include "tuple.h"
+
 using namespace std;
 
-class Tuple {
-    public:
-        float x;  // Attribute
-        float y;  // Attribute
-        float z;  // Attribute
-        float w;  // Attribute
-        Tuple(float x, float y, float z, float w);
-};
 
-int main() {
-    Tuple a(1.0, 2.0, -4.0, 0);
-
-    cout << a.x << endl;
-    cout << a.y << endl;
-    cout << a.z << endl;
-    cout << a.w << endl;
-    return 0;
+bool equalByEpsilon(float a, float b, float epsilon = 0.00001) {
+    // return a <= b + epsilon && a >= b - epsilon;
+    return std::abs(a - b) <= epsilon;
 }
 
-Tuple::Tuple(float x, float y, float z, float w) {
-            this -> x = x;
-            this -> y = y;
-            this -> z = z;
-            this -> w = w;
+
+int main() {
+    // Tests the rest of the code
+
+    // Scenario: A tuple with w=1.0 is a point
+    // page 4
+    Tuple a(4.3, -4.2, 3.1, 1.0);
+
+    cout << equalByEpsilon(a.x, 4.3) << endl;
+    cout << equalByEpsilon(a.y, -4.2) << endl;
+    cout << equalByEpsilon(a.z, 3.1) << endl;
+    cout << equalByEpsilon(a.w, 1.0) << endl;
+    return 0;
 }
