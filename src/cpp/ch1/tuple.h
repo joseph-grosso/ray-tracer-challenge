@@ -1,3 +1,4 @@
+// Chapter 1: Tuples, Vectors and Points
 class Tuple {
     public:
         // Attributes
