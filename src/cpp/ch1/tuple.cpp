@@ -3,12 +3,11 @@
 
 
 Tuple::Tuple(float x, float y, float z, float w) {
-            this -> x = x;
-            this -> y = y;
-            this -> z = z;
-            this -> w = w;
-
-        }
+    this -> x = x;
+    this -> y = y;
+    this -> z = z;
+    this -> w = w;
+}
 
 bool Tuple::isPoint() {
     return w == 1.0;
