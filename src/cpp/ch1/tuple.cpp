@@ -75,11 +75,20 @@ Tuple operator*(Tuple tup, float a) {
     );
 };
 
-Tuple operator* (float a, Tuple tup) {
+Tuple operator*(float a, Tuple tup) {
     return Tuple(
         tup.x * a,
         tup.y * a,
         tup.z * a,
         tup.w * a
+    );
+};
+
+Tuple operator/(Tuple tup, float a) {
+    return Tuple(
+        tup.x / a,
+        tup.y / a,
+        tup.z / a,
+        tup.w / a
     );
 };

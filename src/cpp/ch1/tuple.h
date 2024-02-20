@@ -16,11 +16,10 @@ Tuple point(float x, float y, float z);
 Tuple vector(float x, float y, float z);
 
 // Arithmetic operators
-Tuple operator*(Tuple tup, float a);
-Tuple operator*(float a, Tuple tup);
+bool operator==(Tuple lhs, Tuple rhs);
+Tuple operator+(Tuple lhs, Tuple rhs);
 Tuple operator-(Tuple tup);
 Tuple operator-(Tuple lhs, Tuple rhs);
-Tuple operator+(Tuple lhs, Tuple rhs);
-bool operator==(Tuple lhs, Tuple rhs);
-
-
+Tuple operator*(Tuple tup, float a);
+Tuple operator*(float a, Tuple tup);
+Tuple operator/(Tuple tup, float a);

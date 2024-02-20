@@ -104,8 +104,13 @@ int main() {
     Tuple a5(1, -2, 3, -4);
     Tuple actual_8 = 0.5f * a5;
     Tuple expected_8(0.5, -1, 1.5, -2);
-    cout << (actual_7 == expected_7) << endl;
+    cout << (actual_8 == expected_8) << endl;
 
+    // Scenario: Dividing a tuple by a scalar
+    Tuple a6(1, -2, 3, -4);
+    Tuple actual_9 = a6 / 2.0f;
+    Tuple expected_9(0.5, -1, 1.5, -2);
+    cout << (actual_9 == expected_9) << endl;
 
     cout << "End tests" << endl;
     return 0;
