@@ -32,54 +32,54 @@ bool equalByEpsilon(float a, float b, float epsilon) {
     return std::abs(a - b) <= epsilon;
 }
 
-bool Tuple::operator==(Tuple & rhs) { 
-    return equalByEpsilon(this->x, rhs.x)
-        && equalByEpsilon(this->y, rhs.y)
-        && equalByEpsilon(this->z, rhs.z)
-        && equalByEpsilon(this->w, rhs.w);
+bool operator==(Tuple lhs, Tuple rhs) { 
+    return equalByEpsilon(lhs.x, rhs.x)
+        && equalByEpsilon(lhs.y, rhs.y)
+        && equalByEpsilon(lhs.z, rhs.z)
+        && equalByEpsilon(lhs.w, rhs.w);
 }
 
-Tuple Tuple::operator+(Tuple & rhs) { 
+Tuple operator+(Tuple lhs, Tuple rhs) { 
     return Tuple(
-        this->x  + rhs.x,
-        this->y  + rhs.y,
-        this->z  + rhs.z,
-        this->w  + rhs.w
+        lhs.x  + rhs.x,
+        lhs.y  + rhs.y,
+        lhs.z  + rhs.z,
+        lhs.w  + rhs.w
     );
 }
 
-Tuple Tuple::operator-(Tuple & rhs) {
+Tuple operator-(Tuple lhs, Tuple rhs) {
     return Tuple(
-        this->x  - rhs.x,
-        this->y  - rhs.y,
-        this->z  - rhs.z,
-        this->w  - rhs.w
+        lhs.x  - rhs.x,
+        lhs.y  - rhs.y,
+        lhs.z  - rhs.z,
+        lhs.w  - rhs.w
     );
 }
 
-Tuple Tuple::operator-() {
+Tuple operator-(Tuple tup) {
     return Tuple(
-        -this->x,
-        -this->y,
-        -this->z,
-        -this->w
+        -tup.x,
+        -tup.y,
+        -tup.z,
+        -tup.w
     );
 }
 
-Tuple Tuple::operator*(const float &a) {
+Tuple operator*(Tuple tup, float a) {
     return Tuple(
-        this->x * a,
-        this->y * a,
-        this->z * a,
-        this->w * a
+        tup.x * a,
+        tup.y * a,
+        tup.z * a,
+        tup.w * a
     );
 };
 
-// Tuple Tuple::operator* (float & a, const Tuple & tup) {
-//     return Tuple(
-//         tup.x * a,
-//         tup.y * a,
-//         tup.z * a,
-//         tup.w * a
-//     );
-// };
+Tuple operator* (float a, Tuple tup) {
+    return Tuple(
+        tup.x * a,
+        tup.y * a,
+        tup.z * a,
+        tup.w * a
+    );
+};

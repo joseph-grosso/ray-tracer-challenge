@@ -98,6 +98,15 @@ int main() {
     Tuple expected_7(3.5, -7, 10.5, -14);
     cout << (actual_7 == expected_7) << endl;
 
+
+    // Scenario: Multiplying a tuple by a scalar part 2
+    // p8
+    Tuple a5(1, -2, 3, -4);
+    Tuple actual_8 = 0.5f * a5;
+    Tuple expected_8(0.5, -1, 1.5, -2);
+    cout << (actual_7 == expected_7) << endl;
+
+
     cout << "End tests" << endl;
     return 0;
 
