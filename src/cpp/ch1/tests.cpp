@@ -9,6 +9,7 @@ using namespace std;
 int main() {
     // Tests the rest of the code
 
+    cout << "Test Points/Vectors" << endl;
     // Scenario: A tuple with w=1.0 is a point
     // page 4
     Tuple a(4.3, -4.2, 3.1, 1.0);
@@ -44,6 +45,9 @@ int main() {
     Tuple expected_vector = Tuple(4, -4, 3, 0);
     cout << (expected_vector == v) << endl;
 
+    cout << "End Test Points/Vectors" << endl;
+
+    cout << "Operate on tuples" << endl;
     // Scenario: Adding two tuples
     // p6
     Tuple a1(3, -2, 5, 1);
@@ -113,6 +117,8 @@ int main() {
     Tuple expected_9(0.5, -1, 1.5, -2);
     cout << (actual_9 == expected_9) << endl;
 
+    cout << "End Operate on tuples" << endl;
+
     cout << "Magnitudes tests" << endl;
     // Scenario: Computing the magnitude of vector(1, 0, 0)
     // p8
@@ -166,9 +172,30 @@ int main() {
     
     cout << "End Normalization tests" << endl; 
 
+    cout << "Dot/Cross Product Tests" << endl;
+    // Scenario: The dot product of two tuples
+    // p10
+    Tuple a7 = vector(1, 2, 3);
+    Tuple b7 = vector(2, 3, 4);
+    cout << (20 == a7.dot(b7)) << endl;
+
+    // Scenario: The cross product of unit tuples
+    // p11
+    Tuple x = vector(1, 0, 0);
+    Tuple y = vector(0, 1, 0);
+    Tuple z = vector(0, 0, 1);
+    cout << (x.cross(y) == z) << endl;
+    cout << (y.cross(x) == -z) << endl;
+
+    // Scenario: The cross product of two tuples
+    // p11
+    Tuple a8 = vector(1, 2, 3);
+    Tuple b8 = vector(2, 3, 4);
+    cout << (vector(-1, 2, -1) == a8.cross(b8)) << endl;
+    cout << (vector(1, -2, 1) == b8.cross(a8)) << endl;
+
+    cout << "End Dot/Cross Product Tests" << endl;
+
     cout << "End tests" << endl;
     return 0;
-
-
-
 }

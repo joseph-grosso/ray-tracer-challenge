@@ -11,6 +11,8 @@ class Tuple {
         bool isVector();
         float magnitude();
         Tuple normalize();
+        float dot(Tuple b);
+        Tuple cross(Tuple b);
 };
 
 bool equalByEpsilon(float a, float b, float epsilon = 0.00001);

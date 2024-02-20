@@ -33,7 +33,22 @@ Tuple Tuple::normalize() {
     return *this / this-> magnitude();
 }
 
-// Functions to create tuples
+float Tuple::dot(Tuple b) {
+    return this->x * b.x
+        + this->y * b.y
+        + this->z * b.z
+        + this->w * b.w;
+}
+
+Tuple Tuple::cross(Tuple b) {
+    return vector(
+        this->y * b.z - this->z * b.y,
+        this->z * b.x - this->x * b.z,
+        this->x * b.y - this->y * b.x
+    );
+}
+
+// Functions to create new tuples
 Tuple point(float x, float y, float z) {
     return Tuple(x, y, z, 1.0);
 }
