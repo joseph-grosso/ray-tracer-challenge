@@ -18,6 +18,15 @@ bool Tuple::isVector() {
     return w == 0.0;
 }
 
+float Tuple::magnitude() {
+    // TODO: add check/throw error if tuple is point? 
+    return sqrt(
+        pow(this->x, 2) + 
+        pow(this->y, 2) + 
+        pow(this->z, 2) 
+    );
+}
+
 // Functions to create tuples
 Tuple point(float x, float y, float z) {
     return Tuple(x, y, z, 1.0);

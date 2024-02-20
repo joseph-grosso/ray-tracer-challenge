@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <cmath>
 #include "tuple.h"
 
 using namespace std;
@@ -107,12 +107,41 @@ int main() {
     cout << (actual_8 == expected_8) << endl;
 
     // Scenario: Dividing a tuple by a scalar
+    // p8
     Tuple a6(1, -2, 3, -4);
     Tuple actual_9 = a6 / 2.0f;
     Tuple expected_9(0.5, -1, 1.5, -2);
     cout << (actual_9 == expected_9) << endl;
 
+    cout << "Magnitudes tests" << endl;
+    // Scenario: Computing the magnitude of vector(1, 0, 0)
+    // p8
+    Tuple vec_1 = vector(1, 0, 0);
+    cout << (equalByEpsilon(vec_1.magnitude(), 1)) << endl;
+
+    // Scenario: Computing the magnitude of vector(0, 1, 0)
+    // p9
+    Tuple vec_2 = vector(0, 1, 0);
+    cout << (equalByEpsilon(vec_2.magnitude(), 1)) << endl;
+
+    // Scenario: Computing the magnitude of vector(0, 0, 1)
+    // p9
+    Tuple vec_3 = vector(0, 0, 1);
+    cout << (equalByEpsilon(vec_3.magnitude(), 1)) << endl;
+
+    // Scenario: Computing the magnitude of vector(1, 2, 3)
+    // p9
+    Tuple vec_4 = vector(1, 2, 3);
+    cout << (equalByEpsilon(vec_4.magnitude(), sqrt(14))) << endl;
+
+    // Scenario: Computing the magnitude of vector(-1, -2, -3)
+    // p9
+    Tuple vec_5 = vector(-1, -2, -3);
+    cout << (equalByEpsilon(vec_5.magnitude(), sqrt(14))) << endl;
+
     cout << "End tests" << endl;
     return 0;
+
+
 
 }

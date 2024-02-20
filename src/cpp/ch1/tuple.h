@@ -1,12 +1,15 @@
 class Tuple {
     public:
-        float x;  // Attribute
-        float y;  // Attribute
-        float z;  // Attribute
-        float w;  // Attribute
+        // Attributes
+        float x;
+        float y;
+        float z;
+        float w;
+        // Methods
         Tuple(float x, float y, float z, float w);
         bool isPoint();
         bool isVector();
+        float magnitude();
 };
 
 bool equalByEpsilon(float a, float b, float epsilon = 0.00001);
