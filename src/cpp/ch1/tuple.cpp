@@ -65,3 +65,21 @@ Tuple Tuple::operator-() {
         -this->w
     );
 }
+
+Tuple Tuple::operator*(const float &a) {
+    return Tuple(
+        this->x * a,
+        this->y * a,
+        this->z * a,
+        this->w * a
+    );
+};
+
+// Tuple Tuple::operator* (float & a, const Tuple & tup) {
+//     return Tuple(
+//         tup.x * a,
+//         tup.y * a,
+//         tup.z * a,
+//         tup.w * a
+//     );
+// };

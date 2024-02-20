@@ -85,11 +85,18 @@ int main() {
     cout << (actual_5 == expected_5) << endl;
 
     // Scenario: Negating a tuple
+    // p7
     Tuple a3(1, -2, 3, -4);
     Tuple actual_6 = -a3;
     Tuple expected_6(-1, 2, -3, 4);
     cout << (actual_6 == expected_6) << endl;
 
+    // Scenario: Multiplying a tuple by a scalar
+    // p8
+    Tuple a4(1, -2, 3, -4);
+    Tuple actual_7 = a4 * 3.5f;
+    Tuple expected_7(3.5, -7, 10.5, -14);
+    cout << (actual_7 == expected_7) << endl;
 
     cout << "End tests" << endl;
     return 0;

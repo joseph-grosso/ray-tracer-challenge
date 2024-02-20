@@ -11,6 +11,7 @@ class Tuple {
         Tuple operator+(Tuple & rhs);
         Tuple operator-(Tuple & rhs);
         Tuple operator-();
+        Tuple operator*(const float & a);
 };
 
 bool equalByEpsilon(float a, float b, float epsilon = 0.00001);
