@@ -20,11 +20,17 @@ bool Tuple::isVector() {
 
 float Tuple::magnitude() {
     // TODO: add check/throw error if tuple is point? 
+    // TODO: remove w from equation? Or leave in to show errors? 
     return sqrt(
         pow(this->x, 2) + 
         pow(this->y, 2) + 
-        pow(this->z, 2) 
+        pow(this->z, 2) + 
+        pow(this->w, 2)
     );
+}
+
+Tuple Tuple::normalize() {
+    return *this / this-> magnitude();
 }
 
 // Functions to create tuples

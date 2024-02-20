@@ -10,6 +10,7 @@ class Tuple {
         bool isPoint();
         bool isVector();
         float magnitude();
+        Tuple normalize();
 };
 
 bool equalByEpsilon(float a, float b, float epsilon = 0.00001);

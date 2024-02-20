@@ -139,6 +139,33 @@ int main() {
     Tuple vec_5 = vector(-1, -2, -3);
     cout << (equalByEpsilon(vec_5.magnitude(), sqrt(14))) << endl;
 
+    cout << "End Magnitudes tests" << endl;
+
+    cout << "Normalization tests" << endl;
+    // Scenario: Normalizing vector(4, 0, 0) gives (1, 0, 0)
+    // p10
+    Tuple vec_6 = vector(4, 0, 0);
+    Tuple expected_10 = vector(1, 0, 0);
+    cout << (vec_6.normalize() == expected_10) << endl;
+
+    // Scenario: Normalizing vector(1, 2, 3)
+    // p10
+    Tuple vec_7 = vector(1, 2, 3);
+    Tuple expected_11 = vector(
+        1 / sqrt(14),
+        2 / sqrt(14),
+        3 / sqrt(14)
+    );
+    cout << (vec_7.normalize() == expected_11) << endl;
+
+    // Scenario: The magnitude of a normalized vector
+    // p10
+    Tuple vec_8 = vector(1, 2, 3);
+    cout << equalByEpsilon(vec_8.normalize().magnitude(), 1) << endl;
+
+    
+    cout << "End Normalization tests" << endl; 
+
     cout << "End tests" << endl;
     return 0;
 
