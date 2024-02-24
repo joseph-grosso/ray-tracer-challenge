@@ -7,7 +7,7 @@
 // Chapter 2: Colors and Canvas
 class Canvas {
     private:
-        std::vector<Color> _canvas;
+        std::vector<std::vector<Color>> _canvas;
         // Attributes
         int width, height;
     public:
@@ -16,4 +16,5 @@ class Canvas {
         unsigned int get_width();
         unsigned int get_height();
         Color get_point(unsigned int x, unsigned int y);
+        Color set_point(Color color, unsigned int x, unsigned int y);
 };

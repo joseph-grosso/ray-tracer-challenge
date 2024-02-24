@@ -54,6 +54,7 @@ int main() {
     // scenario: Test canvas points
     Canvas canvas_1(5, 10);
     cout << (canvas.get_point(3, 8) == Color(0, 0, 0)) << endl;
+    
 
     cout << "End tests" << endl;
     return 0;
