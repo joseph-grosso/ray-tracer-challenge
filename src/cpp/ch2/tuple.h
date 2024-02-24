@@ -1,3 +1,5 @@
+#pragma once
+
 // Chapter 1: Tuples, Vectors and Points
 // Equality test
 bool equalByEpsilon(float a, float b, float epsilon = 0.00001);

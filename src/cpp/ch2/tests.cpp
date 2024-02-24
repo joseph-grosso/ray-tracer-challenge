@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 #include "tuple.h"
+#include "canvas.h"
 
 using namespace std;
 
@@ -37,11 +39,21 @@ int main() {
     cout << (expected_3 == 2 * c5) << endl;
 
     // Scenario: Multiplying two colors together
+    // 
     Color c6(1, 0.2, 0.4), c7(0.9, 1, 0.1);
     cout << (Color(0.9, 0.2, 0.04) == c6 * c7) << endl;
 
-
     cout << "End test colors" << endl;
+
+    // Scenario: test getting heights and widths
+    // pMe
+    Canvas canvas(1, 2);
+    cout << (canvas.get_width() == 1) << endl;
+    cout << (canvas.get_height() == 2) << endl;
+
+    // scenario: Test canvas points
+    Canvas canvas_1(5, 10);
+    cout << (canvas.get_point(3, 8) == Color(0, 0, 0)) << endl;
 
     cout << "End tests" << endl;
     return 0;

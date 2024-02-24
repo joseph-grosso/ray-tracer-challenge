@@ -1,8 +1,19 @@
+#pragma once
+
+#include "tuple.h"
+#include <vector>
+
+
 // Chapter 2: Colors and Canvas
 class Canvas {
-    public:
+    private:
+        std::vector<Color> _canvas;
         // Attributes
-        float red, green, blue;
+        int width, height;
+    public:
         // Methods
-        Color(float red = 0.0f, float green = 0.0f, float blue = 0.0f);
+        Canvas(unsigned int width, unsigned int height);
+        unsigned int get_width();
+        unsigned int get_height();
+        Color get_point(unsigned int x, unsigned int y);
 };
