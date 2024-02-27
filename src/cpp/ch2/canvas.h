@@ -2,19 +2,25 @@
 
 #include "tuple.h"
 #include <vector>
+#include <iostream>
 
 
 // Chapter 2: Colors and Canvas
 class Canvas {
     private:
-        std::vector<std::vector<Color>> _canvas;
         // Attributes
-        int width, height;
+        unsigned int width, height;
+        std::vector<std::vector<Color>> _canvas;
+        // Methods
+        std::string ppm_header();
+        std::string ppm_content();
+        unsigned int scale_color(float color_value);
     public:
         // Methods
         Canvas(unsigned int width, unsigned int height);
         unsigned int get_width();
         unsigned int get_height();
-        Color get_point(unsigned int x, unsigned int y);
-        Color set_point(Color color, unsigned int x, unsigned int y);
+        Color pixel_at(unsigned int x, unsigned int y);
+        void write_pixel(Color color, unsigned int x, unsigned int y);
+        std::string canvas_to_ppm();
 };

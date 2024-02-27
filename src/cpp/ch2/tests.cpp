@@ -45,16 +45,34 @@ int main() {
 
     cout << "End test colors" << endl;
 
+    cout << "Test canvas" << endl;
     // Scenario: test getting heights and widths
-    // pMe
-    Canvas canvas(1, 2);
-    cout << (canvas.get_width() == 1) << endl;
-    cout << (canvas.get_height() == 2) << endl;
+    // p19
+    Canvas canvas(10, 20);
+    cout << (canvas.get_width() == 10) << endl;
+    cout << (canvas.get_height() == 20) << endl;
 
-    // scenario: Test canvas points
+    // scenario: Writing pixels to canvas
+    // p19
     Canvas canvas_1(5, 10);
-    cout << (canvas.get_point(3, 8) == Color(0, 0, 0)) << endl;
-    
+    Color red(1, 0, 0), black(0, 0, 0);
+    canvas_1.write_pixel(red, 3, 9);
+    cout << (canvas_1.pixel_at(3, 8) == black) << endl;
+    cout << (canvas_1.pixel_at(3, 9) == red) << endl;
+
+    cout << "End Test canvas" << endl;
+    cout << "Test write ppm file" << endl;
+
+    // Scenario: Construct larger ppm file
+    // p21
+    Canvas canvas_3(5, 3);
+    canvas_3.write_pixel(Color(1.5, 0, 0), 0, 0);
+    canvas_3.write_pixel(Color(0, 0.5, 0), 2, 1);
+    canvas_3.write_pixel(Color(-0.5, 0, 1), 4, 2);
+    string expected_5 = "P3\n5 3\n255\n255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 255\n";
+    cout << expected_5 << endl;
+    cout << canvas_3.canvas_to_ppm() << endl;
+    cout << (expected_5.compare(canvas_3.canvas_to_ppm())) << endl;
 
     cout << "End tests" << endl;
     return 0;
