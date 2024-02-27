@@ -41,27 +41,39 @@ std::string Canvas::ppm_header() {
 
 std::string Canvas::ppm_content() {
     std::string content;
-    std::string red_line, green_line, blue_line;
+    std::string line;
     for (int j = 0; j < height; j++) {
         for (int i = 0; i < width; i++) {
             Color col = _canvas[i][j];
-            red_line   += std::to_string(scale_color(col.red));
-            green_line += std::to_string(scale_color(col.green));
-            blue_line  += std::to_string(scale_color(col.blue));
-            if (red_line.length() > 70 || green_line.length() > 70 || blue_line.length() > 70) {
-                // some logic for when length of line is too great
-                content += red_line + "\n" + green_line + "\n" + blue_line + "\n";
-                red_line.clear();
-                green_line.clear();
-                blue_line.clear();
+            line += std::to_string(scale_color(col.red));
+            if (line.length() < 70) {
+                line += " ";
             } else {
-                red_line   += " ";
-                green_line += " ";
-                blue_line  += " ";
+                content += line + "\n";
+                line.clear();
+            };
+            line += std::to_string(scale_color(col.green));
+            if (line.length() < 70) {
+                line += " ";
+            } else {
+                content += line + "\n";
+                line.clear();
+            };
+            line += std::to_string(scale_color(col.blue));
+            if (line.length() < 70) {
+                line += " ";
+            } else {
+                content += line + "\n";
+                line.clear();
             };
         };
+        content += line + "\n";
+        line.clear();
+
     };
-    content += red_line + "\n" + green_line + "\n" + blue_line + "\n";
+    if (line != "") {
+        content += "\n";
+    };
     return content;
 }
 

@@ -72,7 +72,19 @@ int main() {
     string expected_5 = "P3\n5 3\n255\n255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 255\n";
     cout << expected_5 << endl;
     cout << canvas_3.canvas_to_ppm() << endl;
-    cout << (expected_5.compare(canvas_3.canvas_to_ppm())) << endl;
+    cout << (expected_5 == canvas_3.canvas_to_ppm()) << endl;
+
+    // Scenario: Splitting long lines in PPM files
+    // p22
+    Canvas canvas_4(10, 2);
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 2; j++) {
+            canvas_4.write_pixel(Color(1, 0.8, 0.6), i, j);
+        }
+    }
+
+    cout << canvas_4.canvas_to_ppm() << endl;
+
 
     cout << "End tests" << endl;
     return 0;
