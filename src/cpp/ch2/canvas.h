@@ -23,4 +23,5 @@ class Canvas {
         Color pixel_at(unsigned int x, unsigned int y);
         void write_pixel(Color color, unsigned int x, unsigned int y);
         std::string canvas_to_ppm();
+        void write_to_ppm(std::string filename = "canvas.ppm");
 };

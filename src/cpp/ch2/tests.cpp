@@ -70,8 +70,6 @@ int main() {
     canvas_3.write_pixel(Color(0, 0.5, 0), 2, 1);
     canvas_3.write_pixel(Color(-0.5, 0, 1), 4, 2);
     string expected_5 = "P3\n5 3\n255\n255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 255\n";
-    cout << expected_5 << endl;
-    cout << canvas_3.canvas_to_ppm() << endl;
     cout << (expected_5 == canvas_3.canvas_to_ppm()) << endl;
 
     // Scenario: Splitting long lines in PPM files
@@ -82,9 +80,28 @@ int main() {
             canvas_4.write_pixel(Color(1, 0.8, 0.6), i, j);
         }
     }
+    string expected_6 = "P3\n10 2\n255\n255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n153 255 204 153 255 204 153 255 204 153 255 204 153\n255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n153 255 204 153 255 204 153 255 204 153 255 204 153\n";
+    cout << (canvas_4.canvas_to_ppm() == expected_6) << endl;
 
-    cout << canvas_4.canvas_to_ppm() << endl;
+    // Scenario: PPM output always ends with newline
+    // p22
+    Canvas canvas_5(5, 3);
+    string ppm = canvas_5.canvas_to_ppm();
+    // TODO: Find more consistent way to get last element of string
+    cout << (ppm[ppm.length() - 1] == '\n') << endl;
 
+
+    // Scenario: PPM output to a file
+    // pMe
+    Canvas canvas_6(100, 150);
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 2; j++) {
+            canvas_6.write_pixel(Color(1, 0.8, 0.6), i, j);
+        }
+    }
+    canvas_6.write_to_ppm();
+
+    cout << "End Test write ppm file" << endl;
 
     cout << "End tests" << endl;
     return 0;

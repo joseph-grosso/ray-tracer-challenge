@@ -3,6 +3,8 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
+#include <string>
+#include <fstream>
 
 
 // Chapter 1: Tuples, Vectors and Points
@@ -45,34 +47,39 @@ std::string Canvas::ppm_content() {
     for (int j = 0; j < height; j++) {
         for (int i = 0; i < width; i++) {
             Color col = _canvas[i][j];
-            line += std::to_string(scale_color(col.red));
-            if (line.length() < 70) {
-                line += " ";
-            } else {
+            std::string red = std::to_string(scale_color(col.red));
+            std::string green = std::to_string(scale_color(col.green));
+            std::string blue = std::to_string(scale_color(col.blue));
+            if (line.length() + red.length() + 1 > 70) {
                 content += line + "\n";
                 line.clear();
+                line += red;
+            } else if (line.length() == 0) {
+                line += red;
+            } else {
+                line += " " + red;
             };
-            line += std::to_string(scale_color(col.green));
-            if (line.length() < 70) {
-                line += " ";
-            } else {
+            if (line.length() + green.length() + 1> 70) {
                 content += line + "\n";
                 line.clear();
+                line += green;
+            } else if (line.length() == 0) {
+                line += green;
+            } else {
+                line += " " + green;
             };
-            line += std::to_string(scale_color(col.blue));
-            if (line.length() < 70) {
-                line += " ";
-            } else {
+            if (line.length() + blue.length() + 1> 70) {
                 content += line + "\n";
                 line.clear();
+                line += blue;
+            } else if (line.length() == 0) {
+                line += blue;
+            } else {
+                line += " " + blue;
             };
         };
         content += line + "\n";
         line.clear();
-
-    };
-    if (line != "") {
-        content += "\n";
     };
     return content;
 }
@@ -92,4 +99,13 @@ unsigned int Canvas::scale_color(float color_value) {
         return 255;
     };
     return scaled_value;
+};
+
+void Canvas::write_to_ppm(std::string filename) {
+    std::string ppm_data = canvas_to_ppm();
+    // TODO: Actually write the ppm string to the ppm file
+    std::ofstream out(filename);
+    out << ppm_data;
+    out.close();
+    return;
 };
