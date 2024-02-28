@@ -1,2 +1,5 @@
 .vscode
+
+# Common .out file names
 *test.out
+*cannon.out
