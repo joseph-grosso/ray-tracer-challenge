@@ -6,12 +6,10 @@ g++ tests.cpp tuple.cpp -o test.out
 
 ```
 
-Creating .png files from .ppm
+To run the virtual cannon:
 
 ```bash
-convert imageFile.ppm imageFile.png
+g++ virtual_cannon_traced.cpp tuple.cpp canvas.cpp -o cannon.out
+./cannon.out
+convert flight_path.ppm flight_path.png
 ```
-
-
-1. install GIMP
-1. That's all

@@ -41,7 +41,7 @@ float Tuple::dot(Tuple b) {
 }
 
 Tuple Tuple::cross(Tuple b) {
-    return vector(
+    return vector_(
         this->y * b.z - this->z * b.y,
         this->z * b.x - this->x * b.z,
         this->x * b.y - this->y * b.x
@@ -53,7 +53,7 @@ Tuple point(float x, float y, float z) {
     return Tuple(x, y, z, 1.0);
 }
 
-Tuple vector(float x, float y, float z) {
+Tuple vector_(float x, float y, float z) {
     return Tuple(x, y, z, 0);
 }
 
