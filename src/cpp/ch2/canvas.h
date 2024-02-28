@@ -24,4 +24,6 @@ class Canvas {
         void write_pixel(Color color, unsigned int x, unsigned int y);
         std::string canvas_to_ppm();
         void write_to_ppm(std::string filename = "canvas.ppm");
+        // TODO: implement the conversion from ppm to png.
+        void write_to_png(std::string filename = "canvas.png");
 };
