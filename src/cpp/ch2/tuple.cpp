@@ -20,7 +20,6 @@ bool Tuple::isVector() {
 
 float Tuple::magnitude() {
     // TODO: add check/throw error if tuple is point? 
-    // TODO: remove w from equation? Or leave in to show errors? 
     return sqrt(
         pow(this->x, 2) + 
         pow(this->y, 2) + 
@@ -41,7 +40,7 @@ float Tuple::dot(Tuple b) {
 }
 
 Tuple Tuple::cross(Tuple b) {
-    return vector_(
+    return vector(
         this->y * b.z - this->z * b.y,
         this->z * b.x - this->x * b.z,
         this->x * b.y - this->y * b.x
@@ -53,7 +52,7 @@ Tuple point(float x, float y, float z) {
     return Tuple(x, y, z, 1.0);
 }
 
-Tuple vector_(float x, float y, float z) {
+Tuple vector(float x, float y, float z) {
     return Tuple(x, y, z, 0);
 }
 

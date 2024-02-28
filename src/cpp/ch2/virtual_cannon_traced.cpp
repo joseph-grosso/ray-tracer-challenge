@@ -6,7 +6,7 @@
 #include "canvas.h"
 
 
-using namespace std;
+// using namespace std;
 
 class Projectile {
     public:
@@ -51,24 +51,24 @@ Projectile tick_projectile(Environment env, Projectile proj) {
 int main() {
     int tick_count = 0;
     Tuple pos = point(0, 1, 0);
-    Tuple vel = vector_(1, 1.8, 0).normalize() * 11.25;
+    Tuple vel = vector(1, 1.8, 0).normalize() * 11.25;
 
-    Tuple grav = vector_(0, -0.1, 0);
-    Tuple wind = vector_(-0.01, 0, 0);
+    Tuple grav = vector(0, -0.1, 0);
+    Tuple wind = vector(-0.01, 0, 0);
 
     Projectile p = Projectile(pos, vel);
     Environment e(grav, wind);
 
     Canvas c(900, 500);
 
-    cout << setprecision(2) << fixed;
-    cout << "New flight starting!" << endl;
+    std::cout << std::setprecision(2) << std::fixed;
+    std::cout << "New flight starting!" << std::endl;
 
     while (p.position.y > 0) {
         // fill_in_canvas_at_position(c, (int) p.position.x, (int) p.position.y);
-        cout << "Filling canvas at position" << endl;
-        cout << "i value: " << to_string(p.position.x) << endl;
-        cout << "j value: " << to_string(p.position.y) << endl;
+        std::cout << "Filling canvas at position" << std::endl;
+        std::cout << "i value: " << std::to_string(p.position.x) << std::endl;
+        std::cout << "j value: " << std::to_string(p.position.y) << std::endl;
         for (int i = (int) p.position.x; i<=(int) p.position.x+5; i++) {
             for (int j = (int) p.position.y; j<=(int) p.position.y+5; j++) {
                 if (i >= 0 && i < c.get_width() && j >= 0 && j < c.get_height()) {
@@ -79,12 +79,12 @@ int main() {
         p = tick_projectile(e, p);
     };
 
-    cout << "New flight ending!" << endl;
+    std::cout << "New flight ending!" << std::endl;
 
     
     c.write_to_ppm("flight_path.ppm");
 
-    cout << "Charted at flight_path.ppm" << endl;
+    std::cout << "Charted at flight_path.ppm" << std::endl;
 
 
     return 0;

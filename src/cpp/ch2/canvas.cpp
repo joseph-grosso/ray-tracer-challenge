@@ -103,7 +103,6 @@ unsigned int Canvas::scale_color(float color_value) {
 
 void Canvas::write_to_ppm(std::string filename) {
     std::string ppm_data = canvas_to_ppm();
-    // TODO: Actually write the ppm string to the ppm file
     std::ofstream out(filename);
     out << ppm_data;
     out.close();

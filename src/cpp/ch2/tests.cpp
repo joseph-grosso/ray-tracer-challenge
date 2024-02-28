@@ -87,8 +87,7 @@ int main() {
     // p22
     Canvas canvas_5(5, 3);
     string ppm = canvas_5.canvas_to_ppm();
-    // TODO: Find more consistent way to get last element of string
-    cout << (ppm[ppm.length() - 1] == '\n') << endl;
+    cout << (ppm.back() == '\n') << endl;
 
 
     // Scenario: PPM output to a file
