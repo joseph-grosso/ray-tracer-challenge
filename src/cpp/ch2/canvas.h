@@ -25,5 +25,7 @@ class Canvas {
         std::string canvas_to_ppm();
         void write_to_ppm(std::string filename = "canvas.ppm");
         // TODO: implement the conversion from ppm to png.
+        // maybe using this library?
+        // https://www.codeproject.com/Articles/1300/CxImage#:~:text=...%20Convert%20from%20One%20Format%20to%20Another
         void write_to_png(std::string filename = "canvas.png");
 };

@@ -26,8 +26,6 @@ class Tuple {
 
 // Functions to create tuples
 Tuple point(float x, float y, float z);
-// TODO: Fix error due to conflict in vector naming:
-//  error: reference to ‘vector’ is ambiguous
 Tuple vector(float x, float y, float z);
 
 // Arithmetic operators
