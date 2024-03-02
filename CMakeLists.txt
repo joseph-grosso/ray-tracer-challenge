@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Set the name of the chapter to be built
-set(MAIN "ch2.cpp")
+set(MAIN_FILE_NAME "ch1.cpp")
 
 # add subdirectories
 add_subdirectory(challenges)
