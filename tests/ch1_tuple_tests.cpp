@@ -16,7 +16,6 @@ TEST (TestTuples, TupleDesign) {
     EXPECT_TRUE(!a.isVector());
 };
 
-
 // Scenario: A tuple with w=0 is a vector
 // page 4
 TEST (TestTuples, VectorDesign) {
@@ -54,7 +53,6 @@ TEST (TestTuples, AddingTuples) {
     Tuple expected(1, 1, 6, 1);
     EXPECT_TRUE(expected == actual);
 }
-
 
 // Scenario: Subtracting two points
 // p6
@@ -104,9 +102,6 @@ TEST (TestTuples, NegatingTuple) {
     Tuple expected_6(-1, 2, -3, 4);
     EXPECT_TRUE(actual_6 == expected_6);
 }
-
-
-
 
 // Scenario: Multiplying a tuple by a scalar
 // p8
@@ -166,57 +161,60 @@ TEST (TestTuples, ComputeMagnitude_4) {
 // Scenario: Computing the magnitude of vector(-1, -2, -3)
 // p9
 TEST (TestTuples, ComputeMagnitude_5) {
-
     Tuple vec_5 = vector(-1, -2, -3);
     EXPECT_TRUE(equalByEpsilon(vec_5.magnitude(), sqrt(14)));
 }
 
-//     // Scenario: Normalizing vector(4, 0, 0) gives (1, 0, 0)
-//     // p10
-//     Tuple vec_6 = vector(4, 0, 0);
-//     Tuple expected_10 = vector(1, 0, 0);
-//     EXPECT_TRUE(vec_6.normalize() == expected_10);
+// Scenario: Normalizing vector(4, 0, 0) gives (1, 0, 0)
+// p10
+TEST (TestTuples, Normalization_1) {
+    Tuple vec_6 = vector(4, 0, 0);
+    Tuple expected_10 = vector(1, 0, 0);
+    EXPECT_TRUE(vec_6.normalize() == expected_10);
+}
 
-//     // Scenario: Normalizing vector(1, 2, 3)
-//     // p10
-//     Tuple vec_7 = vector(1, 2, 3);
-//     Tuple expected_11 = vector(
-//         1 / sqrt(14),
-//         2 / sqrt(14),
-//         3 / sqrt(14)
-//     );
-//     EXPECT_TRUE(vec_7.normalize() == expected_11);
+// Scenario: Normalizing vector(1, 2, 3)
+// p10
+TEST (TestTuples, Normalization_2) {
+    Tuple vec_7 = vector(1, 2, 3);
+    Tuple expected_11 = vector(
+        1 / sqrt(14),
+        2 / sqrt(14),
+        3 / sqrt(14)
+    );
+    EXPECT_TRUE(vec_7.normalize() == expected_11);
+}
 
-//     // Scenario: The magnitude of a normalized vector
-//     // p10
-//     Tuple vec_8 = vector(1, 2, 3);
-//     EXPECT_TRUE(equalByEpsilon(vec_8.normalize().magnitude(), 1);
+// Scenario: The magnitude of a normalized vector
+// p10
+TEST (TestTuples, Normalization_3) {
+    Tuple vec_8 = vector(1, 2, 3);
+    EXPECT_TRUE(equalByEpsilon(vec_8.normalize().magnitude(), 1));
+}
 
-    
+// Scenario: The dot product of two tuples
+// p10
+TEST (TestTuples, DotProductOfTuples) {
+    Tuple a7 = vector(1, 2, 3);
+    Tuple b7 = vector(2, 3, 4);
+    EXPECT_TRUE(20 == a7.dot(b7));
+}
 
-//     // Scenario: The dot product of two tuples
-//     // p10
-//     Tuple a7 = vector(1, 2, 3);
-//     Tuple b7 = vector(2, 3, 4);
-//     EXPECT_TRUE(20 == a7.dot(b7));
+// Scenario: The cross product of unit tuples
+// p11
+TEST (TestTuples, CrossProductOfUnitTuples) {
+    Tuple x = vector(1, 0, 0);
+    Tuple y = vector(0, 1, 0);
+    Tuple z = vector(0, 0, 1);
+    EXPECT_TRUE(x.cross(y) == z);
+    EXPECT_TRUE(y.cross(x) == -z);
+}
 
-//     // Scenario: The cross product of unit tuples
-//     // p11
-//     Tuple x = vector(1, 0, 0);
-//     Tuple y = vector(0, 1, 0);
-//     Tuple z = vector(0, 0, 1);
-//     EXPECT_TRUE(x.cross(y) == z);
-//     EXPECT_TRUE(y.cross(x) == -z);
-
-//     // Scenario: The cross product of two tuples
-//     // p11
-//     Tuple a8 = vector(1, 2, 3);
-//     Tuple b8 = vector(2, 3, 4);
-//     EXPECT_TRUE(vector(-1, 2, -1) == a8.cross(b8));
-//     EXPECT_TRUE(vector(1, -2, 1) == b8.cross(a8));
-
-//     EXPECT_TRUE("End Dot/Cross Product Tests";
-
-//     EXPECT_TRUE("End tests";
-//     return 0;
-// }
+// Scenario: The cross product of two tuples
+// p11
+TEST (TestTuples, CrossProductOfRandomTuples) {
+    Tuple a8 = vector(1, 2, 3);
+    Tuple b8 = vector(2, 3, 4);
+    EXPECT_TRUE(vector(-1, 2, -1) == a8.cross(b8));
+    EXPECT_TRUE(vector(1, -2, 1) == b8.cross(a8));
+}
