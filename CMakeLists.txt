@@ -36,21 +36,21 @@ if (test)
 
   include_directories("${CMAKE_SOURCE_DIR}/src")
   add_executable(
-    hello_test.out
+    test.out
     tests/all_tests.cpp
     tests/ch1_tuple_tests.cpp
   )
 
   target_link_libraries(
-    hello_test.out
+    test.out
     GTest::gtest_main
   )
 
   target_link_libraries(
-    hello_test.out
+    test.out
     src
   )
 
   include(GoogleTest)
-  gtest_discover_tests(hello_test.out)
+  gtest_discover_tests(test.out)
 endif()

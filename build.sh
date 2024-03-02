@@ -1,4 +1,5 @@
-mkdir build
+set -eux
+
 cd build
 cmake .. 
 make

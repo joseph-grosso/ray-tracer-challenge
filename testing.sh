@@ -5,4 +5,4 @@ cd build
 cmake .. -Dtest=ON
 make
 cd ..
-./build/hello_test.out
+./build/test.out
