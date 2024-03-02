@@ -2,6 +2,3 @@ cmake_minimum_required(VERSION 3.16)
 project(TestProject)
 
 set(CMAKE_CXX_STANDARD 14)
-
-
-# target_link_libraries(TestProject gtest gtest_main)
