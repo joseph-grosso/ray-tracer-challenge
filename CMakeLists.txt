@@ -39,6 +39,7 @@ if (test)
     test.out
     tests/all_tests.cpp
     tests/ch1_tuple_tests.cpp
+    tests/ch2_canvas_tests.cpp
   )
 
   target_link_libraries(
