@@ -1,4 +1,3 @@
-#include <iostream>
 #include <cmath>
 #include "tuple.h"
 #include "gtest/gtest.h"

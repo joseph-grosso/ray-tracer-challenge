@@ -1,6 +1,4 @@
-#include <iostream>
-#include <cmath>
-#include <vector>
+#include <string>
 #include "tuple.h"
 #include "canvas.h"
 #include "gtest/gtest.h"
