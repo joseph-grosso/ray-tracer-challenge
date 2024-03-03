@@ -17,7 +17,7 @@ Matrix::Matrix(unsigned int rows, unsigned int columns, std::vector<float> data)
     rows_ = rows;
     columns_ = columns;
     data_ = data;
-}
+};
 
 // Matrix(unsigned int rows, unsigned int columns, float data[]);
 float Matrix::get_point(unsigned int row, unsigned int col) {
@@ -138,14 +138,12 @@ std::ostream& operator<<(std::ostream& os,
         os << element << " ";
     }
     return os;
-}
+};
 
 
 Matrix Matrix::transpose() {
     std::vector<float> new_data;
     std::vector<float> current_col;
-    std::cout << "==========2323" << std:: endl;
-    std::cout << new_data << std::endl;
     for (int i = 0;i < columns_; i++) {
         current_col = get_column(i);
         std::copy(
@@ -155,4 +153,30 @@ Matrix Matrix::transpose() {
         );
     };
     return Matrix(columns_, rows_, new_data);
+};
+
+float Matrix::determinant() {
+    if (get_column_count() == 2 && get_row_count() == 2) {
+        return get_point(0, 0) * get_point(1, 1)
+             - get_point(0, 1) * get_point(1, 0);
+    };
+    // TODO: implement the real rest of this
+    return 0;
+};
+
+float Matrix::minor(unsigned int row, unsigned int col) {
+    return submatrix(row, col).determinant();
+};
+
+
+Matrix Matrix::submatrix(unsigned int row, unsigned int col) {
+    std::vector<float> new_data;
+    for (int i=0; i < rows_; i++) {
+        for (int j=0; j < columns_; j++) {
+            if (i != row && j != col) {
+                new_data.push_back(get_point(i, j));
+            };
+        };
+    };
+    return Matrix(rows_ - 1, columns_ - 1, new_data);
 };

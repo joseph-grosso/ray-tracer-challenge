@@ -121,7 +121,6 @@ TEST (TestMatrices, GettingSingleColumn_2) {
                                 13, 14, 15, 16};
     Matrix m(2, 8, input);
     std::vector<float> expected = {3, 11};
-    std::cout << m.get_column(2) << std::endl;
     EXPECT_TRUE(m.get_column(2) == expected);
 }
 
@@ -251,4 +250,68 @@ TEST (TestMatrices, TransposeIdentityMatrix) {
     Matrix actual = I.transpose();
 
     EXPECT_TRUE(expected == actual);
+}
+
+// Scenario: Calculate 2x2 matrix determinant
+// p34
+TEST (TestMatrices, DeterminantOf2x2) {
+    std::vector<float> data = {1, 5,
+                            -3, 2};
+
+    Matrix m(2, 2, data);
+    float expected = 17;
+    float actual = m.determinant();
+
+    EXPECT_TRUE(expected == actual);
+}
+
+// Scenario: A submatrix of a 3x3 matrix is a 2x2 matrix
+// p35
+TEST (TestMatrices, SubmatrixOf3x3) {
+    std::vector<float> in_data = {1, 5, 0,
+                            -3, 2, 7,
+                            0, 6, -3};
+    std::vector<float> expected_data = {-3, 2,
+                                        0, 6,};
+    
+
+    Matrix m(3, 3, in_data);
+    Matrix expected(2, 2, expected_data);
+    Matrix actual = m.submatrix(0, 2);
+
+    EXPECT_TRUE(expected == actual);
+}
+
+// Scenario: A submatrix of a 4x4 matrix is a 3x3 matrix
+// p35
+TEST (TestMatrices, SubmatrixOf4x4) {
+    std::vector<float> in_data = {-6, 1, 1, 6,
+                            -8, 5, 8, 6,
+                            -1, 0, 8, 2,
+                            -7, 1, -1, 1};
+    std::vector<float> expected_data = {-6, 1, 6,
+                            -8, 8, 6,
+                            -7, -1, 1};
+    
+
+    Matrix m(4, 4, in_data);
+    Matrix expected(3, 3, expected_data);
+    Matrix actual = m.submatrix(2, 1);
+
+    EXPECT_TRUE(expected == actual);
+}
+
+
+// Scenario: Calculating a minor of a 3x3 matrix
+// p35
+TEST (TestMatrices, MinorOf3x3) {
+    std::vector<float> a_data = {3, 5, 0,
+                            2, -1, -7,
+                            6, -1, 5};
+
+    Matrix a(3, 3, a_data);
+    Matrix b = a.submatrix(1, 0);
+
+    EXPECT_TRUE(25 == b.determinant());
+    EXPECT_TRUE(25 == a.minor(1, 0));
 }
