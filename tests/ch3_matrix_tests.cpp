@@ -151,7 +151,7 @@ TEST (TestMatrices, MatrixMultiplication_1) {
     EXPECT_TRUE(expected == actual);
 }
 
-// Scenario: Matrix multiplication, part 1
+// Scenario: Matrix multiplication, part 2
 // p28
 TEST (TestMatrices, MatrixMultiplication_2) {
     std::vector<float> in_1 = {1, 2, 3, 4,
@@ -168,3 +168,19 @@ TEST (TestMatrices, MatrixMultiplication_2) {
     Matrix actual = m1 * m2;
     EXPECT_TRUE(expected == actual);
 }
+
+
+// Scenario: Matrix multiplication, part 2
+// p28
+TEST (TestMatrices, MatrixMultWithTuple) {
+    std::vector<float> input_m = {1, 2, 3, 4,
+                             2, 4, 4, 2,
+                             8, 6, 4, 1,
+                             0, 0, 0, 1};
+    Matrix m(4, 4, input_m);
+    Tuple t(1, 2, 3, 1);
+    Tuple expected(18, 24, 33, 1);
+    Tuple actual = m * t;
+    EXPECT_TRUE(expected == actual);
+}
+

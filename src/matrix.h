@@ -10,8 +10,8 @@ class Matrix {
         unsigned int rows_;
         unsigned int columns_;
         std::vector<float> data_;
-        void check_valid_row_coord();
-        void check_valid_column_coord();
+        void check_valid_row_coord(unsigned int row_coord);
+        void check_valid_column_coord(unsigned int column_coord);
     public:
         // Methods
         Matrix(unsigned int rows, unsigned int columns, std::vector<float> data);
@@ -27,6 +27,7 @@ class Matrix {
 bool operator==(Matrix lhs, Matrix rhs);
 bool operator!=(Matrix lhs, Matrix rhs);
 Matrix operator*(Matrix lhs, Matrix rhs);
+Tuple operator*(Matrix m, Tuple t);
 
 // Helpful functions
 // TODO: Find if there's a better way to use this 

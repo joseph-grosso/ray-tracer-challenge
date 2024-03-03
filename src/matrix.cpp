@@ -18,17 +18,21 @@ Matrix::Matrix(unsigned int rows, unsigned int columns, std::vector<float> data)
 
 // Matrix(unsigned int rows, unsigned int columns, float data[]);
 float Matrix::get_point(unsigned int row, unsigned int col) {
+    check_valid_row_coord(row);
+    check_valid_column_coord(col);
     return data_[row * columns_ + col];
 };
 
 
 std::vector<float> Matrix::get_row(unsigned int row) {
+    check_valid_row_coord(row);
     int start_index = row * columns_;
     int end_index = start_index + columns_;
     return std::vector<float>(data_.begin() + start_index, data_.begin() + end_index);
 };
 
 std::vector<float> Matrix::get_column(unsigned int col) {
+    check_valid_column_coord(col);
     std::vector<float> col_vector;
     for (int i=0;i<data_.size();i++) {
         if ((i % columns_) == col) {
@@ -80,6 +84,20 @@ Matrix operator*(Matrix lhs, Matrix rhs) {
     return Matrix(new_rows, new_cols, new_data);
 };
 
+Tuple operator*(Matrix m, Tuple t) {
+    if (m.get_row_count() != 4 || m.get_column_count() != 4) {
+        throw std::invalid_argument("Unfit matrix: Matrix must be 4x4 to multiply with a tuple.");
+    };
+    std::vector<float> tup_as_vector = {t.x, t.y, t.z, t.w};
+    return Tuple(
+        dot_product(m.get_row(0), tup_as_vector), 
+        dot_product(m.get_row(1), tup_as_vector), 
+        dot_product(m.get_row(2), tup_as_vector), 
+        dot_product(m.get_row(3), tup_as_vector)
+    );
+};
+
+
 float dot_product(std::vector<float> v1, std::vector<float> v2) {
     if (v1.size() != v2.size()) {
         throw std::invalid_argument("Length of vector 1 does not match length of vector 2");
@@ -90,4 +108,18 @@ float dot_product(std::vector<float> v1, std::vector<float> v2) {
         v2.begin(),
         0
     );
+};
+
+void Matrix::check_valid_row_coord(unsigned int row_coord) {
+    if (row_coord >= rows_) {
+        throw std::invalid_argument("Row coordinate out of range of matrix");
+    };
+    return;
+};
+
+void Matrix::check_valid_column_coord(unsigned int column_coord) {
+    if (column_coord >= columns_) {
+        throw std::invalid_argument("Column coordinate out of range of matrix");
+    };
+    return;
 };
