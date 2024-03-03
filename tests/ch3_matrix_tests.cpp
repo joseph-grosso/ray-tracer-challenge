@@ -237,3 +237,18 @@ TEST (TestMatrices, MatrixTransposeNonSquareMatrix) {
 
     EXPECT_TRUE(expected == actual);
 }
+
+// Scenario: Transpose Identity Matrix
+// p33
+TEST (TestMatrices, TransposeIdentityMatrix) {
+    std::vector<float> Id = {1, 0, 0, 0,
+                               0, 1, 0, 0,
+                               0, 0, 1, 0,
+                               0, 0, 0, 1};
+
+    Matrix I(4, 4, Id);
+    Matrix expected(4, 4, Id);
+    Matrix actual = I.transpose();
+
+    EXPECT_TRUE(expected == actual);
+}
