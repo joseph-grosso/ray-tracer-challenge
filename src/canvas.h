@@ -2,7 +2,7 @@
 
 #include "tuple.h"
 #include <vector>
-#include <iostream>
+#include <string>
 
 
 // Chapter 2: Colors and Canvas
