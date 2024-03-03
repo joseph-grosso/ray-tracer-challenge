@@ -24,7 +24,7 @@ TEST (TestMatrices, Inspecting4x4Matrix) {
 }
 
 // Scenario: Constructing a 2x2 matrix
-// p26
+// p27
 TEST (TestMatrices, Inspecting2x2Matrix) {
     std::vector<float> m = {-3,  5,
                             1 , -2};
@@ -35,16 +35,32 @@ TEST (TestMatrices, Inspecting2x2Matrix) {
     EXPECT_TRUE(equalByEpsilon(mat.get_point(1, 1), -2));
 }
 
-// Scenario: Constructing a 3x3 matrix
-// p26
-TEST (TestMatrices, Inspecting3x3Matrix) {
-    std::vector<float> m = {-3,  5,  0,
-                            1 , -2, -7,
-                            0,   1,  1};
-    Matrix mat(3, 3, m);
-    EXPECT_TRUE(equalByEpsilon(mat.get_point(0, 0), -3));
-    EXPECT_TRUE(equalByEpsilon(mat.get_point(1, 1), -2));
-    EXPECT_TRUE(equalByEpsilon(mat.get_point(2, 2), 1));
+// Scenario: Comparing 2 equal matrices
+// p27
+TEST (TestMatrices, Comparing2EqualMatrices) {
+    std::vector<float> input = {1, 2, 3, 4,
+                                5, 6, 7, 8,
+                                9, 8, 7, 6,
+                                5, 4, 3, 2};
+    Matrix a(4, 4, input);
+    Matrix b(4, 4, input);
+    EXPECT_TRUE(a == b);
+}
+
+// Scenario: Comparing 2 unequal matrices
+// p27
+TEST (TestMatrices, Comparing2UnequalMatrices) {
+    std::vector<float> input_1 = {1, 2, 3, 4,
+                                  5, 6, 7, 8,
+                                  9, 8, 7, 6,
+                                  5, 4, 3, 2};
+    std::vector<float> input_2 = {2, 3, 4, 5,
+                                  6, 7, 8, 9,
+                                  8, 7, 6, 5,
+                                  4, 3, 2, 1};
+    Matrix a(4, 4, input_1);
+    Matrix b(4, 4, input_2);
+    EXPECT_TRUE(a != b);
 }
 
 
