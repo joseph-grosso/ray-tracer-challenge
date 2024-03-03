@@ -168,6 +168,9 @@ float Matrix::minor(unsigned int row, unsigned int col) {
     return submatrix(row, col).determinant();
 };
 
+float Matrix::cofactor(unsigned int row, unsigned int col) {
+    return (row + col % 2 == 1) ? -minor(row, col) : minor(row, col);
+};
 
 Matrix Matrix::submatrix(unsigned int row, unsigned int col) {
     std::vector<float> new_data;

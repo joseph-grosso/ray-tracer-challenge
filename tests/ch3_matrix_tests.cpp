@@ -301,7 +301,6 @@ TEST (TestMatrices, SubmatrixOf4x4) {
     EXPECT_TRUE(expected == actual);
 }
 
-
 // Scenario: Calculating a minor of a 3x3 matrix
 // p35
 TEST (TestMatrices, MinorOf3x3) {
@@ -315,3 +314,19 @@ TEST (TestMatrices, MinorOf3x3) {
     EXPECT_TRUE(25 == b.determinant());
     EXPECT_TRUE(25 == a.minor(1, 0));
 }
+
+// Scenario: Calculating a cofactor of a 3x3 matrix
+// p35
+TEST (TestMatrices, CofactorOf3x3) {
+    std::vector<float> a_data = {3, 5, 0,
+                            2, -1, -7,
+                            6, -1, 5};
+
+    Matrix a(3, 3, a_data);
+
+    EXPECT_EQ(a.minor(1, 0), 25);
+    EXPECT_EQ(a.cofactor(1, 0), -25);
+    EXPECT_EQ(a.minor(0, 0), -12);
+    EXPECT_EQ(a.cofactor(0, 0), -12);
+}
+

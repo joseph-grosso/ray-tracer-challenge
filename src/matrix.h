@@ -25,6 +25,7 @@ class Matrix {
         float determinant();
         float minor(unsigned int row, unsigned int col);
         Matrix submatrix(unsigned int row, unsigned int col);
+        float cofactor(unsigned int row, unsigned int col);
 };
 
 // Arithmetic Operators
