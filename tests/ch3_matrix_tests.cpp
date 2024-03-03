@@ -75,7 +75,6 @@ TEST (TestMatrices, GettingSingleRow_1) {
     EXPECT_TRUE(m.get_row(2) == expected);
 }
 
-
 // Scenario: getting a single row 2
 // pMe
 TEST (TestMatrices, GettingSingleRow_2) {
@@ -126,7 +125,6 @@ TEST (TestMatrices, GettingSingleColumn_2) {
     EXPECT_TRUE(m.get_column(2) == expected);
 }
 
-
 // Scenario: Matrix multiplication, part 1
 // p28
 TEST (TestMatrices, MatrixMultiplication_1) {
@@ -169,7 +167,6 @@ TEST (TestMatrices, MatrixMultiplication_2) {
     EXPECT_TRUE(expected == actual);
 }
 
-
 // Scenario: Matrix multiplication with a tuple
 // p30
 TEST (TestMatrices, MatrixMultWithTuple) {
@@ -183,7 +180,6 @@ TEST (TestMatrices, MatrixMultWithTuple) {
     Tuple actual = m * t;
     EXPECT_TRUE(expected == actual);
 }
-
 
 // Scenario: Matrix multiplication with an identity matrix
 // p32
@@ -201,6 +197,25 @@ TEST (TestMatrices, MatrixMultWithIdentity) {
     Matrix I(4, 4, in_2);
     Matrix expected(4, 4, in_1);
     Matrix actual = m * I;
+
+    EXPECT_TRUE(expected == actual);
+}
+
+// Scenario: Matrix transpose
+// p33
+TEST (TestMatrices, MatrixTranspose) {
+    std::vector<float> input = {0, 9, 3, 0,
+                                9, 8, 0, 8,
+                                1, 8, 5, 3,
+                                0, 0, 5, 8};
+    std::vector<float> in_exp = {0, 9, 1, 0,
+                               9, 8, 8, 0,
+                               3, 0, 5, 5,
+                               0, 8, 3, 8};
+
+    Matrix m(4, 4, input);
+    Matrix expected(4, 4, in_exp);
+    Matrix actual = m.transpose();
 
     EXPECT_TRUE(expected == actual);
 }

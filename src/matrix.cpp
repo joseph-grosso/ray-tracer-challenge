@@ -2,8 +2,11 @@
 #include "matrix.h"
 #include <vector>
 #include <numeric>
+// TODO: remove
+#include <iostream>
 
 #include <stdexcept>
+#include <algorithm>
 
 
 // Chapter 3: Matrix Math
@@ -122,4 +125,34 @@ void Matrix::check_valid_column_coord(unsigned int column_coord) {
         throw std::invalid_argument("Column coordinate out of range of matrix");
     };
     return;
+};
+
+// TODO: Remove once you're done debugging tests.
+template <typename S>
+std::ostream& operator<<(std::ostream& os,
+                    const std::vector<S>& vector)
+{
+    // Printing all the elements
+    // using <<
+    for (auto element : vector) {
+        os << element << " ";
+    }
+    return os;
+}
+
+
+Matrix Matrix::transpose() {
+    std::vector<float> new_data;
+    std::vector<float> current_col;
+    std::cout << "==========2323" << std:: endl;
+    std::cout << new_data << std::endl;
+    for (int i = 0;i < columns_; i++) {
+        current_col = get_column(i);
+        std::copy(
+            current_col.begin(),
+            current_col.end(),
+            std::back_inserter(new_data)
+        );
+    };
+    return Matrix(columns_, rows_, new_data);
 };

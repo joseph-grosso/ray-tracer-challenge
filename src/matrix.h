@@ -21,6 +21,7 @@ class Matrix {
         unsigned int get_row_count();
         unsigned int get_column_count();
         std::vector<float> get_matrix_data();
+        Matrix transpose();
 };
 
 // Arithmetic Operators
