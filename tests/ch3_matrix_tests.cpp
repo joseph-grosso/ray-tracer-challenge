@@ -125,3 +125,46 @@ TEST (TestMatrices, GettingSingleColumn_2) {
     std::cout << m.get_column(2) << std::endl;
     EXPECT_TRUE(m.get_column(2) == expected);
 }
+
+
+// Scenario: Matrix multiplication, part 1
+// p28
+TEST (TestMatrices, MatrixMultiplication_1) {
+    std::vector<float> in_1 = {1, 2, 3, 4,
+                             5, 6, 7, 8,
+                             9, 8, 7, 6,
+                             5, 4, 3, 2};
+    std::vector<float> in_2 = {-2, 1, 2, 3,
+                             3, 2, 1, -1,
+                             4, 3, 6, 5,
+                             1, 2, 7, 8};
+    std::vector<float> out = {20, 22, 50, 48,
+                              44, 54, 114, 108,
+                              40, 58, 110, 102,
+                              16, 26, 46, 42};
+
+    Matrix m1(4, 4, in_1);
+    Matrix m2(4, 4, in_2);
+    Matrix expected(4, 4, out);
+    Matrix actual = m1 * m2;
+
+    EXPECT_TRUE(expected == actual);
+}
+
+// Scenario: Matrix multiplication, part 1
+// p28
+TEST (TestMatrices, MatrixMultiplication_2) {
+    std::vector<float> in_1 = {1, 2, 3, 4,
+                             5, 6, 7, 8};
+    std::vector<float> in_2 = {-2, 1,
+                                3, 2,
+                                4, 3,
+                                1, 2};
+    std::vector<float> out = {20, 22, 
+                              44, 54};
+    Matrix m1(2, 4, in_1);
+    Matrix m2(4, 2, in_2);
+    Matrix expected(2, 2, out);
+    Matrix actual = m1 * m2;
+    EXPECT_TRUE(expected == actual);
+}

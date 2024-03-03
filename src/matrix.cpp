@@ -1,6 +1,7 @@
 #include "tuple.h"
 #include "matrix.h"
 #include <vector>
+#include <numeric>
 
 #include <stdexcept>
 
@@ -63,3 +64,30 @@ bool operator!=(Matrix lhs, Matrix rhs) {
     return !operator==(lhs, rhs);
 };
 
+Matrix operator*(Matrix lhs, Matrix rhs) {
+    unsigned int new_rows = lhs.get_row_count();
+    unsigned int new_cols = rhs.get_column_count();
+    std::vector<float> new_data;
+    for (int i=0; i<new_rows; i++) {
+        for (int j=0; j<new_cols; j++) {
+            new_data.push_back(
+                // TODO: Find if there's a better way to use this other than a static method.
+                dot_product(lhs.get_row(i), rhs.get_column(j))
+            );
+        };
+    };
+
+    return Matrix(new_rows, new_cols, new_data);
+};
+
+float dot_product(std::vector<float> v1, std::vector<float> v2) {
+    if (v1.size() != v2.size()) {
+        throw std::invalid_argument("Length of vector 1 does not match length of vector 2");
+    };
+    return std::inner_product(
+        v1.begin(),
+        v1.end(),
+        v2.begin(),
+        0
+    );
+};

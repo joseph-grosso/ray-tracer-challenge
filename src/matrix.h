@@ -10,6 +10,8 @@ class Matrix {
         unsigned int rows_;
         unsigned int columns_;
         std::vector<float> data_;
+        void check_valid_row_coord();
+        void check_valid_column_coord();
     public:
         // Methods
         Matrix(unsigned int rows, unsigned int columns, std::vector<float> data);
@@ -24,3 +26,8 @@ class Matrix {
 // Arithmetic Operators
 bool operator==(Matrix lhs, Matrix rhs);
 bool operator!=(Matrix lhs, Matrix rhs);
+Matrix operator*(Matrix lhs, Matrix rhs);
+
+// Helpful functions
+// TODO: Find if there's a better way to use this 
+float dot_product(std::vector<float> v1, std::vector<float> v2);
