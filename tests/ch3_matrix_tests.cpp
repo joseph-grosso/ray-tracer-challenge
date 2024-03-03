@@ -170,8 +170,8 @@ TEST (TestMatrices, MatrixMultiplication_2) {
 }
 
 
-// Scenario: Matrix multiplication, part 2
-// p28
+// Scenario: Matrix multiplication with a tuple
+// p30
 TEST (TestMatrices, MatrixMultWithTuple) {
     std::vector<float> input_m = {1, 2, 3, 4,
                              2, 4, 4, 2,
@@ -184,3 +184,23 @@ TEST (TestMatrices, MatrixMultWithTuple) {
     EXPECT_TRUE(expected == actual);
 }
 
+
+// Scenario: Matrix multiplication with an identity matrix
+// p32
+TEST (TestMatrices, MatrixMultWithIdentity) {
+    std::vector<float> in_1 = {1, 2, 3, 4,
+                             5, 6, 7, 8,
+                             9, 8, 7, 6,
+                             5, 4, 3, 2};
+    std::vector<float> in_2 = {1, 0, 0, 0,
+                               0, 1, 0, 0,
+                               0, 0, 1, 0,
+                               0, 0, 0, 1};
+
+    Matrix m(4, 4, in_1);
+    Matrix I(4, 4, in_2);
+    Matrix expected(4, 4, in_1);
+    Matrix actual = m * I;
+
+    EXPECT_TRUE(expected == actual);
+}
