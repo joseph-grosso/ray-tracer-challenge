@@ -219,3 +219,21 @@ TEST (TestMatrices, MatrixTranspose) {
 
     EXPECT_TRUE(expected == actual);
 }
+
+// Scenario: Matrix transpose non square matrix
+// pMe
+TEST (TestMatrices, MatrixTransposeNonSquareMatrix) {
+    std::vector<float> input = {0, 9, 3, 0,
+                                9, 8, 0, 8,
+                                1, 8, 5, 3};
+    std::vector<float> in_exp = {0, 9, 1,
+                               9, 8, 8,
+                               3, 0, 5,
+                               0, 8, 3,};
+
+    Matrix m(3, 4, input);
+    Matrix expected(4, 3, in_exp);
+    Matrix actual = m.transpose();
+
+    EXPECT_TRUE(expected == actual);
+}
