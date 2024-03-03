@@ -63,5 +63,65 @@ TEST (TestMatrices, Comparing2UnequalMatrices) {
     EXPECT_TRUE(a != b);
 }
 
+// Scenario: getting a single row 2
+// pMe
+TEST (TestMatrices, GettingSingleRow_1) {
+    std::vector<float> input = {1, 2, 3, 4,
+                                5, 6, 7, 8,
+                                9, 8, 7, 6,
+                                5, 4, 3, 2};
+    Matrix m(4, 4, input);
+    std::vector<float> expected = {9, 8, 7, 6};
+    EXPECT_TRUE(m.get_row(2) == expected);
+}
 
 
+// Scenario: getting a single row 2
+// pMe
+TEST (TestMatrices, GettingSingleRow_2) {
+    std::vector<float> input = {1, 2, 3, 4,
+                                5, 6, 7, 8,
+                                9, 8, 7, 6,
+                                5, 4, 3, 2};
+    Matrix m(2, 8, input);
+    std::vector<float> expected = {1, 2, 3, 4, 5, 6, 7, 8};
+    EXPECT_TRUE(m.get_row(0) == expected);
+}
+
+// TODO: Remove once you're done debugging tests.
+template <typename S>
+std::ostream& operator<<(std::ostream& os,
+                    const std::vector<S>& vector)
+{
+    // Printing all the elements
+    // using <<
+    for (auto element : vector) {
+        os << element << " ";
+    }
+    return os;
+}
+
+// Scenario: getting a single column
+// pMe
+TEST (TestMatrices, GettingSingleColumn_1) {
+    std::vector<float> input = {1,   2,  3,  4,
+                                5,   6,  7,  8,
+                                9,  10, 11, 12,
+                                13, 14, 15, 16};
+    Matrix m(4, 4, input);
+    std::vector<float> expected = {3, 7, 11, 15};
+    EXPECT_TRUE(m.get_column(2) == expected);
+}
+
+// Scenario: getting a single column, part 2
+// pMe
+TEST (TestMatrices, GettingSingleColumn_2) {
+    std::vector<float> input = {1,   2,  3,  4,
+                                5,   6,  7,  8,
+                                9,  10, 11, 12,
+                                13, 14, 15, 16};
+    Matrix m(2, 8, input);
+    std::vector<float> expected = {3, 11};
+    std::cout << m.get_column(2) << std::endl;
+    EXPECT_TRUE(m.get_column(2) == expected);
+}
