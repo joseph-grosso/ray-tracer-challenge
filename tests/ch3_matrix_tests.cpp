@@ -316,7 +316,7 @@ TEST (TestMatrices, MinorOf3x3) {
 }
 
 // Scenario: Calculating a cofactor of a 3x3 matrix
-// p35
+// p36
 TEST (TestMatrices, CofactorOf3x3) {
     std::vector<float> a_data = {3, 5, 0,
                             2, -1, -7,
@@ -328,5 +328,37 @@ TEST (TestMatrices, CofactorOf3x3) {
     EXPECT_EQ(a.cofactor(1, 0), -25);
     EXPECT_EQ(a.minor(0, 0), -12);
     EXPECT_EQ(a.cofactor(0, 0), -12);
+}
+
+// Scenario: Calculating the determinant of a 3x3 matrix
+// p37
+TEST (TestMatrices, DeterminantOf3x3) {
+    std::vector<float> a_data = {1, 2, 6,
+                                -5, 8, -4,
+                                2, 6, 4};
+
+    Matrix a(3, 3, a_data);
+
+    EXPECT_EQ(a.cofactor(0, 0), 56);
+    EXPECT_EQ(a.cofactor(0, 1), 12);
+    EXPECT_EQ(a.cofactor(0, 2), -46);
+    EXPECT_EQ(a.determinant(), -196);
+}
+
+// Scenario: Calculating the determinant of a 4x4 matrix
+// p37
+TEST (TestMatrices, DeterminantOf4x4) {
+    std::vector<float> a_data = {-2, -8, 3, 5,
+                                 -3, 1, 7, 3,
+                                 1, 2, -9, 6,
+                                 -6, 7, 7, -9};
+
+    Matrix a(4, 4, a_data);
+
+    EXPECT_EQ(a.cofactor(0, 0), 690);
+    EXPECT_EQ(a.cofactor(0, 1), 447);
+    EXPECT_EQ(a.cofactor(0, 2), 210);
+    EXPECT_EQ(a.cofactor(0, 3), 51);
+    EXPECT_EQ(a.determinant(), -4071);
 }
 

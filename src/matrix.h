@@ -37,4 +37,3 @@ Tuple operator*(Matrix m, Tuple t);
 // Helpful functions
 // TODO: Find if there's a better way to use this 
 float dot_product(std::vector<float> v1, std::vector<float> v2);
-float determinant(Matrix m);
