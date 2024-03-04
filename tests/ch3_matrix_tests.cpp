@@ -44,7 +44,7 @@ TEST (TestMatrices, Comparing2EqualMatrices) {
                                 5, 4, 3, 2};
     Matrix a(4, 4, input);
     Matrix b(4, 4, input);
-    EXPECT_TRUE(a == b);
+    EXPECT_EQ(a, b);
 }
 
 // Scenario: Comparing 2 unequal matrices
@@ -60,7 +60,7 @@ TEST (TestMatrices, Comparing2UnequalMatrices) {
                                   4, 3, 2, 1};
     Matrix a(4, 4, input_1);
     Matrix b(4, 4, input_2);
-    EXPECT_TRUE(a != b);
+    EXPECT_NE(a, b);
 }
 
 // Scenario: getting a single row 2
@@ -72,7 +72,7 @@ TEST (TestMatrices, GettingSingleRow_1) {
                                 5, 4, 3, 2};
     Matrix m(4, 4, input);
     std::vector<float> expected = {9, 8, 7, 6};
-    EXPECT_TRUE(m.get_row(2) == expected);
+    EXPECT_EQ(m.get_row(2), expected);
 }
 
 // Scenario: getting a single row 2
@@ -84,7 +84,7 @@ TEST (TestMatrices, GettingSingleRow_2) {
                                 5, 4, 3, 2};
     Matrix m(2, 8, input);
     std::vector<float> expected = {1, 2, 3, 4, 5, 6, 7, 8};
-    EXPECT_TRUE(m.get_row(0) == expected);
+    EXPECT_EQ(m.get_row(0), expected);
 }
 
 // TODO: Remove once you're done debugging tests.
@@ -109,7 +109,7 @@ TEST (TestMatrices, GettingSingleColumn_1) {
                                 13, 14, 15, 16};
     Matrix m(4, 4, input);
     std::vector<float> expected = {3, 7, 11, 15};
-    EXPECT_TRUE(m.get_column(2) == expected);
+    EXPECT_EQ(m.get_column(2), expected);
 }
 
 // Scenario: getting a single column, part 2
@@ -121,7 +121,7 @@ TEST (TestMatrices, GettingSingleColumn_2) {
                                 13, 14, 15, 16};
     Matrix m(2, 8, input);
     std::vector<float> expected = {3, 11};
-    EXPECT_TRUE(m.get_column(2) == expected);
+    EXPECT_EQ(m.get_column(2), expected);
 }
 
 // Scenario: Matrix multiplication, part 1
@@ -145,7 +145,7 @@ TEST (TestMatrices, MatrixMultiplication_1) {
     Matrix expected(4, 4, out);
     Matrix actual = m1 * m2;
 
-    EXPECT_TRUE(expected == actual);
+    EXPECT_EQ(expected, actual);
 }
 
 // Scenario: Matrix multiplication, part 2
@@ -163,7 +163,7 @@ TEST (TestMatrices, MatrixMultiplication_2) {
     Matrix m2(4, 2, in_2);
     Matrix expected(2, 2, out);
     Matrix actual = m1 * m2;
-    EXPECT_TRUE(expected == actual);
+    EXPECT_EQ(expected, actual);
 }
 
 // Scenario: Matrix multiplication with a tuple
@@ -177,7 +177,7 @@ TEST (TestMatrices, MatrixMultWithTuple) {
     Tuple t(1, 2, 3, 1);
     Tuple expected(18, 24, 33, 1);
     Tuple actual = m * t;
-    EXPECT_TRUE(expected == actual);
+    EXPECT_EQ(expected, actual);
 }
 
 // Scenario: Matrix multiplication with an identity matrix
@@ -197,7 +197,7 @@ TEST (TestMatrices, MatrixMultWithIdentity) {
     Matrix expected(4, 4, in_1);
     Matrix actual = m * I;
 
-    EXPECT_TRUE(expected == actual);
+    EXPECT_EQ(expected, actual);
 }
 
 // Scenario: Matrix transpose
@@ -216,7 +216,7 @@ TEST (TestMatrices, MatrixTranspose) {
     Matrix expected(4, 4, in_exp);
     Matrix actual = m.transpose();
 
-    EXPECT_TRUE(expected == actual);
+    EXPECT_EQ(expected, actual);
 }
 
 // Scenario: Matrix transpose non square matrix
@@ -234,7 +234,7 @@ TEST (TestMatrices, MatrixTransposeNonSquareMatrix) {
     Matrix expected(4, 3, in_exp);
     Matrix actual = m.transpose();
 
-    EXPECT_TRUE(expected == actual);
+    EXPECT_EQ(expected, actual);
 }
 
 // Scenario: Transpose Identity Matrix
@@ -249,7 +249,7 @@ TEST (TestMatrices, TransposeIdentityMatrix) {
     Matrix expected(4, 4, Id);
     Matrix actual = I.transpose();
 
-    EXPECT_TRUE(expected == actual);
+    EXPECT_EQ(expected, actual);
 }
 
 // Scenario: Calculate 2x2 matrix determinant
@@ -262,7 +262,7 @@ TEST (TestMatrices, DeterminantOf2x2) {
     float expected = 17;
     float actual = m.determinant();
 
-    EXPECT_TRUE(expected == actual);
+    EXPECT_EQ(expected, actual);
 }
 
 // Scenario: A submatrix of a 3x3 matrix is a 2x2 matrix
@@ -279,7 +279,7 @@ TEST (TestMatrices, SubmatrixOf3x3) {
     Matrix expected(2, 2, expected_data);
     Matrix actual = m.submatrix(0, 2);
 
-    EXPECT_TRUE(expected == actual);
+    EXPECT_EQ(expected, actual);
 }
 
 // Scenario: A submatrix of a 4x4 matrix is a 3x3 matrix
@@ -298,7 +298,7 @@ TEST (TestMatrices, SubmatrixOf4x4) {
     Matrix expected(3, 3, expected_data);
     Matrix actual = m.submatrix(2, 1);
 
-    EXPECT_TRUE(expected == actual);
+    EXPECT_EQ(expected, actual);
 }
 
 // Scenario: Calculating a minor of a 3x3 matrix
@@ -311,8 +311,8 @@ TEST (TestMatrices, MinorOf3x3) {
     Matrix a(3, 3, a_data);
     Matrix b = a.submatrix(1, 0);
 
-    EXPECT_TRUE(25 == b.determinant());
-    EXPECT_TRUE(25 == a.minor(1, 0));
+    EXPECT_EQ(25, b.determinant());
+    EXPECT_EQ(25, a.minor(1, 0));
 }
 
 // Scenario: Calculating a cofactor of a 3x3 matrix

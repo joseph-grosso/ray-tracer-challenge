@@ -156,12 +156,17 @@ Matrix Matrix::transpose() {
 };
 
 float Matrix::determinant() {
+    float det = 0;
+
     if (get_column_count() == 2 && get_row_count() == 2) {
         return get_point(0, 0) * get_point(1, 1)
              - get_point(0, 1) * get_point(1, 0);
     };
-    // TODO: implement the real rest of this
-    return 0;
+
+    for (int i=0; i<columns_; i++) {
+        det += get_point(0, i) * cofactor(0, i);
+    };
+    return det;
 };
 
 float Matrix::minor(unsigned int row, unsigned int col) {
