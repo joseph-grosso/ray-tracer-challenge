@@ -15,9 +15,9 @@ Implementation of the code from the book [The Ray Tracer Challenge: A Test-Drive
 
 ## TODO:
 
-- Import and use `gtest`
-- Do some sample tests using gtest
-- Fix the tests folder to actually be tests of your code
-- Create a bash script that does all of your building for you
-    - main function building
-    - test building
+- [x] Import and use `gtest`
+- [x] Do some sample tests using gtest
+- [x] Fix the tests folder to actually be tests of your code
+- [x] Create a bash script that does all of your building for you
+    - [x] main function building
+    - [x] test building
