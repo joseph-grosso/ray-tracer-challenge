@@ -453,3 +453,28 @@ TEST (TestMatrices, CalculateInverse_3) {
 
     EXPECT_EQ(expected, a.inverse());
 }
+
+// Scenario: Multiply a product by its inverse
+// p41
+TEST (TestMatrices, MultiplyByInverse) {
+    std::vector<float> a_data = {3, -9, 7, 3,
+                                3, -8, 2, -9,
+                                -4, 4, 4, 1,
+                                -6, 5, -1, 1};
+    std::vector<float> b_data = {8, 2, 2, 2,
+                                3, -1, 7, 0,
+                                7, 0, 5, 4,
+                                6, -2, 0, 5};
+
+    Matrix a(4, 4, a_data);
+    Matrix b(4, 4, b_data);
+    Matrix b_1 = b.inverse();
+    Matrix c = a * b;
+
+    std::cout << a.get_matrix_data() << std::endl;
+    std::cout << (c * b_1).get_matrix_data() << std::endl;
+    std::cout << (b * b_1).get_matrix_data() << std:: endl;
+
+    EXPECT_EQ(c * b_1, a);
+}
+
