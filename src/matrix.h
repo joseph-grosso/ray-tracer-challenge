@@ -26,6 +26,8 @@ class Matrix {
         float minor(unsigned int row, unsigned int col);
         Matrix submatrix(unsigned int row, unsigned int col);
         float cofactor(unsigned int row, unsigned int col);
+        bool is_square();
+        bool is_invertible();
 };
 
 // Arithmetic Operators

@@ -155,7 +155,12 @@ Matrix Matrix::transpose() {
     return Matrix(columns_, rows_, new_data);
 };
 
+
+
 float Matrix::determinant() {
+    if (!is_square()) {
+        throw std::invalid_argument("Row coordinate out of range of matrix");
+    };
     float det = 0;
 
     if (get_column_count() == 2 && get_row_count() == 2) {
@@ -188,3 +193,12 @@ Matrix Matrix::submatrix(unsigned int row, unsigned int col) {
     };
     return Matrix(rows_ - 1, columns_ - 1, new_data);
 };
+
+bool Matrix::is_square() {
+    return rows_ == columns_;
+};
+
+bool Matrix::is_invertible() {
+    return determinant() != 0;
+};
+

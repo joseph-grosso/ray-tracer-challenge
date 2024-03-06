@@ -362,3 +362,30 @@ TEST (TestMatrices, DeterminantOf4x4) {
     EXPECT_EQ(a.determinant(), -4071);
 }
 
+// Scenario: Testing an invertible matrix for invertibility
+// p39
+TEST (TestMatrices, InvertibleMatrix) {
+    std::vector<float> a_data = {6, 4, 4, 4,
+                                 5, 5, 7, 6,
+                                 4, -9, 3, -7,
+                                 9, 1, 7, -6};
+
+    Matrix a(4, 4, a_data);
+
+    EXPECT_EQ(a.determinant(), -2120);
+    EXPECT_TRUE(a.is_invertible());
+}
+
+// Scenario: Testing a non-invertible matrix for invertibility
+// p39
+TEST (TestMatrices, NonInvertibleMatrix) {
+    std::vector<float> a_data = {-4, 2, -2, -3,
+                                 9, 6, 2, 6,
+                                 0, -5, 1, -5,
+                                 0, 0, 0, 0};
+
+    Matrix a(4, 4, a_data);
+
+    EXPECT_EQ(a.determinant(), 0);
+    EXPECT_TRUE(!a.is_invertible());
+}
