@@ -87,19 +87,6 @@ TEST (TestMatrices, GettingSingleRow_2) {
     EXPECT_EQ(m.get_row(0), expected);
 }
 
-// TODO: Remove once you're done debugging tests.
-template <typename S>
-std::ostream& operator<<(std::ostream& os,
-                    const std::vector<S>& vector)
-{
-    // Printing all the elements
-    // using <<
-    for (auto element : vector) {
-        os << element << " ";
-    }
-    return os;
-}
-
 // Scenario: getting a single column
 // pMe
 TEST (TestMatrices, GettingSingleColumn_1) {
@@ -433,6 +420,19 @@ TEST (TestMatrices, CalculateInverse_2) {
     EXPECT_EQ(expected, a.inverse());
 }
 
+// TODO: Remove once you're done debugging tests.
+template <typename S>
+std::ostream& operator<<(std::ostream& os,
+                    const std::vector<S>& vector)
+{
+    // Printing all the elements
+    // using <<
+    for (auto element : vector) {
+        os << element << " ";
+    }
+    return os;
+}
+
 // Scenario: Calculating the inverse of a matrix p3
 // p41
 TEST (TestMatrices, CalculateInverse_3) {
@@ -444,14 +444,86 @@ TEST (TestMatrices, CalculateInverse_3) {
                                         -0.07778,  0.03333,  0.36667, -0.33333,
                                         -0.02901, -0.14630, -0.10926,  0.12963,
                                          0.17778,  0.06667, -0.26667,  0.33333};
-    
     Matrix a(4, 4, a_data);
     Matrix expected(4, 4, expected_data);
 
-    // std::cout << a.inverse().get_matrix_data() << std::endl;
-    // std::cout << expected.get_matrix_data() << std::endl;
-
     EXPECT_EQ(expected, a.inverse());
+}
+
+// Scenario: Multiply a matrix by id matrix
+// pMe
+TEST (TestMatrices, MultiplyByIdMatrix2x2) {
+    std::vector<float> id_data = {1, 0, 0, 1};
+    std::vector<float> a_data = {1, 2, 3, 4};
+
+    Matrix id(2, 2, id_data);
+    Matrix a(2, 2, a_data);
+    Matrix a_1 = a.inverse();
+
+    std::cout << (a).get_matrix_data() << std::endl;
+    std::cout << (a.determinant())<< std::endl;
+    std::cout << (id).get_matrix_data() << std::endl;
+    std::cout << (id.determinant())<< std::endl;
+
+    std::cout << (a * a).get_matrix_data() << std::endl;
+    std::cout << (id * id).get_matrix_data() << std::endl;
+    std::cout << (a * id).get_matrix_data() << std::endl;
+ 
+    EXPECT_EQ(id, id * id);
+    EXPECT_EQ(a, a * id);
+}
+
+// Scenario: Multiply a matrix by id matrix, 3x3
+// pMe
+TEST (TestMatrices, MultiplyByIdMatrix3x3) {
+    std::vector<float> id_data = {1, 0, 0, 0, 1, 0, 0, 0, 1};
+    std::vector<float> a_data = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    Matrix id(3, 3, id_data);
+    Matrix a(3, 3, a_data);
+    Matrix a_1 = a.inverse();
+
+    std::cout << (a).get_matrix_data() << std::endl;
+    std::cout << (a.determinant())<< std::endl;
+    std::cout << (id).get_matrix_data() << std::endl;
+    std::cout << (id.determinant())<< std::endl;
+
+    std::cout << (a * a).get_matrix_data() << std::endl;
+    std::cout << (id * id).get_matrix_data() << std::endl;
+    std::cout << (a * id).get_matrix_data() << std::endl;
+ 
+    EXPECT_EQ(id, id * id);
+    EXPECT_EQ(a, a * id);
+}
+
+// Scenario: The inverse of a matrix times the original matrix equals the identity matrix
+// pMe
+TEST (TestMatrices, InverseTimesOGIsIdentity) {
+    std::vector<float> a_data = { 9, 3,  0,  9,
+                                 -5,  -2,  -6,  -3,
+                                -4,  9,  6,  4,
+                                -7,  6, 6, 2};
+    std::vector<float> id_data = {1, 0, 0, 0,
+                                0, 1, 0, 0,
+                                0, 0, 1, 0,
+                                0, 0, 0, 1};
+    Matrix a(4, 4, a_data);
+    Matrix a_minus1 = a.inverse();
+    Matrix out = a * a_minus1;
+    Matrix id(4, 4, id_data);
+
+
+    std::cout << "a" << std::endl;
+    std::cout << a.get_matrix_data() << std::endl;
+    std::cout << "a.inverse" << std::endl;
+    std::cout << a_minus1.get_matrix_data() << std::endl;
+    std::cout << "out" << std::endl;
+    std::cout << out.get_matrix_data() << std::endl;
+    std::cout << "ID" << std::endl;
+    std::cout << id.get_matrix_data() << std::endl;
+
+    EXPECT_EQ(a_minus1 * a, id);
+    EXPECT_EQ(a * a_minus1, id);
 }
 
 // Scenario: Multiply a product by its inverse
@@ -477,4 +549,3 @@ TEST (TestMatrices, MultiplyByInverse) {
 
     EXPECT_EQ(c * b_1, a);
 }
-

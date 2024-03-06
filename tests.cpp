@@ -17,3 +17,7 @@ TEST (TestMatrices, MultiplyByInverse) {
 
     EXPECT_EQ(c * b.inverse(), a);
 }
+
+    if (get_column_count() == 1 && get_row_count() == 1) {
+        return get_point(0, 0);
+    };

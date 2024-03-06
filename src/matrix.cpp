@@ -4,6 +4,7 @@
 #include <numeric>
 // TODO: remove
 #include <iostream>
+#include <string>
 
 #include <stdexcept>
 #include <algorithm>
@@ -174,8 +175,10 @@ Matrix Matrix::transpose() {
 
 Matrix Matrix::cofactor_matrix() {
     std::vector<float> cofactor_input;
+    std::cout << "cofactor inputs" << std::endl;
     for (int i=0; i < rows_; i++) {
         for (int j=0; j < columns_; j++) {
+            std::cout << cofactor(i, j) << std::endl;
             cofactor_input.push_back(cofactor(i, j));
         };
     };
@@ -187,6 +190,7 @@ Matrix Matrix::inverse() {
     Matrix cofactor_mat = cofactor_matrix();
     Matrix transposed_cofactors = cofactor_mat.transpose();
     float inverted_determinant = 1 / determinant();
+
     return transposed_cofactors * inverted_determinant;
 };
 
@@ -195,6 +199,10 @@ float Matrix::determinant() {
         throw std::invalid_argument("Row coordinate out of range of matrix");
     };
     float det = 0;
+
+    if (get_column_count() == 1 && get_row_count() == 1) {
+        return get_point(0, 0);
+    };
 
     if (get_column_count() == 2 && get_row_count() == 2) {
         return get_point(0, 0) * get_point(1, 1)
