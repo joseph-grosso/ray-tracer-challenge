@@ -12,6 +12,7 @@ class Matrix {
         std::vector<float> data_;
         void check_valid_row_coord(unsigned int row_coord);
         void check_valid_column_coord(unsigned int column_coord);
+        Matrix cofactor_matrix();
     public:
         // Methods
         Matrix(unsigned int rows, unsigned int columns, std::vector<float> data);
@@ -26,6 +27,7 @@ class Matrix {
         float minor(unsigned int row, unsigned int col);
         Matrix submatrix(unsigned int row, unsigned int col);
         float cofactor(unsigned int row, unsigned int col);
+        Matrix inverse();
         bool is_square();
         bool is_invertible();
 };
@@ -35,6 +37,7 @@ bool operator==(Matrix lhs, Matrix rhs);
 bool operator!=(Matrix lhs, Matrix rhs);
 Matrix operator*(Matrix lhs, Matrix rhs);
 Tuple operator*(Matrix m, Tuple t);
+Matrix operator*(Matrix m, float f);
 
 // Helpful functions
 // TODO: Find if there's a better way to use this 

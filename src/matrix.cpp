@@ -64,7 +64,14 @@ bool operator==(Matrix lhs, Matrix rhs) {
     if (lhs.get_row_count() != rhs.get_row_count() || lhs.get_column_count() != rhs.get_column_count()) {
         return false;
     };
-    return lhs.get_matrix_data() == rhs.get_matrix_data();
+    std::vector<float> lhs_data = lhs.get_matrix_data();
+    std::vector<float> rhs_data = rhs.get_matrix_data();
+    for (int i=0; i<lhs_data.size(); i++) {
+        if (!equalByEpsilon(lhs_data[i], rhs_data[i])) {
+            return false;
+        };
+    };
+    return true;
 };
 
 bool operator!=(Matrix lhs, Matrix rhs) {
@@ -99,6 +106,16 @@ Tuple operator*(Matrix m, Tuple t) {
         dot_product(m.get_row(3), tup_as_vector)
     );
 };
+
+Matrix operator*(Matrix m, float x) {
+    std::vector<float> input = m.get_matrix_data();
+    std::vector<float> output;
+    for (int i=0; i<input.size(); i++) {
+        output.push_back(input[i] * x);
+    };
+    return Matrix(m.get_row_count(), m.get_column_count(), output);
+};
+
 
 
 float dot_product(std::vector<float> v1, std::vector<float> v2) {
@@ -155,7 +172,23 @@ Matrix Matrix::transpose() {
     return Matrix(columns_, rows_, new_data);
 };
 
+Matrix Matrix::cofactor_matrix() {
+    std::vector<float> cofactor_input;
+    for (int i=0; i < rows_; i++) {
+        for (int j=0; j < columns_; j++) {
+            cofactor_input.push_back(cofactor(i, j));
+        };
+    };
 
+    return Matrix(rows_, columns_, cofactor_input);
+};
+
+Matrix Matrix::inverse() {
+    Matrix cofactor_mat = cofactor_matrix();
+    Matrix transposed_cofactors = cofactor_mat.transpose();
+    float inverted_determinant = 1 / determinant();
+    return transposed_cofactors * inverted_determinant;
+};
 
 float Matrix::determinant() {
     if (!is_square()) {
@@ -179,7 +212,7 @@ float Matrix::minor(unsigned int row, unsigned int col) {
 };
 
 float Matrix::cofactor(unsigned int row, unsigned int col) {
-    return (row + col % 2 == 1) ? -minor(row, col) : minor(row, col);
+    return ((row + col) % 2 == 1) ? -minor(row, col) : minor(row, col);
 };
 
 Matrix Matrix::submatrix(unsigned int row, unsigned int col) {

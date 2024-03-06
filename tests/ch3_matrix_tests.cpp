@@ -389,3 +389,31 @@ TEST (TestMatrices, NonInvertibleMatrix) {
     EXPECT_EQ(a.determinant(), 0);
     EXPECT_TRUE(!a.is_invertible());
 }
+
+// Scenario: Calculating the inverse of a matrix
+// p39
+TEST (TestMatrices, CalculateInverse) {
+    std::vector<float> a_data = {-5, 2, 6, -8,
+                                 1, -5, 1, 8,
+                                 7, 7, -6, -7,
+                                 1, -3, 7, 4};
+    std::vector<float> b_expected_data = 
+        { 0.21805,  0.45113,  0.24060, -0.04511,
+        -0.80827, -1.45677, -0.44361,  0.52068,
+        -0.07895, -0.22368, -0.05263,  0.19737,
+        -0.52256, -0.81391, -0.30075,  0.30639};
+    
+    Matrix a(4, 4, a_data);
+    Matrix b = a.inverse();
+    Matrix expected(4, 4, b_expected_data);
+
+    std::cout << b.get_matrix_data() << std::endl;
+    std::cout << expected.get_matrix_data() << std::endl;
+
+    EXPECT_EQ(a.determinant(), 532);
+    EXPECT_EQ(a.cofactor(2, 3), -160);
+    EXPECT_TRUE(equalByEpsilon(b.get_point(3, 2), -160 / (float) 532));
+    EXPECT_EQ(a.cofactor(3, 2), 105);
+    EXPECT_EQ(b.get_point(2, 3), 105 / (float) 532);
+    EXPECT_EQ(expected, b);
+}
