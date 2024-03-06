@@ -407,13 +407,49 @@ TEST (TestMatrices, CalculateInverse) {
     Matrix b = a.inverse();
     Matrix expected(4, 4, b_expected_data);
 
-    std::cout << b.get_matrix_data() << std::endl;
-    std::cout << expected.get_matrix_data() << std::endl;
-
     EXPECT_EQ(a.determinant(), 532);
     EXPECT_EQ(a.cofactor(2, 3), -160);
     EXPECT_TRUE(equalByEpsilon(b.get_point(3, 2), -160 / (float) 532));
     EXPECT_EQ(a.cofactor(3, 2), 105);
     EXPECT_EQ(b.get_point(2, 3), 105 / (float) 532);
     EXPECT_EQ(expected, b);
+}
+
+// Scenario: Calculating the inverse of a matrix p2
+// p41
+TEST (TestMatrices, CalculateInverse_2) {
+    std::vector<float> a_data = { 8, -5,  9,  2,
+                                 7,  5,  6,  1,
+                                -6,  0,  9,  6,
+                                -3,  0, -9, -4};
+    std::vector<float> expected_data = {-0.15385, -0.15385, -0.28205, -0.53846,
+                                        -0.07692,  0.12308,  0.02564,  0.03077,
+                                         0.35897,  0.35897,  0.43590,  0.92308,
+                                        -0.69231, -0.69231, -0.76923, -1.92308};
+    
+    Matrix a(4, 4, a_data);
+    Matrix expected(4, 4, expected_data);
+
+    EXPECT_EQ(expected, a.inverse());
+}
+
+// Scenario: Calculating the inverse of a matrix p3
+// p41
+TEST (TestMatrices, CalculateInverse_3) {
+    std::vector<float> a_data = { 9, 3,  0,  9,
+                                 -5,  -2,  -6,  -3,
+                                -4,  9,  6,  4,
+                                -7,  6, 6, 2};
+    std::vector<float> expected_data = {-0.04074, -0.07778,  0.14444, -0.22222,
+                                        -0.07778,  0.03333,  0.36667, -0.33333,
+                                        -0.02901, -0.14630, -0.10926,  0.12963,
+                                         0.17778,  0.06667, -0.26667,  0.33333};
+    
+    Matrix a(4, 4, a_data);
+    Matrix expected(4, 4, expected_data);
+
+    // std::cout << a.inverse().get_matrix_data() << std::endl;
+    // std::cout << expected.get_matrix_data() << std::endl;
+
+    EXPECT_EQ(expected, a.inverse());
 }
