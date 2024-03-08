@@ -9,7 +9,6 @@
 #include <stdexcept>
 #include <algorithm>
 
-
 // Chapter 3: Matrix Math
 Matrix::Matrix(unsigned int rows, unsigned int columns, std::vector<float> data) {
     if (rows * columns != data.size()) {
@@ -127,7 +126,7 @@ float dot_product(std::vector<float> v1, std::vector<float> v2) {
         v1.begin(),
         v1.end(),
         v2.begin(),
-        0
+        0.0
     );
 };
 
@@ -174,6 +173,10 @@ Matrix Matrix::transpose() {
 };
 
 Matrix Matrix::cofactor_matrix() {
+    if (get_row_count() == 1 && get_column_count() == 1) {
+        std::vector<float> id_data = {1};
+        return Matrix(1, 1, id_data);
+    }
     std::vector<float> cofactor_input;
     std::cout << "cofactor inputs" << std::endl;
     for (int i=0; i < rows_; i++) {
