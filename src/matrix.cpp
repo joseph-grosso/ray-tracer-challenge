@@ -178,10 +178,8 @@ Matrix Matrix::cofactor_matrix() {
         return Matrix(1, 1, id_data);
     }
     std::vector<float> cofactor_input;
-    std::cout << "cofactor inputs" << std::endl;
     for (int i=0; i < rows_; i++) {
         for (int j=0; j < columns_; j++) {
-            std::cout << cofactor(i, j) << std::endl;
             cofactor_input.push_back(cofactor(i, j));
         };
     };
@@ -246,3 +244,17 @@ bool Matrix::is_invertible() {
     return determinant() != 0;
 };
 
+std::string Matrix::to_string() {
+    std::string val;
+    for (int i=0; i < get_elements_count() ; i++) {
+        if (i % columns_ == 0 && i != 0) {
+            val += "\n";
+        };
+        val += std::to_string(data_[i]) + " ";
+    };
+    return val;
+};
+
+unsigned int Matrix::get_elements_count() {
+    return rows_ * columns_;
+};

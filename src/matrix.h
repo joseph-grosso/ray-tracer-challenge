@@ -2,6 +2,7 @@
 
 #include "tuple.h"
 #include <vector>
+#include <string>
 
 
 // Chapter 3: Matrix Math
@@ -21,6 +22,7 @@ class Matrix {
         std::vector<float> get_column(unsigned int col);
         unsigned int get_row_count();
         unsigned int get_column_count();
+        unsigned int get_elements_count();
         std::vector<float> get_matrix_data();
         Matrix transpose();
         float determinant();
@@ -30,6 +32,7 @@ class Matrix {
         Matrix inverse();
         bool is_square();
         bool is_invertible();
+        std::string to_string();
 };
 
 // Arithmetic Operators
