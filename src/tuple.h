@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 // Chapter 1: Tuples, Vectors and Points
 // Equality test
 bool equalByEpsilon(float a, float b, float epsilon = 0.00001);
@@ -22,6 +24,7 @@ class Tuple {
         Tuple normalize();
         float dot(Tuple b);
         Tuple cross(Tuple b);
+        std::string to_string();
 };
 
 // Functions to create tuples

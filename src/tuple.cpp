@@ -1,5 +1,6 @@
 #include "tuple.h"
 #include <cmath>
+#include <string>
 
 
 // Chapter 1: Tuples, Vectors and Points
@@ -46,6 +47,14 @@ Tuple Tuple::cross(Tuple b) {
         this->x * b.y - this->y * b.x
     );
 }
+
+std::string Tuple::to_string() {
+    return "Tuple(" + std::to_string(x) + ", " 
+                    + std::to_string(y) + ", "
+                    + std::to_string(z) + ", "
+                    + std::to_string(w) + ")";
+};
+
 
 // Functions to create new tuples
 Tuple point(float x, float y, float z) {

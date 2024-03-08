@@ -8,7 +8,7 @@ project(ray_tracer_challenge VERSION 1.0)
 
 # specify the C++ standard
 # GoogleTest requires at least C++14
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Set the name of the chapter to be built
@@ -41,6 +41,7 @@ if (test)
     tests/ch1_tuple_tests.cpp
     tests/ch2_canvas_tests.cpp
     tests/ch3_matrix_tests.cpp
+    tests/ch4_transformation_tests.cpp
   )
 
   target_link_libraries(
