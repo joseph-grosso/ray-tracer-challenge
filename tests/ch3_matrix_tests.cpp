@@ -10,18 +10,18 @@
 #include <numeric>
 
 
-// TODO: Remove once you're done debugging tests.
-template <typename S>
-std::ostream& operator<<(std::ostream& os,
-                    const std::vector<S>& vector)
-{
-    // Printing all the elements
-    // using <<
-    for (auto element : vector) {
-        os << element << " ";
-    }
-    return os;
-}
+// // TODO: Remove once you're done debugging tests.
+// template <typename S>
+// std::ostream& operator<<(std::ostream& os,
+//                     const std::vector<S>& vector)
+// {
+//     // Printing all the elements
+//     // using <<
+//     for (auto element : vector) {
+//         os << element << " ";
+//     }
+//     return os;
+// }
 
 // Scenario: Constructing and inspecting a 4x4 matrix
 // p26
@@ -186,14 +186,6 @@ TEST (TestMatrices, MatrixMultiplicationWithFloats) {
     Matrix expected(2, 2, out);
     Matrix actual = m1 * m2;
 
-    std::cout << "m1" << std::endl;
-    std::cout << m1.get_matrix_data() << std::endl;
-    std::cout << "m2" << std::endl;
-    std::cout << m2.get_matrix_data() << std::endl;
-    std::cout << "expected" << std::endl;
-    std::cout << expected.get_matrix_data() << std::endl;
-    std::cout << "actual" << std::endl;
-    std::cout << actual.get_matrix_data() << std::endl;
     EXPECT_EQ(expected, actual);
 }
 
@@ -212,14 +204,6 @@ TEST (TestMatrices, MatrixMultiplicationWithFloats_2) {
     Matrix expected(1, 3, out);
     Matrix actual = m1 * m2;
 
-    std::cout << "m1" << std::endl;
-    std::cout << m1.get_matrix_data() << std::endl;
-    std::cout << "m2" << std::endl;
-    std::cout << m2.get_matrix_data() << std::endl;
-    std::cout << "expected" << std::endl;
-    std::cout << expected.get_matrix_data() << std::endl;
-    std::cout << "actual" << std::endl;
-    std::cout << actual.get_matrix_data() << std::endl;
     EXPECT_EQ(expected, actual);
 }
 
@@ -516,15 +500,6 @@ TEST (TestMatrices, MultiplyByIdMatrix2x2) {
     Matrix id(2, 2, id_data);
     Matrix a(2, 2, a_data);
     Matrix a_1 = a.inverse();
-
-    std::cout << (a).get_matrix_data() << std::endl;
-    std::cout << (a.determinant())<< std::endl;
-    std::cout << (id).get_matrix_data() << std::endl;
-    std::cout << (id.determinant())<< std::endl;
-
-    std::cout << (a * a).get_matrix_data() << std::endl;
-    std::cout << (id * id).get_matrix_data() << std::endl;
-    std::cout << (a * id).get_matrix_data() << std::endl;
  
     EXPECT_EQ(id, id * id);
     EXPECT_EQ(a, a * id);
@@ -540,15 +515,6 @@ TEST (TestMatrices, MultiplyByIdMatrix3x3) {
     Matrix a(3, 3, a_data);
     Matrix a_1 = a.inverse();
 
-    std::cout << (a).get_matrix_data() << std::endl;
-    std::cout << (a.determinant())<< std::endl;
-    std::cout << (id).get_matrix_data() << std::endl;
-    std::cout << (id.determinant())<< std::endl;
-
-    std::cout << (a * a).get_matrix_data() << std::endl;
-    std::cout << (id * id).get_matrix_data() << std::endl;
-    std::cout << (a * id).get_matrix_data() << std::endl;
- 
     EXPECT_EQ(id, id * id);
     EXPECT_EQ(a, a * id);
 }
@@ -569,10 +535,6 @@ TEST (TestMatrices, MultiplyByInverse) {
     Matrix b(4, 4, b_data);
     Matrix b_1 = b.inverse();
     Matrix c = a * b;
-
-    std::cout << a.get_matrix_data() << std::endl;
-    std::cout << (c * b_1).get_matrix_data() << std::endl;
-    std::cout << (b * b_1).get_matrix_data() << std:: endl;
 
     EXPECT_EQ(c * b_1, a);
 }
@@ -610,13 +572,6 @@ TEST (TestMatrices, InverseTimesOGIsIdentity_1x1) {
     Matrix a_minus1 = a.inverse();
     Matrix out = a * a_minus1;
     Matrix id(1, 1, id_data);
-
-    std::cout << "a" << std::endl;
-    std::cout << a.get_matrix_data() << std::endl;
-    std::cout << "a_minus1" << std::endl;
-    std::cout << a_minus1.get_matrix_data() << std::endl;
-    std::cout << "ID" << std::endl;
-    std::cout << id.get_matrix_data() << std::endl;
 
     EXPECT_EQ(a_minus1 * a, id);
     EXPECT_EQ(a * a_minus1, id);
@@ -695,19 +650,6 @@ TEST (TestMatrices, InverseTimesOGIsIdentity_4x4) {
 
     Matrix out = a * a_minus1;
     Matrix id(4, 4, id_data);
-
-
-    std::cout << "a" << std::endl;
-    std::cout << a.get_matrix_data() << std::endl;
-    std::cout << "a.inverse" << std::endl;
-    std::cout << a_minus1.get_matrix_data() << std::endl;
-    std::cout << "out" << std::endl;
-    std::cout << out.get_matrix_data() << std::endl;
-    std::cout << "rows and cols" << std::endl;
-    std::cout << a_minus1.get_column(0) << std::endl;
-    std::cout << a_minus1.get_column(1) << std::endl;
-    std::cout << "ID" << std::endl;
-    std::cout << id.get_matrix_data() << std::endl;
 
     EXPECT_EQ(id * a, a);
     EXPECT_EQ(a * a_minus1, id);
