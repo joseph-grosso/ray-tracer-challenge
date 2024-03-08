@@ -707,3 +707,16 @@ TEST (TestMatrices, InverseOfIdentity_2) {
     EXPECT_EQ(id_3, id_3.inverse());
     EXPECT_EQ(id_4, id_4.inverse());
 }
+
+// Scenario: The inverse of the transpose equals the transpose of the inverse
+// p42
+TEST (TestMatrices, InverseAndTranspose) {
+    std::vector<float> a_data = { 9, 3,  0,  9,
+                                 -5,  -2,  -6,  -3,
+                                -4,  9,  6,  4,
+                                -7,  6, 6, 2};            
+    Matrix a(4, 4, a_data);
+
+    
+    EXPECT_EQ(a.inverse().transpose(), a.transpose().inverse());
+}
