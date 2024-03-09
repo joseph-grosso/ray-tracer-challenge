@@ -8,9 +8,9 @@
 
 // Chapter 4: Matrix Transformations
 // Transformations
-Matrix translation(float x, float y, float z);
-Matrix scaling(float x, float y, float z);
-Matrix rotation_x(float radians);
-Matrix rotation_y(float radians);
-Matrix rotation_z(float radians);
-Matrix shearing(float x_y, float x_z, float y_x, float y_z, float z_x, float z_y);
+Matrix translation_matrix(float x, float y, float z);
+Matrix scaling_matrix(float x, float y, float z);
+Matrix rotation_x_matrix(float radians);
+Matrix rotation_y_matrix(float radians);
+Matrix rotation_z_matrix(float radians);
+Matrix shearing_matrix(float x_y, float x_z, float y_x, float y_z, float z_x, float z_y);
