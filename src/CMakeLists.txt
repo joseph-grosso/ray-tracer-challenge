@@ -1,4 +1,4 @@
-add_library(src canvas.cpp tuple.cpp matrix.cpp transform.cpp)
+add_library(src canvas.cpp tuple.cpp matrix.cpp transform.cpp ray.cpp)
 # add_library(src tuple.cpp)
  
 message("Raytracer current source dir = ${CMAKE_CURRENT_SOURCE_DIR}")

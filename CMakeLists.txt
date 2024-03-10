@@ -42,6 +42,7 @@ if (test)
     tests/ch2_canvas_tests.cpp
     tests/ch3_matrix_tests.cpp
     tests/ch4_transformation_tests.cpp
+    tests/ch5_ray_tests.cpp
   )
 
   target_link_libraries(
