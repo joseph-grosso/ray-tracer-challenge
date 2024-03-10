@@ -13,6 +13,12 @@ Implementation of the code from the book [The Ray Tracer Challenge: A Test-Drive
  bash ./build.sh
 ```
 
+### Converting PPM images to PNG
+
+```bash
+convert flight_path.ppm flight_path.png
+```
+
 ## TODO:
 
 - [x] Import and use `gtest`
@@ -21,3 +27,4 @@ Implementation of the code from the book [The Ray Tracer Challenge: A Test-Drive
 - [x] Create a bash script that does all of your building for you
     - [x] main function building
     - [x] test building
+- [ ] TODO: Write a function for canvas.h that directly exports image files to .png instead of only to .ppm

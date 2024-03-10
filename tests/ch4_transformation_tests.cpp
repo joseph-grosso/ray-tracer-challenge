@@ -13,7 +13,7 @@
 
 // Scenario: Translating a Point
 // p45
-TEST (TestTranslations, TranslatePoint) {
+TEST (TestTransformations, TranslatePoint) {
     Matrix A = translation_matrix(5, -3, 2);
     Tuple p = point(-3, 4, 5);
 
@@ -22,7 +22,7 @@ TEST (TestTranslations, TranslatePoint) {
 
 // Scenario: Translating a Point By Inverse
 // p45
-TEST (TestTranslations, TranslatePointByInverse) {
+TEST (TestTransformations, TranslatePointByInverse) {
     Matrix A = translation_matrix(5, -3, 2);
     Tuple p = point(-3, 4, 5);
 
@@ -31,7 +31,7 @@ TEST (TestTranslations, TranslatePointByInverse) {
 
 // Scenario: Translating a Vector gives back the same vector
 // p45
-TEST (TestTranslations, TranslateVector) {
+TEST (TestTransformations, TranslateVector) {
     Matrix A = translation_matrix(5, -3, 2);
     Tuple v = vector(-3, 4, 5);
 
@@ -40,7 +40,7 @@ TEST (TestTranslations, TranslateVector) {
 
 // Scenario: Scaling a Point
 // p46
-TEST (TestTranslations, ScalePoint) {
+TEST (TestTransformations, ScalePoint) {
     Matrix A = scaling_matrix(2, 3, 4);
     Tuple p = point(-4, 6, 8);
 
@@ -49,7 +49,7 @@ TEST (TestTranslations, ScalePoint) {
 
 // Scenario: Scaling a Vector
 // p46
-TEST (TestTranslations, ScaleVector) {
+TEST (TestTransformations, ScaleVector) {
     Matrix A = scaling_matrix(2, 3, 4);
     Tuple v = vector(-4, 6, 8);
 
@@ -58,7 +58,7 @@ TEST (TestTranslations, ScaleVector) {
 
 // Scenario: Scaling a Vector by Inverse
 // p46
-TEST (TestTranslations, ScaleVectorByInverse) {
+TEST (TestTransformations, ScaleVectorByInverse) {
     Matrix A = scaling_matrix(2, 3, 4);
     Tuple v = vector(-4, 6, 8);
 
@@ -67,7 +67,7 @@ TEST (TestTranslations, ScaleVectorByInverse) {
 
 // Scenario: Reflection of point
 // p47
-TEST (TestTranslations, ReflectPointWithScaling) {
+TEST (TestTransformations, ReflectPointWithScaling) {
     Matrix A = scaling_matrix(-1, 1, 1);
     Tuple p = point(2, 3, 4);
 
@@ -76,7 +76,7 @@ TEST (TestTranslations, ReflectPointWithScaling) {
 
 // Scenario: Rotation in the x axis
 // p48
-TEST (TestTranslations, XAxisRotation) {
+TEST (TestTransformations, XAxisRotation) {
     const float pi = 3.14159265359;
     Matrix half_quarter = rotation_x_matrix(pi / 4);
     Matrix full_quarter = rotation_x_matrix(pi / 2);
@@ -88,7 +88,7 @@ TEST (TestTranslations, XAxisRotation) {
 
 // Scenario: Rotation in the x axis - inverse
 // p49
-TEST (TestTranslations, XAxisRotationInverse) {
+TEST (TestTransformations, XAxisRotationInverse) {
     const float pi = 3.14159265359;
     Matrix half_quarter = rotation_x_matrix(pi / 4);
     Tuple p = point(0, 1, 0);
@@ -98,7 +98,7 @@ TEST (TestTranslations, XAxisRotationInverse) {
 
 // Scenario: Rotation in the y axis
 // p49
-TEST (TestTranslations, YAxisRotation) {
+TEST (TestTransformations, YAxisRotation) {
     const float pi = 3.14159265359;
     Matrix half_quarter = rotation_y_matrix(pi / 4);
     Matrix full_quarter = rotation_y_matrix(pi / 2);
@@ -110,7 +110,7 @@ TEST (TestTranslations, YAxisRotation) {
 
 // Scenario: Shearing X in proportion to Y
 // p52
-TEST (TestTranslations, ShearingXInPropToY) {
+TEST (TestTransformations, ShearingXInPropToY) {
     Matrix shear = shearing_matrix(1, 0, 0, 0, 0, 0);
     Tuple p = point(2, 3, 4);
 
@@ -119,7 +119,7 @@ TEST (TestTranslations, ShearingXInPropToY) {
 
 // Scenario: Shearing X in proportion to Z
 // p52
-TEST (TestTranslations, ShearingXInPropToZ) {
+TEST (TestTransformations, ShearingXInPropToZ) {
     Matrix shear = shearing_matrix(0, 1, 0, 0, 0, 0);
     Tuple p = point(2, 3, 4);
 
@@ -128,7 +128,7 @@ TEST (TestTranslations, ShearingXInPropToZ) {
 
 // Scenario: Shearing Y in proportion to X
 // p52
-TEST (TestTranslations, ShearingYInPropToX) {
+TEST (TestTransformations, ShearingYInPropToX) {
     Matrix shear = shearing_matrix(0, 0, 1, 0, 0, 0);
     Tuple p = point(2, 3, 4);
 
@@ -137,7 +137,7 @@ TEST (TestTranslations, ShearingYInPropToX) {
 
 // Scenario: Shearing Y in proportion to Z
 // p52
-TEST (TestTranslations, ShearingYInPropToZ) {
+TEST (TestTransformations, ShearingYInPropToZ) {
     Matrix shear = shearing_matrix(0, 0, 0, 1, 0, 0);
     Tuple p = point(2, 3, 4);
 
@@ -146,7 +146,7 @@ TEST (TestTranslations, ShearingYInPropToZ) {
 
 // Scenario: Shearing Z in proportion to X
 // p52
-TEST (TestTranslations, ShearingZInPropToX) {
+TEST (TestTransformations, ShearingZInPropToX) {
     Matrix shear = shearing_matrix(0, 0, 0, 0, 1, 0);
     Tuple p = point(2, 3, 4);
 
@@ -155,7 +155,16 @@ TEST (TestTranslations, ShearingZInPropToX) {
 
 // Scenario: Shearing Z in proportion to Y
 // p53
-TEST (TestTranslations, ShearingZInPropToY) {
+TEST (TestTransformations, ShearingZInPropToY) {
+    Matrix shear = shearing_matrix(0, 0, 0, 0, 0, 1);
+    Tuple p = point(2, 3, 4);
+
+    EXPECT_EQ(shear * p, point(2, 3, 7));
+}
+
+// Scenario: Individual transformations are applied in sequence
+// p54
+TEST (TestTransformations, IndividualTransformationsAppliedInSequence) {
     Matrix shear = shearing_matrix(0, 0, 0, 0, 0, 1);
     Tuple p = point(2, 3, 4);
 
