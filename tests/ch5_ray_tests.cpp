@@ -43,11 +43,11 @@ TEST (TestRays, RayAndSphereIntersection) {
     Ray r(point(0, 0, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    std::vector<float> xs = s.intersect(r);
+    Intersections xs = intersect(s, r);
 
-    EXPECT_EQ(xs.size(), 2);
-    EXPECT_EQ(xs[0], 4.0);
-    EXPECT_EQ(xs[1], 6.0);
+    EXPECT_EQ(xs.count, 2);
+    EXPECT_EQ(xs[0].t, 4.0);
+    EXPECT_EQ(xs[1].t, 6.0);
 }
 
 // Scenario: A ray touches a sphere
@@ -56,11 +56,11 @@ TEST (TestRays, RayAndSphereTouch) {
     Ray r(point(0, 1, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    std::vector<float> xs = s.intersect(r);
+    Intersections xs = intersect(s, r);
 
-    EXPECT_EQ(xs.size(), 2);
-    EXPECT_EQ(xs[0], 5.0);
-    EXPECT_EQ(xs[1], 5.0);
+    EXPECT_EQ(xs.count, 2);
+    EXPECT_EQ(xs[0].t, 5.0);
+    EXPECT_EQ(xs[1].t, 5.0);
 }
 
 // Scenario: A ray misses a sphere
@@ -69,9 +69,9 @@ TEST (TestRays, RayMissesSphere) {
     Ray r(point(0, 2, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    std::vector<float> xs = s.intersect(r);
+    Intersections xs = intersect(s, r);
 
-    EXPECT_EQ(xs.size(), 0);
+    EXPECT_EQ(xs.count, 0);
 }
 
 // Scenario: A ray originates inside a sphere
@@ -80,11 +80,11 @@ TEST (TestRays, RayInsideSphere) {
     Ray r(point(0, 0, 0), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    std::vector<float> xs = s.intersect(r);
+    Intersections xs = intersect(s, r);
 
-    EXPECT_EQ(xs.size(), 2);
-    EXPECT_EQ(xs[0], -1.0);
-    EXPECT_EQ(xs[1], 1.0);
+    EXPECT_EQ(xs.count, 2);
+    EXPECT_EQ(xs[0].t, -1.0);
+    EXPECT_EQ(xs[1].t, 1.0);
 }
 
 // Scenario: A sphere is behind a ray
@@ -93,11 +93,11 @@ TEST (TestRays, SphereBehindRay) {
     Ray r(point(0, 0, 5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    std::vector<float> xs = s.intersect(r);
+    Intersections xs = intersect(s, r);
 
-    EXPECT_EQ(xs.size(), 2);
-    EXPECT_EQ(xs[0], -6.0);
-    EXPECT_EQ(xs[1], -4.0);
+    EXPECT_EQ(xs.count, 2);
+    EXPECT_EQ(xs[0].t, -6.0);
+    EXPECT_EQ(xs[1].t, -4.0);
 }
 
 // Scenario: An intersection encapsulates t and object

@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "sphere.h"
-
+#include "ray.h"
 
 class Intersection {
     public:
@@ -14,9 +14,13 @@ class Intersection {
 
 class Intersections {
     public:
+        Intersections();
         Intersections(std::vector<Intersection>);
         std::vector<Intersection> data;
         int count;
         Intersection operator[](int);
 };
 
+// TODO: refactor when an intersection is done on a general "object" class
+// rather than just the sphere class. 
+Intersections intersect(Sphere s, Ray r);

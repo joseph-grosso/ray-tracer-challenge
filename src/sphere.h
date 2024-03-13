@@ -18,10 +18,11 @@ class Sphere {
     public:
         // Methods
         Sphere(Tuple center = point(0, 0, 0), float radius = 1.0);
+        Sphere(Tuple center, float radius, int set_random_id);
         Tuple get_center();
         float get_radius();
         int get_random_id();
-        std::vector<float> intersect(Ray r);
+        Sphere copy();
 };
 
 bool operator==(Sphere lhs, Sphere rhs);
