@@ -109,3 +109,16 @@ TEST (TestRays, IntersectionEncapsulatesTAndObject) {
     EXPECT_EQ(i.t, 3.5);
     EXPECT_EQ(i.object, s);
 }
+
+// Scenario: Aggregating intersections
+// p64
+TEST (TestRays, AggregatingIntersections) {
+    Sphere s = Sphere();
+    Intersection i1 = Intersection(1, s);
+    Intersection i2 = Intersection(2, s);
+
+    Intersections xs = Intersections(std::vector<Intersection> {i1, i2});
+    EXPECT_EQ(xs.count, 2);
+    EXPECT_EQ(xs[0].object, s);
+    EXPECT_EQ(xs[1].object, s);
+}

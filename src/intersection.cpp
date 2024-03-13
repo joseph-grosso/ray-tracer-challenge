@@ -9,4 +9,9 @@ Intersection::Intersection(float t, Sphere obj) {
 
 Intersections::Intersections(std::vector<Intersection> data) {
     this->data = data;
+    this->count = data.size();
+};
+
+Intersection Intersections::operator[](int i) {
+    return data[i];
 };

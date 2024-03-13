@@ -16,4 +16,7 @@ class Intersections {
     public:
         Intersections(std::vector<Intersection>);
         std::vector<Intersection> data;
+        int count;
+        Intersection operator[](int);
 };
+
