@@ -5,6 +5,8 @@
 #include "matrix.h"
 #include "transform.h"
 #include "ray.h"
+#include "sphere.h"
+#include "intersection.h"
 #include "gtest/gtest.h"
 
 #include <algorithm>
@@ -39,4 +41,61 @@ TEST (TestRays, PositionAlongRay) {
 // p59
 TEST (TestRays, RayAndSphereIntersection) {
     Ray r(point(0, 0, -5), vector(0, 0, 1));
+    Sphere s = Sphere();
+
+    Intersection xs = r.intersect(s);
+
+    EXPECT_EQ(xs.get_count(), 2);
+    EXPECT_EQ(xs[0], 4.0);
+    EXPECT_EQ(xs[1], 6.0);
+}
+
+// Scenario: A ray touches a sphere
+// p60
+TEST (TestRays, RayAndSphereTouch) {
+    Ray r(point(0, 1, -5), vector(0, 0, 1));
+    Sphere s = Sphere();
+
+    Intersection xs = r.intersect(s);
+
+    EXPECT_EQ(xs.get_count(), 2);
+    EXPECT_EQ(xs[0], 5.0);
+    EXPECT_EQ(xs[1], 5.0);
+}
+
+// Scenario: A ray misses a sphere
+// p60
+TEST (TestRays, RayMissesSphere) {
+    Ray r(point(0, 2, -5), vector(0, 0, 1));
+    Sphere s = Sphere();
+
+    Intersection xs = r.intersect(s);
+
+    EXPECT_EQ(xs.get_count(), 0);
+}
+
+// Scenario: A ray originates inside a sphere
+// p60
+TEST (TestRays, RayInsideSphere) {
+    Ray r(point(0, 0, 0), vector(0, 0, 1));
+    Sphere s = Sphere();
+
+    Intersection xs = r.intersect(s);
+
+    EXPECT_EQ(xs.get_count(), 2);
+    EXPECT_EQ(xs[0], -1.0);
+    EXPECT_EQ(xs[1], 1.0);
+}
+
+// Scenario: A sphere is behind a ray
+// p60
+TEST (TestRays, SphereBehindRay) {
+    Ray r(point(0, 0, 5), vector(0, 0, 1));
+    Sphere s = Sphere();
+
+    Intersection xs = r.intersect(s);
+
+    EXPECT_EQ(xs.get_count(), 2);
+    EXPECT_EQ(xs[0], -6.0);
+    EXPECT_EQ(xs[1], -4.0);
 }
