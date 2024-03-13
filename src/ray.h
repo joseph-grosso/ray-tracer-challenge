@@ -2,8 +2,6 @@
 
 #include "tuple.h"
 #include "matrix.h"
-#include "sphere.h"
-#include "intersection.h"
 
 #include <vector>
 #include <string>
@@ -21,5 +19,4 @@ class Ray {
         Tuple get_origin();
         Tuple get_direction();
         Tuple position(float t);
-        Intersection intersect(Sphere s);
 };

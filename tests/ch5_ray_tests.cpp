@@ -43,9 +43,9 @@ TEST (TestRays, RayAndSphereIntersection) {
     Ray r(point(0, 0, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersection xs = r.intersect(s);
+    std::vector<float> xs = s.intersect(r);
 
-    EXPECT_EQ(xs.get_count(), 2);
+    EXPECT_EQ(xs.size(), 2);
     EXPECT_EQ(xs[0], 4.0);
     EXPECT_EQ(xs[1], 6.0);
 }
@@ -56,9 +56,9 @@ TEST (TestRays, RayAndSphereTouch) {
     Ray r(point(0, 1, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersection xs = r.intersect(s);
+    std::vector<float> xs = s.intersect(r);
 
-    EXPECT_EQ(xs.get_count(), 2);
+    EXPECT_EQ(xs.size(), 2);
     EXPECT_EQ(xs[0], 5.0);
     EXPECT_EQ(xs[1], 5.0);
 }
@@ -69,33 +69,43 @@ TEST (TestRays, RayMissesSphere) {
     Ray r(point(0, 2, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersection xs = r.intersect(s);
+    std::vector<float> xs = s.intersect(r);
 
-    EXPECT_EQ(xs.get_count(), 0);
+    EXPECT_EQ(xs.size(), 0);
 }
 
 // Scenario: A ray originates inside a sphere
-// p60
+// p61
 TEST (TestRays, RayInsideSphere) {
     Ray r(point(0, 0, 0), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersection xs = r.intersect(s);
+    std::vector<float> xs = s.intersect(r);
 
-    EXPECT_EQ(xs.get_count(), 2);
+    EXPECT_EQ(xs.size(), 2);
     EXPECT_EQ(xs[0], -1.0);
     EXPECT_EQ(xs[1], 1.0);
 }
 
 // Scenario: A sphere is behind a ray
-// p60
+// p62
 TEST (TestRays, SphereBehindRay) {
     Ray r(point(0, 0, 5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersection xs = r.intersect(s);
+    std::vector<float> xs = s.intersect(r);
 
-    EXPECT_EQ(xs.get_count(), 2);
+    EXPECT_EQ(xs.size(), 2);
     EXPECT_EQ(xs[0], -6.0);
     EXPECT_EQ(xs[1], -4.0);
+}
+
+// Scenario: An intersection encapsulates t and object
+// p63
+TEST (TestRays, IntersectionEncapsulatesTAndObject) {
+    Sphere s = Sphere();
+    Intersection i = Intersection(3.5, s);
+
+    EXPECT_EQ(i.t, 3.5);
+    EXPECT_EQ(i.object, s);
 }

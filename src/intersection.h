@@ -1,15 +1,19 @@
 #pragma once
 
 #include <vector>
+#include "sphere.h"
 
 
 class Intersection {
-    private:
-        std::vector<float> points;
-        unsigned int count;
     public:
-        Intersection(std::vector<float>);
-        unsigned int get_count();
-        float get_point(unsigned int i);
-        float operator[](int i);
+        Intersection(float t, Sphere obj);
+        float t;
+        // TODO: use OOP to generalize this object class
+        Sphere object;
+};
+
+class Intersections {
+    public:
+        Intersections(std::vector<Intersection>);
+        std::vector<Intersection> data;
 };
