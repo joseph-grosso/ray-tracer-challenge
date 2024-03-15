@@ -196,3 +196,47 @@ TEST (TestRays, ScalingARay) {
     EXPECT_EQ(r2.get_origin(), point(2, 6, 12));
     EXPECT_EQ(r2.get_direction(), vector(0, 3, 0));    
 }
+
+// Scenario: A sphere's default transformation
+// p69
+TEST (TestRays, SphereDefaultTransform) {
+    Sphere s = Sphere();
+
+    EXPECT_EQ(s.get_transform(), identity_matrix(4));
+}
+
+// Scenario: Changing a sphere's transformation
+// p69
+TEST (TestRays, SphereChangedTransform) {
+    Sphere s = Sphere();
+    Matrix t = translation_matrix(2, 3, 4);
+    s.set_transform(t);
+    EXPECT_EQ(s.get_transform(), t);
+}
+
+// Scenario: Intersecting a scaled sphere with a ray
+// p69
+TEST (TestRays, IntersectScaledSphere) {
+    Sphere s = Sphere();
+    Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
+
+    s.set_transform(scaling_matrix(2, 2, 2));
+    Intersections xs = intersect(s, r);
+
+    EXPECT_EQ(xs.count, 2);
+    EXPECT_EQ(xs[0].t, 3);
+    EXPECT_EQ(xs[1].t, 7);
+}
+
+
+// Scenario: Intersecting a translated sphere with a ray
+// p70
+TEST (TestRays, IntersectTranslatedSphere) {
+    Sphere s = Sphere();
+    Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
+
+    s.set_transform(translation_matrix(5, 0, 0));
+    Intersections xs = intersect(s, r);
+
+    EXPECT_EQ(xs.count, 0);
+}

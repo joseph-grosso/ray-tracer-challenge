@@ -16,7 +16,13 @@ class Matrix {
         Matrix cofactor_matrix();
     public:
         // Methods
-        Matrix(unsigned int rows, unsigned int columns, std::vector<float> data);
+        Matrix(
+            unsigned int rows = 4,
+            unsigned int columns = 4,
+            std::vector<float> data = std::vector<float> {1, 0, 0, 0,
+                                                          0, 1, 0, 0,
+                                                          0, 0, 1, 0,
+                                                          0, 0, 0, 1});
         float get_point(unsigned int row, unsigned int col);
         std::vector<float> get_row(unsigned int row);
         std::vector<float> get_column(unsigned int col);
@@ -45,3 +51,4 @@ Matrix operator*(Matrix m, float f);
 // Helpful functions
 // TODO: Find if there's a better way to use this 
 float dot_product(std::vector<float> v1, std::vector<float> v2);
+Matrix identity_matrix(int size);

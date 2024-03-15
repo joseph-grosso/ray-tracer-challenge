@@ -15,6 +15,7 @@ class Sphere {
         float radius;
         // TODO: Consider other options for assigning random id.
         int random_id;
+        Matrix transformation;
     public:
         // Methods
         Sphere(Tuple center = point(0, 0, 0), float radius = 1.0);
@@ -23,6 +24,8 @@ class Sphere {
         float get_radius();
         int get_random_id();
         Sphere copy();
+        Matrix get_transform();
+        void set_transform(Matrix);
 };
 
 bool operator==(Sphere lhs, Sphere rhs);

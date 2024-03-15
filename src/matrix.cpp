@@ -258,3 +258,13 @@ std::string Matrix::to_string() {
 unsigned int Matrix::get_elements_count() {
     return rows_ * columns_;
 };
+
+Matrix identity_matrix(int size) {
+    std::vector<float> data;
+    for (int i=0; i<size; i++) {
+        for (int j=0; j<size; j++) {
+            data.push_back((i == j) ? 1 : 0);
+        };
+    };
+    return Matrix(size, size, data);
+};

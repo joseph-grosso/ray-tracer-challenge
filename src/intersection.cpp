@@ -32,11 +32,14 @@ Intersection Intersections::operator[](int i) {
 };
 
 Intersections intersect(Sphere s, Ray r) {
-    // the vector form the sphere's center to the ray origin
+    // The ray transformed by the inverse of the object matrix
+    Ray r_trans = r.transform(s.get_transform().inverse());
+
+    // the vector from the sphere's center to the ray origin
     // Remember: the sphere is centered at the world origin
-    Tuple sphere_to_ray = r.get_origin() - point(0, 0, 0);
-    float a = r.get_direction().dot(r.get_direction());
-    float b = 2 * r.get_direction().dot(sphere_to_ray);
+    Tuple sphere_to_ray = r_trans.get_origin() - point(0, 0, 0);
+    float a = r_trans.get_direction().dot(r_trans.get_direction());
+    float b = 2 * r_trans.get_direction().dot(sphere_to_ray);
     float c = sphere_to_ray.dot(sphere_to_ray) - 1;
 
     float discriminant = (b * b) - (4 * a * c);
