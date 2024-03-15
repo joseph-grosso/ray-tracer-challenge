@@ -30,3 +30,7 @@ Tuple Ray::get_direction() {
 Tuple Ray::position(float t) {
     return origin + direction * t;
 };
+
+Ray Ray::transform(Matrix m) {
+    return Ray(m * origin, m * direction);
+};

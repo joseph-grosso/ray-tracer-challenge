@@ -19,4 +19,5 @@ class Ray {
         Tuple get_origin();
         Tuple get_direction();
         Tuple position(float t);
+        Ray transform(Matrix m);
 };

@@ -122,3 +122,77 @@ TEST (TestRays, AggregatingIntersections) {
     EXPECT_EQ(xs[0].object, s);
     EXPECT_EQ(xs[1].object, s);
 }
+
+// Scenario: Get the hit when all intersections have positive t
+// p65
+TEST (TestRays, IdentifyIntersectionIfAllPositive) {
+    Sphere s = Sphere();
+    Intersection i1 = Intersection(1, s);
+    Intersection i2 = Intersection(2, s);
+
+    Intersections xs = Intersections(std::vector<Intersection> {i1, i2});
+
+    EXPECT_EQ(xs.hit(), i1);
+}
+
+// Scenario: Get the hit when some intersections have negative t
+// p65
+TEST (TestRays, IdentifyIntersectionIfSomeNegative) {
+    Sphere s = Sphere();
+    Intersection i1 = Intersection(-1, s);
+    Intersection i2 = Intersection(2, s);
+
+    Intersections xs = Intersections(std::vector<Intersection> {i1, i2});
+
+    EXPECT_EQ(xs.hit(), i2);
+}
+
+// Scenario: Get the hit when all intersections have negative t
+// p65
+TEST (TestRays, IdentifyIntersectionIfAllNegative) {
+    Sphere s = Sphere();
+    Intersection i1 = Intersection(-1, s);
+    Intersection i2 = Intersection(-2, s);
+
+    Intersections xs = Intersections(std::vector<Intersection> {i1, i2});
+
+    EXPECT_EQ(xs.hit().is_empty(), true);
+}
+
+// Scenario: The hit is always the lowest nonnegative intersection
+// p66
+TEST (TestRays, LowestNonNegIntersection) {
+    Sphere s = Sphere();
+    Intersection i1 = Intersection(5, s);
+    Intersection i2 = Intersection(7, s);
+    Intersection i3 = Intersection(-3, s);
+    Intersection i4 = Intersection(2, s);
+
+    Intersections xs = Intersections(std::vector<Intersection> {i1, i2, i3, i4});
+
+    EXPECT_EQ(xs.hit(), i4);
+}
+
+// Scenario: Translating a ray
+// p69
+TEST (TestRays, TranslatingARay) {
+    Ray r(point(1, 2, 3), vector(0, 1, 0));
+    Matrix m = translation_matrix(3, 4, 5);
+
+    Ray r2 = r.transform(m);
+
+    EXPECT_EQ(r2.get_origin(), point(4, 6, 8));
+    EXPECT_EQ(r2.get_direction(), vector(0, 1, 0));    
+}
+
+// Scenario: Scaling a ray
+// p69
+TEST (TestRays, ScalingARay) {
+    Ray r(point(1, 2, 3), vector(0, 1, 0));
+    Matrix m = scaling_matrix(2, 3, 4);
+
+    Ray r2 = r.transform(m);
+
+    EXPECT_EQ(r2.get_origin(), point(2, 6, 12));
+    EXPECT_EQ(r2.get_direction(), vector(0, 3, 0));    
+}

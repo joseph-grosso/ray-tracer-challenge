@@ -1,12 +1,20 @@
 #include <vector>
+#include <stdexcept>
+
 #include "intersection.h"
 #include "sphere.h"
 #include "ray.h"
 
 
+
+Intersection::Intersection() {
+    this->empty = true;
+};
+
 Intersection::Intersection(float t, Sphere obj) {
     this->t = t;
     this->object = obj;
+    this->empty = false;
 };
 
 Intersections::Intersections() {
@@ -42,4 +50,40 @@ Intersections intersect(Sphere s, Ray r) {
         Intersection((-b - std::sqrt(discriminant)) / (2 * a), s.copy()),
         Intersection((-b + std::sqrt(discriminant)) / (2 * a), s.copy())
     });
+};
+
+bool Intersection::is_empty() {
+    return empty;
+};
+
+
+Intersection Intersections::hit() {
+    if (count == 0) {
+        // TODO: Think about other ways you could avoid throwing this if this causes issues in the future.
+        // return null intersection?
+        // return Intersection();
+        throw std::logic_error("No hits possible - empty list of intersections");
+    };
+    
+    Intersection inter = data[0];
+
+    for (int i=0; i<count; i++) {
+        if (data[i].t == 0) {
+            return data[i];
+        }
+        if ((inter.t < 0) ||
+            (data[i].t >= 0 && data[i].t < inter.t)) {
+            inter = data[i];
+        };
+    };
+
+    // return the chosen value if valid, if not return empty intersection.
+    return (inter.t >= 0) ? inter : Intersection();
+};
+
+bool operator==(Intersection lhs, Intersection rhs) {
+    return (
+        lhs.object == rhs.object &&
+        lhs.t == rhs.t
+    );
 };
