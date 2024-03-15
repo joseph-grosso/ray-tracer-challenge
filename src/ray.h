@@ -15,6 +15,7 @@ class Ray {
 
     public:
         // Methods
+        // TODO: Create a default construction of the Ray class
         Ray(Tuple origin, Tuple direction);
         Tuple get_origin();
         Tuple get_direction();
