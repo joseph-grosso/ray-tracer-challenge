@@ -1,6 +1,7 @@
 #include "tuple.h"
 #include <cmath>
 #include <string>
+#include <stdexcept>
 
 
 // Chapter 1: Tuples, Vectors and Points
@@ -187,5 +188,8 @@ Color operator*(Color lhs, Color rhs) {
 
 // Chpater 6: Light and Shading
 Tuple Tuple::reflect(Tuple normal) {
+    if (!isVector() || !normal.isVector()) {
+        throw std::invalid_argument("Both input tuples must be vectors.");
+    }
     return *this - (normal * 2) * dot(normal);
 };
