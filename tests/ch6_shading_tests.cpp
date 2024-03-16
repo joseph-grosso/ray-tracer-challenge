@@ -75,3 +75,18 @@ TEST (TestLightingAndShading, NormalOfTransformedSphere) {
     EXPECT_EQ(n, vector(0, 0.97014, -0.24254));
 }
 
+// Scenario: Reflect a vector in a normal approaching at 45 deg.
+// p83
+TEST (TestLightingAndShading, ReflectInNormal) {
+    Tuple v = vector(1, -1, 0);
+    Tuple n = vector(0, 1, 0);
+    EXPECT_EQ(v.reflect(n), vector(1, 1, 0));
+}
+
+// Scenario: Reflect a vector off a slanted surface.
+// p83
+TEST (TestLightingAndShading, ReflectInSlantedSurface) {
+    Tuple v = vector(0, -1, 0);
+    Tuple n = vector(std::sqrt(2)/2, std::sqrt(2)/2, 0);
+    EXPECT_EQ(v.reflect(n), vector(1, 0, 0));
+}

@@ -184,3 +184,8 @@ Color operator*(Color lhs, Color rhs) {
         lhs.blue * rhs.blue
     );
 };
+
+// Chpater 6: Light and Shading
+Tuple Tuple::reflect(Tuple normal) {
+    return *this - (normal * 2) * dot(normal);
+};

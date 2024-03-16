@@ -69,6 +69,7 @@ void Sphere::set_transform(Matrix m) {
     this->transformation = m;
 };
 
+// chapter 6: Lighting and Shading
 Tuple Sphere::normal_at(float x, float y, float z) {
     // Algorithm explanation: p80 - p82
     Tuple world_point = point(x, y, z);

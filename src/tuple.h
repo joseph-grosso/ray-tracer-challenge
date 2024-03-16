@@ -25,6 +25,7 @@ class Tuple {
         float dot(Tuple b);
         Tuple cross(Tuple b);
         std::string to_string();
+        Tuple reflect(Tuple normal);
 };
 
 // Functions to create tuples
