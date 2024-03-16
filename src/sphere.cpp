@@ -8,6 +8,9 @@
 #include <random> 
 #include <vector>
 
+// TODO: remove after testing
+#include <iostream>
+
 
 Sphere::Sphere(Tuple center, float radius) {
     if (!center.isPoint()) {
@@ -64,4 +67,14 @@ void Sphere::set_transform(Matrix m) {
         throw std::invalid_argument("Unfit matrix: Matrix must be 4x4 to be a transformation on an object.");
     };
     this->transformation = m;
+};
+
+Tuple Sphere::normal_at(float x, float y, float z) {
+    // Algorithm explanation: p80 - p82
+    Tuple world_point = point(x, y, z);
+    Tuple obj_point = transformation.inverse() * world_point;
+    Tuple obj_normal = obj_point - point(0, 0, 0);
+    Tuple world_normal = transformation.inverse().transpose() * obj_normal;
+    world_normal.w = 0;
+    return world_normal.normalize();
 };

@@ -26,6 +26,7 @@ class Sphere {
         Sphere copy();
         Matrix get_transform();
         void set_transform(Matrix);
+        Tuple normal_at(float x, float y, float z);
 };
 
 bool operator==(Sphere lhs, Sphere rhs);

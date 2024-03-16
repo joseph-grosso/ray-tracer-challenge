@@ -41,7 +41,7 @@ Matrix rotation_y_matrix(float radians) {
 Matrix rotation_z_matrix(float radians) {
     std::vector<float> rotate_data = {std::cos(radians), -std::sin(radians), 0, 0,
                                       std::sin(radians), std::cos(radians), 0, 0,
-                                      0,  0, 0, 0,
+                                      0,  0, 1, 0,
                                       0, 0, 0, 1};
     return Matrix(4, 4, rotate_data);
 };

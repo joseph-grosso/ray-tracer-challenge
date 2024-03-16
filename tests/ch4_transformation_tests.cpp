@@ -108,6 +108,17 @@ TEST (TestTransformations, YAxisRotation) {
     EXPECT_EQ(full_quarter * p, point(1, 0, 0));
 }
 
+// Scenario: Rotation in the z axis
+// p50
+TEST (TestTransformations, ZAxisRotation) {
+    Matrix half_quarter = rotation_z_matrix(M_PI / 4);
+    Matrix full_quarter = rotation_z_matrix(M_PI / 2);
+    Tuple p = point(0, 1, 0);
+
+    EXPECT_EQ(half_quarter * p, point(-std::sqrt(2)/2, std::sqrt(2)/2, 0));
+    EXPECT_EQ(full_quarter * p, point(-1, 0, 0));
+}
+
 // Scenario: Shearing X in proportion to Y
 // p52
 TEST (TestTransformations, ShearingXInPropToY) {
