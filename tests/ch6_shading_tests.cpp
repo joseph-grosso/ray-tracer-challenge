@@ -8,6 +8,7 @@
 #include "sphere.h"
 #include "intersection.h"
 #include "lights.h"
+#include "material.h"
 #include "gtest/gtest.h"
 
 #include <cmath>
@@ -101,3 +102,16 @@ TEST (TestLightingAndShading, CreatePointLight) {
     EXPECT_EQ(light.get_position(), position);
     EXPECT_EQ(light.get_intensity(), intensity);
 }
+
+// Scenario: A sphere has a default material
+// p85
+TEST (TestLightingAndShading, CreateDefaultMaterial) {
+    Material m = Material();
+
+    EXPECT_EQ(m.color, Color(1, 1, 1));
+    EXPECT_TRUE(equalByEpsilon(m.ambient, 0.1));
+    EXPECT_TRUE(equalByEpsilon(m.diffuse, 0.9));
+    EXPECT_TRUE(equalByEpsilon(m.specular, 0.9));
+    EXPECT_TRUE(equalByEpsilon(m.shininess, 200.0));
+}
+

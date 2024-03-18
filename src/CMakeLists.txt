@@ -8,6 +8,7 @@ add_library(
     sphere.cpp
     intersection.cpp
     lights.cpp
+    material.cpp
 )
  
 message("Raytracer current source dir = ${CMAKE_CURRENT_SOURCE_DIR}")
