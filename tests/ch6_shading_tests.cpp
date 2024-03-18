@@ -7,10 +7,9 @@
 #include "ray.h"
 #include "sphere.h"
 #include "intersection.h"
+#include "lights.h"
 #include "gtest/gtest.h"
 
-// #include <algorithm>
-// #include <numeric>
 #include <cmath>
 
 
@@ -90,3 +89,15 @@ TEST (TestLightingAndShading, ReflectInSlantedSurface) {
     Tuple n = vector(std::sqrt(2)/2, std::sqrt(2)/2, 0);
     EXPECT_EQ(v.reflect(n), vector(1, 0, 0));
 }
+
+// // Scenario: Creating a point light
+// // p84
+// TEST (TestLightingAndShading, CreatePointLight) {
+//     Tuple position = point(1, 1, 1);
+//     Color intensity = Color(1, 1, 1);
+    
+//     PointLight light = PointLight(position, intensity);
+
+//     EXPECT_EQ(light.get_position(), position);
+//     EXPECT_EQ(light.get_intensity(), intensity);
+// }
