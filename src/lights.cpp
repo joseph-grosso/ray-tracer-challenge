@@ -11,6 +11,6 @@ PointLight::PointLight(Tuple position, Color intensity) {
 Tuple PointLight::get_position() {
     return position;
 };
-Color PointLight::intensity() {
+Color PointLight::get_intensity() {
     return intensity;
 };

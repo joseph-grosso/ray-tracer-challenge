@@ -90,14 +90,14 @@ TEST (TestLightingAndShading, ReflectInSlantedSurface) {
     EXPECT_EQ(v.reflect(n), vector(1, 0, 0));
 }
 
-// // Scenario: Creating a point light
-// // p84
-// TEST (TestLightingAndShading, CreatePointLight) {
-//     Tuple position = point(1, 1, 1);
-//     Color intensity = Color(1, 1, 1);
+// Scenario: Creating a point light
+// p84
+TEST (TestLightingAndShading, CreatePointLight) {
+    Tuple position = point(1, 1, 1);
+    Color intensity = Color(1, 1, 1);
     
-//     PointLight light = PointLight(position, intensity);
+    PointLight light = PointLight(position, intensity);
 
-//     EXPECT_EQ(light.get_position(), position);
-//     EXPECT_EQ(light.get_intensity(), intensity);
-// }
+    EXPECT_EQ(light.get_position(), position);
+    EXPECT_EQ(light.get_intensity(), intensity);
+}

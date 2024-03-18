@@ -6,8 +6,9 @@ add_library(
     transform.cpp
     ray.cpp
     sphere.cpp
-    intersection.cpp)
-# add_library(src tuple.cpp)
+    intersection.cpp
+    lights.cpp
+)
  
 message("Raytracer current source dir = ${CMAKE_CURRENT_SOURCE_DIR}")
  
