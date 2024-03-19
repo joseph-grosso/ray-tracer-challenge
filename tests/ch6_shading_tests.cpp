@@ -103,7 +103,7 @@ TEST (TestLightingAndShading, CreatePointLight) {
     EXPECT_EQ(light.get_intensity(), intensity);
 }
 
-// Scenario: A sphere has a default material
+// Scenario: A material has default settings
 // p85
 TEST (TestLightingAndShading, CreateDefaultMaterial) {
     Material m = Material();
@@ -113,5 +113,25 @@ TEST (TestLightingAndShading, CreateDefaultMaterial) {
     EXPECT_TRUE(equalByEpsilon(m.diffuse, 0.9));
     EXPECT_TRUE(equalByEpsilon(m.specular, 0.9));
     EXPECT_TRUE(equalByEpsilon(m.shininess, 200.0));
+}
+
+// Scenario: A sphere has a default material
+// p85
+TEST (TestLightingAndShading, SphereHasDefaultMaterial) {
+    Material m = Material();
+    Sphere s = Sphere();
+    EXPECT_EQ(m, s.get_material());
+}
+
+// Scenario: A sphere has a material that can be set
+// p85
+TEST (TestLightingAndShading, SphereMaterialCanBeSet) {
+    Material m = Material();
+    Sphere s = Sphere();
+
+    m.ambient = 1;
+    s.set_material(m);
+
+    EXPECT_EQ(m, s.get_material());
 }
 

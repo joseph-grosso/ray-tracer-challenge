@@ -18,3 +18,5 @@ class Material {
         float specular;
         float shininess;
 };
+
+bool operator==(Material lhs, Material rhs);

@@ -2,6 +2,7 @@
 #include "sphere.h"
 #include "ray.h"
 #include "matrix.h"
+#include "material.h"
 
 #include <stdexcept>
 #include <cmath>
@@ -22,6 +23,7 @@ Sphere::Sphere(Tuple center, float radius) {
     std::random_device rd;
     this->random_id = rd();
     this->transformation = Matrix();
+    this->material = Material();
 };
 
 Tuple Sphere::get_center() {
@@ -78,4 +80,12 @@ Tuple Sphere::normal_at(float x, float y, float z) {
     Tuple world_normal = transformation.inverse().transpose() * obj_normal;
     world_normal.w = 0;
     return world_normal.normalize();
+};
+
+Material Sphere::get_material() {
+    return material;
+};
+
+void Sphere::set_material(Material m) {
+    this->material = m;
 };

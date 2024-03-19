@@ -3,6 +3,7 @@
 #include "tuple.h"
 #include "matrix.h"
 #include "ray.h"
+#include "material.h"
 
 #include <vector>
 #include <random> 
@@ -16,6 +17,7 @@ class Sphere {
         // TODO: Consider other options for assigning random id.
         int random_id;
         Matrix transformation;
+        Material material;
     public:
         // Methods
         Sphere(Tuple center = point(0, 0, 0), float radius = 1.0);
@@ -26,6 +28,8 @@ class Sphere {
         Sphere copy();
         Matrix get_transform();
         void set_transform(Matrix);
+        Material get_material();
+        void set_material(Material);
         Tuple normal_at(float x, float y, float z);
 };
 
