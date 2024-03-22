@@ -135,3 +135,82 @@ TEST (TestLightingAndShading, SphereMaterialCanBeSet) {
     EXPECT_EQ(m, s.get_material());
 }
 
+// Fixture: Set up the material and positions
+// p86
+class TestSphereReflection : public testing::Test {
+    protected:
+        Material m = Material();
+        Tuple position = point(0, 0, 0);
+};
+
+// Scenario: Lighting with the eye between the light and the surface
+// p86
+TEST_F (TestSphereReflection, LightingWithEyeBetweenLightAndSurface) {
+    Tuple eyev = vector(0, 0, -1);
+    Tuple normalv = vector(0, 0, -1);
+    PointLight light = PointLight(point(0, 0, -10), Color(1, 1, 1));
+
+    Color result = lighting(m, light, position, eyev, normalv);
+    
+    EXPECT_EQ(result, Color(1.9, 1.9, 1.9));
+}
+
+// Scenario: Lighting with the eye between the light and the surface, offset at a 45 degree angle
+// p86
+TEST_F (TestSphereReflection, LightingWithEyeBetweenAt45Degree) {
+    Tuple eyev = vector(0, std::sqrt(2)/2, -std::sqrt(2)/2);
+    Tuple normalv = vector(0, 0, -1);
+    PointLight light = PointLight(point(0, 0, -10), Color(1, 1, 1));
+
+    Color result = lighting(m, light, position, eyev, normalv);
+    
+    EXPECT_EQ(result, Color(1.0, 1.0, 1.0));
+}
+
+// Scenario: Lighting with the eye between the light and the surface, view offset at a 45 degree angle
+// p86
+TEST_F (TestSphereReflection, LightingWithEyeAt45Degree) {
+    Tuple eyev = vector(0, std::sqrt(2)/2, -std::sqrt(2)/2);
+    Tuple normalv = vector(0, 0, -1);
+    PointLight light = PointLight(point(0, 0, -10), Color(1, 1, 1));
+
+    Color result = lighting(m, light, position, eyev, normalv);
+    
+    EXPECT_EQ(result, Color(1.0, 1.0, 1.0));
+}
+
+// Scenario: Lighting with the eye between the light and the surface, light offset at a 45 degree angle
+// p87
+TEST_F (TestSphereReflection, LightingWithLightAt45Degree) {
+    Tuple eyev = vector(0, 0, -1);
+    Tuple normalv = vector(0, 0, -1);
+    PointLight light = PointLight(point(0, 10, -10), Color(1, 1, 1));
+
+    Color result = lighting(m, light, position, eyev, normalv);
+    
+    EXPECT_EQ(result, Color(0.7364, 0.7364, 0.7364));
+}
+
+// Scenario: Lighting with bot eye and light at 45 degrees to the surface
+// p87
+TEST_F (TestSphereReflection, LightingWithBothAt45Degree) {
+    Tuple eyev = vector(0, -std::sqrt(2)/2, -std::sqrt(2)/2);
+    Tuple normalv = vector(0, 0, -1);
+    PointLight light = PointLight(point(0, 10, -10), Color(1, 1, 1));
+
+    Color result = lighting(m, light, position, eyev, normalv);
+    
+    EXPECT_EQ(result, Color(1.63639, 1.63639, 1.63639));
+}
+
+// Scenario: Lighting behind the surface
+// p88
+TEST_F (TestSphereReflection, LightingBehindSurface) {
+    Tuple eyev = vector(0, 0, -1);
+    Tuple normalv = vector(0, 0, -1);
+    PointLight light = PointLight(point(0, 0, 10), Color(1, 1, 1));
+
+    Color result = lighting(m, light, position, eyev, normalv);
+    
+    EXPECT_EQ(result, Color(0.1, 0.1, 0.1));
+}

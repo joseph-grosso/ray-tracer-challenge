@@ -1,7 +1,7 @@
 #pragma once
 
 #include "tuple.h"
-
+#include "material.h"
 
 // Chapter 6: Lights and Shading
 class PointLight {
@@ -13,3 +13,11 @@ class PointLight {
         Tuple get_position();
         Color get_intensity();
 };
+
+Color lighting(
+    Material m,
+    PointLight light,
+    Tuple position,
+    Tuple eyev,
+    Tuple normalv
+);
