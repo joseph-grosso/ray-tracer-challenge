@@ -32,5 +32,6 @@ Tuple Ray::position(float t) {
 };
 
 Ray Ray::transform(Matrix m) {
+    // TODO: Add size checking code
     return Ray(m * origin, m * direction);
 };

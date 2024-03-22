@@ -31,6 +31,7 @@ class Sphere {
         Material get_material();
         void set_material(Material);
         Tuple normal_at(float x, float y, float z);
+        Tuple normal_at(Tuple p);
 };
 
 bool operator==(Sphere lhs, Sphere rhs);

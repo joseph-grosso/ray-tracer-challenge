@@ -39,7 +39,9 @@ int Sphere::get_random_id() {
 };
 
 Sphere Sphere::copy() {
-    return Sphere(center, radius, random_id);
+    Sphere copy_s(center, radius, random_id);
+    copy_s.set_material(material);
+    return copy_s;
 };
 
 Sphere::Sphere(Tuple center, float radius, int set_random_id) {
@@ -80,6 +82,10 @@ Tuple Sphere::normal_at(float x, float y, float z) {
     Tuple world_normal = transformation.inverse().transpose() * obj_normal;
     world_normal.w = 0;
     return world_normal.normalize();
+};
+
+Tuple Sphere::normal_at(Tuple p) {
+    return normal_at(p.x, p.y, p.z);
 };
 
 Material Sphere::get_material() {
