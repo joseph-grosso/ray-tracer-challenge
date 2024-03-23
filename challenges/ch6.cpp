@@ -3,14 +3,7 @@
 #include <iomanip>
 #include <chrono>
 
-#include "tuple.h"
-#include "canvas.h"
-#include "matrix.h"
-#include "sphere.h"
-#include "intersection.h"
-#include "transform.h"
-#include "material.h"
-#include "lights.h"
+#include "ray_tracer.h"
 
 using namespace std::chrono;
 
