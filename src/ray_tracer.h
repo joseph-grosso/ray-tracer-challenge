@@ -7,3 +7,4 @@
 #include "sphere.h"
 #include "transform.h"
 #include "tuple.h"
+#include "world.h"
