@@ -38,5 +38,20 @@ TEST (TestWorld, DefaultWorld) {
 
     EXPECT_THAT(w.objects, Contains(s1));
     EXPECT_THAT(w.objects, Contains(s2));
-    // EXPECT_EQ(w.lights.size(), );
+}
+
+// Scenario: Intersect a world with a ray
+// p92
+TEST (TestWorld, IntersectWorldWithRay) {
+
+    World w = default_world();
+    Ray r(point(0, 0, -5), vector(0, 0, 1));
+
+    Intersections xs = w.intersect_world(r);
+
+    EXPECT_EQ(xs.count, 4);
+    EXPECT_EQ(xs[0].t, 4);
+    EXPECT_EQ(xs[1].t, 4.5);
+    EXPECT_EQ(xs[2].t, 5.5);
+    EXPECT_EQ(xs[3].t, 6);
 }

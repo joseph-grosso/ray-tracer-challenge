@@ -18,4 +18,3 @@ class World {
         World(Sphere, PointLight);
         World(std::vector<Sphere>, PointLight);
 };
-
