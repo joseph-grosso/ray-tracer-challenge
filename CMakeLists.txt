@@ -44,7 +44,7 @@ if (test)
     tests/ch4_transformation_tests.cpp
     tests/ch5_ray_tests.cpp
     tests/ch6_shading_tests.cpp
-    # tests/ch7_world_tests.cpp
+    tests/ch7_world_tests.cpp
   )
 
   target_link_libraries(
