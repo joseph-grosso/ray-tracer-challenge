@@ -9,7 +9,7 @@
 #include <random> 
 #include <vector>
 
-// TODO: remove after testing
+// TODO: Add a toString function that adds this info.
 #include <iostream>
 
 
@@ -37,6 +37,7 @@ int Sphere::get_random_id() {
 Sphere Sphere::copy() {
     Sphere copy_s(center, radius, random_id);
     copy_s.set_material(material);
+    copy_s.set_transform(transformation);
     return copy_s;
 };
 
