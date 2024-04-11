@@ -18,7 +18,7 @@ class Intersection {
 
 class Intersections {
     public:
-        Intersections();
+        Intersections() : Intersections(std::vector<Intersection>{}) {};
         Intersections(std::vector<Intersection>);
         std::vector<Intersection> data;
         int count;
@@ -31,3 +31,4 @@ class Intersections {
 Intersections intersect(Sphere s, Ray r);
 
 bool operator==(Intersection lhs, Intersection rhs);
+bool operator<(Intersection lhs, Intersection rhs);

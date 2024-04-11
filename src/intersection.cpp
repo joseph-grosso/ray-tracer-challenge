@@ -17,11 +17,6 @@ Intersection::Intersection(float t, Sphere obj) {
     this->empty = false;
 };
 
-Intersections::Intersections() {
-    this->data = std::vector<Intersection>{};
-    this->count = 0;
-};
-
 Intersections::Intersections(std::vector<Intersection> data) {
     this->data = data;
     this->count = data.size();
@@ -89,4 +84,8 @@ bool operator==(Intersection lhs, Intersection rhs) {
         lhs.object == rhs.object &&
         lhs.t == rhs.t
     );
+};
+
+bool operator<(Intersection lhs, Intersection rhs) {
+    return lhs.t < rhs.t;
 };

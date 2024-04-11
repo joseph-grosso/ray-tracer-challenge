@@ -49,7 +49,7 @@ if (test)
 
   target_link_libraries(
     test.out
-    GTest::gtest_main
+    GTest::gmock_main
   )
 
   target_link_libraries(

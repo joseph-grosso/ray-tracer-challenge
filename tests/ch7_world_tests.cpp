@@ -1,5 +1,6 @@
 #include "ray_tracer.h"
 #include "gtest/gtest.h"
+#include <gmock/gmock.h>
 
 #include <cmath>
 #include <string>
@@ -20,8 +21,8 @@ TEST (TestWorld, CreatingAWorld) {
 // p92
 TEST (TestWorld, DefaultWorld) {
 
-    PointLight light = point_light(point(-10, 10, -10), Color(1, 1, 1))
-    Sphere s1 = Sphere();
+    PointLight light = PointLight(point(-10, 10, -10), Color(1, 1, 1));
+    Sphere s1 = Sphere(1);
     s1.set_material(
         Material(
             Color(0.8, 1.0, 0.6),  // color
@@ -31,13 +32,13 @@ TEST (TestWorld, DefaultWorld) {
             200.0  // shininess
         )
     );
-    Sphere s2 = Sphere();
+    Sphere s2 = Sphere(2);
     s2.set_transform(scaling_matrix(0.5, 0.5, 0.5));
 
     World w = default_world();
 
-    EXPECT_THAT(w.objects, Contains(s1));
-    EXPECT_THAT(w.objects, Contains(s2));
+    EXPECT_THAT(w.objects, testing::Contains(s1));
+    EXPECT_THAT(w.objects, testing::Contains(s2));
 }
 
 // Scenario: Intersect a world with a ray
