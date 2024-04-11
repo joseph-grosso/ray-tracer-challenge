@@ -20,7 +20,7 @@ class Sphere {
         Material material;
     public:
         // Methods
-        Sphere(Tuple center = point(0, 0, 0), float radius = 1.0);
+        Sphere();
         Sphere(Tuple center, float radius, int set_random_id);
         Sphere(int set_random_id) : Sphere(point(0, 0, 0), 1, set_random_id) {};
         Tuple get_center();

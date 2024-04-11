@@ -13,13 +13,9 @@
 #include <iostream>
 
 
-Sphere::Sphere(Tuple center, float radius) {
-    if (!center.isPoint()) {
-        throw std::invalid_argument("The center passed in must be a Point.");
-    };
-
-    this->center = center;
-    this->radius = radius;
+Sphere::Sphere() {
+    this->center = point(0, 0, 0);
+    this->radius = 1.0;
     std::random_device rd;
     this->random_id = rd();
     this->transformation = Matrix();
@@ -55,9 +51,9 @@ Sphere::Sphere(Tuple center, float radius, int set_random_id) {
 bool operator==(Sphere lhs, Sphere rhs) {
     return (
         lhs.get_center() == rhs.get_center() &&
-        lhs.get_radius() == rhs.get_radius() &&
+        equalByEpsilon(lhs.get_radius(), rhs.get_radius()) &&
         // TODO: Update when IDs are updated
-        lhs.get_random_id() == rhs.get_random_id() // &&
+        equalByEpsilon(lhs.get_random_id(), rhs.get_random_id()) // &&
         // lhs.get_transform() == rhs.get_transform()
     );
 };
