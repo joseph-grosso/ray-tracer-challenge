@@ -17,6 +17,7 @@ class Material {
         float diffuse;
         float specular;
         float shininess;
+        std::string to_string();
 };
 
 bool operator==(Material lhs, Material rhs);

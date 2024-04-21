@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <random> 
+#include <string>
 
 
 // Chapter 5: Rays
@@ -15,17 +16,17 @@ class Sphere {
         Tuple center;
         float radius;
         // TODO: Consider other options for assigning random id.
-        int random_id;
+        // unsigned int random_id;
         Matrix transformation;
         Material material;
     public:
+        unsigned int random_id;
         // Methods
         Sphere();
-        Sphere(Tuple center, float radius, int set_random_id);
-        Sphere(int set_random_id) : Sphere(point(0, 0, 0), 1, set_random_id) {};
+        Sphere(int determined_id);
         Tuple get_center();
         float get_radius();
-        int get_random_id();
+        unsigned int get_random_id();
         Sphere copy();
         Matrix get_transform();
         void set_transform(Matrix);
@@ -33,6 +34,7 @@ class Sphere {
         void set_material(Material);
         Tuple normal_at(float x, float y, float z);
         Tuple normal_at(Tuple p);
+        std::string to_string();
 };
 
 bool operator==(Sphere lhs, Sphere rhs);

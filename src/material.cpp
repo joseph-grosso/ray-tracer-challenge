@@ -16,6 +16,15 @@ Material::Material(
     this->shininess = shininess;
 };
 
+std::string Material::to_string() {
+    return "Material(Color=" + color.to_string() +
+        ", Ambient=" + std::to_string(ambient) +
+        ", Diffuse=" + std::to_string(diffuse) +
+        ", Specular=" + std::to_string(specular) +
+        ", Shininess=" + std::to_string(shininess) + ")";
+};
+
+
 // Arithmetic operators
 bool operator==(Material lhs, Material rhs) {
     return (

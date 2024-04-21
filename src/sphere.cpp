@@ -9,15 +9,15 @@
 #include <random> 
 #include <vector>
 
-// TODO: Add a toString function that adds this info.
+// TODO: Add a to_string function that adds this info.
 #include <iostream>
+#include <chrono>
 
+static std::random_device rd;
 
 Sphere::Sphere() {
     this->center = point(0, 0, 0);
     this->radius = 1.0;
-    std::random_device rd;
-    this->random_id = rd();
     this->transformation = Matrix();
     this->material = Material();
 };
@@ -30,32 +30,19 @@ float Sphere::get_radius() {
     return radius;
 };
 
-int Sphere::get_random_id() {
-    return random_id;
-};
-
 Sphere Sphere::copy() {
-    Sphere copy_s(center, radius, random_id);
+    Sphere copy_s;
     copy_s.set_material(material);
     copy_s.set_transform(transformation);
     return copy_s;
 };
 
-Sphere::Sphere(Tuple center, float radius, int set_random_id) {
-    this->center = center;
-    this->radius = radius;
-    // TODO: Consider other options for assigning random id.
-    int random_id = set_random_id;
-};
-
-
 bool operator==(Sphere lhs, Sphere rhs) {
     return (
         lhs.get_center() == rhs.get_center() &&
         equalByEpsilon(lhs.get_radius(), rhs.get_radius()) &&
-        // TODO: Update when IDs are updated
-        equalByEpsilon(lhs.get_random_id(), rhs.get_random_id()) // &&
-        // lhs.get_transform() == rhs.get_transform()
+        lhs.get_transform() == rhs.get_transform() &&
+        lhs.get_material() == rhs.get_material()
     );
 };
 
@@ -91,4 +78,9 @@ Material Sphere::get_material() {
 
 void Sphere::set_material(Material m) {
     this->material = m;
+};
+
+std::string Sphere::to_string() {
+    return "\nTransform:\n" + transformation.to_string() +
+    "\nMaterial: " + material.to_string();
 };

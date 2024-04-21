@@ -228,11 +228,26 @@ TEST (TestRays, IntersectScaledSphere) {
     EXPECT_EQ(xs[1].t, 7);
 }
 
-
 // Scenario: Intersecting a translated sphere with a ray
 // p70
 TEST (TestRays, IntersectTranslatedSphere) {
     Sphere s = Sphere();
+    Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
+
+    s.set_transform(translation_matrix(5, 0, 0));
+    Intersections xs = intersect(s, r);
+
+    EXPECT_EQ(xs.count, 0);
+}
+
+
+// Scenario: Testing equality of spheres
+// pMe
+TEST (TestRays, TestSphereEquality) {
+    Sphere s1 = Sphere();
+    Sphere s1 = Sphere();
+    Sphere s3 = Sphere();
+    Sphere s4 = Sphere();
     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
     s.set_transform(translation_matrix(5, 0, 0));

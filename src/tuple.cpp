@@ -193,3 +193,9 @@ Tuple Tuple::reflect(Tuple normal) {
     }
     return *this - (normal * 2) * dot(normal);
 };
+
+std::string Color::to_string() {
+    return "Color(red=" + std::to_string(red)
+        + ", green=" + std::to_string(green)
+        + ", blue=" + std::to_string(blue) + ")";
+};

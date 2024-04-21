@@ -48,6 +48,7 @@ class Color {
         float red, green, blue;
         // Methods
         Color(float red = 0.0f, float green = 0.0f, float blue = 0.0f);
+        std::string to_string();
 };
 
 // Arithmetic operators
@@ -57,3 +58,4 @@ Color operator-(Color lhs, Color rhs);
 Color operator*(Color color, float a);
 Color operator*(float a, Color color);
 Color operator*(Color lhs, Color rhs);
+

@@ -22,7 +22,7 @@ TEST (TestWorld, CreatingAWorld) {
 TEST (TestWorld, DefaultWorld) {
 
     PointLight light = PointLight(point(-10, 10, -10), Color(1, 1, 1));
-    Sphere s1 = Sphere(1);
+    Sphere s1 = Sphere();
     s1.set_material(
         Material(
             Color(0.8, 1.0, 0.6),  // color
@@ -32,7 +32,7 @@ TEST (TestWorld, DefaultWorld) {
             200.0  // shininess
         )
     );
-    Sphere s2 = Sphere(2);
+    Sphere s2 = Sphere();
     s2.set_transform(scaling_matrix(0.5, 0.5, 0.5));
 
     World w = default_world();
