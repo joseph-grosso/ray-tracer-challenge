@@ -15,11 +15,11 @@
 
 static std::random_device rd;
 
-Sphere::Sphere() {
+Sphere::Sphere(Matrix t, Material m) {
     this->center = point(0, 0, 0);
     this->radius = 1.0;
-    this->transformation = Matrix();
-    this->material = Material();
+    this->transformation = t;
+    this->material = m;
 };
 
 Tuple Sphere::get_center() {
@@ -45,6 +45,11 @@ bool operator==(Sphere lhs, Sphere rhs) {
         lhs.get_material() == rhs.get_material()
     );
 };
+
+bool operator!=(Sphere lhs, Sphere rhs) {
+    return !(lhs == rhs);
+};
+
 
 Matrix Sphere::get_transform() {
     return transformation;

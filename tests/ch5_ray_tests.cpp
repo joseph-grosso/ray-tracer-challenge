@@ -244,14 +244,32 @@ TEST (TestRays, IntersectTranslatedSphere) {
 // Scenario: Testing equality of spheres
 // pMe
 TEST (TestRays, TestSphereEquality) {
-    Sphere s1 = Sphere();
-    Sphere s1 = Sphere();
-    Sphere s3 = Sphere();
-    Sphere s4 = Sphere();
-    Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
-    s.set_transform(translation_matrix(5, 0, 0));
-    Intersections xs = intersect(s, r);
+    EXPECT_EQ(Sphere(), Sphere());
+    EXPECT_EQ(
+        Sphere(translation_matrix(1, 2, 3), Material()),
+        Sphere(translation_matrix(1.0, 2.0, 3.0), Material())
+    );
+    EXPECT_EQ(
+        Sphere(Material()),
+        Sphere(Material())
+    );
 
-    EXPECT_EQ(xs.count, 0);
+    EXPECT_NE(
+        Sphere(translation_matrix(1, 2, 3)),
+        Sphere(Material())
+    );
+    EXPECT_NE(
+        Sphere(),
+        Sphere(Material(
+            Color(10, 1, 1), 
+            1,
+            1,
+            1,
+            1.0))
+    );
+    EXPECT_NE(
+        Sphere(translation_matrix(1, 2, 3)),
+        Sphere()
+    );
 }

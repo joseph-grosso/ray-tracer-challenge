@@ -16,17 +16,15 @@ class Sphere {
         Tuple center;
         float radius;
         // TODO: Consider other options for assigning random id.
-        // unsigned int random_id;
         Matrix transformation;
         Material material;
     public:
-        unsigned int random_id;
         // Methods
-        Sphere();
-        Sphere(int determined_id);
+        Sphere(Matrix t = identity_matrix(4), Material m = Material());
+        // Sphere(Matrix t) : Sphere(t, Material()) {};
+        Sphere(Material m) : Sphere(identity_matrix(4), m) {};
         Tuple get_center();
         float get_radius();
-        unsigned int get_random_id();
         Sphere copy();
         Matrix get_transform();
         void set_transform(Matrix);
@@ -38,3 +36,4 @@ class Sphere {
 };
 
 bool operator==(Sphere lhs, Sphere rhs);
+bool operator!=(Sphere lhs, Sphere rhs);
