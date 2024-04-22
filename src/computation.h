@@ -6,6 +6,7 @@
 #include "intersection.h"
 
 
+// Chapter 7: Building a World
 class Computation {
     public:
         // Attributes
@@ -14,6 +15,7 @@ class Computation {
         Tuple point;
         Tuple eyev;
         Tuple normalv;
+        bool inside;
         Computation(float t, Sphere object, Tuple point, Tuple eyev, Tuple normalv);
 };
 

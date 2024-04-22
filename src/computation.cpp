@@ -5,12 +5,19 @@
 #include "computation.h"
 
 
+// Chapter 7: Building a World
 Computation::Computation(float t, Sphere object, Tuple point, Tuple eyev, Tuple normalv) {
         this->t = t;
         this->object = object;
         this->point = point;
         this->eyev = eyev;
-        this->normalv = normalv;
+        if (normalv.dot(eyev) < 0) {
+            this->inside = true;
+            this->normalv = -normalv;
+        } else {
+            this->inside = false;
+            this->normalv = normalv;
+        }
 };
 
 Computation prepare_computations(Intersection i, Ray r) {

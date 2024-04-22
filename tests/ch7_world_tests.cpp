@@ -65,12 +65,42 @@ TEST (TestWorld, PrecomputingIntersection) {
     Sphere s = Sphere();
     Intersection i = Intersection(4.0, s);
 
-
     Computation comps = prepare_computations(i, r);
 
     EXPECT_EQ(comps.t, i.t);
     EXPECT_EQ(comps.object, i.object);
     EXPECT_EQ(comps.point, point(0, 0, -1));
     EXPECT_EQ(comps.eyev, vector(0, 0, -1));
+    EXPECT_EQ(comps.normalv, vector(0, 0, -1));
+}
+
+// Scenario: Precomputing the hit from outside
+// p93
+TEST (TestWorld, PrecomputingHitInterior) {
+
+    Ray r(point(0, 0, -5), vector(0, 0, 1));
+    Sphere s = Sphere();
+    Intersection i = Intersection(4.0, s);
+
+    Computation comps = prepare_computations(i, r);
+
+    EXPECT_EQ(comps.inside, false);
+}
+
+// Scenario: Precomputing the hit from inside
+// p94
+TEST (TestWorld, PrecomputingHitExterior) {
+
+    Ray r(point(0, 0, 0), vector(0, 0, 1));
+    Sphere s = Sphere();
+    Intersection i = Intersection(1, s);
+
+    Computation comps = prepare_computations(i, r);
+
+    EXPECT_EQ(comps.object, i.object);
+    EXPECT_EQ(comps.point, point(0, 0, 1));
+    EXPECT_EQ(comps.eyev, vector(0, 0, -1));
+    EXPECT_EQ(comps.inside, true);
+    // Normal inverted
     EXPECT_EQ(comps.normalv, vector(0, 0, -1));
 }
