@@ -10,6 +10,7 @@ add_library(
     lights.cpp
     material.cpp
     world.cpp
+    computation.cpp
 )
  
 message("Raytracer current source dir = ${CMAKE_CURRENT_SOURCE_DIR}")

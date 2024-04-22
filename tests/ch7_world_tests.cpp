@@ -42,7 +42,7 @@ TEST (TestWorld, DefaultWorld) {
 }
 
 // Scenario: Intersect a world with a ray
-// p92
+// p93
 TEST (TestWorld, IntersectWorldWithRay) {
 
     World w = default_world();
@@ -55,4 +55,22 @@ TEST (TestWorld, IntersectWorldWithRay) {
     EXPECT_EQ(xs[1].t, 4.5);
     EXPECT_EQ(xs[2].t, 5.5);
     EXPECT_EQ(xs[3].t, 6);
+}
+
+// Scenario: Precomputing the state of an intersection
+// p93
+TEST (TestWorld, PrecomputingIntersection) {
+
+    Ray r(point(0, 0, -5), vector(0, 0, 1));
+    Sphere s = Sphere();
+    Intersection i = Intersection(4.0, s);
+
+
+    Computation comps = prepare_computations(i, r);
+
+    EXPECT_EQ(comps.t, i.t);
+    EXPECT_EQ(comps.object, i.object);
+    EXPECT_EQ(comps.point, point(0, 0, -1));
+    EXPECT_EQ(comps.eyev, vector(0, 0, -1));
+    EXPECT_EQ(comps.normalv, vector(0, 0, -1));
 }
