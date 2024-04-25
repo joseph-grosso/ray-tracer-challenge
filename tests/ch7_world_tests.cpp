@@ -88,7 +88,7 @@ TEST (TestWorld, PrecomputingHitInterior) {
 }
 
 // Scenario: Precomputing the hit from inside
-// p94
+// p95
 TEST (TestWorld, PrecomputingHitExterior) {
 
     Ray r(point(0, 0, 0), vector(0, 0, 1));
@@ -103,4 +103,35 @@ TEST (TestWorld, PrecomputingHitExterior) {
     EXPECT_EQ(comps.inside, true);
     // Normal inverted
     EXPECT_EQ(comps.normalv, vector(0, 0, -1));
+}
+
+// Scenario: Shading an intersection
+// p95
+TEST (TestWorld, ShadingIntersection) {
+
+    World w = default_world();
+    Ray r(point(0, 0, -5), vector(0, 0, 1));
+    Sphere s = w.objects[0];
+    Intersection i = Intersection(4, s);
+
+    Computation comps = prepare_computations(i, r);
+    Color c = w.shade_hit(comps);
+
+    EXPECT_EQ(c, Color(0.38066, 0.47583, 0.2855));
+}
+
+// Scenario: Shading an intersection from the inside
+// p95
+TEST (TestWorld, ShadingIntersectionFromInside) {
+
+    World w = default_world();
+    w.lights[0] = PointLight(point(0, 0.25, 0), Color(1, 1, 1));
+    Ray r(point(0, 0, 0), vector(0, 0, 1));
+    Sphere s = w.objects[1];
+    Intersection i = Intersection(0.5, s);
+
+    Computation comps = prepare_computations(i, r);
+    Color c = w.shade_hit(comps);
+
+    EXPECT_EQ(c, Color(0.90498, 0.90498, 0.90498));
 }

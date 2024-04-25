@@ -8,6 +8,7 @@
 #include "world.h"
 #include "transform.h"
 #include "intersection.h"
+#include "computation.h"
 
 #include <vector>
 #include <bits/stdc++.h> 
@@ -34,6 +35,17 @@ Intersections World::intersect_world(Ray r) {
     );
     return Intersections(initial_intersections);
 };
+
+Color World::shade_hit(Computation comp) {
+    return lighting(
+        comp.object.get_material(),
+        lights[0],  // TODO: Fix this when using multiple light sources! Extra chapter
+        comp.point,
+        comp.eyev,
+        comp.normalv
+    );
+};
+
 
 
 World default_world() {
