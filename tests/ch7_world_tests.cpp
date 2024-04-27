@@ -135,3 +135,48 @@ TEST (TestWorld, ShadingIntersectionFromInside) {
 
     EXPECT_EQ(c, Color(0.90498, 0.90498, 0.90498));
 }
+
+// Scenario: The colour when a ray misses
+// p96
+TEST (TestWorld, MissColor) {
+
+    World w = default_world();
+    Ray r(point(0, 0, -5), vector(0, 1, 0));
+
+    Color c = w.color_at(r);
+
+    EXPECT_EQ(c, Color(0, 0, 0));
+}
+
+// Scenario: The colour when a ray hit
+// p96
+TEST (TestWorld, HitColor) {
+
+    World w = default_world();
+    Ray r(point(0, 0, -5), vector(0, 0, 1));
+
+    Color c = w.color_at(r);
+
+    EXPECT_EQ(c, Color(0.38066, 0.47583, 0.2855));
+}
+
+// Scenario: The colour when a ray hit
+// p97
+TEST (TestWorld, HitColorBehindRay) {
+
+    World w = default_world();
+
+    Material m1 = w.objects[0].get_material();
+    m1.ambient = 1;
+    w.objects[0].set_material(m1);
+
+    Material m2 = w.objects[1].get_material();
+    m2.ambient = 1;
+    w.objects[1].set_material(m2);
+
+    Ray r(point(0, 0, 0.75), vector(0, 0, -1));
+
+    Color c = w.color_at(r);
+
+    EXPECT_EQ(c, m2.color);
+}

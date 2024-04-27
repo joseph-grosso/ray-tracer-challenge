@@ -21,6 +21,7 @@ class World {
         World(std::vector<Sphere> s_list, PointLight l) : World(s_list, std::vector<PointLight> {1, l})  {};
         Intersections intersect_world(Ray r);
         Color shade_hit(Computation comp);
+        Color color_at(Ray r);
 };
 
 World default_world();

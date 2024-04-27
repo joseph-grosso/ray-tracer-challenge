@@ -60,7 +60,7 @@ Intersection Intersections::hit() {
         // TODO: Think about other ways you could avoid throwing this if this causes issues in the future.
         // return null intersection?
         // return Intersection();
-        throw std::logic_error("No hits possible - empty list of intersections");
+        return Intersection();
     };
     
     Intersection inter = data[0];

@@ -67,3 +67,16 @@ World default_world() {
         std::vector<PointLight>{light}
     );
 };
+
+Color World::color_at(Ray r) {
+    Intersections i = intersect_world(r);
+    Intersection h = i.hit();
+
+    if (h.is_empty()) {
+        return Color();
+    };
+
+    Computation comp = prepare_computations(h, r);
+
+    return shade_hit(comp);
+};
