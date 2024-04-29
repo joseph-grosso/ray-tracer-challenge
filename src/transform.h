@@ -14,3 +14,7 @@ Matrix rotation_x_matrix(float radians);
 Matrix rotation_y_matrix(float radians);
 Matrix rotation_z_matrix(float radians);
 Matrix shearing_matrix(float x_y, float x_z, float y_x, float y_z, float z_x, float z_y);
+
+// Chapter 7: Making a Scene
+// Defining a view transform
+Matrix view_transform(Tuple from, Tuple to, Tuple up);

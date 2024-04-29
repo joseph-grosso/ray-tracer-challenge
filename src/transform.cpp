@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <iostream>
 
 
 // Chapter 4: Matrix Transformations
@@ -51,4 +52,31 @@ Matrix shearing_matrix(float x_y, float x_z, float y_x, float y_z, float z_x, fl
                                      z_x, z_y, 1, 0,
                                      0,   0,   0, 1};
     return Matrix(4, 4, shear_data);
+};
+
+// Chapter 7: Making a Scene
+// Defining a view transform
+Matrix view_transform(Tuple from, Tuple to, Tuple up) {
+    // Compute "forward" direction and normalize
+    Tuple forward = (to - from).normalize();
+    // Compute normalized up vector
+    Tuple upn = up.normalize();
+    // Compute "left" with the cross product
+    Tuple left = forward.cross(upn);
+    // Compute "true up" with the cross of left and forward
+    Tuple true_up = left.cross(forward);
+    // Create the orientation matrix using computed vectors
+    Matrix orientation(
+        4,
+        4,
+        std::vector<float>{
+            left.x,     left.y,     left.z,     0,
+            true_up.x,  true_up.y,  true_up.z,  0,
+            -forward.x, -forward.y, -forward.z, 0,
+            0,          0,          0,          1
+        }
+    );
+
+    // Translate the scene into place before orienting it
+    return orientation * translation_matrix(-from.x, -from.y, -from.z);
 };

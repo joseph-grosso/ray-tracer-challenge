@@ -180,3 +180,63 @@ TEST (TestWorld, HitColorBehindRay) {
 
     EXPECT_EQ(c, m2.color);
 }
+
+// Chapter 7: Making a Scene
+// Defining a view transform
+// Scenario: The transform matrix for the default orientation
+// p98
+TEST (TestCameraTransform, DefaultOrientation) {
+
+    Tuple from = point(0, 0, 0);
+    Tuple to = point(0, 0, -1);
+    Tuple up = vector(0, 1, 0);
+    
+    Matrix t = view_transform(from, to, up);
+    EXPECT_EQ(t, identity_matrix(4));
+}
+
+// Scenario: The transform matrix looking in the z direction
+// p98
+TEST (TestCameraTransform, ZDirectionCameraOrientation) {
+
+    Tuple from = point(0, 0, 0);
+    Tuple to = point(0, 0, 1);
+    Tuple up = vector(0, 1, 0);
+    
+    Matrix t = view_transform(from, to, up);
+    EXPECT_EQ(t, scaling_matrix(-1, 1, -1));
+}
+
+// Scenario: The transform matrix moves the world
+// p99
+TEST (TestCameraTransform, TranslationOrientation) {
+
+    Tuple from = point(0, 0, 8);
+    Tuple to = point(0, 0, 0);
+    Tuple up = vector(0, 1, 0);
+    
+    Matrix t = view_transform(from, to, up);
+    EXPECT_EQ(t, translation_matrix(0, 0, -8));
+}
+
+// Scenario: The transform matrix moves the world
+// p99
+TEST (TestCameraTransform, ArbitraryTransform) {
+
+    Tuple from = point(1, 3, 2);
+    Tuple to = point(4, -2, 8);
+    Tuple up = vector(1, 1, 0);
+    
+    Matrix actual = view_transform(from, to, up);
+    Matrix expected(
+        4,
+        4,
+        std::vector<float>{
+            -0.50709, 0.50709,  0.67612, -2.36643,
+             0.76772, 0.60609,  0.12122, -2.82843,
+            -0.35857, 0.59761, -0.71714,  0.00000,
+             0.00000, 0.00000,  0.00000,  1.00000
+        }
+    );
+    EXPECT_EQ(expected, actual);
+}

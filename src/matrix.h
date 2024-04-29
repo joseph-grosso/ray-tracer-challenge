@@ -52,3 +52,7 @@ Matrix operator*(Matrix m, float f);
 // TODO: Find if there's a better way to use this 
 float dot_product(std::vector<float> v1, std::vector<float> v2);
 Matrix identity_matrix(int size);
+
+// Chapter 7: Making a Scene
+// Defining a view transform
+void PrintTo(const Matrix& m, std::ostream* os);

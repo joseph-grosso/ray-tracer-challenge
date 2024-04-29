@@ -5,6 +5,7 @@
 // TODO: remove
 #include <iostream>
 #include <string>
+#include <ostream>
 
 #include <stdexcept>
 #include <algorithm>
@@ -268,3 +269,10 @@ Matrix identity_matrix(int size) {
     };
     return Matrix(size, size, data);
 };
+
+// Chapter 7: Making a Scene
+// Defining a view transform
+void PrintTo(const Matrix& m, std::ostream* os) {
+    Matrix& ref = const_cast <Matrix&>(m);
+    *os << ref.to_string();
+}
