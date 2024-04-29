@@ -254,7 +254,7 @@ TEST (TestCamera, ConstructingCamera) {
 
     EXPECT_EQ(c.hsize, 160);
     EXPECT_EQ(c.vsize, 120);
-    EXPECT_EQ(c.field_of_view, M_PI / 2);
+    EXPECT_TRUE(equalByEpsilon(c.field_of_view, M_PI / 2));
     EXPECT_EQ(c.transform, Matrix(4));
 }
 
@@ -263,14 +263,14 @@ TEST (TestCamera, ConstructingCamera) {
 TEST (TestCamera, CamPixelSizeHorizontal) {
     Camera c(200, 125, M_PI / 2);
 
-    EXPECT_EQ(c.pixel_size, 0.01);
+    EXPECT_TRUE(equalByEpsilon(c.pixel_size, 0.01));
 }
 
 // Scenario: The pixel size for a vertical canvas
 // p101
 TEST (TestCamera, CamPixelSizeVertical) {
-    Camera c(125, 20, M_PI / 2);
+    Camera c(125, 200, M_PI / 2);
 
-    EXPECT_EQ(c.pixel_size, 0.01);
+    EXPECT_TRUE(equalByEpsilon(c.pixel_size, 0.01));
 }
 

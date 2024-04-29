@@ -9,3 +9,4 @@
 #include "tuple.h"
 #include "world.h"
 #include "computation.h"
+#include "camera.h"
