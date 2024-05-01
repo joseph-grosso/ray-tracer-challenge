@@ -1,6 +1,8 @@
 #include "tuple.h"
 #include "matrix.h"
 #include "ray.h"
+#include "canvas.h"
+#include "world.h"
 #include <vector>
 #include <string>
 #include <math.h>
@@ -48,4 +50,18 @@ Ray Camera::ray_for_pixel(int px, int py) {
     Tuple direction = (pixel - origin).normalize();
 
     return Ray(origin, direction);
+};
+
+Canvas Camera::render(World w) {
+    Canvas image(hsize, vsize);
+
+    for (int x=0; x<vsize; x++) {
+        for (int y=0; y<hsize; y++) {
+            Ray r = ray_for_pixel(x, y);
+            Color c = w.color_at(r);
+            image.write_pixel(c, x, y);
+        };
+    };
+
+    return image;
 };
