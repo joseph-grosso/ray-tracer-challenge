@@ -88,10 +88,9 @@ int main() {
     // Add a light source
     PointLight light = PointLight(point(-10, 10, -10), Color(1, 1, 1));
 
-
     // Create camera
-    unsigned int x = 72;
-    unsigned int y = 128;
+    unsigned int x = 720;
+    unsigned int y = 1280;
     Camera camera(x, y, M_PI / 2);
     camera.transform = view_transform(
         point(0, 1.5, -5),
