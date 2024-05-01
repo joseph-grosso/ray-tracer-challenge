@@ -55,8 +55,8 @@ Ray Camera::ray_for_pixel(int px, int py) {
 Canvas Camera::render(World w) {
     Canvas image(hsize, vsize);
 
-    for (int x=0; x<vsize; x++) {
-        for (int y=0; y<hsize; y++) {
+    for (int x=0; x<hsize; x++) {
+        for (int y=0; y<vsize; y++) {
             Ray r = ray_for_pixel(x, y);
             Color c = w.color_at(r);
             image.write_pixel(c, x, y);

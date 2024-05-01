@@ -324,3 +324,37 @@ TEST (TestCamera, RenderWorld) {
 
     EXPECT_EQ(image.pixel_at(5, 5), Color(0.38066, 0.47583, 0.2855));
 }
+
+// Scenario: Render a world with a camera with different pixel widths
+// pMe
+TEST (TestCamera, RenderWorldDifferentWidths) {
+    World w = default_world();
+    Camera c(11, 21, M_PI / 2);
+
+    Tuple from = point(0, 0, -5);
+    Tuple to = point(0, 0, 0);
+    Tuple up = vector(0, 1, 0);
+
+    c.transform = view_transform(from, to, up);
+    
+    Canvas image = c.render(w);
+
+    EXPECT_EQ(image.pixel_at(5, 10), Color(0.38066, 0.47583, 0.2855));
+}
+
+// Scenario: Render a world with a camera with different pixel widths
+// pMe
+TEST (TestCamera, RenderWorldDifferentWidths2) {
+    World w = default_world();
+    Camera c(21, 11, M_PI / 2);
+
+    Tuple from = point(0, 0, -5);
+    Tuple to = point(0, 0, 0);
+    Tuple up = vector(0, 1, 0);
+
+    c.transform = view_transform(from, to, up);
+    
+    Canvas image = c.render(w);
+
+    EXPECT_EQ(image.pixel_at(10, 5), Color(0.38066, 0.47583, 0.2855));
+}
