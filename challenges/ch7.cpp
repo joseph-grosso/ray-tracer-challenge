@@ -90,9 +90,9 @@ int main() {
 
 
     // Create camera
-    unsigned int x = 1280;
-    unsigned int y = 720;
-    Camera camera(x, y, M_PI / 3);
+    unsigned int x = 72;
+    unsigned int y = 128;
+    Camera camera(x, y, M_PI / 2);
     camera.transform = view_transform(
         point(0, 1.5, -5),
         point(0, 1, 0),
