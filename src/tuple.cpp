@@ -132,6 +132,13 @@ Tuple operator/(Tuple tup, float a) {
     );
 };
 
+// Chapter 7: Making a Scene
+// Defining a view transform
+void PrintTo(const Tuple& m, std::ostream* os) {
+    Tuple& ref = const_cast <Tuple&>(m);
+    *os << ref.to_string();
+}
+
 // Chapter 2: Colors and Canvas
 Color::Color(float red, float green, float blue) {
     this->red=red;
@@ -198,4 +205,11 @@ std::string Color::to_string() {
     return "Color(red=" + std::to_string(red)
         + ", green=" + std::to_string(green)
         + ", blue=" + std::to_string(blue) + ")";
+};
+
+// Chapter 7: Making a Scene
+// Defining a view transform
+void PrintTo(const Color& m, std::ostream* os) {
+    Color& ref = const_cast <Color&>(m);
+    *os << ref.to_string();
 };

@@ -274,3 +274,36 @@ TEST (TestCamera, CamPixelSizeVertical) {
     EXPECT_TRUE(equalByEpsilon(c.pixel_size, 0.01));
 }
 
+// Scenario: Constructing a ray through the center of the canvas
+// p103
+TEST (TestCamera, RayThruCenterOfCanvas) {
+    Camera c(201, 101, M_PI / 2);
+
+    Ray r = c.ray_for_pixel(100, 50);
+
+    EXPECT_EQ(r.get_origin(), point(0, 0, 0));
+    EXPECT_EQ(r.get_direction(), vector(0, 0, -1));
+}
+
+// Scenario: Constructing a ray through a corner of the canvas
+// p103
+TEST (TestCamera, RayThruCornerOfCanvas) {
+    Camera c(201, 101, M_PI / 2);
+
+    Ray r = c.ray_for_pixel(0, 0);
+
+    EXPECT_EQ(r.get_origin(), point(0, 0, 0));
+    EXPECT_EQ(r.get_direction(), vector(0.66519, 0.33259, -0.66851));
+}
+
+// Scenario: Constructing a ray when the camera is transformed
+// p103
+TEST (TestCamera, RayThruCameraTransformed) {
+    Camera c(201, 101, M_PI / 2);
+    c.transform = rotation_y_matrix(M_PI / 4) * translation_matrix(0, -2, 5);
+
+    Ray r = c.ray_for_pixel(100, 50);
+
+    EXPECT_EQ(r.get_origin(), point(0, 2, -5));
+    EXPECT_EQ(r.get_direction(), vector(std::sqrt(2) / 2, 0, -std::sqrt(2) / 2));
+}

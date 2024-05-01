@@ -41,6 +41,10 @@ Tuple operator*(Tuple tup, float a);
 Tuple operator*(float a, Tuple tup);
 Tuple operator/(Tuple tup, float a);
 
+// Chapter 7: Making a Scene
+// Defining a view transform
+void PrintTo(const Tuple& m, std::ostream* os);
+
 // Chapter 2: Colors
 class Color {
     public:
@@ -59,3 +63,6 @@ Color operator*(Color color, float a);
 Color operator*(float a, Color color);
 Color operator*(Color lhs, Color rhs);
 
+// Chapter 7: Making a Scene
+// Defining a view transform
+void PrintTo(const Color& m, std::ostream* os);
