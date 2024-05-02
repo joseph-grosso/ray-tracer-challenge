@@ -1,6 +1,7 @@
 #pragma once
 
 #include "tuple.h"
+#include "lights.h"
 
 
 class Material {
@@ -18,6 +19,12 @@ class Material {
         float specular;
         float shininess;
         std::string to_string();
+        Color lighting(
+            PointLight light,
+            Tuple position,
+            Tuple eyev,
+            Tuple normalv
+        );
 };
 
 bool operator==(Material lhs, Material rhs);

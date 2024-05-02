@@ -37,8 +37,7 @@ Intersections World::intersect_world(Ray r) {
 };
 
 Color World::shade_hit(Computation comp) {
-    return lighting(
-        comp.object.get_material(),
+    return comp.object.get_material().lighting(
         lights[0],  // TODO: Fix this when using multiple light sources! Extra chapter
         comp.point,
         comp.eyev,

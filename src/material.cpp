@@ -1,5 +1,9 @@
 #include "tuple.h"
 #include "material.h"
+#include "lights.h"
+
+#include <cmath>
+
 
 // Chapter 6: Lights and Shading
 Material::Material(
@@ -24,6 +28,38 @@ std::string Material::to_string() {
         ", Shininess=" + std::to_string(shininess) + ")";
 };
 
+Color Material::lighting(
+    PointLight light,
+    Tuple position,
+    Tuple eyev,
+    Tuple normalv
+) {
+    Color black = Color();
+    Color effective_color = this->color * light.get_intensity();
+    Tuple lightv = (light.get_position() - position).normalize();
+
+    Color ambient = effective_color * this->ambient;
+
+    Color diffuse, specular;
+
+    float light_dot_normal = lightv.dot(normalv);
+    if (light_dot_normal < 0) {
+        diffuse = black;
+        specular = black;
+    } else {
+        diffuse = effective_color * this->diffuse * light_dot_normal;
+        Tuple reflectv = (-lightv).reflect(normalv);
+        float reflect_dot_eye = reflectv.dot(eyev);
+        
+        if (reflect_dot_eye <= 0) {
+            specular = black;
+        } else {
+            float factor = std::pow(reflect_dot_eye, this->shininess);
+            specular = light.get_intensity() * this->specular * factor;
+        };
+    };
+    return ambient + diffuse + specular;
+};
 
 // Arithmetic operators
 bool operator==(Material lhs, Material rhs) {

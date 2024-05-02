@@ -83,8 +83,7 @@ int main() {
                 // if (i % 80 == 0) {
                 //     std::cout << inter.object.get_material().color.red << std:: endl;
                 // };
-                Color lit_color = lighting(
-                    inter.object.get_material(),
+                Color lit_color = inter.object.get_material().lighting(
                     light,
                     hit_point,
                     eye,
