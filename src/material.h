@@ -23,7 +23,8 @@ class Material {
             PointLight light,
             Tuple position,
             Tuple eyev,
-            Tuple normalv
+            Tuple normalv,
+            bool in_shadow
         );
 };
 

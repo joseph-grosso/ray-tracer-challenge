@@ -41,7 +41,9 @@ Color World::shade_hit(Computation comp) {
         lights[0],  // TODO: Fix this when using multiple light sources! Extra chapter
         comp.point,
         comp.eyev,
-        comp.normalv
+        comp.normalv,
+        // TODO: fix this when you need to in ch8
+        false
     );
 };
 

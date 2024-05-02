@@ -87,7 +87,8 @@ int main() {
                     light,
                     hit_point,
                     eye,
-                    norm
+                    norm,
+                    false
                 );
                 c.write_pixel(lit_color, i, canv_y - j);
             };

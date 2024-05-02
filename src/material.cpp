@@ -32,13 +32,18 @@ Color Material::lighting(
     PointLight light,
     Tuple position,
     Tuple eyev,
-    Tuple normalv
+    Tuple normalv,
+    bool in_shadow
 ) {
     Color black = Color();
     Color effective_color = this->color * light.get_intensity();
     Tuple lightv = (light.get_position() - position).normalize();
 
     Color ambient = effective_color * this->ambient;
+
+    if (in_shadow) {
+        return ambient;
+    };
 
     Color diffuse, specular;
 
@@ -58,6 +63,7 @@ Color Material::lighting(
             specular = light.get_intensity() * this->specular * factor;
         };
     };
+
     return ambient + diffuse + specular;
 };
 
