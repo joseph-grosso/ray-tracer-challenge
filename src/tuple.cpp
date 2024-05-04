@@ -13,11 +13,11 @@ Tuple::Tuple(float x, float y, float z, float w) {
 }
 
 bool Tuple::isPoint() {
-    return w == 1.0;
+    return equalByEpsilon(w, 1.0);
 }
 
 bool Tuple::isVector() {
-    return w == 0.0;
+    return equalByEpsilon(w, 0.0);
 }
 
 float Tuple::magnitude() {

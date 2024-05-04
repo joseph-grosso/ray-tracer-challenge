@@ -48,7 +48,7 @@ Ray Camera::ray_for_pixel(int px, int py) {
     Tuple pixel = transform.inverse() * point(world_x, world_y, -1);
     Tuple origin = transform.inverse() * point(0, 0, 0);
     Tuple direction = (pixel - origin).normalize();
-
+    
     return Ray(origin, direction);
 };
 
