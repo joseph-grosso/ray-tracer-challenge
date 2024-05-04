@@ -41,7 +41,7 @@ int main() {
 
     // Arm Sphere
     Sphere arm = Sphere();
-    arm.set_transform(translation_matrix(-5, -1, 4) * rotation_z_matrix(M_PI / 7) * scaling_matrix(2, 1, 0.5));
+    arm.set_transform(translation_matrix(-3, -1, 4) * rotation_z_matrix(M_PI / 7) * scaling_matrix(3, 1, 0.5));
     arm.set_material(
         Material(
             Color(0.1, 1, 0.5), // color
@@ -54,7 +54,7 @@ int main() {
 
     // MIDDLE finger Sphere
     Sphere MIDDLE = Sphere();
-    MIDDLE.set_transform(translation_matrix(0.7, 0, 3) * scaling_matrix(1, 0.25, 0.25));
+    MIDDLE.set_transform(translation_matrix(1, 0, 4) * scaling_matrix(1, 0.25, 0.25));
     MIDDLE.set_material(
         Material(
             Color(0.1, 1, 0.5), // color
@@ -64,6 +64,33 @@ int main() {
             200.0               // shininess
         )
     );
+
+    // RING finger Sphere
+    Sphere RING = Sphere();
+    RING.set_transform(translation_matrix(1, -0.4, 4) * scaling_matrix(1, 0.25, 0.25));
+    RING.set_material(
+        Material(
+            Color(0.9, 0.9, 0), // color
+            0.1,                // ambient
+            0.7,                // diffuse
+            0.3,                // specular
+            200.0               // shininess
+        )
+    );
+
+    // PINKY finger Sphere
+    Sphere PINKY = Sphere();
+    PINKY.set_transform(translation_matrix(0.8, -1, 4) * rotation_z_matrix(-M_PI / 7) * scaling_matrix(0.9, 0.21, 0.21));
+    PINKY.set_material(
+        Material(
+            Color(0, 0.9, 0.9), // color
+            0.1,                // ambient
+            0.7,                // diffuse
+            0.3,                // specular
+            200.0               // shininess
+        )
+    );
+
 
     // BLUE x sphere
     Sphere x_sphere = Sphere();
@@ -105,7 +132,19 @@ int main() {
     );
 
     // Create world
-    World w(std::vector<Sphere> {wall, palm, arm, x_sphere, y_sphere, MIDDLE}, light);
+    World w(
+        std::vector<Sphere> {
+            wall,
+            palm,
+            arm,
+            x_sphere,
+            y_sphere,
+            MIDDLE,
+            RING,
+            PINKY
+        },
+        light
+    );
 
     std::cout << std::setprecision(2) << std::fixed;
     std::cout << "New image generation starting!" << std::endl;
@@ -125,7 +164,8 @@ int main() {
 
     auto duration = duration_cast<microseconds>(stop - start);
     std::cout << duration.count() << " microseconds." << std::endl;
-    std::cout << duration.count() / 1000000.0 << " seconds." << std::endl;
+    std::cout << duration.count() / 1000000.0 << " seconds ";
+    std::cout << "(" << duration.count() / (1000000.0 * 60) << " mins)" << std::endl;
     std::cout << duration.count() / (x * y) << " microseconds per pixel." << std::endl;
 
     return 0;
