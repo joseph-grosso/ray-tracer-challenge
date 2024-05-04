@@ -52,6 +52,19 @@ int main() {
         )
     );
 
+    // INDEX finger Sphere
+    Sphere INDEX = Sphere();
+    INDEX.set_transform(translation_matrix(0.85, 0.42, 4) * scaling_matrix(0.9, 0.21, 0.21));
+    INDEX.set_material(
+        Material(
+            Color(0.8, 0.1, 0.1),   // color
+            0.1,                    // ambient
+            0.7,                    // diffuse
+            0.3,                    // specular
+            200.0                   // shininess
+        )
+    );
+
     // MIDDLE finger Sphere
     Sphere MIDDLE = Sphere();
     MIDDLE.set_transform(translation_matrix(1, 0, 4) * scaling_matrix(1, 0.25, 0.25));
@@ -137,8 +150,9 @@ int main() {
             wall,
             palm,
             arm,
-            x_sphere,
-            y_sphere,
+            // x_sphere,
+            // y_sphere,
+            INDEX,
             MIDDLE,
             RING,
             PINKY
