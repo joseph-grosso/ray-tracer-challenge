@@ -14,7 +14,7 @@ int main() {
     // left_wall
     Sphere wall = Sphere();
     wall.set_transform(
-        scaling_matrix(100, 100, 0.01)
+        scaling_matrix(100, 100, 0.1)
     );
     wall.set_material(
         Material(
@@ -95,8 +95,8 @@ int main() {
     PointLight light = PointLight(point(0, 0, 100), Color(1, 1, 1));
 
     // Create camera
-    unsigned int x = 100;
-    unsigned int y = 100;
+    unsigned int x = 200;
+    unsigned int y = 200;
     Camera camera(x, y, M_PI / 2);
     camera.transform = view_transform(
         point(2, 2, 6),

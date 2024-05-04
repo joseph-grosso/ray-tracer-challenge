@@ -4,7 +4,7 @@
 
 // Chapter 1: Tuples, Vectors and Points
 // Equality test
-bool equalByEpsilon(float a, float b, float epsilon = 0.00001);
+bool equalByEpsilon(float a, float b, float epsilon = 0.001);
 
 class Tuple {
     public:
