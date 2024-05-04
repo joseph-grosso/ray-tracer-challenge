@@ -146,8 +146,8 @@ int main() {
     PointLight light = PointLight(point(-10, -45, 80), Color(1, 1, 1));
 
     // Create camera
-    unsigned int x = 1000;
-    unsigned int y = 1000;
+    unsigned int x = 1260;
+    unsigned int y = 1260;
     Camera camera(x, y, M_PI * 1.4 / 3.0);
     camera.transform = view_transform(
         point(2, 2, 8),
