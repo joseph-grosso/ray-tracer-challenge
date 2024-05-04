@@ -13,6 +13,7 @@ class Computation {
         float t;
         Sphere object;
         Tuple point;
+        Tuple over_point;
         Tuple eyev;
         Tuple normalv;
         bool inside;

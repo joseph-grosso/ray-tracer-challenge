@@ -17,7 +17,9 @@ Computation::Computation(float t, Sphere object, Tuple point, Tuple eyev, Tuple 
         } else {
             this->inside = false;
             this->normalv = normalv;
-        }
+        };
+        // TODO: Create epsilon constant that is shared around the codebase
+        this->over_point = this->point + this->normalv * 0.00001;  // EPSILON
 };
 
 Computation prepare_computations(Intersection i, Ray r) {

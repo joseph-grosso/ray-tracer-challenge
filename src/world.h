@@ -22,6 +22,7 @@ class World {
         Intersections intersect_world(Ray r);
         Color shade_hit(Computation comp);
         Color color_at(Ray r);
+        bool is_shadowed(Tuple p);
 };
 
 World default_world();

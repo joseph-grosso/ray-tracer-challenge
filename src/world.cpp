@@ -37,16 +37,28 @@ Intersections World::intersect_world(Ray r) {
 };
 
 Color World::shade_hit(Computation comp) {
+    bool shadowed = is_shadowed(comp.over_point);
     return comp.object.get_material().lighting(
         lights[0],  // TODO: Fix this when using multiple light sources! Extra chapter
-        comp.point,
+        comp.over_point,
         comp.eyev,
         comp.normalv,
-        // TODO: fix this when you need to in ch8
-        false
+        shadowed
     );
 };
 
+// p113
+bool World::is_shadowed(Tuple p) {
+    // TODO: replace with multiple light sources
+    Tuple direction = lights[0].get_position() - p;
+    float distance = direction.magnitude();
+    Ray r(p, direction.normalize());
+
+    Intersections i = intersect_world(r);
+    Intersection hit = i.hit();
+
+    return !hit.is_empty() && hit.t < distance;
+};
 
 
 World default_world() {
