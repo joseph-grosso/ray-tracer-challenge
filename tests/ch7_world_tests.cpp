@@ -64,12 +64,12 @@ TEST (TestWorld, PrecomputingIntersection) {
 
     Ray r(point(0, 0, -5), vector(0, 0, 1));
     Sphere s = Sphere();
-    Intersection i = Intersection(4.0, s);
+    Intersection i = Intersection(4.0, &s);
 
     Computation comps = prepare_computations(i, r);
 
     EXPECT_EQ(comps.t, i.t);
-    EXPECT_EQ(comps.object, i.object);
+    EXPECT_EQ(comps.object, *i.object);
     EXPECT_EQ(comps.point, point(0, 0, -1));
     EXPECT_EQ(comps.eyev, vector(0, 0, -1));
     EXPECT_EQ(comps.normalv, vector(0, 0, -1));
@@ -81,7 +81,7 @@ TEST (TestWorld, PrecomputingHitInterior) {
 
     Ray r(point(0, 0, -5), vector(0, 0, 1));
     Sphere s = Sphere();
-    Intersection i = Intersection(4.0, s);
+    Intersection i = Intersection(4.0, &s);
 
     Computation comps = prepare_computations(i, r);
 
@@ -94,11 +94,11 @@ TEST (TestWorld, PrecomputingHitExterior) {
 
     Ray r(point(0, 0, 0), vector(0, 0, 1));
     Sphere s = Sphere();
-    Intersection i = Intersection(1, s);
+    Intersection i = Intersection(1, &s);
 
     Computation comps = prepare_computations(i, r);
 
-    EXPECT_EQ(comps.object, i.object);
+    EXPECT_EQ(comps.object, *i.object);
     EXPECT_EQ(comps.point, point(0, 0, 1));
     EXPECT_EQ(comps.eyev, vector(0, 0, -1));
     EXPECT_EQ(comps.inside, true);
@@ -113,7 +113,7 @@ TEST (TestWorld, ShadingIntersection) {
     World w = default_world();
     Ray r(point(0, 0, -5), vector(0, 0, 1));
     Sphere s = w.objects[0];
-    Intersection i = Intersection(4, s);
+    Intersection i = Intersection(4, &s);
 
     Computation comps = prepare_computations(i, r);
     Color c = w.shade_hit(comps);
@@ -129,7 +129,7 @@ TEST (TestWorld, ShadingIntersectionFromInside) {
     w.lights[0] = PointLight(point(0, 0.25, 0), Color(1, 1, 1));
     Ray r(point(0, 0, 0), vector(0, 0, 1));
     Sphere s = w.objects[1];
-    Intersection i = Intersection(0.5, s);
+    Intersection i = Intersection(0.5, &s);
 
     Computation comps = prepare_computations(i, r);
     Color c = w.shade_hit(comps);
@@ -319,7 +319,7 @@ TEST (TestCamera, RenderWorld) {
     Tuple up = vector(0, 1, 0);
 
     c.transform = view_transform(from, to, up);
-    
+
     Canvas image = c.render(w);
 
     EXPECT_EQ(image.pixel_at(5, 5), Color(0.38066, 0.47583, 0.2855));

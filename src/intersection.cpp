@@ -11,7 +11,7 @@ Intersection::Intersection() {
     this->empty = true;
 };
 
-Intersection::Intersection(float t, Sphere obj) {
+Intersection::Intersection(float t, Sphere *const obj) {
     this->t = t;
     this->object = obj;
     this->empty = false;
@@ -26,9 +26,9 @@ Intersection Intersections::operator[](int i) {
     return data[i];
 };
 
-Intersections intersect(Sphere s, Ray r) {
+Intersections intersect(Sphere* s, Ray r) {
     // The ray transformed by the inverse of the object matrix
-    Ray r_trans = r.transform(s.get_transform().inverse());
+    Ray r_trans = r.transform((*s).get_transform().inverse());
 
     // the vector from the sphere's center to the ray origin
     // Remember: the sphere is centered at the world origin
@@ -45,8 +45,8 @@ Intersections intersect(Sphere s, Ray r) {
     };
     // At least 1 intersection
     return Intersections(std::vector<Intersection>{
-        Intersection((-b - std::sqrt(discriminant)) / (2 * a), s.copy()),
-        Intersection((-b + std::sqrt(discriminant)) / (2 * a), s.copy())
+        Intersection((-b - std::sqrt(discriminant)) / (2 * a), s),
+        Intersection((-b + std::sqrt(discriminant)) / (2 * a), s)
     });
 };
 

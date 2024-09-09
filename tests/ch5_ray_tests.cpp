@@ -43,7 +43,7 @@ TEST (TestRays, RayAndSphereIntersection) {
     Ray r(point(0, 0, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = intersect(s, r);
+    Intersections xs = intersect(&s, r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, 4.0);
@@ -56,7 +56,7 @@ TEST (TestRays, RayAndSphereTouch) {
     Ray r(point(0, 1, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = intersect(s, r);
+    Intersections xs = intersect(&s, r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, 5.0);
@@ -69,7 +69,7 @@ TEST (TestRays, RayMissesSphere) {
     Ray r(point(0, 2, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = intersect(s, r);
+    Intersections xs = intersect(&s, r);
 
     EXPECT_EQ(xs.count, 0);
 }
@@ -80,7 +80,7 @@ TEST (TestRays, RayInsideSphere) {
     Ray r(point(0, 0, 0), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = intersect(s, r);
+    Intersections xs = intersect(&s, r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, -1.0);
@@ -93,7 +93,7 @@ TEST (TestRays, SphereBehindRay) {
     Ray r(point(0, 0, 5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = intersect(s, r);
+    Intersections xs = intersect(&s, r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, -6.0);
@@ -104,31 +104,33 @@ TEST (TestRays, SphereBehindRay) {
 // p63
 TEST (TestRays, IntersectionEncapsulatesTAndObject) {
     Sphere s = Sphere();
-    Intersection i = Intersection(3.5, s);
+    Intersection i = Intersection(3.5, &s);
 
     EXPECT_EQ(i.t, 3.5);
-    EXPECT_EQ(i.object, s);
+    EXPECT_EQ(*i.object, s);
 }
 
 // Scenario: Aggregating intersections
 // p64
 TEST (TestRays, AggregatingIntersections) {
     Sphere s = Sphere();
-    Intersection i1 = Intersection(1, s);
-    Intersection i2 = Intersection(2, s);
+    Intersection i1 = Intersection(1, &s);
+    Intersection i2 = Intersection(2, &s);
 
     Intersections xs = Intersections(std::vector<Intersection> {i1, i2});
     EXPECT_EQ(xs.count, 2);
-    EXPECT_EQ(xs[0].object, s);
-    EXPECT_EQ(xs[1].object, s);
+    EXPECT_EQ(xs[0].object, &s);
+    EXPECT_EQ(xs[1].object, &s);
+    EXPECT_EQ(*xs[0].object, s);
+    EXPECT_EQ(*xs[1].object, s);
 }
 
 // Scenario: Get the hit when all intersections have positive t
 // p65
 TEST (TestRays, IdentifyIntersectionIfAllPositive) {
     Sphere s = Sphere();
-    Intersection i1 = Intersection(1, s);
-    Intersection i2 = Intersection(2, s);
+    Intersection i1 = Intersection(1, &s);
+    Intersection i2 = Intersection(2, &s);
 
     Intersections xs = Intersections(std::vector<Intersection> {i1, i2});
 
@@ -139,8 +141,8 @@ TEST (TestRays, IdentifyIntersectionIfAllPositive) {
 // p65
 TEST (TestRays, IdentifyIntersectionIfSomeNegative) {
     Sphere s = Sphere();
-    Intersection i1 = Intersection(-1, s);
-    Intersection i2 = Intersection(2, s);
+    Intersection i1 = Intersection(-1, &s);
+    Intersection i2 = Intersection(2, &s);
 
     Intersections xs = Intersections(std::vector<Intersection> {i1, i2});
 
@@ -151,8 +153,8 @@ TEST (TestRays, IdentifyIntersectionIfSomeNegative) {
 // p65
 TEST (TestRays, IdentifyIntersectionIfAllNegative) {
     Sphere s = Sphere();
-    Intersection i1 = Intersection(-1, s);
-    Intersection i2 = Intersection(-2, s);
+    Intersection i1 = Intersection(-1, &s);
+    Intersection i2 = Intersection(-2, &s);
 
     Intersections xs = Intersections(std::vector<Intersection> {i1, i2});
 
@@ -163,10 +165,10 @@ TEST (TestRays, IdentifyIntersectionIfAllNegative) {
 // p66
 TEST (TestRays, LowestNonNegIntersection) {
     Sphere s = Sphere();
-    Intersection i1 = Intersection(5, s);
-    Intersection i2 = Intersection(7, s);
-    Intersection i3 = Intersection(-3, s);
-    Intersection i4 = Intersection(2, s);
+    Intersection i1 = Intersection(5, &s);
+    Intersection i2 = Intersection(7, &s);
+    Intersection i3 = Intersection(-3, &s);
+    Intersection i4 = Intersection(2, &s);
 
     Intersections xs = Intersections(std::vector<Intersection> {i1, i2, i3, i4});
 
@@ -221,7 +223,7 @@ TEST (TestRays, IntersectScaledSphere) {
     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
     s.set_transform(scaling_matrix(2, 2, 2));
-    Intersections xs = intersect(s, r);
+    Intersections xs = intersect(&s, r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, 3);
@@ -235,7 +237,7 @@ TEST (TestRays, IntersectTranslatedSphere) {
     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
     s.set_transform(translation_matrix(5, 0, 0));
-    Intersections xs = intersect(s, r);
+    Intersections xs = intersect(&s, r);
 
     EXPECT_EQ(xs.count, 0);
 }

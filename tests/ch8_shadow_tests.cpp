@@ -77,7 +77,7 @@ TEST (TestShadows, ShadeHitAtIntersection) {
     World w(objects, light);
 
     Ray r(point(0, 0, 5), vector(0, 0, 1));
-    Intersection i(4, s2);
+    Intersection i(4, &s2);
 
     Computation comps = prepare_computations(i, r);
     Color c = w.shade_hit(comps);
@@ -93,7 +93,7 @@ TEST (TestShadows, HitOffsetAtPoint) {
     Sphere s;
     s.set_transform(translation_matrix(0, 0, 1));
 
-    Intersection i(5, s);
+    Intersection i(5, &s);
     Computation comps = prepare_computations(i, r);
 
     EXPECT_TRUE(comps.over_point.z < -EPSILON / 2);

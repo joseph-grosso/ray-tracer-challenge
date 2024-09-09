@@ -52,7 +52,7 @@ int main() {
             current_ray = Ray(camera_origin, current_point - camera_origin);
             
             // Check if it hit the sphere
-            Intersections xs = intersect(s, current_ray);
+            Intersections xs = intersect(&s, current_ray);
 
             if (xs.count > 0) {
                 c.write_pixel(Color(1, 0, 0), i, canv_y - j);

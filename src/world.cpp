@@ -24,7 +24,7 @@ Intersections World::intersect_world(Ray r) {
     std::vector<Intersection> initial_intersections;
     Intersections i_inter;
     for (int i=0; i<objects.size(); i++) {
-        i_inter = intersect(objects[i], r);
+        i_inter = intersect(&objects[i], r);
         for (int j=0; j<i_inter.data.size(); j++) {
             initial_intersections.push_back(i_inter.data[j]);
         }
@@ -74,7 +74,7 @@ World default_world() {
         )
     );
     Sphere s2 = Sphere();
-    s2.set_transform(scaling_matrix(0.5, 0.5, 0.5));    
+    s2.set_transform(scaling_matrix(0.5, 0.5, 0.5));
     return World(
         std::vector<Sphere>{s1, s2},
         std::vector<PointLight>{light}

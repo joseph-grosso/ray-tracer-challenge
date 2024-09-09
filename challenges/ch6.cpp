@@ -68,7 +68,7 @@ int main() {
             current_ray = Ray(camera_origin, (current_point - camera_origin).normalize());
             
             // Check if it hit the sphere
-            Intersections xs = intersect(s, current_ray);
+            Intersections xs = intersect(&s, current_ray);
 
             if (xs.count > 0) {
                 // Normalize Ray direction and find normal vector at the hit

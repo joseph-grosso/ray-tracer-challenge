@@ -25,6 +25,8 @@ class Shape {
         void set_transform(Matrix m);
         Material get_material();
         void set_material(Material m);
+        // TODO: Add these functions so that intersect is a function internal to this
+        // object, not external. Should be in line with the rest of the methods.
         Intersections intersect(Ray r);
         Intersections local_intersect(Ray r);
         Tuple normal_at(float x, float y, float z);

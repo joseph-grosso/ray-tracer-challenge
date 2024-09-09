@@ -9,10 +9,10 @@ class Intersection {
         bool empty;
     public:
         Intersection();
-        Intersection(float t, Sphere obj);
+        Intersection(float t, Sphere *const obj);
         float t;
         // TODO: use OOP to generalize this object class
-        Sphere object;
+        Sphere *object;
         bool is_empty();
 };
 
@@ -28,7 +28,7 @@ class Intersections {
 
 // TODO: refactor when an intersection is done on a general "object" class
 // rather than just the sphere class. 
-Intersections intersect(Sphere s, Ray r);
+Intersections intersect(Sphere* s, Ray r);
 
 bool operator==(Intersection lhs, Intersection rhs);
 bool operator<(Intersection lhs, Intersection rhs);
