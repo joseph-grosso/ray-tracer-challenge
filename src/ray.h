@@ -12,7 +12,6 @@ class Ray {
     private:
         Tuple origin;
         Tuple direction;
-
     public:
         // Methods
         // TODO: Create a default construction of the Ray class

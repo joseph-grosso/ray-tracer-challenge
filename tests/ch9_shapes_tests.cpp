@@ -8,7 +8,18 @@
 #include <vector>
 #include <iostream>
 
-class TestShape : public Shape {};
+class TestShape : public Shape {
+    public:
+        // default ray
+        Ray saved_ray = Ray(
+            point(0, 0, 0),
+            vector(1, 0, 0)
+        );
+        Intersections local_intersect(Ray r) {
+            this->saved_ray = r;
+            return Intersections();
+        };
+};
 
 
 // Chapter 9: Refactoring Shapes
@@ -49,30 +60,30 @@ TEST (TestAbstractShape, AssigningMaterial) {
     EXPECT_EQ(m, s.get_material());
 }
 
-// // Scenario: Intersecting a scaled shape with a ray
-// // p120
-// TEST (TestAbstractShape, IntersectScaledShape) {
-//     TestShape s = TestShape();
-//     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
+// Scenario: Intersecting a scaled shape with a ray
+// p120
+TEST (TestAbstractShape, IntersectScaledShape) {
+    TestShape s = TestShape();
+    Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
-//     s.set_transform(scaling_matrix(2, 2, 2));
-//     Intersections xs = s.intersect(r);
+    s.set_transform(scaling_matrix(2, 2, 2));
+    Intersections xs = s.intersect(r);
 
-//     EXPECT_EQ(s.saved_ray.origin, point(0, 0, -2.5));
-//     EXPECT_EQ(s.saved_ray.direction, vector(0, 0, 0.5));
-// }
+    EXPECT_EQ(s.saved_ray.get_origin(), point(0, 0, -2.5));
+    EXPECT_EQ(s.saved_ray.get_direction(), vector(0, 0, 0.5));
+}
 
-// // Scenario: Intersecting a translated shape with a ray
-// // p120
-// TEST (TestAbstractShape, IntersectTranslatedShape) {
-//     TestShape s = TestShape();
-//     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
+// Scenario: Intersecting a translated shape with a ray
+// p120
+TEST (TestAbstractShape, IntersectTranslatedShape) {
+    TestShape s = TestShape();
+    Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
-//     s.set_transform(translation_matrix(5, 0, 0));
-//     Intersections xs = s.intersect(r);
+    s.set_transform(translation_matrix(5, 0, 0));
+    Intersections xs = s.intersect(r);
 
-//     EXPECT_EQ(xs.count, 0);
-// }
+    EXPECT_EQ(xs.count, 0);
+}
 
 // // Scenario: Computing the normal of a sphere on a translated shape
 // // p121

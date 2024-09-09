@@ -32,3 +32,8 @@ Material Shape::get_material() {
 void Shape::set_material(Material m) {
     this->material = m;
 };
+
+Intersections Shape::intersect(Ray r) {
+    Ray local_ray = r.transform(get_transform().inverse());
+    return local_intersect(local_ray);
+};
