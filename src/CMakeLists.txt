@@ -7,6 +7,7 @@ add_library(
     ray.cpp
     sphere.cpp
     intersection.cpp
+    intersections.cpp
     lights.cpp
     material.cpp
     world.cpp

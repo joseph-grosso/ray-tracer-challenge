@@ -7,6 +7,7 @@
 #include "sphere.h"
 #include "lights.h"
 #include "intersection.h"
+#include "intersections.h"
 #include "computation.h"
 
 #include <vector>

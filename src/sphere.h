@@ -4,6 +4,8 @@
 #include "matrix.h"
 #include "ray.h"
 #include "material.h"
+#include "intersection.h"
+#include "intersections.h"
 
 #include <vector>
 #include <random> 
@@ -33,6 +35,9 @@ class Sphere {
         Tuple normal_at(float x, float y, float z);
         Tuple normal_at(Tuple p);
         std::string to_string();
+        // TODO: refactor when an intersection is done on a general "object" class
+        // rather than just the sphere class.
+        Intersections intersect(Ray r);
 };
 
 bool operator==(Sphere lhs, Sphere rhs);

@@ -7,6 +7,7 @@
 #include "ray.h"
 #include "sphere.h"
 #include "intersection.h"
+#include "intersections.h"
 #include "lights.h"
 #include "material.h"
 #include "gtest/gtest.h"

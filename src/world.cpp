@@ -8,6 +8,7 @@
 #include "world.h"
 #include "transform.h"
 #include "intersection.h"
+#include "intersections.h"
 #include "computation.h"
 
 #include <vector>
@@ -24,7 +25,7 @@ Intersections World::intersect_world(Ray r) {
     std::vector<Intersection> initial_intersections;
     Intersections i_inter;
     for (int i=0; i<objects.size(); i++) {
-        i_inter = intersect(&objects[i], r);
+        i_inter = objects[i].intersect(r);
         for (int j=0; j<i_inter.data.size(); j++) {
             initial_intersections.push_back(i_inter.data[j]);
         }

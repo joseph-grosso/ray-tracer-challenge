@@ -7,6 +7,7 @@
 #include "ray.h"
 #include "sphere.h"
 #include "intersection.h"
+#include "intersections.h"
 #include "gtest/gtest.h"
 
 #include <algorithm>
@@ -43,7 +44,7 @@ TEST (TestRays, RayAndSphereIntersection) {
     Ray r(point(0, 0, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = intersect(&s, r);
+    Intersections xs = s.intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, 4.0);
@@ -56,7 +57,7 @@ TEST (TestRays, RayAndSphereTouch) {
     Ray r(point(0, 1, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = intersect(&s, r);
+    Intersections xs = s.intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, 5.0);
@@ -69,7 +70,7 @@ TEST (TestRays, RayMissesSphere) {
     Ray r(point(0, 2, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = intersect(&s, r);
+    Intersections xs = s.intersect(r);
 
     EXPECT_EQ(xs.count, 0);
 }
@@ -80,7 +81,7 @@ TEST (TestRays, RayInsideSphere) {
     Ray r(point(0, 0, 0), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = intersect(&s, r);
+    Intersections xs = s.intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, -1.0);
@@ -93,7 +94,7 @@ TEST (TestRays, SphereBehindRay) {
     Ray r(point(0, 0, 5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = intersect(&s, r);
+    Intersections xs = s.intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, -6.0);
@@ -223,7 +224,7 @@ TEST (TestRays, IntersectScaledSphere) {
     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
     s.set_transform(scaling_matrix(2, 2, 2));
-    Intersections xs = intersect(&s, r);
+    Intersections xs = s.intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, 3);
@@ -237,7 +238,7 @@ TEST (TestRays, IntersectTranslatedSphere) {
     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
     s.set_transform(translation_matrix(5, 0, 0));
-    Intersections xs = intersect(&s, r);
+    Intersections xs = s.intersect(r);
 
     EXPECT_EQ(xs.count, 0);
 }

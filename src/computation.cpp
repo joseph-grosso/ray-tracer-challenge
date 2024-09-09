@@ -1,7 +1,7 @@
 #include <vector>
 #include "sphere.h"
 #include "ray.h"
-#include "intersection.h"
+#include "intersections.h"
 #include "computation.h"
 
 
