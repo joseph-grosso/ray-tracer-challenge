@@ -39,4 +39,8 @@ convert flight_path.ppm flight_path.png
 
 ## TODO:
 
+- [ ] Fix the intersections file to directly be called from within the Sphere/Shape object, rather than be an external function
+- [ ] Move common Shape functionality to a separate file
+- [ ] Move Shape objects code into its own folder
+- [ ] Move headers into a different folder than source code files
 - [ ] TODO: Write a function for canvas.h that directly exports image files to .png instead of only to .ppm
