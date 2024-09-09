@@ -13,6 +13,7 @@ add_library(
     world.cpp
     computation.cpp
     camera.cpp
+    shape.cpp
 )
  
 message("Raytracer current source dir = ${CMAKE_CURRENT_SOURCE_DIR}")

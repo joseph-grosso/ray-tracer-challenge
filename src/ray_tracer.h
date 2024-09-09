@@ -11,3 +11,4 @@
 #include "world.h"
 #include "computation.h"
 #include "camera.h"
+#include "shape.h"
