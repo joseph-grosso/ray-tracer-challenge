@@ -37,3 +37,13 @@ Intersections Shape::intersect(Ray r) {
     Ray local_ray = r.transform(get_transform().inverse());
     return local_intersect(local_ray);
 };
+
+// page 120 of RTC
+Tuple Shape::normal_at(Tuple p) {
+    Tuple local_point = get_transform().inverse() * p;
+    Tuple local_normal = local_normal_at(local_point);
+    Tuple world_normal = get_transform().inverse().transpose() * local_normal;
+    world_normal.w = 0;
+
+    return world_normal.normalize();
+};

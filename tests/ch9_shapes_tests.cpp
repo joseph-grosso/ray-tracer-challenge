@@ -19,6 +19,9 @@ class TestShape : public Shape {
             this->saved_ray = r;
             return Intersections();
         };
+        Tuple local_normal_at(Tuple p) {
+            return vector(p.x, p.y, p.z);
+        };
 };
 
 
@@ -85,25 +88,25 @@ TEST (TestAbstractShape, IntersectTranslatedShape) {
     EXPECT_EQ(xs.count, 0);
 }
 
-// // Scenario: Computing the normal of a sphere on a translated shape
-// // p121
-// // TODO: Delete original tests as they are no longer needed (refactor on p121)
-// TEST (TestAbstractShape, NormalOfTranslatedSphere) {
-//     TestShape s = TestShape();
-//     s.set_transform(translation_matrix(0, 1, 0));
-//     Tuple n = s.normal_at(0, 1.70711, -0.70711);
+// Scenario: Computing the normal of a sphere on a translated shape
+// p121
+// TODO: Delete original tests as they are no longer needed (refactor on p121)
+TEST (TestAbstractShape, NormalOfTranslatedSphere) {
+    TestShape s = TestShape();
+    s.set_transform(translation_matrix(0, 1, 0));
+    Tuple n = s.normal_at(point(0, 1.70711, -0.70711));
 
-//     EXPECT_EQ(n, vector(0, 0.70711, -0.70711));
-// }
+    EXPECT_EQ(n, vector(0, 0.70711, -0.70711));
+}
 
-// // Scenario: Computing the normal on a transformed shape
-// // p121
-// // TODO: Delete original tests as they are no longer needed (refactor on p121)
-// TEST (TestAbstractShape, NormalOfTransformedSphere) {
-//     TestShape s = TestShape();
-//     s.set_transform(scaling_matrix(1, 0.5, 1) * rotation_z_matrix(M_PI/5));
+// Scenario: Computing the normal on a transformed shape
+// p121
+// TODO: Delete original tests as they are no longer needed (refactor on p121)
+TEST (TestAbstractShape, NormalOfTransformedSphere) {
+    TestShape s = TestShape();
+    s.set_transform(scaling_matrix(1.0, 0.5f, 1.0) * rotation_z_matrix(M_PI/5));
 
-//     Tuple n = s.normal_at(0, std::sqrt(2)/2, -std::sqrt(2)/2);
+    Tuple n = s.normal_at(point(0, std::sqrt(2)/2, -std::sqrt(2)/2));
 
-//     EXPECT_EQ(n, vector(0, 0.97014, -0.24254));
-// }
+    EXPECT_EQ(n, vector(0, 0.97014, -0.24254));
+}

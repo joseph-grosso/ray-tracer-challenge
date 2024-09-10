@@ -28,7 +28,6 @@ class Shape {
         void set_material(Material m);
         Intersections intersect(Ray r);
         virtual Intersections local_intersect(Ray r) = 0;
-        // Tuple normal_at(float x, float y, float z);
-        // Tuple normal_at(Tuple p);
-        // std::string to_string();
+        Tuple normal_at(Tuple p);
+        virtual Tuple local_normal_at(Tuple p) = 0;
 };
