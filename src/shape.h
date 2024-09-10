@@ -21,7 +21,6 @@ class Shape {
         Shape(Matrix t = identity_matrix(4), Material m = Material());
         Shape(Matrix t) : Shape(t, Material()) {};
         Shape(Material m) : Shape(identity_matrix(4), m) {};
-        // Shape copy();
         Matrix get_transform();
         void set_transform(Matrix m);
         Material get_material();

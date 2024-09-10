@@ -32,13 +32,6 @@ float Sphere::get_radius() {
     return radius;
 };
 
-Sphere Sphere::copy() {
-    Sphere copy_s;
-    copy_s.set_material(material);
-    copy_s.set_transform(transformation);
-    return copy_s;
-};
-
 bool operator==(Sphere lhs, Sphere rhs) {
     return (
         lhs.get_center() == rhs.get_center() &&
