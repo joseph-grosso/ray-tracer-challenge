@@ -5,6 +5,7 @@
 #include "material.h"
 #include "intersection.h"
 #include "intersections.h"
+#include "shape.h"
 
 #include <stdexcept>
 #include <cmath>
@@ -58,7 +59,7 @@ void Sphere::set_transform(Matrix m) {
 };
 
 // chapter 6: Lighting and Shading
-Tuple Sphere::normal_at(float x, float y, float z) {
+Tuple Sphere::local_normal_at(float x, float y, float z) {
     // Algorithm explanation: p80 - p82
     Tuple world_point = point(x, y, z);
     Tuple obj_point = transformation.inverse() * world_point;
@@ -68,8 +69,8 @@ Tuple Sphere::normal_at(float x, float y, float z) {
     return world_normal.normalize();
 };
 
-Tuple Sphere::normal_at(Tuple p) {
-    return normal_at(p.x, p.y, p.z);
+Tuple Sphere::local_normal_at(Tuple p) {
+    return local_normal_at(p.x, p.y, p.z);
 };
 
 Material Sphere::get_material() {
@@ -85,7 +86,7 @@ std::string Sphere::to_string() {
     "\nMaterial: " + material.to_string();
 };
 
-Intersections Sphere::intersect(Ray r) {
+Intersections Sphere::local_intersect(Ray r) {
     // The ray transformed by the inverse of the object matrix
     Ray r_trans = r.transform(get_transform().inverse());
 

@@ -44,7 +44,7 @@ TEST (TestRays, RayAndSphereIntersection) {
     Ray r(point(0, 0, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = s.intersect(r);
+    Intersections xs = s.local_intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, 4.0);
@@ -57,7 +57,7 @@ TEST (TestRays, RayAndSphereTouch) {
     Ray r(point(0, 1, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = s.intersect(r);
+    Intersections xs = s.local_intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, 5.0);
@@ -70,7 +70,7 @@ TEST (TestRays, RayMissesSphere) {
     Ray r(point(0, 2, -5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = s.intersect(r);
+    Intersections xs = s.local_intersect(r);
 
     EXPECT_EQ(xs.count, 0);
 }
@@ -81,7 +81,7 @@ TEST (TestRays, RayInsideSphere) {
     Ray r(point(0, 0, 0), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = s.intersect(r);
+    Intersections xs = s.local_intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, -1.0);
@@ -94,7 +94,7 @@ TEST (TestRays, SphereBehindRay) {
     Ray r(point(0, 0, 5), vector(0, 0, 1));
     Sphere s = Sphere();
 
-    Intersections xs = s.intersect(r);
+    Intersections xs = s.local_intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, -6.0);
@@ -200,23 +200,6 @@ TEST (TestRays, ScalingARay) {
     EXPECT_EQ(r2.get_direction(), vector(0, 3, 0));    
 }
 
-// Scenario: A sphere's default transformation
-// p69
-TEST (TestRays, SphereDefaultTransform) {
-    Sphere s = Sphere();
-
-    EXPECT_EQ(s.get_transform(), identity_matrix(4));
-}
-
-// Scenario: Changing a sphere's transformation
-// p69
-TEST (TestRays, SphereChangedTransform) {
-    Sphere s = Sphere();
-    Matrix t = translation_matrix(2, 3, 4);
-    s.set_transform(t);
-    EXPECT_EQ(s.get_transform(), t);
-}
-
 // Scenario: Intersecting a scaled sphere with a ray
 // p69
 TEST (TestRays, IntersectScaledSphere) {
@@ -224,7 +207,7 @@ TEST (TestRays, IntersectScaledSphere) {
     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
     s.set_transform(scaling_matrix(2, 2, 2));
-    Intersections xs = s.intersect(r);
+    Intersections xs = s.local_intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, 3);
@@ -238,7 +221,7 @@ TEST (TestRays, IntersectTranslatedSphere) {
     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
     s.set_transform(translation_matrix(5, 0, 0));
-    Intersections xs = s.intersect(r);
+    Intersections xs = s.local_intersect(r);
 
     EXPECT_EQ(xs.count, 0);
 }

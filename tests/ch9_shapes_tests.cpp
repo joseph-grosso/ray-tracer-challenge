@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <type_traits>
 
 class TestShape : public Shape {
     public:

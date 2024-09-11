@@ -6,6 +6,7 @@
 #include "material.h"
 #include "intersection.h"
 #include "intersections.h"
+#include "shape.h"
 
 #include <vector>
 #include <random> 
@@ -13,7 +14,7 @@
 
 
 // Chapter 5: Rays
-class Sphere {
+class Sphere : public Shape {
     private:
         Tuple center;
         float radius;
@@ -30,12 +31,12 @@ class Sphere {
         void set_transform(Matrix);
         Material get_material();
         void set_material(Material);
-        Tuple normal_at(float x, float y, float z);
-        Tuple normal_at(Tuple p);
+        Tuple local_normal_at(float x, float y, float z);
+        Tuple local_normal_at(Tuple p);
         std::string to_string();
         // TODO: refactor when an intersection is done on a general "object" class
         // rather than just the sphere class.
-        Intersections intersect(Ray r);
+        Intersections local_intersect(Ray r);
 };
 
 bool operator==(Sphere lhs, Sphere rhs);

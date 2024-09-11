@@ -19,7 +19,7 @@
 // p78
 TEST (TestLightingAndShading, NormalOfSphereAtX) {
     Sphere s = Sphere();
-    Tuple n = s.normal_at(1, 0, 0);
+    Tuple n = s.local_normal_at(1, 0, 0);
 
     EXPECT_EQ(n, vector(1, 0, 0));
     EXPECT_EQ(n, n.normalize());
@@ -29,7 +29,7 @@ TEST (TestLightingAndShading, NormalOfSphereAtX) {
 // p78
 TEST (TestLightingAndShading, NormalOfSphereAtY) {
     Sphere s = Sphere();
-    Tuple n = s.normal_at(0, 1, 0);
+    Tuple n = s.local_normal_at(0, 1, 0);
 
     EXPECT_EQ(n, vector(0, 1, 0));
     EXPECT_EQ(n, n.normalize());
@@ -39,7 +39,7 @@ TEST (TestLightingAndShading, NormalOfSphereAtY) {
 // p78
 TEST (TestLightingAndShading, NormalOfSphereAtZ) {
     Sphere s = Sphere();
-    Tuple n = s.normal_at(0, 0, 1);
+    Tuple n = s.local_normal_at(0, 0, 1);
 
     EXPECT_EQ(n, vector(0, 0, 1));
     EXPECT_EQ(n, n.normalize());
@@ -49,7 +49,7 @@ TEST (TestLightingAndShading, NormalOfSphereAtZ) {
 // p78
 TEST (TestLightingAndShading, NormalOfSphereAtNonAxis) {
     Sphere s = Sphere();
-    Tuple n = s.normal_at(std::sqrt(3)/3, std::sqrt(3)/3, std::sqrt(3)/3);
+    Tuple n = s.local_normal_at(std::sqrt(3)/3, std::sqrt(3)/3, std::sqrt(3)/3);
 
     EXPECT_EQ(n, vector(std::sqrt(3)/3, std::sqrt(3)/3, std::sqrt(3)/3));
     EXPECT_EQ(n, n.normalize());
@@ -60,7 +60,7 @@ TEST (TestLightingAndShading, NormalOfSphereAtNonAxis) {
 TEST (TestLightingAndShading, NormalOfTranslatedSphere) {
     Sphere s = Sphere();
     s.set_transform(translation_matrix(0, 1, 0));
-    Tuple n = s.normal_at(0, 1.70711, -0.70711);
+    Tuple n = s.local_normal_at(0, 1.70711, -0.70711);
 
     EXPECT_EQ(n, vector(0, 0.70711, -0.70711));
 }
@@ -71,7 +71,7 @@ TEST (TestLightingAndShading, NormalOfTransformedSphere) {
     Sphere s = Sphere();
     s.set_transform(scaling_matrix(1, 0.5, 1) * rotation_z_matrix(M_PI/5));
 
-    Tuple n = s.normal_at(0, std::sqrt(2)/2, -std::sqrt(2)/2);
+    Tuple n = s.local_normal_at(0, std::sqrt(2)/2, -std::sqrt(2)/2);
 
     EXPECT_EQ(n, vector(0, 0.97014, -0.24254));
 }
@@ -114,26 +114,6 @@ TEST (TestLightingAndShading, CreateDefaultMaterial) {
     EXPECT_TRUE(equalByEpsilon(m.diffuse, 0.9));
     EXPECT_TRUE(equalByEpsilon(m.specular, 0.9));
     EXPECT_TRUE(equalByEpsilon(m.shininess, 200.0));
-}
-
-// Scenario: A sphere has a default material
-// p85
-TEST (TestLightingAndShading, SphereHasDefaultMaterial) {
-    Material m = Material();
-    Sphere s = Sphere();
-    EXPECT_EQ(m, s.get_material());
-}
-
-// Scenario: A sphere has a material that can be set
-// p85
-TEST (TestLightingAndShading, SphereMaterialCanBeSet) {
-    Material m = Material();
-    Sphere s = Sphere();
-
-    m.ambient = 1;
-    s.set_material(m);
-
-    EXPECT_EQ(m, s.get_material());
 }
 
 // Fixture: Set up the material and positions
