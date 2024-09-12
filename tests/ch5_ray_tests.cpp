@@ -207,7 +207,7 @@ TEST (TestRays, IntersectScaledSphere) {
     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
     s.set_transform(scaling_matrix(2, 2, 2));
-    Intersections xs = s.local_intersect(r);
+    Intersections xs = s.intersect(r);
 
     EXPECT_EQ(xs.count, 2);
     EXPECT_EQ(xs[0].t, 3);
@@ -221,7 +221,7 @@ TEST (TestRays, IntersectTranslatedSphere) {
     Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
 
     s.set_transform(translation_matrix(5, 0, 0));
-    Intersections xs = s.local_intersect(r);
+    Intersections xs = s.intersect(r);
 
     EXPECT_EQ(xs.count, 0);
 }

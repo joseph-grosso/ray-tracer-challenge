@@ -22,11 +22,12 @@ class Shape {
         Shape(Matrix t) : Shape(t, Material()) {};
         Shape(Material m) : Shape(identity_matrix(4), m) {};
         Matrix get_transform();
-        void set_transform(Matrix m);
+        void set_transform(Matrix);
         Material get_material();
-        void set_material(Material m);
+        void set_material(Material);
         Intersections intersect(Ray r);
         virtual Intersections local_intersect(Ray r) = 0;
         Tuple normal_at(Tuple p);
+        Tuple normal_at(float x, float y, float z);
         virtual Tuple local_normal_at(Tuple p) = 0;
 };

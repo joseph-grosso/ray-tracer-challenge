@@ -47,3 +47,7 @@ Tuple Shape::normal_at(Tuple p) {
 
     return world_normal.normalize();
 };
+
+Tuple Shape::normal_at(float x, float y, float z) {
+    return normal_at(point(x, y, z));
+};

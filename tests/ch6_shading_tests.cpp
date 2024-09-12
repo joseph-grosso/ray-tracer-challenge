@@ -60,7 +60,7 @@ TEST (TestLightingAndShading, NormalOfSphereAtNonAxis) {
 TEST (TestLightingAndShading, NormalOfTranslatedSphere) {
     Sphere s = Sphere();
     s.set_transform(translation_matrix(0, 1, 0));
-    Tuple n = s.local_normal_at(0, 1.70711, -0.70711);
+    Tuple n = s.normal_at(0, 1.70711, -0.70711);
 
     EXPECT_EQ(n, vector(0, 0.70711, -0.70711));
 }
@@ -71,7 +71,7 @@ TEST (TestLightingAndShading, NormalOfTransformedSphere) {
     Sphere s = Sphere();
     s.set_transform(scaling_matrix(1, 0.5, 1) * rotation_z_matrix(M_PI/5));
 
-    Tuple n = s.local_normal_at(0, std::sqrt(2)/2, -std::sqrt(2)/2);
+    Tuple n = s.normal_at(0, std::sqrt(2)/2, -std::sqrt(2)/2);
 
     EXPECT_EQ(n, vector(0, 0.97014, -0.24254));
 }

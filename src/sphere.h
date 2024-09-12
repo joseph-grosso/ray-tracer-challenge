@@ -18,19 +18,22 @@ class Sphere : public Shape {
     private:
         Tuple center;
         float radius;
-        Matrix transformation;
-        Material material;
+        // Matrix transformation;
+        // Material material;
     public:
         // Methods
-        Sphere(Matrix t = identity_matrix(4), Material m = Material());
+        Sphere(Matrix t = identity_matrix(4), Material m = Material()) : Shape(t, m) {
+            this->center = point(0, 0, 0);
+            this->radius = 1.0;
+        };
         // Sphere(Matrix t) : Sphere(t, Material()) {};
         Sphere(Material m) : Sphere(identity_matrix(4), m) {};
         Tuple get_center();
         float get_radius();
-        Matrix get_transform();
-        void set_transform(Matrix);
-        Material get_material();
-        void set_material(Material);
+        // Matrix get_transform();
+        // void set_transform(Matrix);
+        // Material get_material();
+        // void set_material(Material);
         Tuple local_normal_at(float x, float y, float z);
         Tuple local_normal_at(Tuple p);
         std::string to_string();
