@@ -66,7 +66,7 @@ TEST (TestWorld, PrecomputingIntersection) {
     Sphere s = Sphere();
     Intersection i = Intersection(4.0, &s);
 
-    Computation comps = prepare_computations(i, r);
+    Computation comps = i.prepare_computations(r);
 
     EXPECT_EQ(comps.t, i.t);
     EXPECT_EQ(*comps.object, *i.object);
@@ -83,7 +83,7 @@ TEST (TestWorld, PrecomputingHitInterior) {
     Sphere s = Sphere();
     Intersection i = Intersection(4.0, &s);
 
-    Computation comps = prepare_computations(i, r);
+    Computation comps = i.prepare_computations(r);
 
     EXPECT_EQ(comps.inside, false);
 }
@@ -96,7 +96,7 @@ TEST (TestWorld, PrecomputingHitExterior) {
     Sphere s = Sphere();
     Intersection i = Intersection(1, &s);
 
-    Computation comps = prepare_computations(i, r);
+    Computation comps = i.prepare_computations(r);
 
     EXPECT_EQ(*comps.object, *i.object);
     EXPECT_EQ(comps.point, point(0, 0, 1));
@@ -115,7 +115,7 @@ TEST (TestWorld, ShadingIntersection) {
     Sphere s = w.objects[0];
     Intersection i = Intersection(4, &s);
 
-    Computation comps = prepare_computations(i, r);
+    Computation comps = i.prepare_computations(r);
     Color c = w.shade_hit(comps);
 
     EXPECT_EQ(c, Color(0.38066, 0.47583, 0.2855));
@@ -131,7 +131,7 @@ TEST (TestWorld, ShadingIntersectionFromInside) {
     Sphere s = w.objects[1];
     Intersection i = Intersection(0.5, &s);
 
-    Computation comps = prepare_computations(i, r);
+    Computation comps = i.prepare_computations(r);
     Color c = w.shade_hit(comps);
 
     EXPECT_EQ(c, Color(0.90498, 0.90498, 0.90498));

@@ -1,19 +1,4 @@
-#include "tuple.h"
 #include "sphere.h"
-#include "ray.h"
-#include "matrix.h"
-#include "material.h"
-#include "intersection.h"
-#include "intersections.h"
-#include "shape.h"
-
-#include <stdexcept>
-#include <cmath>
-#include <vector>
-
-// TODO: Add a to_string function that adds this info.
-#include <iostream>
-#include <chrono>
 
 
 Tuple Sphere::get_center() {

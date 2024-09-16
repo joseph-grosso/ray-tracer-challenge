@@ -79,7 +79,7 @@ TEST (TestShadows, ShadeHitAtIntersection) {
     Ray r(point(0, 0, 5), vector(0, 0, 1));
     Intersection i(4, &s2);
 
-    Computation comps = prepare_computations(i, r);
+    Computation comps = i.prepare_computations(r);
     Color c = w.shade_hit(comps);
 
     EXPECT_EQ(c, Color(0.1, 0.1, 0.1));
@@ -94,7 +94,7 @@ TEST (TestShadows, HitOffsetAtPoint) {
     s.set_transform(translation_matrix(0, 0, 1));
 
     Intersection i(5, &s);
-    Computation comps = prepare_computations(i, r);
+    Computation comps = i.prepare_computations(r);
 
     EXPECT_TRUE(comps.over_point.z < -EPSILON / 2);
     EXPECT_TRUE(comps.point.z > comps.over_point.z);

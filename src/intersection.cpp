@@ -31,3 +31,11 @@ bool operator==(Intersection lhs, Intersection rhs) {
 bool operator<(Intersection lhs, Intersection rhs) {
     return lhs.t < rhs.t;
 };
+
+Computation Intersection::prepare_computations(Ray r) {
+    Tuple point = r.position(t);
+    Tuple eyev = -r.get_direction();
+    Tuple normalv = (*object).normal_at(point);
+
+    return Computation(t, object, point, eyev, normalv);
+};

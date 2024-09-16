@@ -1,11 +1,9 @@
 #pragma once
 
+#include "tuple.h"
 #include <vector>
-#include "sphere.h"
-#include "ray.h"
-#include "intersection.h"
 
-
+class Sphere;
 // Chapter 7: Building a World
 class Computation {
     public:
@@ -19,5 +17,3 @@ class Computation {
         bool inside;
         Computation(float t, Sphere * object, Tuple point, Tuple eyev, Tuple normalv);
 };
-
-Computation prepare_computations(Intersection i, Ray r);

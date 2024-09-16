@@ -90,7 +90,7 @@ Color World::color_at(Ray r) {
         return Color();
     };
 
-    Computation comp = prepare_computations(h, r);
+    Computation comp = h.prepare_computations(r);
 
     return shade_hit(comp);
 };

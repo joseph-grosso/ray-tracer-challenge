@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "ray.h"
+#include "computation.h"
 
 class Sphere;
 
@@ -15,6 +16,7 @@ class Intersection {
         // TODO: use OOP to generalize this object class
         Sphere *object;
         bool is_empty();
+        Computation prepare_computations(Ray r);
 };
 
 bool operator==(Intersection lhs, Intersection rhs);
