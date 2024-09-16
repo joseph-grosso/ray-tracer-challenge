@@ -2,7 +2,7 @@
 
 
 // Chapter 7: Building a World
-Computation::Computation(float t, Sphere * object, Tuple point, Tuple eyev, Tuple normalv) {
+Computation::Computation(float t, Shape * object, Tuple point, Tuple eyev, Tuple normalv) {
         this->t = t;
         this->object = object;
         this->point = point;

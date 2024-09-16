@@ -4,17 +4,17 @@
 #include "ray.h"
 #include "computation.h"
 
-class Sphere;
+class Shape;
 
 class Intersection {
     private:
         bool empty;
     public:
         Intersection();
-        Intersection(float t, Sphere *const obj);
+        Intersection(float t, Shape *const obj);
         float t;
         // TODO: use OOP to generalize this object class
-        Sphere *object;
+        Shape *object;
         bool is_empty();
         Computation prepare_computations(Ray r);
 };

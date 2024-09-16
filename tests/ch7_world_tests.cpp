@@ -69,7 +69,7 @@ TEST (TestWorld, PrecomputingIntersection) {
     Computation comps = i.prepare_computations(r);
 
     EXPECT_EQ(comps.t, i.t);
-    EXPECT_EQ(*comps.object, *i.object);
+    EXPECT_EQ(comps.object, i.object);
     EXPECT_EQ(comps.point, point(0, 0, -1));
     EXPECT_EQ(comps.eyev, vector(0, 0, -1));
     EXPECT_EQ(comps.normalv, vector(0, 0, -1));
@@ -98,7 +98,7 @@ TEST (TestWorld, PrecomputingHitExterior) {
 
     Computation comps = i.prepare_computations(r);
 
-    EXPECT_EQ(*comps.object, *i.object);
+    EXPECT_EQ(comps.object, i.object);
     EXPECT_EQ(comps.point, point(0, 0, 1));
     EXPECT_EQ(comps.eyev, vector(0, 0, -1));
     EXPECT_EQ(comps.inside, true);

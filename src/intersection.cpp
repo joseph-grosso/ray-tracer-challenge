@@ -11,7 +11,7 @@ Intersection::Intersection() {
     this->empty = true;
 };
 
-Intersection::Intersection(float t, Sphere *const obj) {
+Intersection::Intersection(float t, Shape *const obj) {
     this->t = t;
     this->object = obj;
     this->empty = false;
