@@ -111,3 +111,19 @@ TEST (TestAbstractShape, NormalOfTransformedSphere) {
 
     EXPECT_EQ(n, vector(0, 0.97014, -0.24254));
 }
+
+// Planes tests
+
+// Scenario: The normal of a plane is constant everywhere
+// p122
+TEST (TestPlanes, NormalOfPlane) {
+    Plane p = Plane();
+
+    Tuple n1 = p.local_normal_at(point(0, 0, 0));
+    Tuple n2 = p.local_normal_at(point(10, 0, -10));
+    Tuple n3 = p.local_normal_at(point(-5, 0, 150));
+
+    EXPECT_EQ(n1, vector(0, 1, 0));
+    EXPECT_EQ(n2, vector(0, 1, 0));
+    EXPECT_EQ(n3, vector(0, 1, 0));
+}
