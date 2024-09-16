@@ -11,13 +11,13 @@ class Computation {
     public:
         // Attributes
         float t;
-        Sphere object;
+        Sphere * object;
         Tuple point;
         Tuple over_point;
         Tuple eyev;
         Tuple normalv;
         bool inside;
-        Computation(float t, Sphere object, Tuple point, Tuple eyev, Tuple normalv);
+        Computation(float t, Sphere * object, Tuple point, Tuple eyev, Tuple normalv);
 };
 
 Computation prepare_computations(Intersection i, Ray r);
