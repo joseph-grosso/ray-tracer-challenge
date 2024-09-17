@@ -4,6 +4,7 @@
 #include "material.h"
 #include "matrix.h"
 #include "sphere.h"
+#include "shape.h"
 #include "lights.h"
 #include "world.h"
 #include "transform.h"
@@ -16,7 +17,7 @@
 #include <iostream>
 
 
-World::World(std::vector<Sphere *> objects, std::vector<PointLight> lights) {
+World::World(std::vector<Shape *> objects, std::vector<PointLight> lights) {
     this->objects = objects;
     this->lights = lights;
 };
@@ -64,7 +65,7 @@ bool World::is_shadowed(Tuple p) {
 
 World default_world() {
     PointLight light = PointLight(point(-10, 10, -10), Color(1, 1, 1));
-    Sphere * s1 = new Sphere();
+    Shape * s1 = new Sphere();
     (*s1).set_material(
         Material(
             Color(0.8, 1.0, 0.6),  // color
@@ -74,10 +75,10 @@ World default_world() {
             200.0  // shininess
         )
     );
-    Sphere * s2 = new Sphere();
+    Shape * s2 = new Sphere();
     (*s2).set_transform(scaling_matrix(0.5, 0.5, 0.5));
     return World(
-        std::vector<Sphere *>{s1, s2},
+        std::vector<Shape *>{s1, s2},
         std::vector<PointLight>{light}
     );
 };

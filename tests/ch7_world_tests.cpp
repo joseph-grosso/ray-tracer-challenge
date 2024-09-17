@@ -38,8 +38,11 @@ TEST (TestWorld, DefaultWorld) {
 
     World w = default_world();
 
-    EXPECT_EQ(*w.objects[0], s1);
-    EXPECT_THAT(*w.objects[1], s2);
+    Sphere * default_object_1 = dynamic_cast<Sphere *>(w.objects[0]);
+    Sphere * default_object_2 = dynamic_cast<Sphere *>(w.objects[1]);
+
+    EXPECT_EQ(*default_object_1, s1);
+    EXPECT_EQ(*default_object_2, s2);
 }
 
 // Scenario: Intersect a world with a ray
@@ -112,8 +115,8 @@ TEST (TestWorld, ShadingIntersection) {
 
     World w = default_world();
     Ray r(point(0, 0, -5), vector(0, 0, 1));
-    Sphere s = *w.objects[0];
-    Intersection i = Intersection(4, &s);
+    Shape * s = w.objects[0];
+    Intersection i = Intersection(4, s);
 
     Computation comps = i.prepare_computations(r);
     Color c = w.shade_hit(comps);
@@ -128,8 +131,8 @@ TEST (TestWorld, ShadingIntersectionFromInside) {
     World w = default_world();
     w.lights[0] = PointLight(point(0, 0.25, 0), Color(1, 1, 1));
     Ray r(point(0, 0, 0), vector(0, 0, 1));
-    Sphere s = *w.objects[1];
-    Intersection i = Intersection(0.5, &s);
+    Shape * s = w.objects[1];
+    Intersection i = Intersection(0.5, s);
 
     Computation comps = i.prepare_computations(r);
     Color c = w.shade_hit(comps);

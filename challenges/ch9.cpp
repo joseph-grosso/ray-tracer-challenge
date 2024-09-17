@@ -97,8 +97,14 @@ int main() {
         vector(0, 1, 0)
     );
 
+    std::vector<Shape *> objects;
+    objects.push_back(&floor);
+    objects.push_back(&middle);
+    objects.push_back(&left);
+    objects.push_back(&right);
+
     // Create world
-    World w(std::vector<Shape *> {&middle, &left, &right}, &light);
+    World w(objects, &light);
 
     std::cout << std::setprecision(2) << std::fixed;
     std::cout << "New image generation starting!" << std::endl;

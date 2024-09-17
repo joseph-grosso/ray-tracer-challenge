@@ -73,7 +73,7 @@ TEST (TestShadows, ShadeHitAtIntersection) {
     s2.set_transform(translation_matrix(0, 0, 10));
 
     std::vector<PointLight> light = {PointLight(point(0, 0, -10), Color(1, 1, 1))};
-    std::vector<Sphere *> objects = {&s1, &s2};
+    std::vector<Shape *> objects = {&s1, &s2};
     World w(objects, light);
 
     Ray r(point(0, 0, 5), vector(0, 0, 1));

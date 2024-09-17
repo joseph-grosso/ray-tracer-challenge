@@ -12,9 +12,9 @@ int main() {
 
     // Define the spheres
     // left_wall
-    Sphere wall = Sphere();
+    Plane wall = Plane();
     wall.set_transform(
-        translation_matrix(0, 0, -2) * scaling_matrix(1000, 1000, 0.1)
+        translation_matrix(0, 0, -2) * rotation_x_matrix(M_PI / 2)
     );
     wall.set_material(
         Material(
@@ -157,7 +157,7 @@ int main() {
 
     // Create world
     World w(
-        std::vector<Sphere *> {
+        std::vector<Shape *> {
             &wall,
             &palm,
             &arm,
