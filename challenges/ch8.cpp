@@ -157,17 +157,15 @@ int main() {
 
     // Create world
     World w(
-        std::vector<Sphere> {
-            wall,
-            palm,
-            arm,
-            // x_sphere,
-            // y_sphere,
-            THUMB,
-            INDEX,
-            MIDDLE,
-            RING,
-            PINKY
+        std::vector<Sphere *> {
+            &wall,
+            &palm,
+            &arm,
+            &THUMB,
+            &INDEX,
+            &MIDDLE,
+            &RING,
+            &PINKY
         },
         light
     );

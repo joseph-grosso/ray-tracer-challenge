@@ -15,11 +15,11 @@
 
 class World {
     public:
-        std::vector<Sphere> objects;
+        std::vector<Sphere *> objects;
         std::vector<PointLight> lights;
-        World(std::vector<Sphere> objects = std::vector<Sphere>{}, std::vector<PointLight> lights = std::vector<PointLight>{});
-        World(Sphere s, PointLight l) : World(std::vector<Sphere> (1, s), std::vector<PointLight> {1, l})  {};
-        World(std::vector<Sphere> s_list, PointLight l) : World(s_list, std::vector<PointLight> {1, l})  {};
+        World(std::vector<Sphere *> objects = std::vector<Sphere *>{}, std::vector<PointLight> lights = std::vector<PointLight>{});
+        World(Sphere * s, PointLight l) : World(std::vector<Sphere *> (1, s), std::vector<PointLight> {1, l})  {};
+        World(std::vector<Sphere *> s_list, PointLight l) : World(s_list, std::vector<PointLight> {1, l})  {};
         Intersections intersect_world(Ray r);
         Color shade_hit(Computation comp);
         Color color_at(Ray r);

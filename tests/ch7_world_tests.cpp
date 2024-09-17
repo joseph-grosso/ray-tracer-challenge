@@ -38,8 +38,8 @@ TEST (TestWorld, DefaultWorld) {
 
     World w = default_world();
 
-    EXPECT_THAT(w.objects, testing::Contains(s1));
-    EXPECT_THAT(w.objects, testing::Contains(s2));
+    EXPECT_EQ(*w.objects[0], s1);
+    EXPECT_THAT(*w.objects[1], s2);
 }
 
 // Scenario: Intersect a world with a ray
@@ -112,7 +112,7 @@ TEST (TestWorld, ShadingIntersection) {
 
     World w = default_world();
     Ray r(point(0, 0, -5), vector(0, 0, 1));
-    Sphere s = w.objects[0];
+    Sphere s = *w.objects[0];
     Intersection i = Intersection(4, &s);
 
     Computation comps = i.prepare_computations(r);
@@ -128,7 +128,7 @@ TEST (TestWorld, ShadingIntersectionFromInside) {
     World w = default_world();
     w.lights[0] = PointLight(point(0, 0.25, 0), Color(1, 1, 1));
     Ray r(point(0, 0, 0), vector(0, 0, 1));
-    Sphere s = w.objects[1];
+    Sphere s = *w.objects[1];
     Intersection i = Intersection(0.5, &s);
 
     Computation comps = i.prepare_computations(r);
@@ -167,13 +167,13 @@ TEST (TestWorld, HitColorBehindRay) {
 
     World w = default_world();
 
-    Material m1 = w.objects[0].get_material();
+    Material m1 = (*w.objects[0]).get_material();
     m1.ambient = 1;
-    w.objects[0].set_material(m1);
+    (*w.objects[0]).set_material(m1);
 
-    Material m2 = w.objects[1].get_material();
+    Material m2 = (*w.objects[1]).get_material();
     m2.ambient = 1;
-    w.objects[1].set_material(m2);
+    (*w.objects[1]).set_material(m2);
 
     Ray r(point(0, 0, 0.75), vector(0, 0, -1));
 

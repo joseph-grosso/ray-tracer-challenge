@@ -16,7 +16,7 @@
 #include <iostream>
 
 
-World::World(std::vector<Sphere> objects, std::vector<PointLight> lights) {
+World::World(std::vector<Sphere *> objects, std::vector<PointLight> lights) {
     this->objects = objects;
     this->lights = lights;
 };
@@ -25,7 +25,7 @@ Intersections World::intersect_world(Ray r) {
     std::vector<Intersection> initial_intersections;
     Intersections i_inter;
     for (int i=0; i<objects.size(); i++) {
-        i_inter = objects[i].intersect(r);
+        i_inter = (*objects[i]).intersect(r);
         for (int j=0; j<i_inter.data.size(); j++) {
             initial_intersections.push_back(i_inter.data[j]);
         }
@@ -64,8 +64,8 @@ bool World::is_shadowed(Tuple p) {
 
 World default_world() {
     PointLight light = PointLight(point(-10, 10, -10), Color(1, 1, 1));
-    Sphere s1 = Sphere();
-    s1.set_material(
+    Sphere * s1 = new Sphere();
+    (*s1).set_material(
         Material(
             Color(0.8, 1.0, 0.6),  // color
             0.1,  // ambient
@@ -74,10 +74,10 @@ World default_world() {
             200.0  // shininess
         )
     );
-    Sphere s2 = Sphere();
-    s2.set_transform(scaling_matrix(0.5, 0.5, 0.5));
+    Sphere * s2 = new Sphere();
+    (*s2).set_transform(scaling_matrix(0.5, 0.5, 0.5));
     return World(
-        std::vector<Sphere>{s1, s2},
+        std::vector<Sphere *>{s1, s2},
         std::vector<PointLight>{light}
     );
 };
