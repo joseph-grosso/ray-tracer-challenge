@@ -8,6 +8,7 @@
 using namespace std::chrono;
 
 
+// First basic plane image; same as chapter 7
 int main() {
 
     // Define the spheres
@@ -66,8 +67,8 @@ int main() {
     PointLight light = PointLight(point(-10, 10, -10), Color(1, 1, 1));
 
     // Create camera
-    unsigned int x = 1280;
-    unsigned int y = 720;
+    unsigned int x = 128;
+    unsigned int y = 72;
     Camera camera(x, y, M_PI / 3);
     camera.transform = view_transform(
         point(0, 1.5, -5),
