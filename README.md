@@ -21,9 +21,13 @@ convert flight_path.ppm flight_path.png
 
 ## Sample Images
 
+### Spheres and Planes
+
+![Walls with Planes](outputs/ch9/high_res_multi_wall_pic.png "A wall made of planes interacting with a deformed sphere.")
+
 ### Spheres with shadows
 
-![Spheres with shadows](outputs/ch8/high_res_shadow.png "Spheres with shadows from an outside light source.")
+![Spheres with shadows](outputs/ch9/high_res_plane_pic.png "Spheres with shadows from an outside light source on an infinite plane.")
 
 ### "Hand Puppet"
 
