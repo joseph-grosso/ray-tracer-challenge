@@ -88,8 +88,8 @@ int main() {
     PointLight light = PointLight(point(-10, 10, -10), Color(1, 1, 1));
 
     // Create camera
-    unsigned int x = 720;
-    unsigned int y = 1280;
+    unsigned int x = 100;
+    unsigned int y = 100;
     Camera camera(x, y, M_PI / 2);
     camera.transform = view_transform(
         point(0, 1.5, -5),
@@ -97,14 +97,16 @@ int main() {
         vector(0, 1, 0)
     );
 
-    std::vector<Shape *> objects;
-    objects.push_back(&floor);
-    objects.push_back(&middle);
-    objects.push_back(&left);
-    objects.push_back(&right);
-
     // Create world
-    World w(objects, &light);
+    World w(
+        std::vector<Shape *> {
+            &floor,
+            &middle,
+            &left,
+            &right
+        },
+        light
+    );
 
     std::cout << std::setprecision(2) << std::fixed;
     std::cout << "New image generation starting!" << std::endl;
