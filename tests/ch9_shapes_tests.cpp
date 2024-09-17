@@ -127,3 +127,51 @@ TEST (TestPlanes, NormalOfPlane) {
     EXPECT_EQ(n2, vector(0, 1, 0));
     EXPECT_EQ(n3, vector(0, 1, 0));
 }
+
+// Scenario: Intersect with a ray parallel to the plane
+// p123
+TEST (TestPlanes, IntersectParallelRay) {
+    Plane p = Plane();
+
+    Ray r = Ray(point(0, 10, 0), vector(0, 0, 1));
+    Intersections xs = p.local_intersect(r);
+
+    EXPECT_EQ(xs.count, 0);
+}
+
+// Scenario: Intersect with a coplanar ray
+// p123
+TEST (TestPlanes, IntersectCoplanarRay) {
+    Plane p = Plane();
+
+    Ray r = Ray(point(0, 10, 0), vector(0, 0, 1));
+    Intersections xs = p.local_intersect(r);
+
+    EXPECT_EQ(xs.count, 0);
+}
+
+// Scenario: A ray intersecting a plane from above
+// p123
+TEST (TestPlanes, IntersectRayAbove) {
+    Plane p = Plane();
+
+    Ray r = Ray(point(0, 1, 0), vector(0, -1, 0));
+    Intersections xs = p.local_intersect(r);
+
+    EXPECT_EQ(xs.count, 1);
+    EXPECT_EQ(xs[0].t, 1);
+    EXPECT_EQ(xs[0].object, &p);
+}
+
+// Scenario: A ray intersecting a plane from below
+// p123
+TEST (TestPlanes, IntersectRayBelow) {
+    Plane p = Plane();
+
+    Ray r = Ray(point(0, -1, 0), vector(0, 1, 0));
+    Intersections xs = p.local_intersect(r);
+
+    EXPECT_EQ(xs.count, 1);
+    EXPECT_EQ(xs[0].t, 1);
+    EXPECT_EQ(xs[0].object, &p);
+}
