@@ -23,28 +23,6 @@ int main() {
         )
     );
 
-    // // left wall
-    // Sphere left_wall = Sphere();
-    // left_wall.set_transform(
-    //     translation_matrix(0, 0, 5) * 
-    //     rotation_y_matrix(-M_PI / 4) * rotation_x_matrix(M_PI / 2) * 
-    //     scaling_matrix(10, 0.01, 10)
-    // );
-    // left_wall.set_material(
-    //     floor.get_material()
-    // );
-
-    // // right wall
-    // Sphere right_wall = Sphere();
-    // right_wall.set_transform(
-    //     translation_matrix(0, 0, 5) * 
-    //     rotation_y_matrix(M_PI / 4) * rotation_x_matrix(M_PI / 2) * 
-    //     scaling_matrix(10, 0.01, 10)
-    // );
-    // right_wall.set_material(
-    //     floor.get_material()
-    // );
-
     // First (Large, Green) Sphere
     Sphere middle = Sphere();
     middle.set_transform(translation_matrix(-0.5, 1, 0.5));
@@ -88,9 +66,9 @@ int main() {
     PointLight light = PointLight(point(-10, 10, -10), Color(1, 1, 1));
 
     // Create camera
-    unsigned int x = 100;
-    unsigned int y = 100;
-    Camera camera(x, y, M_PI / 2);
+    unsigned int x = 128;
+    unsigned int y = 72;
+    Camera camera(x, y, M_PI / 3);
     camera.transform = view_transform(
         point(0, 1.5, -5),
         point(0, 1, 0),
