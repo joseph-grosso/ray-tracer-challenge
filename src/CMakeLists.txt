@@ -15,6 +15,7 @@ add_library(
     camera.cpp
     shape.cpp
     plane.cpp
+    stripe_pattern.cpp
 )
  
 message("Raytracer current source dir = ${CMAKE_CURRENT_SOURCE_DIR}")

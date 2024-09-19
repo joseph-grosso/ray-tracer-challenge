@@ -47,6 +47,7 @@ if (test)
     tests/ch7_world_tests.cpp
     tests/ch8_shadow_tests.cpp
     tests/ch9_shapes_tests.cpp
+    tests/ch10_patterns_tests.cpp
   )
 
   target_link_libraries(

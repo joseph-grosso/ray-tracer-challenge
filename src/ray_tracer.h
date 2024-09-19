@@ -13,3 +13,4 @@
 #include "camera.h"
 #include "shape.h"
 #include "plane.h"
+#include "stripe_pattern.h"
