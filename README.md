@@ -41,9 +41,31 @@ convert flight_path.ppm flight_path.png
 
 ![Deformed red ball](outputs/ch5/sheared_circle.png "A ball deformed by its shearing transformation. ")
 
-## TODO:
+## TODO
+
+### Chapters
+
+- [x] ch1
+- [x] ch2
+- [x] ch3
+- [x] ch4
+- [x] ch5
+- [x] ch6
+- [x] ch7
+- [x] ch8
+- [x] ch9
+- [ ] ch10
+- [ ] ch11
+- [ ] ch12
+- [ ] ch13
+- [ ] ch14
+- [ ] ch15
+- [ ] ch16
+- [ ] Bonus chapters (online)
+
+### Code Enhancements
 
 - [ ] Move common Shape functionality to a separate file
 - [ ] Move Shape objects code into its own folder
 - [ ] Move headers into a different folder than source code files
-- [ ] TODO: Write a function for canvas.h that directly exports image files to .png instead of only to .ppm
+- [ ] Write a function for canvas.h that directly exports image files to .png instead of only to .ppm
