@@ -1,18 +1,16 @@
-#include "tuple.h"
 #include "material.h"
-#include "lights.h"
-
-#include <cmath>
 
 
 // Chapter 6: Lights and Shading
 Material::Material(
+    StripePattern * pattern,
     Color color,
     float ambient,
     float diffuse,
     float specular,
     float shininess
 ) {
+    this->pattern = pattern;
     this->color = color;
     this->ambient = ambient;
     this->diffuse = diffuse;
@@ -70,6 +68,7 @@ Color Material::lighting(
 // Arithmetic operators
 bool operator==(Material lhs, Material rhs) {
     return (
+        (lhs.pattern == rhs.pattern) &&
         (lhs.color == rhs.color) &&
         equalByEpsilon(lhs.ambient, rhs.ambient) &&
         equalByEpsilon(lhs.diffuse, rhs.diffuse) &&

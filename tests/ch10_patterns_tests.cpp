@@ -58,3 +58,9 @@ TEST_F (TestPatterns_Fixture, PatternAlternatesInX) {
     EXPECT_EQ(p.stripe_at(point(-1, 0, 0)), black);
     EXPECT_EQ(p.stripe_at(point(-1.1, 0, 0)), white);
 }
+
+// Scenario: Lighting with a pattern applied
+// p129
+TEST_F (TestPatterns_Fixture, LightingWithPattern) {
+    
+}
