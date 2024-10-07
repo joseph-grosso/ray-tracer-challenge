@@ -34,7 +34,14 @@ Color Material::lighting(
     bool in_shadow
 ) {
     Color black = Color();
-    Color effective_color = this->color * light.get_intensity();
+    Color base_color;
+
+    if (this->pattern != NULL) {
+        base_color = (*this->pattern).stripe_at(position);
+    } else {
+        base_color = this->color;
+    }
+    Color effective_color = base_color * light.get_intensity();
     Tuple lightv = (light.get_position() - position).normalize();
 
     Color ambient = effective_color * this->ambient;
