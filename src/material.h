@@ -6,7 +6,6 @@
 
 #include <cmath>
 
-
 class Material {
     public:
         Material(

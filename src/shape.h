@@ -10,7 +10,6 @@
 #include <random> 
 #include <string>
 
-
 // Chapter 9: Shapes and Planes
 class Shape {
     protected:

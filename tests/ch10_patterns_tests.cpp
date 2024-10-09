@@ -79,3 +79,36 @@ TEST_F (TestPatterns_Fixture, LightingWithPattern) {
     EXPECT_EQ(c1, white);
     EXPECT_EQ(c2, black);
 }
+
+// Scenario: Stripes with an object transformation
+// p131
+TEST_F (TestPatterns_Fixture, StripesWithObjectTransform) {
+    Sphere s = Sphere(scaling_matrix(2, 2, 2));
+    StripePattern pattern = StripePattern(white, black);
+
+    Color c = pattern.stripe_at_object(&s, point(1.5, 0, 0));
+    EXPECT_EQ(c, white);
+   
+}
+
+// Scenario: Stripes with an pattern transformation
+// p131
+TEST_F (TestPatterns_Fixture, StripesWithPatternTransform) {
+    Sphere s = Sphere();
+    StripePattern pattern = StripePattern(white, black);
+    pattern.set_transform(scaling_matrix(2, 2, 2));
+
+    Color c = pattern.stripe_at_object(&s, point(1.5, 0, 0));
+    EXPECT_EQ(c, white);
+}
+
+// Scenario: Stripes with a pattern and an object transformation
+// p131
+TEST_F (TestPatterns_Fixture, StripesWithBothTransforms) {
+    Sphere s = Sphere(scaling_matrix(2, 2, 2));
+    StripePattern pattern = StripePattern(white, black);
+    pattern.set_transform(translation_matrix(0.5, 0, 0));
+
+    Color c = pattern.stripe_at_object(&s, point(2.5, 0, 0));
+    EXPECT_EQ(c, white);
+}
