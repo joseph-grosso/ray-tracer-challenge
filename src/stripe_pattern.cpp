@@ -1,9 +1,10 @@
 #include "stripe_pattern.h"
 #include "shape.h"
 
-StripePattern::StripePattern(Color a, Color b) {
+StripePattern::StripePattern(Color a, Color b, Matrix t) {
     this->a = a;
     this->b = b;
+    this->transform = t;
 };
 
 Color StripePattern::get_a() {

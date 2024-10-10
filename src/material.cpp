@@ -38,7 +38,7 @@ Color Material::lighting(
     Color base_color;
 
     if (this->pattern != NULL) {
-        base_color = (*this->pattern).stripe_at(position);
+        base_color = (*this->pattern).stripe_at_object(object, position);
     } else {
         base_color = this->color;
     }

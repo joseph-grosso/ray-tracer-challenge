@@ -21,6 +21,10 @@ convert flight_path.ppm flight_path.png
 
 ## Sample Images
 
+### Patterns
+
+![Spheres On A Plane with Stripes](outputs/ch10/hq_stripes_and_spheres.png "Some striped spheres sit on a plane, showing the first implementation of a pattern object.")
+
 ### Spheres and Planes
 
 ![Walls with Planes](outputs/ch9/high_res_multi_wall_pic.png "A wall made of planes interacting with a deformed sphere.")

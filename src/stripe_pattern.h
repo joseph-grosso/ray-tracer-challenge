@@ -13,7 +13,8 @@ class StripePattern {
         Color b;
         Matrix transform;
     public:
-        StripePattern(Color a, Color b);
+        StripePattern(Color a, Color b, Matrix t);
+        StripePattern(Color a, Color b) : StripePattern(a, b, identity_matrix(4)) {};
         Color get_a();
         Color get_b();
         void set_transform(Matrix t);
