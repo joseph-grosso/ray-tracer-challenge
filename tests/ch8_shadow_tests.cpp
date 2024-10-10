@@ -24,8 +24,9 @@ TEST_F (TestShadows_Fixture, SurfaceInShadow) {
     Tuple normalv = vector(0, 0, -1);
     PointLight light = PointLight(point(0, 0, -10), Color(1, 1, 1));
     bool in_shadow = true;
+    Sphere s = Sphere();
 
-    Color result = m.lighting(light, position, eyev, normalv, in_shadow);
+    Color result = m.lighting(&s, light, position, eyev, normalv, in_shadow);
 
     EXPECT_EQ(result, Color(0.1, 0.1, 0.1));
 }

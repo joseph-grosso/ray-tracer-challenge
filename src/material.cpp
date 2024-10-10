@@ -1,5 +1,5 @@
 #include "material.h"
-
+#include "shape.h"
 
 // Chapter 6: Lights and Shading
 Material::Material(
@@ -27,6 +27,7 @@ std::string Material::to_string() {
 };
 
 Color Material::lighting(
+    Shape * object,
     PointLight light,
     Tuple position,
     Tuple eyev,

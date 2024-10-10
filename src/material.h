@@ -6,6 +6,8 @@
 
 #include <cmath>
 
+class Shape;
+
 class Material {
     public:
         Material(
@@ -38,6 +40,7 @@ class Material {
         float shininess;
         std::string to_string();
         Color lighting(
+            Shape * object,
             PointLight light,
             Tuple position,
             Tuple eyev,

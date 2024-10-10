@@ -68,13 +68,14 @@ TEST_F (TestPatterns_Fixture, LightingWithPattern) {
     m.ambient = 1;
     m.diffuse = 0;
     m.specular = 0;
+    Sphere s = Sphere();
 
     Tuple eyev = vector(0, 0, -1);
     Tuple normalv = vector(0, 0, -1);
     PointLight light = PointLight(point(0, 0, -10), Color(1, 1, 1));
 
-    Color c1 = m.lighting(light, point(0.9, 0, 0), eyev, normalv, false);
-    Color c2 = m.lighting(light, point(1.1, 0, 0), eyev, normalv, false);
+    Color c1 = m.lighting(&s, light, point(0.9, 0, 0), eyev, normalv, false);
+    Color c2 = m.lighting(&s, light, point(1.1, 0, 0), eyev, normalv, false);
 
     EXPECT_EQ(c1, white);
     EXPECT_EQ(c2, black);

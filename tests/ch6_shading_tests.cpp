@@ -130,8 +130,9 @@ TEST_F (TestSphereReflection, LightingWithEyeBetweenLightAndSurface) {
     Tuple eyev = vector(0, 0, -1);
     Tuple normalv = vector(0, 0, -1);
     PointLight light = PointLight(point(0, 0, -10), Color(1, 1, 1));
+    Sphere s = Sphere();
 
-    Color result = m.lighting(light, position, eyev, normalv, false);
+    Color result = m.lighting(&s, light, position, eyev, normalv, false);
     
     EXPECT_EQ(result, Color(1.9, 1.9, 1.9));
 }
@@ -142,8 +143,9 @@ TEST_F (TestSphereReflection, LightingWithEyeBetweenAt45Degree) {
     Tuple eyev = vector(0, std::sqrt(2)/2, -std::sqrt(2)/2);
     Tuple normalv = vector(0, 0, -1);
     PointLight light = PointLight(point(0, 0, -10), Color(1, 1, 1));
+    Sphere s = Sphere();
 
-    Color result = m.lighting(light, position, eyev, normalv, false);
+    Color result = m.lighting(&s, light, position, eyev, normalv, false);
     
     EXPECT_EQ(result, Color(1.0, 1.0, 1.0));
 }
@@ -154,8 +156,9 @@ TEST_F (TestSphereReflection, LightingWithEyeAt45Degree) {
     Tuple eyev = vector(0, std::sqrt(2)/2, -std::sqrt(2)/2);
     Tuple normalv = vector(0, 0, -1);
     PointLight light = PointLight(point(0, 0, -10), Color(1, 1, 1));
+    Sphere s = Sphere();
 
-    Color result = m.lighting(light, position, eyev, normalv, false);
+    Color result = m.lighting(&s, light, position, eyev, normalv, false);
     
     EXPECT_EQ(result, Color(1.0, 1.0, 1.0));
 }
@@ -166,8 +169,9 @@ TEST_F (TestSphereReflection, LightingWithLightAt45Degree) {
     Tuple eyev = vector(0, 0, -1);
     Tuple normalv = vector(0, 0, -1);
     PointLight light = PointLight(point(0, 10, -10), Color(1, 1, 1));
+    Sphere s = Sphere();
 
-    Color result = m.lighting(light, position, eyev, normalv, false);
+    Color result = m.lighting(&s, light, position, eyev, normalv, false);
     
     EXPECT_EQ(result, Color(0.7364, 0.7364, 0.7364));
 }
@@ -178,8 +182,9 @@ TEST_F (TestSphereReflection, LightingWithBothAt45Degree) {
     Tuple eyev = vector(0, -std::sqrt(2)/2, -std::sqrt(2)/2);
     Tuple normalv = vector(0, 0, -1);
     PointLight light = PointLight(point(0, 10, -10), Color(1, 1, 1));
+    Sphere s = Sphere();
 
-    Color result = m.lighting(light, position, eyev, normalv, false);
+    Color result = m.lighting(&s, light, position, eyev, normalv, false);
     
     EXPECT_EQ(result, Color(1.63639, 1.63639, 1.63639));
 }
@@ -190,8 +195,9 @@ TEST_F (TestSphereReflection, LightingBehindSurface) {
     Tuple eyev = vector(0, 0, -1);
     Tuple normalv = vector(0, 0, -1);
     PointLight light = PointLight(point(0, 0, 10), Color(1, 1, 1));
+    Sphere s = Sphere();
 
-    Color result = m.lighting(light, position, eyev, normalv, false);
+    Color result = m.lighting(&s, light, position, eyev, normalv, false);
     
     EXPECT_EQ(result, Color(0.1, 0.1, 0.1));
 }

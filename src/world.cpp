@@ -41,6 +41,7 @@ Intersections World::intersect_world(Ray r) {
 Color World::shade_hit(Computation comp) {
     bool shadowed = is_shadowed(comp.over_point);
     return (*comp.object).get_material().lighting(
+        comp.object,
         lights[0],  // TODO: Fix this when using multiple light sources! Extra chapter
         comp.over_point,
         comp.eyev,
