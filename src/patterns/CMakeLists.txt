@@ -1,3 +1,6 @@
+# TODO: Make this cmake file actually work instead of including
+# everything in the cmake file above
+
 # # Add the patterns library
 # add_library(
 #     patterns

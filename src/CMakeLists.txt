@@ -6,7 +6,6 @@ add_library(
     matrix.cpp
     transform.cpp
     ray.cpp
-    sphere.cpp
     intersection.cpp
     intersections.cpp
     lights.cpp
@@ -14,9 +13,12 @@ add_library(
     world.cpp
     computation.cpp
     camera.cpp
-    shape.cpp
-    plane.cpp
+    # patterns folder
     patterns/stripe_pattern.cpp
+    # shapes folder
+    shapes/sphere.cpp
+    shapes/shape.cpp
+    shapes/plane.cpp
 )
 
 message("Raytracer current source dir = ${CMAKE_CURRENT_SOURCE_DIR}")
@@ -25,5 +27,6 @@ target_include_directories(
     src PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/patterns
+    ${CMAKE_CURRENT_SOURCE_DIR}/shapes
 )
 
