@@ -1,6 +1,7 @@
 #pragma once
 
 #include "tuple.h"
+#include "color.h"
 #include "lights.h"
 #include "stripe_pattern.h"
 

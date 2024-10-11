@@ -2,6 +2,7 @@ add_library(
     src
     canvas.cpp
     tuple.cpp
+    color.cpp
     matrix.cpp
     transform.cpp
     ray.cpp

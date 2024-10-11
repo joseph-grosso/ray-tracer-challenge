@@ -1,6 +1,9 @@
 #pragma once
 
 #include "tuple.h"
+#include "color.h"
+
+#include <cmath>
 
 
 // Chapter 6: Lights and Shading

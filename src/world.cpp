@@ -1,20 +1,5 @@
-#include "tuple.h"
-#include "matrix.h"
-#include "ray.h"
-#include "material.h"
-#include "matrix.h"
 #include "sphere.h"
-#include "shape.h"
-#include "lights.h"
 #include "world.h"
-#include "transform.h"
-#include "intersection.h"
-#include "intersections.h"
-#include "computation.h"
-
-#include <vector>
-#include <bits/stdc++.h> 
-#include <iostream>
 
 
 World::World(std::vector<Shape *> objects, std::vector<PointLight> lights) {

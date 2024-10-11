@@ -1,6 +1,7 @@
 #pragma once
 
 #include "tuple.h"
+#include "color.h"
 #include "matrix.h"
 #include "ray.h"
 #include "canvas.h"

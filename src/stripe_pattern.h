@@ -2,6 +2,7 @@
 
 #include "tuple.h"
 #include "matrix.h"
+#include "color.h"
 
 #include <cmath>
 

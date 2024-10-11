@@ -1,7 +1,5 @@
-#include "tuple.h"
 #include "lights.h"
 
-#include <cmath>
 
 
 // Chapter 6: Lights and Shading

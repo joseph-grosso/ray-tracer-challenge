@@ -8,6 +8,7 @@
 #include "sphere.h"
 #include "transform.h"
 #include "tuple.h"
+#include "color.h"
 #include "world.h"
 #include "computation.h"
 #include "camera.h"

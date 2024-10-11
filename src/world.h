@@ -9,8 +9,12 @@
 #include "intersection.h"
 #include "intersections.h"
 #include "computation.h"
+#include "color.h"
+#include "transform.h"
 
 #include <vector>
+#include <bits/stdc++.h> 
+#include <iostream>
 
 
 class World {
