@@ -22,3 +22,4 @@
 #include "stripe_pattern.h"
 #include "gradient_pattern.h"
 #include "conical_ring_pattern.h"
+#include "checkers_pattern.h"

@@ -183,7 +183,7 @@ TEST_F (TestPatterns_Fixture, GradientPattern) {
     EXPECT_EQ(p.pattern_at(point(0.75, 0, 0)), Color(0.25, 0.25, 0.25));
 }
 
-// Scenario: a ring should extend in both x and z
+// Scenario: a CONICAL ring should extend in both x and z
 // p136
 TEST_F (TestPatterns_Fixture, ConicalRingsPattern) {
     ConicalRingPattern p = ConicalRingPattern(white, black);
@@ -194,3 +194,34 @@ TEST_F (TestPatterns_Fixture, ConicalRingsPattern) {
     // just outside sqrt(2) / 2
     EXPECT_EQ(p.pattern_at(point(0.708, 0, 0.708)), black);
 }
+
+// Scenario: Checkers should repeat in x
+// p137
+TEST_F (TestPatterns_Fixture, CheckersInX) {
+    CheckersPattern p = CheckersPattern(white, black);
+
+    EXPECT_EQ(p.pattern_at(point(0, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0.99, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(1.01, 0, 0)), black);
+}
+
+// Scenario: Checkers should repeat in y
+// p137
+TEST_F (TestPatterns_Fixture, CheckersInY) {
+    CheckersPattern p = CheckersPattern(white, black);
+
+    EXPECT_EQ(p.pattern_at(point(0, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 0.99, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 1.01, 0)), black);
+}
+
+// Scenario: Checkers should repeat in z
+// p137
+TEST_F (TestPatterns_Fixture, CheckersInZ) {
+    CheckersPattern p = CheckersPattern(white, black);
+
+    EXPECT_EQ(p.pattern_at(point(0, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 0, 0.99)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 0, 1.01)), black);
+}
+
