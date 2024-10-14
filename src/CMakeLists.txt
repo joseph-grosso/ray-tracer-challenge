@@ -17,6 +17,7 @@ add_library(
     patterns/pattern.cpp
     patterns/stripe_pattern.cpp
     patterns/gradient_pattern.cpp
+    patterns/conical_ring_pattern.cpp
     # shapes folder
     shapes/shape.cpp
     shapes/sphere.cpp
