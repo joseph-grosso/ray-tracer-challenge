@@ -113,3 +113,63 @@ TEST_F (TestPatterns_Fixture, StripesWithBothTransforms) {
     Color c = pattern.pattern_at_shape(&s, point(2.5, 0, 0));
     EXPECT_EQ(c, white);
 }
+
+// Abstract class for testing patterns class
+class TestPattern : public Pattern {
+    public:
+        TestPattern(Matrix t = identity_matrix(4)) : Pattern(t) {};
+        Color pattern_at(Tuple p) {
+            return Color(p.x, p.y, p.z);
+        };
+};
+
+// Scenario: The default pattern transformation
+// p133
+TEST (TestAbstractPattern, DefaultPatternTransform) {
+    TestPattern p = TestPattern();
+
+    EXPECT_EQ(p.get_transform(), identity_matrix(4));
+}
+
+// Scenario: Assigning a transformation
+// p133
+TEST (TestAbstractPattern, AssigningPatternTransform) {
+    TestPattern p = TestPattern(translation_matrix(1, 2, 3));
+
+    EXPECT_EQ(p.get_transform(), translation_matrix(1, 2, 3));
+}
+
+// Scenario: A pattern with an object transformation
+// p134
+TEST (TestAbstractPattern, PatternObjectTransform) {
+    Sphere s = Sphere(scaling_matrix(2, 2, 2));
+    TestPattern p = TestPattern();
+
+    Color c = p.pattern_at_shape(&s, point(2, 3, 4));
+
+    EXPECT_EQ(c, Color(1, 1.5, 2));
+}
+
+// Scenario: A pattern with an pattern transformation
+// p134
+TEST (TestAbstractPattern, PatternPatternTransform) {
+    Sphere s = Sphere();
+    TestPattern p = TestPattern(scaling_matrix(2, 2, 2));
+
+    Color c = p.pattern_at_shape(&s, point(2, 3, 4));
+
+    EXPECT_EQ(c, Color(1, 1.5, 2));
+}
+
+// Scenario: A pattern with both object and pattern transformations
+// p134
+TEST (TestAbstractPattern, PatternBothTransforms) {
+    Sphere s = Sphere(scaling_matrix(2, 2, 2));
+    TestPattern p = TestPattern(translation_matrix(0.5, 1, 1.5));
+
+    Color c = p.pattern_at_shape(&s, point(2.5, 3, 3.5));
+
+    EXPECT_EQ(c, Color(0.75, 0.5, 0.25));
+}
+
+
