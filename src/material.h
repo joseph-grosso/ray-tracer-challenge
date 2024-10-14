@@ -3,7 +3,7 @@
 #include "tuple.h"
 #include "color.h"
 #include "lights.h"
-#include "stripe_pattern.h"
+#include "pattern.h"
 
 #include <cmath>
 
@@ -12,7 +12,7 @@ class Shape;
 class Material {
     public:
         Material(
-            StripePattern * pattern = NULL,
+            Pattern * pattern = NULL,
             Color color = Color(1, 1, 1),
             float ambient = 0.1,
             float diffuse = 0.9,
@@ -33,7 +33,7 @@ class Material {
             specular,
             shininess
         ) {};
-        StripePattern * pattern;
+        Pattern * pattern;
         Color color;
         float ambient;
         float diffuse;

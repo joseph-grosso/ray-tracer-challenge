@@ -14,10 +14,11 @@ add_library(
     computation.cpp
     camera.cpp
     # patterns folder
+    patterns/pattern.cpp
     patterns/stripe_pattern.cpp
     # shapes folder
-    shapes/sphere.cpp
     shapes/shape.cpp
+    shapes/sphere.cpp
     shapes/plane.cpp
 )
 

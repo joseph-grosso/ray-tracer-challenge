@@ -3,7 +3,7 @@
 
 // Chapter 6: Lights and Shading
 Material::Material(
-    StripePattern * pattern,
+    Pattern * pattern,
     Color color,
     float ambient,
     float diffuse,
@@ -38,7 +38,7 @@ Color Material::lighting(
     Color base_color;
 
     if (this->pattern != NULL) {
-        base_color = (*this->pattern).stripe_at_object(object, position);
+        base_color = (*this->pattern).pattern_at_shape(object, position);
     } else {
         base_color = this->color;
     }

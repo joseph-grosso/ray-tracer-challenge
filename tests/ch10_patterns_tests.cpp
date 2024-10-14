@@ -31,9 +31,9 @@ TEST_F (TestPatterns_Fixture, CreateStripePattern) {
 TEST_F (TestPatterns_Fixture, PatternConstantInY) {
     StripePattern p = StripePattern(white, black);
 
-    EXPECT_EQ(p.stripe_at(point(0, 0, 0)), white);
-    EXPECT_EQ(p.stripe_at(point(0, 1, 0)), white);
-    EXPECT_EQ(p.stripe_at(point(0, 2, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 1, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 2, 0)), white);
 }
 
 // Scenario: A stripe pattern is constant in z
@@ -41,9 +41,9 @@ TEST_F (TestPatterns_Fixture, PatternConstantInY) {
 TEST_F (TestPatterns_Fixture, PatternConstantInZ) {
     StripePattern p = StripePattern(white, black);
 
-    EXPECT_EQ(p.stripe_at(point(0, 0, 0)), white);
-    EXPECT_EQ(p.stripe_at(point(0, 0, 1)), white);
-    EXPECT_EQ(p.stripe_at(point(0, 0, 2)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 0, 1)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 0, 2)), white);
 }
 
 // Scenario: A stripe pattern alternates in x
@@ -51,12 +51,12 @@ TEST_F (TestPatterns_Fixture, PatternConstantInZ) {
 TEST_F (TestPatterns_Fixture, PatternAlternatesInX) {
     StripePattern p = StripePattern(white, black);
 
-    EXPECT_EQ(p.stripe_at(point(0, 0, 0)), white);
-    EXPECT_EQ(p.stripe_at(point(0.9, 0, 0)), white);
-    EXPECT_EQ(p.stripe_at(point(1, 0, 0)), black);
-    EXPECT_EQ(p.stripe_at(point(-0.1, 0, 0)), black);
-    EXPECT_EQ(p.stripe_at(point(-1, 0, 0)), black);
-    EXPECT_EQ(p.stripe_at(point(-1.1, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0.9, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(1, 0, 0)), black);
+    EXPECT_EQ(p.pattern_at(point(-0.1, 0, 0)), black);
+    EXPECT_EQ(p.pattern_at(point(-1, 0, 0)), black);
+    EXPECT_EQ(p.pattern_at(point(-1.1, 0, 0)), white);
 }
 
 // Scenario: Lighting with a pattern applied
@@ -87,7 +87,7 @@ TEST_F (TestPatterns_Fixture, StripesWithObjectTransform) {
     Sphere s = Sphere(scaling_matrix(2, 2, 2));
     StripePattern pattern = StripePattern(white, black);
 
-    Color c = pattern.stripe_at_object(&s, point(1.5, 0, 0));
+    Color c = pattern.pattern_at_shape(&s, point(1.5, 0, 0));
     EXPECT_EQ(c, white);
    
 }
@@ -99,7 +99,7 @@ TEST_F (TestPatterns_Fixture, StripesWithPatternTransform) {
     StripePattern pattern = StripePattern(white, black);
     pattern.set_transform(scaling_matrix(2, 2, 2));
 
-    Color c = pattern.stripe_at_object(&s, point(1.5, 0, 0));
+    Color c = pattern.pattern_at_shape(&s, point(1.5, 0, 0));
     EXPECT_EQ(c, white);
 }
 
@@ -110,6 +110,6 @@ TEST_F (TestPatterns_Fixture, StripesWithBothTransforms) {
     StripePattern pattern = StripePattern(white, black);
     pattern.set_transform(translation_matrix(0.5, 0, 0));
 
-    Color c = pattern.stripe_at_object(&s, point(2.5, 0, 0));
+    Color c = pattern.pattern_at_shape(&s, point(2.5, 0, 0));
     EXPECT_EQ(c, white);
 }
