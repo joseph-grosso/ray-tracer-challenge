@@ -225,3 +225,16 @@ TEST_F (TestPatterns_Fixture, CheckersInZ) {
     EXPECT_EQ(p.pattern_at(point(0, 0, 1.01)), black);
 }
 
+// Scenario: a RADIAL ring should extend in x, y, and z
+// p138/pMe
+TEST_F (TestPatterns_Fixture, RadialRingsPattern) {
+    RadialRingPattern p = RadialRingPattern(white, black);
+
+    EXPECT_EQ(p.pattern_at(point(0, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(1, 0, 0)), black);
+    EXPECT_EQ(p.pattern_at(point(0, 0, 1)), black);
+    EXPECT_EQ(p.pattern_at(point(0, 1.1, 0)), black);
+    EXPECT_EQ(p.pattern_at(point(1, 1, 1)), black);
+    // just outside sqrt(2) / 2
+    EXPECT_EQ(p.pattern_at(point(0.708, 0, 0.708)), black);
+}
