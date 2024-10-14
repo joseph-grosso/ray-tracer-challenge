@@ -1,68 +1,67 @@
-#include "tuple.h"
+#include "canvas.h"
 #include "color.h"
 #include "matrix.h"
 #include "ray.h"
-#include "canvas.h"
+#include "tuple.h"
 #include "world.h"
-#include <vector>
-#include <string>
 #include <math.h>
+#include <string>
+#include <vector>
 
 #include <iostream>
 
 #include "camera.h"
 
-
 Camera::Camera(unsigned int hsize, unsigned int vsize, float field_of_view) {
-    // Computed values
-    float half_view = tan(field_of_view / 2);
-    float aspect = (float) hsize / vsize;
+  // Computed values
+  float half_view = tan(field_of_view / 2);
+  float aspect = (float)hsize / vsize;
 
-    if (aspect >= 1) {
-        this->half_width = half_view;
-        this->half_height = half_view / aspect;
-    } else {
-        this->half_width = half_view * aspect;
-        this->half_height = half_view;
-    };
+  if (aspect >= 1) {
+    this->half_width = half_view;
+    this->half_height = half_view / aspect;
+  } else {
+    this->half_width = half_view * aspect;
+    this->half_height = half_view;
+  };
 
-    this->pixel_size = (this->half_width * 2) / hsize;
+  this->pixel_size = (this->half_width * 2) / hsize;
 
-    // Raw values
-    this->hsize = hsize;
-    this->vsize = vsize;
-    this->field_of_view = field_of_view;
+  // Raw values
+  this->hsize = hsize;
+  this->vsize = vsize;
+  this->field_of_view = field_of_view;
 };
 
 Ray Camera::ray_for_pixel(int px, int py) {
 
-    // The offset from the edge of the canvas to the pixel's center
-    float xoffset = (float)((float)px + (float)0.5) * (float)pixel_size;
-    float yoffset = (float)((float)py + (float)0.5) * (float)pixel_size;
+  // The offset from the edge of the canvas to the pixel's center
+  float xoffset = (float)((float)px + (float)0.5) * (float)pixel_size;
+  float yoffset = (float)((float)py + (float)0.5) * (float)pixel_size;
 
-    // The untransformed coordinates of the pixel in world space
-    float world_x = half_width - xoffset;
-    float world_y = half_height - yoffset;
+  // The untransformed coordinates of the pixel in world space
+  float world_x = half_width - xoffset;
+  float world_y = half_height - yoffset;
 
-    // using the camera matrix, transform the canvas point and the origin,
-    // and then compute the the ray's direction vector
-    Tuple pixel = transform.inverse() * point(world_x, world_y, -1);
-    Tuple origin = transform.inverse() * point(0, 0, 0);
-    Tuple direction = (pixel - origin).normalize();
-    
-    return Ray(origin, direction);
+  // using the camera matrix, transform the canvas point and the origin,
+  // and then compute the the ray's direction vector
+  Tuple pixel = transform.inverse() * point(world_x, world_y, -1);
+  Tuple origin = transform.inverse() * point(0, 0, 0);
+  Tuple direction = (pixel - origin).normalize();
+
+  return Ray(origin, direction);
 };
 
 Canvas Camera::render(World w) {
-    Canvas image(hsize, vsize);
+  Canvas image(hsize, vsize);
 
-    for (int x=0; x<hsize; x++) {
-        for (int y=0; y<vsize; y++) {
-            Ray r = ray_for_pixel(x, y);
-            Color c = w.color_at(r);
-            image.write_pixel(c, x, y);
-        };
+  for (int x = 0; x < hsize; x++) {
+    for (int y = 0; y < vsize; y++) {
+      Ray r = ray_for_pixel(x, y);
+      Color c = w.color_at(r);
+      image.write_pixel(c, x, y);
     };
+  };
 
-    return image;
+  return image;
 };
