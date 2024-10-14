@@ -172,4 +172,13 @@ TEST (TestAbstractPattern, PatternBothTransforms) {
     EXPECT_EQ(c, Color(0.75, 0.5, 0.25));
 }
 
+// Scenario: A gradient linearly interpolates between colors
+// p134
+TEST_F (TestPatterns_Fixture, GradientPattern) {
+    GradientPattern p = GradientPattern(white, black);
 
+    EXPECT_EQ(p.pattern_at(point(0, 0, 0)), white);
+    EXPECT_EQ(p.pattern_at(point(0.25, 0, 0)), Color(0.75, 0.75, 0.75));
+    EXPECT_EQ(p.pattern_at(point(0.5, 0, 0)), Color(0.5, 0.5, 0.5));
+    EXPECT_EQ(p.pattern_at(point(0.75, 0, 0)), Color(0.25, 0.25, 0.25));
+}

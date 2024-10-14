@@ -1,5 +1,4 @@
 #include "stripe_pattern.h"
-#include "shape.h"
 
 
 Color StripePattern::get_a() {

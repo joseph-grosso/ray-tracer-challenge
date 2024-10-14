@@ -16,6 +16,7 @@ add_library(
     # patterns folder
     patterns/pattern.cpp
     patterns/stripe_pattern.cpp
+    patterns/gradient_pattern.cpp
     # shapes folder
     shapes/shape.cpp
     shapes/sphere.cpp
