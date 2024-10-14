@@ -1,8 +1,9 @@
+#include "intersections.h"
+
 #include <stdexcept>
 #include <vector>
 
 #include "intersection.h"
-#include "intersections.h"
 #include "ray.h"
 #include "sphere.h"
 
