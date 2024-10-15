@@ -15,7 +15,6 @@ add_library(
     camera.cpp
     # patterns folder
     patterns/pattern.cpp
-    patterns/stripe_pattern.cpp
     patterns/gradient_pattern.cpp
     patterns/conical_ring_pattern.cpp
     patterns/radial_ring_pattern.cpp
