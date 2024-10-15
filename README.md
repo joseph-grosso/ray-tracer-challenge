@@ -74,10 +74,4 @@ convert flight_path.ppm flight_path.png
 - [ ] Move headers into a different folder than source code files
 - [ ] Write a function for canvas.h that directly exports image files to .png instead of only to .ppm
 - [x] Separate Color class into its own header file
-- [ ] Rename all .h files to .hpp
-
-
-# Rename all *.h to *.hpp
-for file in *.h; do
-    mv -- "$file" "${file%.h}.hpp"
-done
+- [x] Rename all .h files to .hpp
