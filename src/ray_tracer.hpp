@@ -23,6 +23,7 @@
 #include "conical_ring_pattern.hpp"
 #include "gradient_pattern.hpp"
 #include "pattern.hpp"
+#include "perlin_pattern.hpp"
 #include "radial_ring_pattern.hpp"
 #include "solid_pattern.hpp"
 #include "stripe_pattern.hpp"

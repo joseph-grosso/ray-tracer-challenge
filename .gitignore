@@ -3,3 +3,6 @@
 # Common .out file names
 *.out
 build/
+
+# TODO: Figure out a better way to use this file
+src/PerlinNoise.hpp
