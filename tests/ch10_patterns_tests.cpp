@@ -248,3 +248,11 @@ TEST_F(TestPatterns_Fixture, SolidColorPattern) {
   EXPECT_EQ(black.pattern_at(point(10, 10, 10)), Color(0, 0, 0));
   EXPECT_EQ(black.pattern_at(point(-1500.0, 0.0001, 19)), Color(0, 0, 0));
 }
+
+// Scenario: a blended pattern should return a mix of the two subpatterns
+// p139/pMe
+TEST_F(TestPatterns_Fixture, BlendedColorPattern) {
+  BlendPattern bp = BlendPattern(&white, &black);
+
+  EXPECT_EQ(bp.pattern_at(point(0, 0, 0)), Color(0.5, 0.5, 0.5));
+}

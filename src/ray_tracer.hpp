@@ -18,6 +18,7 @@
 #include "shape.hpp"
 #include "sphere.hpp"
 // patterns
+#include "blend_pattern.hpp"
 #include "checkers_pattern.hpp"
 #include "conical_ring_pattern.hpp"
 #include "gradient_pattern.hpp"
