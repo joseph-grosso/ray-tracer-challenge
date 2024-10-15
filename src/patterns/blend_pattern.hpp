@@ -20,10 +20,9 @@ class BlendPattern : public Pattern {
     this->b = b;
     this->blend_percent = blend_percent;
   };
-  BlendPattern(Pattern *a, Pattern *b, Matrix t) : BlendPattern(a, b, 0.5, t) {
-    this->a = a;
-    this->b = b;
-  };
+  BlendPattern(Pattern *a, Pattern *b, Matrix t) : BlendPattern(a, b, 0.5, t){};
+  BlendPattern(Pattern *a, Pattern *b, float blend_percent)
+      : BlendPattern(a, b, blend_percent, identity_matrix(4)){};
   BlendPattern(Pattern *a, Pattern *b)
       : BlendPattern(a, b, 0.5, identity_matrix(4)){};
   Pattern *get_a() { return a; };
