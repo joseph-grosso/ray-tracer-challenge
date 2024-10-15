@@ -1,25 +1,25 @@
 #pragma once
 
-#include "intersection.h"
-#include "intersections.h"
-#include "material.h"
-#include "matrix.h"
-#include "ray.h"
-#include "shape.h"
-#include "tuple.h"
-
 #include <cmath>
 #include <random>
 #include <string>
 #include <vector>
 
+#include "intersection.hpp"
+#include "intersections.hpp"
+#include "material.hpp"
+#include "matrix.hpp"
+#include "ray.hpp"
+#include "shape.hpp"
+#include "tuple.hpp"
+
 // Chapter 9: Planes
 class Plane : public Shape {
-private:
+ private:
   Tuple normal;
   Tuple point_inside;
 
-public:
+ public:
   // Methods
   Plane(Matrix t = identity_matrix(4), Material m = Material()) : Shape(t, m) {
     this->normal = vector(0, 1, 0);

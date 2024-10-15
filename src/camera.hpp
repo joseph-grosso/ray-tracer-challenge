@@ -1,17 +1,18 @@
 #pragma once
 
-#include "canvas.h"
-#include "color.h"
-#include "matrix.h"
-#include "ray.h"
-#include "tuple.h"
-#include "world.h"
 #include <string>
 #include <vector>
 
+#include "canvas.hpp"
+#include "color.hpp"
+#include "matrix.hpp"
+#include "ray.hpp"
+#include "tuple.hpp"
+#include "world.hpp"
+
 // Chapter 7: Making a Scene
 class Camera {
-public:
+ public:
   // Attributes
   float half_width;
   float half_height;

@@ -1,4 +1,4 @@
-#include "tuple.h"
+#include "tuple.hpp"
 
 // Chapter 1: Tuples, Vectors and Points
 Tuple::Tuple(float x, float y, float z, float w) {

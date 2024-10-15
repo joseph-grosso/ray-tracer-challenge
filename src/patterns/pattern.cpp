@@ -1,6 +1,6 @@
 #include "pattern.hpp"
 
-#include "shape.h"
+#include "shape.hpp"
 
 // Get the pattern at a point using the normal of a shape
 Color Pattern::pattern_at_shape(Shape *object, Tuple point_) {

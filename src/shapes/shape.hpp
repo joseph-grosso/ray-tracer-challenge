@@ -1,22 +1,22 @@
 #pragma once
 
-#include "intersections.h"
-#include "material.h"
-#include "matrix.h"
-#include "ray.h"
-#include "tuple.h"
-
 #include <random>
 #include <string>
 #include <vector>
 
+#include "intersections.hpp"
+#include "material.hpp"
+#include "matrix.hpp"
+#include "ray.hpp"
+#include "tuple.hpp"
+
 // Chapter 9: Shapes and Planes
 class Shape {
-protected:
+ protected:
   Matrix transformation;
   Material material;
 
-public:
+ public:
   // Methods
   Shape(Matrix t = identity_matrix(4), Material m = Material());
   Shape(Matrix t) : Shape(t, Material()){};

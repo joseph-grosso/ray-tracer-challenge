@@ -1,5 +1,6 @@
-#include "material.h"
-#include "shape.h"
+#include "material.hpp"
+
+#include "shape.hpp"
 
 // Chapter 6: Lights and Shading
 Material::Material(Pattern *pattern, Color color, float ambient, float diffuse,

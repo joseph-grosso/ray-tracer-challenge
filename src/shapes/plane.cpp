@@ -1,5 +1,6 @@
-#include "plane.h"
-#include "intersection.h"
+#include "plane.hpp"
+
+#include "intersection.hpp"
 
 // Chapter 9: Planes
 Tuple Plane::local_normal_at(float x, float y, float z) {
@@ -12,7 +13,7 @@ Tuple Plane::local_normal_at(Tuple p) { return normal; };
 // rather than just the sphere class.
 Intersections Plane::local_intersect(Ray r) {
   if (std::abs(r.get_direction().y) < 0.0001) {
-    return Intersections(); // no intersections
+    return Intersections();  // no intersections
   };
   float t = -(r.get_origin().y) / r.get_direction().y;
   Intersection i = Intersection(t, this);

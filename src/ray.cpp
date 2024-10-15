@@ -1,10 +1,12 @@
-#include "ray.h"
-#include "matrix.h"
-#include "tuple.h"
+#include "ray.hpp"
+
 #include <cmath>
 #include <stdexcept>
 #include <string>
 #include <vector>
+
+#include "matrix.hpp"
+#include "tuple.hpp"
 
 // Chapter 5: Rays
 Ray::Ray(Tuple origin, Tuple direction) {

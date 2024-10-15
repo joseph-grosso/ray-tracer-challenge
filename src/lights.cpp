@@ -1,4 +1,4 @@
-#include "lights.h"
+#include "lights.hpp"
 
 // Chapter 6: Lights and Shading
 PointLight::PointLight(Tuple position, Color intensity) {

@@ -1,7 +1,7 @@
 #include <cmath>
 
 #include "gtest/gtest.h"
-#include "tuple.h"
+#include "tuple.hpp"
 
 // Scenario: A tuple with w=1.0 is a point
 // page 4

@@ -1,14 +1,15 @@
-#include "matrix.h"
-#include "tuple.h"
+#include "matrix.hpp"
+
 #include <numeric>
 #include <vector>
+
+#include "tuple.hpp"
 // TODO: remove
+#include <algorithm>
 #include <iostream>
 #include <ostream>
-#include <string>
-
-#include <algorithm>
 #include <stdexcept>
+#include <string>
 
 // Chapter 3: Matrix Math
 Matrix::Matrix(unsigned int rows, unsigned int columns,

@@ -4,15 +4,15 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "intersection.h"
-#include "intersections.h"
-#include "lights.h"
-#include "material.h"
-#include "matrix.h"
-#include "ray.h"
-#include "sphere.h"
-#include "transform.h"
-#include "tuple.h"
+#include "intersection.hpp"
+#include "intersections.hpp"
+#include "lights.hpp"
+#include "material.hpp"
+#include "matrix.hpp"
+#include "ray.hpp"
+#include "sphere.hpp"
+#include "transform.hpp"
+#include "tuple.hpp"
 
 // Scenario: Normal of a sphere at the X axis
 // p78

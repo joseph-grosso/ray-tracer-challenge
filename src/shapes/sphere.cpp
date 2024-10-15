@@ -1,4 +1,4 @@
-#include "sphere.h"
+#include "sphere.hpp"
 
 Tuple Sphere::get_center() { return center; };
 

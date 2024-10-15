@@ -1,11 +1,11 @@
-#include "intersections.h"
+#include "intersections.hpp"
 
 #include <stdexcept>
 #include <vector>
 
-#include "intersection.h"
-#include "ray.h"
-#include "sphere.h"
+#include "intersection.hpp"
+#include "ray.hpp"
+#include "sphere.hpp"
 
 Intersections::Intersections(std::vector<Intersection> data) {
   this->data = data;

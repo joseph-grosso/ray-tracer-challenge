@@ -6,9 +6,9 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "matrix.h"
-#include "transform.h"
-#include "tuple.h"
+#include "matrix.hpp"
+#include "transform.hpp"
+#include "tuple.hpp"
 
 // Scenario: Translating a Point
 // p45

@@ -5,8 +5,8 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "matrix.h"
-#include "tuple.h"
+#include "matrix.hpp"
+#include "tuple.hpp"
 
 // // TODO: Remove once you're done debugging tests.
 // template <typename S>

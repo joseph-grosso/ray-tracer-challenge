@@ -1,8 +1,8 @@
 #include <string>
 
-#include "canvas.h"
+#include "canvas.hpp"
 #include "gtest/gtest.h"
-#include "tuple.h"
+#include "tuple.hpp"
 
 // Scenario: Colors are (red, green, blue) tuples
 // p16

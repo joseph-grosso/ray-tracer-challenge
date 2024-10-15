@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ray_tracer.h"
+#include "ray_tracer.hpp"
 
 // Scenario: Creating a world
 // p92

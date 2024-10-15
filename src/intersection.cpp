@@ -1,9 +1,10 @@
+#include "intersection.hpp"
+
 #include <stdexcept>
 #include <vector>
 
-#include "intersection.h"
-#include "ray.h"
-#include "sphere.h"
+#include "ray.hpp"
+#include "sphere.hpp"
 
 Intersection::Intersection() { this->empty = true; };
 

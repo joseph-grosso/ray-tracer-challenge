@@ -1,12 +1,13 @@
 #pragma once
 
-#include "tuple.h"
 #include <vector>
+
+#include "tuple.hpp"
 
 class Shape;
 // Chapter 7: Building a World
 class Computation {
-public:
+ public:
   // Attributes
   float t;
   Shape *object;

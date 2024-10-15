@@ -1,14 +1,14 @@
-#include "intersections.h"
-#include "material.h"
-#include "matrix.h"
-#include "ray.h"
-#include "tuple.h"
-
-#include "shape.h"
+#include "shape.hpp"
 
 #include <random>
 #include <string>
 #include <vector>
+
+#include "intersections.hpp"
+#include "material.hpp"
+#include "matrix.hpp"
+#include "ray.hpp"
+#include "tuple.hpp"
 
 // Chapter 9: Shapes and Planes
 Shape::Shape(Matrix t, Material m) {

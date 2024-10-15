@@ -1,10 +1,12 @@
-#include "canvas.h"
-#include "tuple.h"
+#include "canvas.hpp"
+
 #include <cmath>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include "tuple.hpp"
 
 // Chapter 1: Tuples, Vectors and Points
 Canvas::Canvas(unsigned int width, unsigned int height) {

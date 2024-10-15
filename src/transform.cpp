@@ -1,10 +1,12 @@
-#include "transform.h"
-#include "matrix.h"
-#include "tuple.h"
+#include "transform.hpp"
+
 #include <cmath>
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include "matrix.hpp"
+#include "tuple.hpp"
 
 // Chapter 4: Matrix Transformations
 // Transformations

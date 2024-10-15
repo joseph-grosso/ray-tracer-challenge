@@ -1,23 +1,23 @@
 #pragma once
 
-#include "intersection.h"
-#include "intersections.h"
-#include "material.h"
-#include "matrix.h"
-#include "ray.h"
-#include "shape.h"
-#include "tuple.h"
-
 #include <string>
 #include <vector>
 
+#include "intersection.hpp"
+#include "intersections.hpp"
+#include "material.hpp"
+#include "matrix.hpp"
+#include "ray.hpp"
+#include "shape.hpp"
+#include "tuple.hpp"
+
 // Chapter 5: Rays
 class Sphere : public Shape {
-private:
+ private:
   Tuple center;
   float radius;
 
-public:
+ public:
   // Methods
   Sphere(Matrix t = identity_matrix(4), Material m = Material()) : Shape(t, m) {
     this->center = point(0, 0, 0);

@@ -1,16 +1,17 @@
-#include "canvas.h"
-#include "color.h"
-#include "matrix.h"
-#include "ray.h"
-#include "tuple.h"
-#include "world.h"
+#include "camera.hpp"
+
 #include <math.h>
+
+#include <iostream>
 #include <string>
 #include <vector>
 
-#include <iostream>
-
-#include "camera.h"
+#include "canvas.hpp"
+#include "color.hpp"
+#include "matrix.hpp"
+#include "ray.hpp"
+#include "tuple.hpp"
+#include "world.hpp"
 
 Camera::Camera(unsigned int hsize, unsigned int vsize, float field_of_view) {
   // Computed values
@@ -34,7 +35,6 @@ Camera::Camera(unsigned int hsize, unsigned int vsize, float field_of_view) {
 };
 
 Ray Camera::ray_for_pixel(int px, int py) {
-
   // The offset from the edge of the canvas to the pixel's center
   float xoffset = (float)((float)px + (float)0.5) * (float)pixel_size;
   float yoffset = (float)((float)py + (float)0.5) * (float)pixel_size;

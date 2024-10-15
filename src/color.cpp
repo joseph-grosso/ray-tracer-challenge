@@ -1,4 +1,4 @@
-#include "color.h"
+#include "color.hpp"
 
 // Chapter 2: Colors and Canvas
 Color::Color(float red, float green, float blue) {

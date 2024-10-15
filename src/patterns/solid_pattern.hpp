@@ -1,9 +1,9 @@
 #pragma once
 
-#include "color.h"
-#include "matrix.h"
+#include "color.hpp"
+#include "matrix.hpp"
 #include "pattern.hpp"
-#include "tuple.h"
+#include "tuple.hpp"
 
 class SolidPattern : public Pattern {
  private:

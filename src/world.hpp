@@ -1,23 +1,24 @@
 #pragma once
 
-#include "color.h"
-#include "computation.h"
-#include "intersection.h"
-#include "intersections.h"
-#include "lights.h"
-#include "material.h"
-#include "matrix.h"
-#include "ray.h"
-#include "shape.h"
-#include "transform.h"
-#include "tuple.h"
-
 #include <bits/stdc++.h>
+
 #include <iostream>
 #include <vector>
 
+#include "color.hpp"
+#include "computation.hpp"
+#include "intersection.hpp"
+#include "intersections.hpp"
+#include "lights.hpp"
+#include "material.hpp"
+#include "matrix.hpp"
+#include "ray.hpp"
+#include "shape.hpp"
+#include "transform.hpp"
+#include "tuple.hpp"
+
 class World {
-public:
+ public:
   std::vector<Shape *> objects;
   std::vector<PointLight> lights;
   World(std::vector<Shape *> objects = std::vector<Shape *>{},

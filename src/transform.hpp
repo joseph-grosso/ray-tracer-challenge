@@ -1,9 +1,10 @@
 #pragma once
 
-#include "matrix.h"
-#include "tuple.h"
 #include <string>
 #include <vector>
+
+#include "matrix.hpp"
+#include "tuple.hpp"
 
 // Chapter 4: Matrix Transformations
 // Transformations

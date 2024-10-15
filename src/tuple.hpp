@@ -9,7 +9,7 @@
 bool equalByEpsilon(float a, float b, float epsilon = 0.001);
 
 class Tuple {
-public:
+ public:
   // Attributes
   float x;
   float y;

@@ -1,11 +1,12 @@
 #pragma once
 
-#include "intersection.h"
-#include "ray.h"
 #include <vector>
 
+#include "intersection.hpp"
+#include "ray.hpp"
+
 class Intersections {
-public:
+ public:
   Intersections() : Intersections(std::vector<Intersection>{}){};
   Intersections(std::vector<Intersection>);
   std::vector<Intersection> data;

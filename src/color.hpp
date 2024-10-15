@@ -4,11 +4,11 @@
 #include <stdexcept>
 #include <string>
 // TODO: is this necessary?
-#include "tuple.h"
+#include "tuple.hpp"
 
 // Chapter 2: Colors
 class Color {
-public:
+ public:
   // Attributes
   float red, green, blue;
   // Methods

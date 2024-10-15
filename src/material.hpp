@@ -2,10 +2,10 @@
 
 #include <cmath>
 
-#include "color.h"
-#include "lights.h"
+#include "color.hpp"
+#include "lights.hpp"
 #include "pattern.hpp"
-#include "tuple.h"
+#include "tuple.hpp"
 
 class Shape;
 

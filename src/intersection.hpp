@@ -1,16 +1,17 @@
 #pragma once
 
-#include "computation.h"
-#include "ray.h"
 #include <vector>
+
+#include "computation.hpp"
+#include "ray.hpp"
 
 class Shape;
 
 class Intersection {
-private:
+ private:
   bool empty;
 
-public:
+ public:
   Intersection();
   Intersection(float t, Shape *const obj);
   float t;

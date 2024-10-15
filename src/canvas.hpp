@@ -1,13 +1,14 @@
 #pragma once
 
-#include "color.h"
-#include "tuple.h"
 #include <string>
 #include <vector>
 
+#include "color.hpp"
+#include "tuple.hpp"
+
 // Chapter 2: Colors and Canvas
 class Canvas {
-private:
+ private:
   // Attributes
   unsigned int width, height;
   std::vector<std::vector<Color>> _canvas;
@@ -16,7 +17,7 @@ private:
   std::string ppm_content();
   unsigned int scale_color(float color_value);
 
-public:
+ public:
   // Methods
   Canvas(unsigned int width, unsigned int height);
   unsigned int get_width();
