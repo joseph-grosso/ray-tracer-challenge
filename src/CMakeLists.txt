@@ -17,7 +17,6 @@ add_library(
     patterns/pattern.cpp
     patterns/gradient_pattern.cpp
     patterns/conical_ring_pattern.cpp
-    patterns/radial_ring_pattern.cpp
     patterns/checkers_pattern.cpp
     # shapes folder
     shapes/shape.cpp
