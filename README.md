@@ -71,6 +71,7 @@ convert flight_path.ppm flight_path.png
 
 - [x] Move common Shape functionality to a separate file
 - [x] Move Shape objects code into its own folder
+- [ ] Fix the configuration of the CMake files for the `patterns` and `shapes` dirs such that they don't rely on the parent dirs configuration
 - [ ] Move headers into a different folder than source code files
 - [ ] Write a function for canvas.h that directly exports image files to .png instead of only to .ppm
 - [x] Separate Color class into its own header file
