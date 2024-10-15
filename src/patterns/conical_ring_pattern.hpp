@@ -9,23 +9,21 @@
 
 class ConicalRingPattern : public Pattern {
  private:
-  Color a;
-  Color b;
+  Pattern* a;
+  Pattern* b;
 
  public:
-  ConicalRingPattern(Color a, Color b, Matrix t) : Pattern(t) {
+  ConicalRingPattern(Pattern* a, Pattern* b, Matrix t) : Pattern(t) {
     this->a = a;
     this->b = b;
   };
-  ConicalRingPattern(Color a, Color b)
+  ConicalRingPattern(Pattern* a, Pattern* b)
       : ConicalRingPattern(a, b, identity_matrix(4)){};
-  Color get_a() { return a; };
-  Color get_b() { return b; };
+  Pattern* get_a() { return a; };
+  Pattern* get_b() { return b; };
   Color pattern_at(Tuple p) {
-    return (int)std::floor(std::sqrt(std::pow(p.x, 2) + std::pow(p.z, 2))) %
-                       2 ==
-                   0
-               ? a
-               : b;
+    int orig_distance =
+        (int)std::floor(std::sqrt(std::pow(p.x, 2) + std::pow(p.z, 2)));
+    return orig_distance % 2 == 0 ? a->pattern_at(p) : b->pattern_at(p);
   };
 };

@@ -9,16 +9,20 @@
 
 class StripePattern : public Pattern {
  private:
-  Color a;
-  Color b;
+  Pattern* a;
+  Pattern* b;
 
  public:
-  StripePattern(Color a, Color b, Matrix t) : Pattern(t) {
+  StripePattern(Pattern* a, Pattern* b, Matrix t) : Pattern(t) {
     this->a = a;
     this->b = b;
   };
-  StripePattern(Color a, Color b) : StripePattern(a, b, identity_matrix(4)){};
-  Color get_a() { return a; };
-  Color get_b() { return b; };
-  Color pattern_at(Tuple p) { return ((int)std::floor(p.x) % 2 == 0) ? a : b; };
+  StripePattern(Pattern* a, Pattern* b)
+      : StripePattern(a, b, identity_matrix(4)){};
+  Pattern* get_a() { return a; };
+  Pattern* get_b() { return b; };
+  Color pattern_at(Tuple p) {
+    return ((int)std::floor(p.x) % 2 == 0) ? (*a).pattern_at(p)
+                                           : (*b).pattern_at(p);
+  };
 };

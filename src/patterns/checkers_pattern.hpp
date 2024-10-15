@@ -9,20 +9,20 @@
 
 class CheckersPattern : public Pattern {
  private:
-  Color a;
-  Color b;
+  Pattern* a;
+  Pattern* b;
 
  public:
-  CheckersPattern(Color a, Color b, Matrix t) : Pattern(t) {
+  CheckersPattern(Pattern* a, Pattern* b, Matrix t) : Pattern(t) {
     this->a = a;
     this->b = b;
   };
-  CheckersPattern(Color a, Color b)
+  CheckersPattern(Pattern* a, Pattern* b)
       : CheckersPattern(a, b, identity_matrix(4)){};
-  Color get_a() { return a; };
-  Color get_b() { return b; };
+  Pattern* get_a() { return a; };
+  Pattern* get_b() { return b; };
   Color pattern_at(Tuple p) {
     int abs_distances = (int)(std::abs(p.x) + std::abs(p.y) + std::abs(p.z));
-    return abs_distances % 2 == 0 ? a : b;
+    return abs_distances % 2 == 0 ? a->pattern_at(p) : b->pattern_at(p);
   };
 };

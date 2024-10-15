@@ -9,22 +9,25 @@
 
 class GradientPattern : public Pattern {
  private:
-  Color a;
-  Color b;
+  Pattern* a;
+  Pattern* b;
 
  public:
-  GradientPattern(Color a, Color b, Matrix t) : Pattern(t) {
+  GradientPattern(Pattern* a, Pattern* b, Matrix t) : Pattern(t) {
     this->a = a;
     this->b = b;
   };
-  GradientPattern(Color a, Color b)
+  GradientPattern(Pattern* a, Pattern* b)
       : GradientPattern(a, b, identity_matrix(4)){};
-  Color get_a() { return a; };
-  Color get_b() { return b; };
+  Pattern* get_a() { return a; };
+  Pattern* get_b() { return b; };
   Color pattern_at(Tuple p) {
-    Color distance = b - a;
+    Color a_col = a->pattern_at(p);
+    Color b_col = b->pattern_at(p);
+
+    Color distance = b_col - a_col;
     float fraction = p.x - floor(p.x);
 
-    return a + (distance * fraction);
+    return a_col + (distance * fraction);
   };
 };

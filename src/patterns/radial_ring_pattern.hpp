@@ -9,25 +9,21 @@
 
 class RadialRingPattern : public Pattern {
  private:
-  Color a;
-  Color b;
+  Pattern* a;
+  Pattern* b;
 
  public:
-  RadialRingPattern(Color a, Color b, Matrix t) : Pattern(t) {
+  RadialRingPattern(Pattern* a, Pattern* b, Matrix t) : Pattern(t) {
     this->a = a;
     this->b = b;
   };
-  RadialRingPattern(Color a, Color b)
+  RadialRingPattern(Pattern* a, Pattern* b)
       : RadialRingPattern(a, b, identity_matrix(4)){};
-  Color get_a() { return a; };
-  Color get_b() { return b; };
+  Pattern* get_a() { return a; };
+  Pattern* get_b() { return b; };
   Color pattern_at(Tuple p) {
-    return (int)std::floor(
-               std::sqrt(std::pow(p.x, 2) +
-                         std::sqrt(std::pow(p.y, 2) + std::pow(p.z, 2)))) %
-                       2 ==
-                   0
-               ? a
-               : b;
+    int origin_distance = (int)std::floor(std::sqrt(
+        std::pow(p.x, 2) + std::sqrt(std::pow(p.y, 2) + std::pow(p.z, 2))));
+    return origin_distance % 2 == 0 ? a->pattern_at(p) : b->pattern_at(p);
   };
 };
