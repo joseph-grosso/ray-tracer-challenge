@@ -4,4 +4,4 @@ repos:
     rev: master
     hooks:
       - id: clang-format
-        args: [--style=Google]
+        args: [--style=Google, -i]

@@ -23,4 +23,5 @@
 #include "gradient_pattern.h"
 #include "pattern.h"
 #include "radial_ring_pattern.h"
+#include "solid_pattern.h"
 #include "stripe_pattern.h"
