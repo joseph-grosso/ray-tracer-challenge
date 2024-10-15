@@ -15,7 +15,6 @@ add_library(
     camera.cpp
     # patterns folder
     patterns/pattern.cpp
-    patterns/conical_ring_pattern.cpp
     patterns/checkers_pattern.cpp
     # shapes folder
     shapes/shape.cpp
