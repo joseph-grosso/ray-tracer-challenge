@@ -24,6 +24,8 @@ class RadialRingPattern : public Pattern {
   Color pattern_at(Tuple p) {
     int origin_distance = (int)std::floor(std::sqrt(
         std::pow(p.x, 2) + std::sqrt(std::pow(p.y, 2) + std::pow(p.z, 2))));
-    return origin_distance % 2 == 0 ? a->pattern_at(p) : b->pattern_at(p);
+    return origin_distance % 2 == 0
+               ? a->pattern_at(a->get_transform().inverse() * p)
+               : b->pattern_at(b->get_transform().inverse() * p);
   };
 };
