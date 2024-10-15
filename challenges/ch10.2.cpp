@@ -9,8 +9,7 @@ using namespace std::chrono;
 
 // More interesting patterns
 int main() {
-  // TODO: uncomment
-
+  // Patterns
   SolidPattern white = SolidPattern(Color(1, 1, 1));
   SolidPattern black = SolidPattern(Color(0, 0, 0));
   SolidPattern maroon = SolidPattern(Color(0.5, 0, 0));
