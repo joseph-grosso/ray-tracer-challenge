@@ -2,7 +2,7 @@
 
 #include "color.h"
 #include "matrix.h"
-#include "pattern.h"
+#include "pattern.hpp"
 #include "tuple.h"
 
 class SolidPattern : public Pattern {

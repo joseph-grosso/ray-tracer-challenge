@@ -1,16 +1,16 @@
 #pragma once
 
+#include <cmath>
+
 #include "color.h"
 #include "lights.h"
-#include "pattern.h"
+#include "pattern.hpp"
 #include "tuple.h"
-
-#include <cmath>
 
 class Shape;
 
 class Material {
-public:
+ public:
   Material(Pattern *pattern = NULL, Color color = Color(1, 1, 1),
            float ambient = 0.1, float diffuse = 0.9, float specular = 0.9,
            float shininess = 200.0);
