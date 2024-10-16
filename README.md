@@ -76,4 +76,5 @@ convert flight_path.ppm flight_path.png
 - [ ] Write a function for canvas.h that directly exports image files to .png instead of only to .ppm
 - [x] Separate Color class into its own header file
 - [x] Rename all .h files to .hpp
-- [ ] Fix download location of the PerlinNoise file 
+- [ ] Fix download location of the PerlinNoise file
+- [ ] Implement the "Pattern Permuter" Perlin Noise pattern
