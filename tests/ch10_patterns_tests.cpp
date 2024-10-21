@@ -10,7 +10,7 @@
 #include "ray_tracer.hpp"
 
 // Fixture: Set up the material and positions
-// p86
+// p128
 class TestPatterns_Fixture : public testing::Test {
  protected:
   SolidPattern black = SolidPattern(Color(0, 0, 0));
