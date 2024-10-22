@@ -74,5 +74,9 @@ Color World::reflected_color(Computation comp) {
   if (equalByEpsilon(comp.object->get_material().reflective, 0)) {
     return Color(0, 0, 0);
   };
-  return Color(1, 1, 1);
+
+  Ray reflected_ray = Ray(comp.over_point, comp.reflectv);
+  Color col = color_at(reflected_ray);
+
+  return col * comp.object->get_material().reflective;
 };
