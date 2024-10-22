@@ -19,27 +19,33 @@ TEST(TestReflection, DefaultReflectivity) {
   EXPECT_EQ(m.reflective, (float)0.0);
 }
 
-// // Scenario: Precomputing the reflection vector
-// // p143
-// TEST(TestReflection, ComputeReflectionVector) {
-//   Plane p = Plane();
-//   Ray r = Ray(point(0, 1, -1), vector(0, -std::sqrt(2) / 2, std::sqrt(2) /
-//   2)); Intersection i = Intersection(std::sqrt(2), &p);
+// Scenario: Precomputing the reflection vector
+// p143
+TEST(TestReflection, ComputeReflectionVector) {
+  Plane p = Plane();
+  Ray r = Ray(point(0, 1, -1), vector(0, -std::sqrt(2) / 2, std::sqrt(2) / 2));
+  Intersection i = Intersection(std::sqrt(2), &p);
 
-//   Computation comps = i.prepare_computations(r);
+  Computation comps = i.prepare_computations(r);
 
-//   EXPECT_EQ(comps.reflectv, vector(0, std::sqrt(2) / 2, std::sqrt(2) / 2));
-// }
+  EXPECT_EQ(comps.reflectv, vector(0, std::sqrt(2) / 2, std::sqrt(2) / 2));
+}
 
-// // Scenario: The reflected color for a nonreflective material
-// // p144
-// TEST(TestReflection, NonreflectiveMaterialColor) {
-//   World w = default_world();
-//   Ray r = Ray(point(0, 0, 0), vector(0, 0, 1));
-//   w.objects[1]->set_material(Material());
+// Scenario: The reflected color for a nonreflective material
+// p144
+TEST(TestReflection, NonreflectiveMaterialColor) {
+  World w = default_world();
+  Ray r = Ray(point(0, 0, 0), vector(0, 0, 1));
+  Material m = Material();
+  m.ambient = 1;
+  w.objects[1]->set_material(m);
+  Intersection i = Intersection(1, w.objects[1]);
 
-//   EXPECT_EQ(m.get_reflective(), (float)0.0);
-// }
+  Computation comps = i.prepare_computations(r);
+  Color c = w.reflected_color(comps);
+
+  EXPECT_EQ(c, Color(0, 0, 0));
+}
 
 // // Scenario: Strike a reflective surface
 // // p144

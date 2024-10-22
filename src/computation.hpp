@@ -15,6 +15,8 @@ class Computation {
   Tuple over_point;
   Tuple eyev;
   Tuple normalv;
+  Tuple reflectv;
   bool inside;
-  Computation(float t, Shape *object, Tuple point, Tuple eyev, Tuple normalv);
+  Computation(float t, Shape *object, Tuple point, Tuple eyev, Tuple normalv,
+              Tuple reflectv);
 };

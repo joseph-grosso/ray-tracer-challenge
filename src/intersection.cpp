@@ -27,5 +27,7 @@ Computation Intersection::prepare_computations(Ray r) {
   Tuple eyev = -r.get_direction();
   Tuple normalv = (*object).normal_at(point);
 
-  return Computation(t, object, point, eyev, normalv);
+  Tuple reflectv = r.get_direction().reflect(normalv);
+
+  return Computation(t, object, point, eyev, normalv, reflectv);
 };

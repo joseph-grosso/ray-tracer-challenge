@@ -2,11 +2,12 @@
 
 // Chapter 7: Building a World
 Computation::Computation(float t, Shape *object, Tuple point, Tuple eyev,
-                         Tuple normalv) {
+                         Tuple normalv, Tuple reflectv) {
   this->t = t;
   this->object = object;
   this->point = point;
   this->eyev = eyev;
+  this->reflectv = reflectv;
   if (normalv.dot(eyev) < 0) {
     this->inside = true;
     this->normalv = -normalv;

@@ -69,3 +69,10 @@ Color World::color_at(Ray r) {
 
   return shade_hit(comp);
 };
+
+Color World::reflected_color(Computation comp) {
+  if (equalByEpsilon(comp.object->get_material().reflective, 0)) {
+    return Color(0, 0, 0);
+  };
+  return Color(1, 1, 1);
+};
