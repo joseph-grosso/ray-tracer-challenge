@@ -4,13 +4,14 @@
 
 // Chapter 6: Lights and Shading
 Material::Material(Pattern *pattern, Color color, float ambient, float diffuse,
-                   float specular, float shininess) {
+                   float specular, float shininess, float reflective) {
   this->pattern = pattern;
   this->color = color;
   this->ambient = ambient;
   this->diffuse = diffuse;
   this->specular = specular;
   this->shininess = shininess;
+  this->reflective = reflective;
 };
 
 std::string Material::to_string() {
@@ -18,7 +19,8 @@ std::string Material::to_string() {
          ", Ambient=" + std::to_string(ambient) +
          ", Diffuse=" + std::to_string(diffuse) +
          ", Specular=" + std::to_string(specular) +
-         ", Shininess=" + std::to_string(shininess) + ")";
+         ", Shininess=" + std::to_string(shininess) +
+         ", Reflective=" + std::to_string(reflective) + ")";
 };
 
 Color Material::lighting(Shape *object, PointLight light, Tuple position,
@@ -68,5 +70,7 @@ bool operator==(Material lhs, Material rhs) {
           equalByEpsilon(lhs.ambient, rhs.ambient) &&
           equalByEpsilon(lhs.diffuse, rhs.diffuse) &&
           equalByEpsilon(lhs.specular, rhs.specular) &&
-          equalByEpsilon(lhs.shininess, rhs.shininess));
+          equalByEpsilon(lhs.shininess, rhs.shininess) &&
+          lhs.pattern == rhs.pattern &&
+          equalByEpsilon(lhs.reflective, rhs.reflective));
 };
