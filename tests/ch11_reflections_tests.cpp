@@ -70,27 +70,27 @@ TEST(TestReflection, ReflectiveMaterialColor) {
   EXPECT_EQ(col, Color(0.19032, 0.2379, 0.14274));
 }
 
-// // Scenario: shade_hit function with a reflective material
-// // p145
-// TEST(TestReflection, ShadeHitWithReflection) {
-//   World w = default_world();
-//   Plane p = Plane(translation_matrix(0, -1, 0),
-//                   Material(Color(1, 1, 1),
-//                            0.1F,    // ambient
-//                            0.9F,    // diffuse
-//                            0.9F,    // specular
-//                            200.0F,  // shininess
-//                            0.5F     // reflectiveness - Non-default value
-//                            ));
-//   w.objects.push_back(&p);
-//   Ray r = Ray(point(0, 0, -3), vector(0, -std::sqrt(2) / 2, std::sqrt(2) /
-//   2)); Intersection i = Intersection(std::sqrt(2), &p);
+// Scenario: shade_hit function with a reflective material
+// p145
+TEST(TestReflection, ShadeHitWithReflection) {
+  World w = default_world();
+  Plane p = Plane(translation_matrix(0, -1, 0),
+                  Material(Color(1, 1, 1),
+                           0.1F,    // ambient
+                           0.9F,    // diffuse
+                           0.9F,    // specular
+                           200.0F,  // shininess
+                           0.5F     // reflectiveness - Non-default value
+                           ));
+  w.objects.push_back(&p);
+  Ray r = Ray(point(0, 0, -3), vector(0, -std::sqrt(2) / 2, std::sqrt(2) / 2));
+  Intersection i = Intersection(std::sqrt(2), &p);
 
-//   Computation comps = i.prepare_computations(r);
-//   Color col = w.shade_hit(comps);
+  Computation comps = i.prepare_computations(r);
+  Color col = w.shade_hit(comps);
 
-//   EXPECT_EQ(col, Color(0.87677, 0.92436, 0.82918));
-// }
+  EXPECT_EQ(col, Color(0.87677, 0.92436, 0.82918));
+}
 
 // // Scenario: color_at function with mutually reflective surfaces
 // // p146
