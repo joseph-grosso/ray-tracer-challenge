@@ -37,3 +37,5 @@ class Sphere : public Shape {
 
 bool operator==(Sphere lhs, Sphere rhs);
 bool operator!=(Sphere lhs, Sphere rhs);
+
+Sphere glass_sphere();

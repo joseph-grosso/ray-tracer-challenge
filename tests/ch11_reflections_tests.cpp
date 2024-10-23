@@ -145,3 +145,12 @@ TEST(TestTransparencyAndRefraction, DefaultTranspAndRI) {
   EXPECT_TRUE(equalByEpsilon(m.transparency, (float)0.0));
   EXPECT_TRUE(equalByEpsilon(m.refractive_index, (float)1.0));
 }
+
+// Scenario: A helper for producing a sphere with a glassy material
+// p151
+TEST(TestTransparencyAndRefraction, GlassSphereHelper) {
+  Sphere m = glass_sphere();
+
+  EXPECT_TRUE(equalByEpsilon(m.get_material().transparency, (float)1.0));
+  EXPECT_TRUE(equalByEpsilon(m.get_material().refractive_index, (float)1.5));
+}
