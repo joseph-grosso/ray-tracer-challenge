@@ -4,7 +4,8 @@
 
 // Chapter 6: Lights and Shading
 Material::Material(Pattern *pattern, Color color, float ambient, float diffuse,
-                   float specular, float shininess, float reflective) {
+                   float specular, float shininess, float reflective,
+                   float transparency, float refractive_index) {
   this->pattern = pattern;
   this->color = color;
   this->ambient = ambient;
@@ -12,6 +13,8 @@ Material::Material(Pattern *pattern, Color color, float ambient, float diffuse,
   this->specular = specular;
   this->shininess = shininess;
   this->reflective = reflective;
+  this->transparency = transparency;
+  this->refractive_index = refractive_index;
 };
 
 std::string Material::to_string() {
@@ -20,7 +23,9 @@ std::string Material::to_string() {
          ", Diffuse=" + std::to_string(diffuse) +
          ", Specular=" + std::to_string(specular) +
          ", Shininess=" + std::to_string(shininess) +
-         ", Reflective=" + std::to_string(reflective) + ")";
+         ", Reflective=" + std::to_string(reflective) +
+         ", Transparency=" + std::to_string(transparency) +
+         ", Refractive Index=" + std::to_string(refractive_index) + ")";
 };
 
 Color Material::lighting(Shape *object, PointLight light, Tuple position,

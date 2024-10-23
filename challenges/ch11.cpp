@@ -36,9 +36,9 @@ int main() {
                       Material(&floor_pat, Color(1, 0.9, 0.9),  // color
                                0.1,                             // ambient
                                0.5,                             // diffuse
-                               0,                               // specular
-                               0,                               // shininess
-                               0.5));
+                               0.0,                             // specular
+                               0.0,                             // shininess
+                               0.5, 0.0, 1.0));
 
   // Middle Sphere
   Sphere middle = Sphere();
@@ -48,8 +48,7 @@ int main() {
                                0.7,                      // diffuse
                                0.3,                      // specular
                                200.0,                    // shininess
-                               0.25                      // shininess
-                               ));
+                               0.25));
 
   // Right Sphere
   Sphere right = Sphere();
@@ -77,7 +76,7 @@ int main() {
   PointLight light = PointLight(point(10, 10, -10), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 3;
+  int ratio = 1;
   unsigned int x = ratio * 128;
   unsigned int y = ratio * 90;
 

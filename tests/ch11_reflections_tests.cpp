@@ -136,3 +136,12 @@ TEST(TestReflection, LimitRecursion) {
 
   EXPECT_EQ(col, Color(0, 0, 0));
 }
+
+// Scenario: Transarency and Refractive Index for the default material
+// p150
+TEST(TestTransparencyAndRefraction, DefaultTranspAndRI) {
+  Material m = Material();
+
+  EXPECT_TRUE(equalByEpsilon(m.transparency, (float)0.0));
+  EXPECT_TRUE(equalByEpsilon(m.refractive_index, (float)1.0));
+}
