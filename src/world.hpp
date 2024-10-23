@@ -28,9 +28,9 @@ class World {
   World(std::vector<Shape *> s_list, PointLight l)
       : World(s_list, std::vector<PointLight>{1, l}){};
   Intersections intersect_world(Ray r);
-  Color shade_hit(Computation comp);
-  Color color_at(Ray r);
-  Color reflected_color(Computation comp);
+  Color shade_hit(Computation comp, int remaining = 5);
+  Color color_at(Ray r, int remaining = 5);
+  Color reflected_color(Computation comp, int remaining = 5);
   bool is_shadowed(Tuple p);
 };
 

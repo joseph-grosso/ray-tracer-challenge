@@ -20,13 +20,13 @@ Intersections World::intersect_world(Ray r) {
   return Intersections(initial_intersections);
 };
 
-Color World::shade_hit(Computation comp) {
+Color World::shade_hit(Computation comp, int remaining) {
   bool shadowed = is_shadowed(comp.over_point);
   Color surface = (*comp.object)
                       .get_material()
                       .lighting(comp.object, lights[0], comp.over_point,
                                 comp.eyev, comp.normalv, shadowed);
-  Color reflected = reflected_color(comp);
+  Color reflected = reflected_color(comp, remaining);
   return surface + reflected;
 };
 
@@ -57,7 +57,7 @@ World default_world() {
   return World(std::vector<Shape *>{s1, s2}, std::vector<PointLight>{light});
 };
 
-Color World::color_at(Ray r) {
+Color World::color_at(Ray r, int remaining) {
   Intersections i = intersect_world(r);
   Intersection h = i.hit();
 
@@ -67,16 +67,17 @@ Color World::color_at(Ray r) {
 
   Computation comp = h.prepare_computations(r);
 
-  return shade_hit(comp);
+  return shade_hit(comp, remaining);
 };
 
-Color World::reflected_color(Computation comp) {
-  if (equalByEpsilon(comp.object->get_material().reflective, 0)) {
+Color World::reflected_color(Computation comp, int remaining) {
+  if (equalByEpsilon(comp.object->get_material().reflective, 0) ||
+      remaining <= 0) {
     return Color(0, 0, 0);
   };
 
   Ray reflected_ray = Ray(comp.over_point, comp.reflectv);
-  Color col = color_at(reflected_ray);
+  Color col = color_at(reflected_ray, remaining - 1);
 
   return col * comp.object->get_material().reflective;
 };

@@ -58,7 +58,8 @@ Canvas Camera::render(World w) {
   for (int x = 0; x < hsize; x++) {
     for (int y = 0; y < vsize; y++) {
       Ray r = ray_for_pixel(x, y);
-      Color c = w.color_at(r);
+      // TODO: make reflections default configurable
+      Color c = w.color_at(r, 5);
       image.write_pixel(c, x, y);
     };
   };

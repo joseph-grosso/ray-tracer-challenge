@@ -28,20 +28,12 @@ int main() {
   PointLight light = PointLight(point(10, 10, -10), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 14;
+  int ratio = 1;
   unsigned int x = ratio * 100;
   unsigned int y = ratio * 100;
   Camera camera(x, y, M_PI / 6);
   camera.transform =
       view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0));
-
-  // // Create camera
-  // int ratio = 10;
-  // unsigned int x = ratio * 128;
-  // unsigned int y = ratio * 72;
-  // Camera camera(x, y, M_PI / 2.5);
-  // camera.transform =
-  //     view_transform(point(0, 1.5, -5), point(0, 0, 0), vector(0, 1, 0));
 
   // Create world
   World w(

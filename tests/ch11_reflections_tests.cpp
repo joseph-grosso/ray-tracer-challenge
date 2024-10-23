@@ -92,43 +92,47 @@ TEST(TestReflection, ShadeHitWithReflection) {
   EXPECT_EQ(col, Color(0.87677, 0.92436, 0.82918));
 }
 
-// // Scenario: color_at function with mutually reflective surfaces
-// // p146
-// TEST(TestReflection, ColorAtFuncExitsSuccessfully) {
-//   Material reflective_mat = Material();
-//   reflective_mat.reflectiveness = 1.0F;
+// Scenario: color_at function with mutually reflective surfaces
+// p146
+TEST(TestReflection, ColorAtFuncExitsSuccessfully) {
+  Material reflective_mat = Material();
+  reflective_mat.reflective = 1.0F;
 
-//   Plane lower = Plane(translation_matrix(0, -1, 0), reflective_mat);
-//   Plane upper = Plane(translation_matrix(0, -1, 0), reflective_mat);
-//   World w = World(std::vector<Shape *>{upper, lower},
-//                   PointLight(point(0, 0, 0), Color(1, 1, 1)));
-//   Ray r = Ray(point(0, 0, 0), vector(0, 1, 0));
+  Plane lower = Plane(translation_matrix(0, -1, 0), reflective_mat);
+  Plane upper = Plane(translation_matrix(0, 1, 0), reflective_mat);
+  World w = World(std::vector<Shape *>{&upper, &lower},
+                  PointLight(point(0, 0, 0), Color(1, 1, 1)));
+  Ray r = Ray(point(0, 0, 0), vector(0, 1, 0));
 
-//   auto start = std::chrono::high_resolution_clock::now();
-//   Color c = w.color_at(r);
-//   auto end = std::chrono::high_resolution_clock::now();
+  auto start = std::chrono::high_resolution_clock::now();
+  Color c = w.color_at(r, 2000);
+  auto end = std::chrono::high_resolution_clock::now();
 
-//   EXPECT_EQ(end - start, 1.0F);  // fix this value
-// }
+  double time_span =
+      std::chrono::duration_cast<std::chrono::duration<double>>(start - end)
+          .count();
 
-// // Scenario: The reflected color at the max recursive depth
-// // p147
-// TEST(TestReflection, LimitRecursion) {
-//   World w = default_world();
-//   Plane p = Plane(translation_matrix(0, -1, 0),
-//                   Material(Color(1, 1, 1),
-//                            0.1F,    // ambient
-//                            0.9F,    // diffuse
-//                            0.9F,    // specular
-//                            200.0F,  // shininess
-//                            0.5F     // reflectiveness - Non-default value
-//                            ));
-//   w.objects.push_back(&p);
-//   Ray r = Ray(point(0, 0, -3), vector(0, -std::sqrt(2) / 2, std::sqrt(2) /
-//   2)); Intersection i = Intersection(std::sqrt(2), &p);
+  EXPECT_TRUE(time_span < 1.0);  // fix this value
+}
 
-//   Computation comps = i.prepare_computations(r);
-//   Color col = w.reflected_color(comps, 0);
+// Scenario: The reflected color at the max recursive depth
+// p147
+TEST(TestReflection, LimitRecursion) {
+  World w = default_world();
+  Plane p = Plane(translation_matrix(0, -1, 0),
+                  Material(Color(1, 1, 1),
+                           0.1F,    // ambient
+                           0.9F,    // diffuse
+                           0.9F,    // specular
+                           200.0F,  // shininess
+                           0.5F     // reflectiveness - Non-default value
+                           ));
+  w.objects.push_back(&p);
+  Ray r = Ray(point(0, 0, -3), vector(0, -std::sqrt(2) / 2, std::sqrt(2) / 2));
+  Intersection i = Intersection(std::sqrt(2), &p);
 
-//   EXPECT_EQ(col, Color(0, 0, 0));
-// }
+  Computation comps = i.prepare_computations(r);
+  Color col = w.reflected_color(comps, 0);
+
+  EXPECT_EQ(col, Color(0, 0, 0));
+}
