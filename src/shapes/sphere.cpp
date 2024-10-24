@@ -49,7 +49,7 @@ Intersections Sphere::local_intersect(Ray r) {
       Intersection((-b + std::sqrt(discriminant)) / (2 * a), this)});
 };
 
-Sphere glass_sphere() {
-  return Sphere(
-      Material(NULL, Color(1, 1, 1), 0.1, 0.9, 0.9, 200.0, 0.0, 1.0, 1.5));
+Sphere glass_sphere(Matrix m, float refractive_index) {
+  return Sphere(m, Material(NULL, Color(1, 1, 1), 0.1, 0.9, 0.9, 200.0, 0.0,
+                            1.0, refractive_index));
 };
