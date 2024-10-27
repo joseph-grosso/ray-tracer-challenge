@@ -26,7 +26,7 @@ TEST(TestReflection, ComputeReflectionVector) {
   Ray r = Ray(point(0, 1, -1), vector(0, -std::sqrt(2) / 2, std::sqrt(2) / 2));
   Intersection i = Intersection(std::sqrt(2), &p);
 
-  Computation comps = i.prepare_computations(r);
+  Computation comps = i.prepare_computations(r, Intersections());
 
   EXPECT_EQ(comps.reflectv, vector(0, std::sqrt(2) / 2, std::sqrt(2) / 2));
 }
@@ -41,7 +41,7 @@ TEST(TestReflection, NonreflectiveMaterialColor) {
   w.objects[1]->set_material(m);
   Intersection i = Intersection(1, w.objects[1]);
 
-  Computation comps = i.prepare_computations(r);
+  Computation comps = i.prepare_computations(r, Intersections());
   Color c = w.reflected_color(comps);
 
   EXPECT_EQ(c, Color(0, 0, 0));
@@ -64,7 +64,7 @@ TEST(TestReflection, ReflectiveMaterialColor) {
   w.objects[1]->set_material(Material());
   Intersection i = Intersection(std::sqrt(2), &p);
 
-  Computation comps = i.prepare_computations(r);
+  Computation comps = i.prepare_computations(r, Intersections());
   Color col = w.reflected_color(comps);
 
   EXPECT_EQ(col, Color(0.19032, 0.2379, 0.14274));
@@ -86,7 +86,7 @@ TEST(TestReflection, ShadeHitWithReflection) {
   Ray r = Ray(point(0, 0, -3), vector(0, -std::sqrt(2) / 2, std::sqrt(2) / 2));
   Intersection i = Intersection(std::sqrt(2), &p);
 
-  Computation comps = i.prepare_computations(r);
+  Computation comps = i.prepare_computations(r, Intersections());
   Color col = w.shade_hit(comps);
 
   EXPECT_EQ(col, Color(0.87677, 0.92436, 0.82918));
@@ -105,7 +105,7 @@ TEST(TestReflection, ColorAtFuncExitsSuccessfully) {
   Ray r = Ray(point(0, 0, 0), vector(0, 1, 0));
 
   auto start = std::chrono::high_resolution_clock::now();
-  Color c = w.color_at(r, 2000);
+  Color c = w.color_at(r);
   auto end = std::chrono::high_resolution_clock::now();
 
   double time_span =
@@ -131,7 +131,7 @@ TEST(TestReflection, LimitRecursion) {
   Ray r = Ray(point(0, 0, -3), vector(0, -std::sqrt(2) / 2, std::sqrt(2) / 2));
   Intersection i = Intersection(std::sqrt(2), &p);
 
-  Computation comps = i.prepare_computations(r);
+  Computation comps = i.prepare_computations(r, Intersections());
   Color col = w.reflected_color(comps, 0);
 
   EXPECT_EQ(col, Color(0, 0, 0));
@@ -153,4 +153,45 @@ TEST(TestTransparencyAndRefraction, GlassSphereHelper) {
 
   EXPECT_TRUE(equalByEpsilon(m.get_material().transparency, (float)1.0));
   EXPECT_TRUE(equalByEpsilon(m.get_material().refractive_index, (float)1.5));
+}
+
+// Scenario: Finding n1 and n2 at various intersections
+// p152
+TEST(TestTransparencyAndRefraction, FindingIntersections) {
+  Sphere A = glass_sphere(scaling_matrix(2, 2, 2), 1.5);
+  Sphere B = glass_sphere(translation_matrix(0, 0, -0.25), 2.0);
+  Sphere C = glass_sphere(translation_matrix(0, 0, 0.25), 2.5);
+  Ray r = Ray(point(0, 0, -4), vector(0, 0, 1));
+  Intersections xs = Intersections(std::vector<Intersection>{
+      Intersection(2, &A),
+      Intersection(2.75, &B),
+      Intersection(3.25, &C),
+      Intersection(4.75, &B),
+      Intersection(5.25, &C),
+      Intersection(6, &A),
+  });
+
+  Computation c0 = xs[0].prepare_computations(r, xs);
+  EXPECT_EQ(c0.n1, 1.0f);
+  EXPECT_EQ(c0.n2, 1.5f);
+
+  Computation c1 = xs[1].prepare_computations(r, xs);
+  EXPECT_EQ(c1.n1, 1.5f);
+  EXPECT_EQ(c1.n2, 2.0f);
+
+  Computation c2 = xs[2].prepare_computations(r, xs);
+  EXPECT_EQ(c2.n1, 2.0f);
+  EXPECT_EQ(c2.n2, 2.5f);
+
+  Computation c3 = xs[3].prepare_computations(r, xs);
+  EXPECT_EQ(c3.n1, 2.5f);
+  EXPECT_EQ(c3.n2, 2.5f);
+
+  Computation c4 = xs[4].prepare_computations(r, xs);
+  EXPECT_EQ(c4.n1, 2.5f);
+  EXPECT_EQ(c4.n2, 1.5f);
+
+  Computation c5 = xs[5].prepare_computations(r, xs);
+  EXPECT_EQ(c5.n1, 1.5f);
+  EXPECT_EQ(c5.n2, 1.0f);
 }

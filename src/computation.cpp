@@ -2,7 +2,7 @@
 
 // Chapter 7: Building a World
 Computation::Computation(float t, Shape *object, Tuple point, Tuple eyev,
-                         Tuple normalv, Tuple reflectv) {
+                         Tuple normalv, Tuple reflectv, float n1, float n2) {
   this->t = t;
   this->object = object;
   this->point = point;
@@ -20,4 +20,6 @@ Computation::Computation(float t, Shape *object, Tuple point, Tuple eyev,
   // * make epsilon here smaller
   // * Reduce acne when epsilon is smaller
   this->over_point = this->point + this->normalv * 0.002;  // EPSILON
+  this->n1 = n1;
+  this->n2 = n2;
 };

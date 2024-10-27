@@ -65,7 +65,7 @@ Color World::color_at(Ray r, int remaining) {
     return Color();
   };
 
-  Computation comp = h.prepare_computations(r);
+  Computation comp = h.prepare_computations(r, i);
 
   return shade_hit(comp, remaining);
 };
