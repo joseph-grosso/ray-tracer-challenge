@@ -225,3 +225,23 @@ TEST(TestTransparencyAndRefraction, RefractedColorOpaqueSurface) {
 
   EXPECT_EQ(c, Color(0, 0, 0));
 }
+
+// Scenario: The refracted color at the maximum recursive depth
+// p156
+TEST(TestTransparencyAndRefraction, RefractedColorMaxDepth) {
+  World w = default_world();
+  Shape *s = w.objects[0];
+  Material m = Material();
+  m.transparency = 1.0;
+  m.refractive_index = 1.5;
+  s->set_material(m);
+  Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
+  Intersection i0 = Intersection(4, s);
+  Intersection i1 = Intersection(6, s);
+  Intersections xs = Intersections(std::vector<Intersection>{i0, i1});
+
+  Computation comps = i0.prepare_computations(r, xs);
+  Color c = w.refracted_color(comps, 0);
+
+  EXPECT_EQ(c, Color(0, 0, 0));
+}
