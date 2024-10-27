@@ -195,3 +195,17 @@ TEST(TestTransparencyAndRefraction, FindingIntersections) {
   EXPECT_EQ(c5.n1, 1.5f);
   EXPECT_EQ(c5.n2, 1.0f);
 }
+
+// Scenario: The under point is offset below the surface
+// p154
+TEST(TestTransparencyAndRefraction, UnderPoint) {
+  Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
+  Sphere s = glass_sphere(translation_matrix(0, 0, 1));
+  Intersection i = Intersection(5, &s);
+  Intersections xs = Intersections(std::vector<Intersection>{i});
+
+  Computation comps = i.prepare_computations(r, xs);
+
+  EXPECT_TRUE(comps.under_point.z > 0.001);
+  EXPECT_TRUE(comps.point.z < comps.under_point.z);
+}

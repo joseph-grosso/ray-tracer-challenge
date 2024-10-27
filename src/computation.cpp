@@ -19,7 +19,8 @@ Computation::Computation(float t, Shape *object, Tuple point, Tuple eyev,
   // TODO: Fix the shading function to
   // * make epsilon here smaller
   // * Reduce acne when epsilon is smaller
-  this->over_point = this->point + this->normalv * 0.002;  // EPSILON
+  this->over_point = this->point + this->normalv * 0.002;   // EPSILON
+  this->under_point = this->point - this->normalv * 0.002;  // EPSILON
   this->n1 = n1;
   this->n2 = n2;
 };

@@ -13,6 +13,7 @@ class Computation {
   Shape *object;
   Tuple point;
   Tuple over_point;
+  Tuple under_point;
   Tuple eyev;
   Tuple normalv;
   Tuple reflectv;
