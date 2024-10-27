@@ -18,6 +18,9 @@
 #include "tuple.hpp"
 
 class World {
+ private:
+  float calculate_angle_ratio(Computation comps);
+
  public:
   std::vector<Shape *> objects;
   std::vector<PointLight> lights;

@@ -83,8 +83,21 @@ Color World::reflected_color(Computation comp, int remaining) {
 };
 
 Color World::refracted_color(Computation comps, int remaining) {
-  if (comps.object->get_material().transparency == 0 || remaining <= 0) {
+  float sin2_t = calculate_angle_ratio(comps);
+  if (comps.object->get_material().transparency == 0 || remaining <= 0 ||
+      sin2_t > 1) {
     return Color(0, 0, 0);
   };
   return Color(1, 1, 1);
 };
+
+// uses Snell's Law to describe the relationship between the angle of the
+// incoming ray and the angle of the refracted ray. See below for equation:
+// sin(theta_i)    n_2
+// ------------ == ---
+// sin(theta_t)    n_1
+float World::calculate_angle_ratio(Computation comps) {
+  float n_ratio = comps.n1 / comps.n2;
+  float cos_i = comps.eyev.dot(comps.normalv);
+  return n_ratio * n_ratio * (1 - cos_i * cos_i);
+}

@@ -245,3 +245,23 @@ TEST(TestTransparencyAndRefraction, RefractedColorMaxDepth) {
 
   EXPECT_EQ(c, Color(0, 0, 0));
 }
+
+// Scenario: The refracted color under total internal reflection
+// p157
+TEST(TestTransparencyAndRefraction, RefractedColorTIR) {
+  World w = default_world();
+  Shape *s = w.objects[0];
+  Material m = Material();
+  m.transparency = 1.0;
+  m.refractive_index = 1.5;
+  s->set_material(m);
+  Ray r = Ray(point(0, 0, std::sqrt(2) / 2), vector(0, 1, 0));
+  Intersection i0 = Intersection(-std::sqrt(2) / 2, s);
+  Intersection i1 = Intersection(std::sqrt(2) / 2, s);
+  Intersections xs = Intersections(std::vector<Intersection>{i0, i1});
+
+  Computation comps = i1.prepare_computations(r, xs);
+  Color c = w.refracted_color(comps, 5);
+
+  EXPECT_EQ(c, Color(0, 0, 0));
+}
