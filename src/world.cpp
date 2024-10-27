@@ -81,3 +81,10 @@ Color World::reflected_color(Computation comp, int remaining) {
 
   return col * comp.object->get_material().reflective;
 };
+
+Color World::refracted_color(Computation comps, int remaining) {
+  if (comps.object->get_material().transparency == 0) {
+    return Color(0, 0, 0);
+  };
+  return Color(1, 1, 1);
+};

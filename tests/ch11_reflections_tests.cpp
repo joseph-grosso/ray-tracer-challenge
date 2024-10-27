@@ -209,3 +209,19 @@ TEST(TestTransparencyAndRefraction, UnderPoint) {
   EXPECT_TRUE(comps.under_point.z > 0.001);
   EXPECT_TRUE(comps.point.z < comps.under_point.z);
 }
+
+// Scenario: The refracted color with an opaque surface
+// p155
+TEST(TestTransparencyAndRefraction, RefractedColorOpaqueSurface) {
+  World w = default_world();
+  Shape *s = w.objects[0];
+  Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
+  Intersection i0 = Intersection(4, s);
+  Intersection i1 = Intersection(6, s);
+  Intersections xs = Intersections(std::vector<Intersection>{i0, i1});
+
+  Computation comps = i0.prepare_computations(r, xs);
+  Color c = w.refracted_color(comps, 5);
+
+  EXPECT_EQ(c, Color(0, 0, 0));
+}

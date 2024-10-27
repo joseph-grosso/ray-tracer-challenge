@@ -32,6 +32,7 @@ class World {
   Color color_at(Ray r, int remaining = 5);
   Color reflected_color(Computation comp, int remaining = 5);
   bool is_shadowed(Tuple p);
+  Color refracted_color(Computation comps, int remaining);
 };
 
 World default_world();
