@@ -25,6 +25,21 @@ Computation::Computation(float t, Shape *object, Tuple point, Tuple eyev,
   this->n2 = n2;
 };
 
+float Computation::schlick() {
+  // find the cosine of the nalge b/w the eye and normal vectors
+  float cos = eyev.dot(normalv);
+
+  // total internal reflection can only occur if n1 > n2
+  if (n1 > n2) {
+    float n = n1 / n2;
+    float sin2_t = n * n * (1.0F - cos * cos);
+    if (sin2_t > 1.0F) {
+      return 1.0;
+    };
+  }
+  return 0;
+};
+
 std::string Computation::to_string() {
   return "Computation(Vector Distance=" + std::to_string(t) +
          ", Object Transform=" +  // Not implemented yet

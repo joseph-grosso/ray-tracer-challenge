@@ -22,5 +22,6 @@ class Computation {
   float n2;
   Computation(float t, Shape *object, Tuple point, Tuple eyev, Tuple normalv,
               Tuple reflectv, float n1, float n2);
+  float schlick();
   std::string to_string();
 };

@@ -330,7 +330,23 @@ TEST(TestTransparencyAndRefraction, ShadeHitTransparentMaterial) {
   Computation comps = xs[0].prepare_computations(r, xs);
   Color c = w.shade_hit(comps, 5);
 
+  EXPECT_EQ(c, Color(0.93642, 0.68642, 0.68642));
+}
+
+// Scenario: The Schlick approximation under total internal reflection
+// p161
+TEST(TestFresnel, SchlickWithTotalInternalReflection) {
+  Sphere s = glass_sphere();
+  Ray r = Ray(point(0, 0, std::sqrt(2) / 2), vector(0, 1, 0));
+  Intersections xs = Intersections(std::vector<Intersection>{
+      Intersection(-std::sqrt(2) / 2, &s),
+      Intersection(std::sqrt(2) / 2, &s),
+  });
+
+  Computation comps = xs[1].prepare_computations(r, xs);
+  float reflectance = comps.schlick();
+
   // This is working correctly if you set the bounds right for how far away the
   // hit can be.
-  EXPECT_EQ(c, Color(0.93642, 0.68642, 0.68642));
+  EXPECT_EQ(reflectance, 1.0F);
 }
