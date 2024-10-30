@@ -28,6 +28,12 @@ Color World::shade_hit(Computation comp, int remaining) {
                                 comp.eyev, comp.normalv, shadowed);
   Color reflected = reflected_color(comp, remaining);
   Color refracted = refracted_color(comp, remaining);
+  // Fresnel effect
+  if (comp.object->get_material().reflective > 0 &&
+      comp.object->get_material().transparency > 0) {
+    float reflectance = comp.schlick();
+    return surface + reflected * reflectance + refracted * (1 - reflectance);
+  };
   return surface + reflected + refracted;
 };
 

@@ -379,3 +379,28 @@ TEST(TestFresnel, SchlickWithSmallAngle) {
 
   EXPECT_TRUE(equalByEpsilon(reflectance, 0.48873F));
 }
+
+// Scenario: shade_hit() with a reflective, transparent material
+// p164
+TEST(TestFresnel, ShadeHitFresnel) {
+  World w = default_world();
+  // w plane
+  Plane floor = Plane(
+      translation_matrix(0, -1, 0),
+      Material(NULL, Color(1, 1, 1), 0.1, 0.9, 0.9, 200.0, 0.5f, 0.5f, 1.5f));
+  w.objects.push_back(&floor);
+  // w new sphere
+  Sphere s = Sphere(translation_matrix(0, -3.5, -0.5),
+                    Material(NULL, Color(1, 0, 0), 0.5));
+  w.objects.push_back(&s);
+  // rays
+  Ray r = Ray(point(0, 0, -3), vector(0, -std::sqrt(2) / 2, std::sqrt(2) / 2));
+  Intersections xs = Intersections(std::vector<Intersection>{
+      Intersection(std::sqrt(2), &floor),
+  });
+
+  Computation comps = xs[0].prepare_computations(r, xs);
+  Color c = w.shade_hit(comps, 5);
+
+  EXPECT_EQ(c, Color(0.93391, 0.69642, 0.69243));
+}
