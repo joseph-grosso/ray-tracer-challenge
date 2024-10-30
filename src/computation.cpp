@@ -24,3 +24,15 @@ Computation::Computation(float t, Shape *object, Tuple point, Tuple eyev,
   this->n1 = n1;
   this->n2 = n2;
 };
+
+std::string Computation::to_string() {
+  return "Computation(Vector Distance=" + std::to_string(t) +
+         ", Object Transform=" +  // Not implemented yet
+         ", point=" + point.to_string() +
+         ", over_point=" + over_point.to_string() +
+         ", under_point=" + under_point.to_string() +
+         ", eyev=" + eyev.to_string() + ", normalv=" + normalv.to_string() +
+         ", reflectv=" + reflectv.to_string() +
+         ", inside=" + std::to_string(inside) + ", n1=" + std::to_string(n1) +
+         ", n2=" + std::to_string(n2) + ")";
+}

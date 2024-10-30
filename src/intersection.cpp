@@ -28,7 +28,7 @@ bool operator<(Intersection lhs, Intersection rhs) { return lhs.t < rhs.t; };
 Computation Intersection::prepare_computations(Ray r, Intersections xs) {
   Tuple point = r.position(t);
   Tuple eyev = -r.get_direction();
-  Tuple normalv = (*object).normal_at(point);
+  Tuple normalv = object->normal_at(point);
 
   Tuple reflectv = r.get_direction().reflect(normalv);
 

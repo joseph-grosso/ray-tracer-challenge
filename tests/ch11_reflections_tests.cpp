@@ -265,3 +265,45 @@ TEST(TestTransparencyAndRefraction, RefractedColorTIR) {
 
   EXPECT_EQ(c, Color(0, 0, 0));
 }
+
+// Abstract class for testing patterns class
+// repeated testing code taken from ch11, p132
+class TestPattern : public Pattern {
+ public:
+  TestPattern(Matrix t = identity_matrix(4)) : Pattern(t){};
+  Color pattern_at(Tuple p) { return Color(20, p.y, p.z); };
+};
+
+// Scenario: The refracted color with a refracted ray
+// p158
+TEST(TestTransparencyAndRefraction, RefractedColorRefractedRay) {
+  World w = default_world();
+  // first object in w
+  Shape *a = w.objects[0];
+  Material m_a = Material();
+  m_a.ambient = 1.0;
+  TestPattern pat = TestPattern();
+  m_a.pattern = &pat;
+  a->set_material(m_a);
+  // second object in w
+  Shape *b = w.objects[1];
+  Material m_b = Material();
+  m_b.transparency = 1.0;
+  m_b.refractive_index = 1.5;
+  b->set_material(m_b);
+  // rays
+  Ray r = Ray(point(0, 0, 0.1), vector(0, 1, 0));
+  Intersections xs = Intersections(std::vector<Intersection>{
+      Intersection(-0.9899, a),
+      Intersection(-0.4899, b),
+      Intersection(0.4899, b),
+      Intersection(0.9899, a),
+  });
+
+  Computation comps = xs[2].prepare_computations(r, xs);
+  Color c = w.refracted_color(comps, 5);
+
+  // This is working correctly if you set the bounds right for how far away the
+  // hit can be.
+  EXPECT_EQ(c, Color(0, 0.99888, 0.04725));
+}

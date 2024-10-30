@@ -83,19 +83,32 @@ Color World::reflected_color(Computation comp, int remaining) {
 };
 
 Color World::refracted_color(Computation comps, int remaining) {
-  float sin2_t = calculate_angle_ratio(comps);
+  // uses Snell's Law to describe the relationship between the angle of the
+  // incoming ray and the angle of the refracted ray. See below for equation:
+  // sin(theta_i)    n_2
+  // ------------ == ---
+  // sin(theta_t)    n_1
+  float n_ratio = comps.n1 / comps.n2;
+  float cos_i = comps.eyev.dot(comps.normalv);
+  float sin2_t = n_ratio * n_ratio * (1 - cos_i * cos_i);
   if (comps.object->get_material().transparency == 0 || remaining <= 0 ||
       sin2_t > 1) {
     return Color(0, 0, 0);
   };
-  return Color(1, 1, 1);
+
+  // Find cos(theta_t) via trigonometric identity
+  float cos_t = std::sqrt(1.0 - sin2_t);
+  // compute the direction of the refracted ray
+  Tuple direction =
+      comps.normalv * (n_ratio * cos_i - cos_t) - comps.eyev * n_ratio;
+  // Create the refracted ray
+  Ray refract_ray = Ray(comps.under_point, direction);
+  // Find the color of the refracted ray, maing sure to mutliply by the
+  // transparency value to account for any opacity
+  return color_at(refract_ray, remaining - 1) *
+         comps.object->get_material().transparency;
 };
 
-// uses Snell's Law to describe the relationship between the angle of the
-// incoming ray and the angle of the refracted ray. See below for equation:
-// sin(theta_i)    n_2
-// ------------ == ---
-// sin(theta_t)    n_1
 float World::calculate_angle_ratio(Computation comps) {
   float n_ratio = comps.n1 / comps.n2;
   float cos_i = comps.eyev.dot(comps.normalv);

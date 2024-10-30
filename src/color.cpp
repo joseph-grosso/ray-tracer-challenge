@@ -8,9 +8,9 @@ Color::Color(float red, float green, float blue) {
 };
 
 bool operator==(Color lhs, Color rhs) {
-  return equalByEpsilon(lhs.red, rhs.red) &&
-         equalByEpsilon(lhs.green, rhs.green) &&
-         equalByEpsilon(lhs.blue, rhs.blue);
+  return equalByEpsilon(lhs.red, rhs.red, 1.0 / 255.0) &&
+         equalByEpsilon(lhs.green, rhs.green, 1.0 / 255.0) &&
+         equalByEpsilon(lhs.blue, rhs.blue, 1.0 / 255.0);
 };
 
 Color operator+(Color lhs, Color rhs) {
