@@ -346,7 +346,36 @@ TEST(TestFresnel, SchlickWithTotalInternalReflection) {
   Computation comps = xs[1].prepare_computations(r, xs);
   float reflectance = comps.schlick();
 
-  // This is working correctly if you set the bounds right for how far away the
-  // hit can be.
-  EXPECT_EQ(reflectance, 1.0F);
+  EXPECT_TRUE(equalByEpsilon(reflectance, 1.0F));
+}
+
+// Scenario: The Schlick approximation with a perpendicular viewing angle
+// p162
+TEST(TestFresnel, SchlickWithPerpendicularView) {
+  Sphere s = glass_sphere();
+  Ray r = Ray(point(0, 0, 0), vector(0, 1, 0));
+  Intersections xs = Intersections(std::vector<Intersection>{
+      Intersection(-1, &s),
+      Intersection(1, &s),
+  });
+
+  Computation comps = xs[1].prepare_computations(r, xs);
+  float reflectance = comps.schlick();
+
+  EXPECT_TRUE(equalByEpsilon(reflectance, 0.04F));
+}
+
+// Scenario: The Schlick approximation with small angle and n2 > n1
+// p163
+TEST(TestFresnel, SchlickWithSmallAngle) {
+  Sphere s = glass_sphere();
+  Ray r = Ray(point(0, 0.99, -2), vector(0, 0, 1));
+  Intersections xs = Intersections(std::vector<Intersection>{
+      Intersection(1.8589, &s),
+  });
+
+  Computation comps = xs[0].prepare_computations(r, xs);
+  float reflectance = comps.schlick();
+
+  EXPECT_TRUE(equalByEpsilon(reflectance, 0.48873F));
 }
