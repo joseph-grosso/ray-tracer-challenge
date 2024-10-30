@@ -27,7 +27,8 @@ Color World::shade_hit(Computation comp, int remaining) {
                       .lighting(comp.object, lights[0], comp.over_point,
                                 comp.eyev, comp.normalv, shadowed);
   Color reflected = reflected_color(comp, remaining);
-  return surface + reflected;
+  Color refracted = refracted_color(comp, remaining);
+  return surface + reflected + refracted;
 };
 
 // p113

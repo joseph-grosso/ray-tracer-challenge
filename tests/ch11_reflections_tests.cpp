@@ -307,3 +307,30 @@ TEST(TestTransparencyAndRefraction, RefractedColorRefractedRay) {
   // hit can be.
   EXPECT_EQ(c, Color(0, 0.99888, 0.04725));
 }
+
+// Scenario: shade_hit() with a transparent material
+// p159
+TEST(TestTransparencyAndRefraction, ShadeHitTransparentMaterial) {
+  World w = default_world();
+  // w plane
+  Plane floor = Plane(
+      translation_matrix(0, -1, 0),
+      Material(NULL, Color(1, 1, 1), 0.1, 0.9, 0.9, 200.0, 0.0f, 0.5f, 1.5f));
+  w.objects.push_back(&floor);
+  // w new sphere
+  Sphere s = Sphere(translation_matrix(0, -3.5, -0.5),
+                    Material(NULL, Color(1, 0, 0), 0.5));
+  w.objects.push_back(&s);
+  // rays
+  Ray r = Ray(point(0, 0, -3), vector(0, -std::sqrt(2) / 2, std::sqrt(2) / 2));
+  Intersections xs = Intersections(std::vector<Intersection>{
+      Intersection(std::sqrt(2), &floor),
+  });
+
+  Computation comps = xs[0].prepare_computations(r, xs);
+  Color c = w.shade_hit(comps, 5);
+
+  // This is working correctly if you set the bounds right for how far away the
+  // hit can be.
+  EXPECT_EQ(c, Color(0.93642, 0.68642, 0.68642));
+}
