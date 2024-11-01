@@ -7,7 +7,7 @@
 
 using namespace std::chrono;
 
-// Nested patterns test
+// Reflective surfaces test
 int main() {
   SolidPattern white = SolidPattern(Color(1, 1, 1));
   SolidPattern offwhite = SolidPattern(Color(0.9, 0.9, 0.9));

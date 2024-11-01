@@ -7,7 +7,7 @@
 
 using namespace std::chrono;
 
-// Nested patterns test
+// Perlin Noise test
 int main() {
   SolidPattern green = SolidPattern(Color(0, 1, 0));
   SolidPattern blue = SolidPattern(Color(0, 0, 1));

@@ -5,7 +5,6 @@
 
 #include "intersection.hpp"
 #include "ray.hpp"
-#include "sphere.hpp"
 
 Intersections::Intersections(std::vector<Intersection> data) {
   this->data = data;
