@@ -21,7 +21,9 @@ class Plane : public Shape {
 
  public:
   // Methods
-  Plane(Matrix t = identity_matrix(4), Material m = Material()) : Shape(t, m) {
+  Plane(Matrix t = identity_matrix(4), Material m = Material(),
+        bool throws_shadow = true)
+      : Shape(t, m, throws_shadow) {
     this->normal = vector(0, 1, 0);
     this->point_inside = point(0, 0, 0);
   };

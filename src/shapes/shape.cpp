@@ -11,9 +11,10 @@
 #include "tuple.hpp"
 
 // Chapter 9: Shapes and Planes
-Shape::Shape(Matrix t, Material m) {
+Shape::Shape(Matrix t, Material m, bool throws_shadow) {
   this->transformation = t;
   this->material = m;
+  this->throws_shadow = throws_shadow;
 };
 
 Matrix Shape::get_transform() { return transformation; };
@@ -42,3 +43,9 @@ Tuple Shape::normal_at(Tuple p) {
 Tuple Shape::normal_at(float x, float y, float z) {
   return normal_at(point(x, y, z));
 };
+
+void Shape::set_throws_shadow(bool throws_shadow) {
+  this->throws_shadow = throws_shadow;
+}
+
+bool Shape::get_throws_shadow() { return throws_shadow; }

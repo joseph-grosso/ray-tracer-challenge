@@ -59,7 +59,7 @@ convert flight_path.ppm flight_path.png
 - [x] ch8
 - [x] ch9
 - [x] ch10
-- [ ] ch11
+- [x] ch11
 - [ ] ch12
 - [ ] ch13
 - [ ] ch14

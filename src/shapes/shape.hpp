@@ -15,15 +15,19 @@ class Shape {
  protected:
   Matrix transformation;
   Material material;
+  bool throws_shadow;
 
  public:
   // Methods
-  Shape(Matrix t = identity_matrix(4), Material m = Material());
+  Shape(Matrix t = identity_matrix(4), Material m = Material(),
+        bool throws_shadow = true);
   Shape(Matrix t) : Shape(t, Material()){};
   Shape(Material m) : Shape(identity_matrix(4), m){};
   Matrix get_transform();
   void set_transform(Matrix);
   Material get_material();
+  void set_throws_shadow(bool);
+  bool get_throws_shadow();
   void set_material(Material);
   Intersections intersect(Ray r);
   virtual Intersections local_intersect(Ray r) = 0;

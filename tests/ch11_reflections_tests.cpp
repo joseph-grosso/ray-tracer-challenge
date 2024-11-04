@@ -404,3 +404,26 @@ TEST(TestFresnel, ShadeHitFresnel) {
 
   EXPECT_EQ(c, Color(0.93391, 0.69642, 0.69243));
 }
+
+class TestShape : public Shape {
+ public:
+  // default ray
+  Ray saved_ray = Ray(point(0, 0, 0), vector(1, 0, 0));
+  Intersections local_intersect(Ray r) {
+    this->saved_ray = r;
+    return Intersections();
+  };
+  Tuple local_normal_at(Tuple p) { return vector(p.x, p.y, p.z); };
+};
+
+// Scenario: shape object has a bool representing whether it throws a shadow
+// p164
+TEST(TestThrowsShadow, ThrowsShadowField) {
+  TestShape s = TestShape();
+
+  EXPECT_EQ(s.get_throws_shadow(), true);
+
+  s.set_throws_shadow(false);
+
+  EXPECT_EQ(s.get_throws_shadow(), false);
+}

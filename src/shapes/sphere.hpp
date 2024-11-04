@@ -19,7 +19,9 @@ class Sphere : public Shape {
 
  public:
   // Methods
-  Sphere(Matrix t = identity_matrix(4), Material m = Material()) : Shape(t, m) {
+  Sphere(Matrix t = identity_matrix(4), Material m = Material(),
+         bool throws_shadow = true)
+      : Shape(t, m, throws_shadow) {
     this->center = point(0, 0, 0);
     this->radius = 1.0;
   };
