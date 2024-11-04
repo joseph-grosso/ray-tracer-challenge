@@ -49,7 +49,7 @@ bool World::is_shadowed(Tuple p) {
   // TODO: assess how much this function slows down the runtime
   bool is_shaded = i.is_shadowed(distance);
 
-  return !hit.is_empty() && hit.t < distance && is_shaded;
+  return is_shaded;
 };
 
 World default_world() {

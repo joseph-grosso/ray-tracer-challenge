@@ -35,9 +35,22 @@ Intersection Intersections::hit() {
   return (inter.t >= 0) ? inter : Intersection();
 };
 
+// 4 conditions:
+// * the intersection is not empty
+// * the intersection occurs after the origin of the ray
+// * the intersection occurs before getting to the light source
+// * the object intersected comes before the ray hits the light source
 bool Intersections::is_shadowed(float light_distance) {
+  if (count == 0) {
+    return false;
+  };
+
   for (int i = 0; i < count; i++) {
-    if (data[i].is_shadowed(light_distance)) {
+    if (data[i].is_empty() || data[i].t < 0) {
+      continue;
+    } else if (data[i].t > light_distance) {
+      break;
+    } else if (data[i].is_shadowed()) {
       return true;
     };
   };

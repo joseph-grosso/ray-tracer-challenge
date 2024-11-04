@@ -433,17 +433,7 @@ TEST(TestThrowsShadow, ThrowsShadowField) {
 TEST(TestThrowsShadow, EmptyIntersectionThrowsNoShadow) {
   Intersection i = Intersection();
 
-  EXPECT_EQ(i.is_shadowed(10), false);
-}
-
-// Scenario: Intersection throws no shadow when behind ray
-// p166
-TEST(TestThrowsShadow, BehindImageThrowsNoShadow) {
-  TestShape s = TestShape();
-
-  Intersection i = Intersection(-1, &s);
-
-  EXPECT_EQ(i.is_shadowed(10), false);
+  EXPECT_EQ(i.is_shadowed(), false);
 }
 
 // Scenario: Intersection throws a shadow when in front of ray
@@ -453,7 +443,7 @@ TEST(TestThrowsShadow, IntersectThrowsShadow) {
 
   Intersection i = Intersection(1.0, &s);
 
-  EXPECT_EQ(i.is_shadowed(10), true);
+  EXPECT_EQ(i.is_shadowed(), true);
 }
 
 // Scenario: Intersection throws no shadow when option turned off
@@ -464,19 +454,7 @@ TEST(TestThrowsShadow, IntersectThrowsNoShadow) {
 
   Intersection i = Intersection(1.0, &s);
 
-  EXPECT_EQ(i.is_shadowed(10), false);
-}
-
-// Scenario: Intersection throws no shadow when int occurs after hitting the
-// light source
-// p166
-TEST(TestThrowsShadow, IntersectAfterLightSource) {
-  TestShape s = TestShape();
-  s.set_throws_shadow(true);
-
-  Intersection i = Intersection(10, &s);
-
-  EXPECT_EQ(i.is_shadowed(5.0), false);
+  EXPECT_EQ(i.is_shadowed(), false);
 }
 
 // Scenario: Intersections handles throws_shadow for multiple sources

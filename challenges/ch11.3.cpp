@@ -7,7 +7,7 @@
 
 using namespace std::chrono;
 
-// Glass patterns test
+// Glass ball has no shadow - test
 int main() {
   // base patterns
   SolidPattern off_white = SolidPattern(Color(0.9, 0.9, 0.9));

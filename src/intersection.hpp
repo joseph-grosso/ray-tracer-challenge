@@ -21,7 +21,7 @@ class Intersection {
   Shape *object;
   bool is_empty();
   Computation prepare_computations(Ray r, Intersections xs);
-  bool is_shadowed(float light_distance);
+  bool is_shadowed();
 };
 
 bool operator==(Intersection lhs, Intersection rhs);
