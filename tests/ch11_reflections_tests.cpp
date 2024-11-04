@@ -417,7 +417,7 @@ class TestShape : public Shape {
 };
 
 // Scenario: shape object has a bool representing whether it throws a shadow
-// p164
+// p166
 TEST(TestThrowsShadow, ThrowsShadowField) {
   TestShape s = TestShape();
 
@@ -426,4 +426,97 @@ TEST(TestThrowsShadow, ThrowsShadowField) {
   s.set_throws_shadow(false);
 
   EXPECT_EQ(s.get_throws_shadow(), false);
+}
+
+// Scenario: Intersection throws no shadow when empty
+// p166
+TEST(TestThrowsShadow, EmptyIntersectionThrowsNoShadow) {
+  Intersection i = Intersection();
+
+  EXPECT_EQ(i.is_shadowed(10), false);
+}
+
+// Scenario: Intersection throws no shadow when behind ray
+// p166
+TEST(TestThrowsShadow, BehindImageThrowsNoShadow) {
+  TestShape s = TestShape();
+
+  Intersection i = Intersection(-1, &s);
+
+  EXPECT_EQ(i.is_shadowed(10), false);
+}
+
+// Scenario: Intersection throws a shadow when in front of ray
+// p166
+TEST(TestThrowsShadow, IntersectThrowsShadow) {
+  TestShape s = TestShape();
+
+  Intersection i = Intersection(1.0, &s);
+
+  EXPECT_EQ(i.is_shadowed(10), true);
+}
+
+// Scenario: Intersection throws no shadow when option turned off
+// p166
+TEST(TestThrowsShadow, IntersectThrowsNoShadow) {
+  TestShape s = TestShape();
+  s.set_throws_shadow(false);
+
+  Intersection i = Intersection(1.0, &s);
+
+  EXPECT_EQ(i.is_shadowed(10), false);
+}
+
+// Scenario: Intersection throws no shadow when int occurs after hitting the
+// light source
+// p166
+TEST(TestThrowsShadow, IntersectAfterLightSource) {
+  TestShape s = TestShape();
+  s.set_throws_shadow(true);
+
+  Intersection i = Intersection(10, &s);
+
+  EXPECT_EQ(i.is_shadowed(5.0), false);
+}
+
+// Scenario: Intersections handles throws_shadow for multiple sources
+// p166
+TEST(TestThrowsShadow, MultipleIntersects) {
+  Plane p1 = Plane();
+  Plane p2 = Plane(translation_matrix(0, -1, 0));
+  float light_distance = 100;
+
+  Intersections xs = Intersections(
+      std::vector<Intersection>{Intersection(10, &p1), Intersection(11, &p2)});
+
+  EXPECT_EQ(xs.is_shadowed(100), true);
+}
+
+// Scenario: Intersections handles throws_shadow for multiple sources behind the
+// ray
+// p166
+TEST(TestThrowsShadow, MultipleIntersectsBehind) {
+  Plane p1 = Plane();
+  Plane p2 = Plane(translation_matrix(0, -1, 0));
+  float light_distance = 100;
+
+  Intersections xs = Intersections(std::vector<Intersection>{
+      Intersection(-10, &p1), Intersection(-11, &p2)});
+
+  EXPECT_EQ(xs.is_shadowed(light_distance), false);
+}
+
+// Scenario: Intersections handles throws_shadow for multiple sources
+// p166
+TEST(TestThrowsShadow, MultipleUnshadowedIntersects) {
+  Plane p1 = Plane();
+  Plane p2 = Plane(translation_matrix(0, -1, 0));
+  p1.set_throws_shadow(false);
+  p2.set_throws_shadow(false);
+  float light_distance = 100;
+
+  Intersections xs = Intersections(
+      std::vector<Intersection>{Intersection(10, &p1), Intersection(11, &p2)});
+
+  EXPECT_EQ(xs.is_shadowed(100), false);
 }

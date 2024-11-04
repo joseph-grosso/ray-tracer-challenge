@@ -13,4 +13,5 @@ class Intersections {
   int count;
   Intersection operator[](int);
   Intersection hit();
+  bool is_shadowed(float light_distance);
 };

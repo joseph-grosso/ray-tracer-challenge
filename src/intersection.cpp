@@ -73,3 +73,13 @@ std::vector<float> Intersection::compute_n1_and_n2(Intersections xs) {
 
   return std::vector<float>{n1, n2};
 }
+
+// 4 conditions:
+// * the intersection is not empty
+// * the intersection occurs after the origin of the ray
+// * the intersection occurs before getting to the light source
+// * the object intersected comes before the ray hits the light source
+bool Intersection::is_shadowed(float light_distance) {
+  return !is_empty() && t >= 0 && object->get_throws_shadow() &&
+         light_distance > t;
+};

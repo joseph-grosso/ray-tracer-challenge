@@ -34,3 +34,12 @@ Intersection Intersections::hit() {
   // return the chosen value if valid, if not return empty intersection.
   return (inter.t >= 0) ? inter : Intersection();
 };
+
+bool Intersections::is_shadowed(float light_distance) {
+  for (int i = 0; i < count; i++) {
+    if (data[i].is_shadowed(light_distance)) {
+      return true;
+    };
+  };
+  return false;
+};
