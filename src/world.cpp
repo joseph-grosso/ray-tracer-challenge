@@ -46,8 +46,10 @@ bool World::is_shadowed(Tuple p) {
 
   Intersections i = intersect_world(r);
   Intersection hit = i.hit();
+  // TODO: assess how much this function slows down the runtime
+  bool is_shaded = i.is_shadowed(distance);
 
-  return !hit.is_empty() && hit.t < distance;
+  return !hit.is_empty() && hit.t < distance && is_shaded;
 };
 
 World default_world() {

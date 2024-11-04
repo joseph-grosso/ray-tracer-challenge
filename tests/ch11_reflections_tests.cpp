@@ -520,3 +520,15 @@ TEST(TestThrowsShadow, MultipleUnshadowedIntersects) {
 
   EXPECT_EQ(xs.is_shadowed(100), false);
 }
+
+// Scenario: There is not shadow when an non-shadowing object is between the
+// point and light
+// p112
+TEST(TestThrowsShadow, ShadowAtPoint) {
+  World w = default_world();
+  w.objects[0]->set_throws_shadow(false);
+  w.objects[1]->set_throws_shadow(false);
+  Tuple p = point(10, -10, 10);
+
+  EXPECT_EQ(w.is_shadowed(p), false);
+}
