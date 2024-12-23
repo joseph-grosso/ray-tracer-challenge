@@ -36,7 +36,7 @@ float Computation::schlick() {
     if (sin2_t > 1.0F) {
       return 1.0;
     };
-    // compute cosune of theta_t using trig identity
+    // compute cosine of theta_t using trig identity
     float cos_t = std::sqrt(1.0 - sin2_t);
     // when n1 > n2, use cos(theta_t) instead
     float cos = cos_t;

@@ -201,3 +201,12 @@ TEST_F(TestSphereReflection, LightingBehindSurface) {
 
   EXPECT_EQ(result, Color(0.1, 0.1, 0.1));
 }
+
+// Scenario: the glass material has a default value
+// pMe - Chapter 11
+TEST(TestMaterial, GlassMaterial) {
+  Material glass = glass_material();
+
+  EXPECT_EQ(glass, Material(NULL, Color(1, 1, 1), 0.1, 0.1, 0.1, 300.0, 0.0,
+                            1.0, 1.5));
+}

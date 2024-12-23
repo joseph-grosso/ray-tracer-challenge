@@ -6,3 +6,7 @@ build/
 
 # TODO: Figure out a better way to use this file
 src/PerlinNoise.hpp
+
+# common output files
+values.ppm
+img.png
