@@ -35,7 +35,7 @@ int main() {
 
   // Glass floor
   Plane glass_floor =
-      Plane(translation_matrix(0, 1, 0), glass_material(), false);
+      Plane(translation_matrix(0, 1, 0), glass_material(1.5, 0.5), false);
   // back_wall
   Plane back_wall =
       Plane(translation_matrix(0, 0, 50) * rotation_x_matrix(M_PI / 2),
@@ -50,7 +50,7 @@ int main() {
   PointLight light = PointLight(point(10, 10, -10), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 4;
+  int ratio = 8;
   unsigned int x = ratio * 100;
   unsigned int y = ratio * 33;
   Camera camera(x, y, M_PI / 2.0);
