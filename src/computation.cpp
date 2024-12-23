@@ -43,7 +43,7 @@ float Computation::schlick() {
   }
 
   float r0 = std::pow(((n1 - n2) / (n1 + n2)), 2);
-  return r0 + (1 - r0) * std::pow(1 - cos, 5);
+  return r0 + (1 - r0) * std::pow((1 - cos), 5);
 };
 
 std::string Computation::to_string() {

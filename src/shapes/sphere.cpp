@@ -50,6 +50,6 @@ Intersections Sphere::local_intersect(Ray r) {
 };
 
 Sphere glass_sphere(Matrix m, float refractive_index) {
-  return Sphere(m, Material(NULL, Color(1, 1, 1), 0.1, 0.9, 0.9, 200.0, 0.0,
+  return Sphere(m, Material(NULL, Color(1, 1, 1), 0.1, 0.1, 0.1, 300.0, 0.0,
                             1.0, refractive_index));
 };

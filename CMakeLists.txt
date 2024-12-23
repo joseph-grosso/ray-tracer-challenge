@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Set the name of the chapter to be built
-set(MAIN_FILE_NAME "ch11.3.cpp")
+set(MAIN_FILE_NAME "ch11.5.cpp")
 
 # TODO: Figure out a better way to download this file
 file(DOWNLOAD
