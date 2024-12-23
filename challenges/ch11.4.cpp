@@ -27,7 +27,7 @@ int main() {
                                ));
 
   // glass_sphere
-  Sphere s1 = glass_sphere(translation_matrix(0, 12, 0));
+  Sphere s1 = glass_sphere(translation_matrix(0, 12, 0), 1.5, 0.9);
 
   // air bubble
   Sphere s2 =
@@ -38,7 +38,7 @@ int main() {
       0.0,   // diffuse. lower in transparent/reflective surfaces
       0.0,   // specular
       0.0,   // shininess
-      0.0f,  // reflectivity. 1.0 or 0.9 in glass/similar
+      1.0f,  // reflectivity. 1.0 or 0.9 in glass/similar
       1.0f,  // transparency. 1.0 or 0.9 in transparent materials
       1.0f   // refractive index. Fresnel effect
       ));
@@ -49,7 +49,7 @@ int main() {
   PointLight light = PointLight(point(10, 10, -10), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 2;
+  int ratio = 7;
   unsigned int x = ratio * 100;
   unsigned int y = ratio * 100;
   Camera camera(x, y, M_PI / 4.5);

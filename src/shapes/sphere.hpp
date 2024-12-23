@@ -40,5 +40,5 @@ class Sphere : public Shape {
 bool operator==(Sphere lhs, Sphere rhs);
 bool operator!=(Sphere lhs, Sphere rhs);
 
-Sphere glass_sphere(Matrix m = identity_matrix(4),
-                    float refractive_index = 1.5);
+Sphere glass_sphere(Matrix m = identity_matrix(4), float refractive_index = 1.5,
+                    float reflective = 0.0);

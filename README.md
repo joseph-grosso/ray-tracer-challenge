@@ -79,3 +79,4 @@ convert flight_path.ppm flight_path.png
 - [ ] Fix download location of the PerlinNoise file
 - [ ] Implement the "Pattern Permuter" Perlin Noise pattern
 - [ ] Refactor "material" class to improve cpp structure (public attributes -> private)
+
