@@ -34,4 +34,4 @@ class Material {
 };
 
 bool operator==(Material lhs, Material rhs);
-Material glass_material(float refractive_index = 1.5);
+Material glass_material(float refractive_index = 1.5, float reflective = 0.0);

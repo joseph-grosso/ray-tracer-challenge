@@ -81,7 +81,7 @@ bool operator==(Material lhs, Material rhs) {
 };
 
 // Common materials
-Material glass_material(float refractive_index) {
-  return Material(NULL, Color(1, 1, 1), 0.1, 0.1, 0.1, 300.0, 0.0, 1.0,
-                  refractive_index);
+Material glass_material(float refractive_index, float reflective) {
+  return Material(NULL, Color(0.1, 0.1, 0.1), 0.1, 0.1, 0.1, 300.0, reflective,
+                  1.0, refractive_index);
 }

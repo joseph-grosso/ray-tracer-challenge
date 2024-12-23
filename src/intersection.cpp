@@ -74,4 +74,6 @@ std::vector<float> Intersection::compute_n1_and_n2(Intersections xs) {
   return std::vector<float>{n1, n2};
 }
 
-bool Intersection::is_shadowed() { return object->get_throws_shadow(); };
+bool Intersection::is_shadowed() {
+  return !is_empty() and object->get_throws_shadow();
+};

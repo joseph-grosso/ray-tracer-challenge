@@ -207,6 +207,15 @@ TEST_F(TestSphereReflection, LightingBehindSurface) {
 TEST(TestMaterial, GlassMaterial) {
   Material glass = glass_material();
 
-  EXPECT_EQ(glass, Material(NULL, Color(1, 1, 1), 0.1, 0.1, 0.1, 300.0, 0.0,
-                            1.0, 1.5));
+  EXPECT_EQ(glass, Material(NULL, Color(0.1, 0.1, 0.1), 0.1, 0.1, 0.1, 300.0,
+                            0.0, 1.0, 1.5));
+}
+
+// Scenario: the glass material can override the values
+// pMe - Chapter 11
+TEST(TestMaterial, GlassMaterialOverrides) {
+  Material glass = glass_material(5.5, 9.9);
+
+  EXPECT_EQ(glass, Material(NULL, Color(0.1, 0.1, 0.1), 0.1, 0.1, 0.1, 300.0,
+                            9.9, 1.0, 5.5));
 }
