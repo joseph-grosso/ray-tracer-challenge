@@ -15,6 +15,8 @@ Intersections Cube::local_intersect(Ray r) {
   float tmin = *std::max_element(max.begin(), max.end());
   float tmax = *std::min_element(min.begin(), min.end());
 
+  if (tmin > tmax) return Intersections();
+
   Intersection tmin_inter = Intersection(tmin, this);
   Intersection tmax_inter = Intersection(tmax, this);
 
