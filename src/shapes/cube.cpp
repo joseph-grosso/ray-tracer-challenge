@@ -45,3 +45,16 @@ std::tuple<float, float> Cube::check_axis(float origin, float direction) {
 
   return std::make_tuple(tmin, tmax);
 }
+
+Tuple Cube::local_normal_at(float x, float y, float z) {
+  std::vector<float> vals =
+      std::vector<float>{std::abs(x), std::abs(y), std::abs(z)};
+  float maxc = *std::max_element(vals.begin(), vals.end());
+
+  if (maxc == std::abs(x)) {
+    return vector(x, 0, 0);
+  } else if (maxc == std::abs(y)) {
+    return vector(0, y, 0);
+  };
+  return vector(0, 0, z);
+};

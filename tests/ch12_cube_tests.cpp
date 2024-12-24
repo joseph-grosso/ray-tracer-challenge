@@ -64,3 +64,41 @@ INSTANTIATE_TEST_SUITE_P(
         std::make_tuple(point(2, 0, 2), vector(0, 0, -1)),
         std::make_tuple(point(0, 2, 2), vector(0, -1, 0)),
         std::make_tuple(point(2, 2, 0), vector(-1, 0, 0))));
+
+class TestCubeNormal : public testing::TestWithParam<std::tuple<Tuple, Tuple>> {
+};
+
+// Scenario: The normal on the surface of a cube
+// p173
+TEST_P(TestCubeNormal, CubeSurfaceNormal) {
+  auto [point_, expected_normal] = GetParam();
+
+  Cube c = Cube();
+
+  Tuple actual_normal = c.local_normal_at(point_);
+
+  ASSERT_EQ(actual_normal, expected_normal);
+}
+
+// Scenario: The normal on the surface of a cube - other possible function
+// p173 - repeat
+TEST_P(TestCubeNormal, CubeSurfaceNormalAlternative) {
+  auto [point_, expected_normal] = GetParam();
+
+  Cube c = Cube();
+
+  Tuple actual_normal = c.local_normal_at(point_.x, point_.y, point_.z);
+
+  ASSERT_EQ(actual_normal, expected_normal);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    TestNormal, TestCubeNormal,
+    ::testing::Values(std::make_tuple(point(1.0, 0.5, -0.8), vector(1, 0, 0)),
+                      std::make_tuple(point(-1.0, 0.2, 0.9), vector(-1, 0, 0)),
+                      std::make_tuple(point(-0.4, 1.0, -0.1), vector(0, 1, 0)),
+                      std::make_tuple(point(0.3, -1.0, -0.7), vector(0, -1, 0)),
+                      std::make_tuple(point(-0.6, 0.3, 1.0), vector(0, 0, 1)),
+                      std::make_tuple(point(0.4, 0.4, -1.0), vector(0, 0, -1)),
+                      std::make_tuple(point(1, 1, 1), vector(1, 0, 0)),
+                      std::make_tuple(point(-1, -1, -1), vector(-1, 0, 0))));

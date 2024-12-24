@@ -22,9 +22,7 @@ class Cube : public Shape {
   Cube(Matrix t = identity_matrix(4), Material m = Material(),
        bool throws_shadow = true)
       : Shape(t, m, throws_shadow){};
-  Tuple local_normal_at(float x, float y, float z) {
-    return point(-1, -1, -1); /*TODO: Fix */
-  };
+  Tuple local_normal_at(float x, float y, float z);
   Tuple local_normal_at(Tuple p) { return local_normal_at(p.x, p.y, p.z); };
   // TODO: refactor when an intersection is done on a general "object" class
   // rather than just the sphere class.
