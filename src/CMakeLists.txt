@@ -19,6 +19,7 @@ add_library(
     shapes/shape.cpp
     shapes/sphere.cpp
     shapes/plane.cpp
+    shapes/cube.cpp
 )
 
 message("Raytracer current source dir = ${CMAKE_CURRENT_SOURCE_DIR}")

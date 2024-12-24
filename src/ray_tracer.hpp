@@ -14,6 +14,7 @@
 // shapes
 // TODO: move the definitions of these into shared header files in
 // their directory for ease of use
+#include "cube.hpp"
 #include "plane.hpp"
 #include "shape.hpp"
 #include "sphere.hpp"
