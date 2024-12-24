@@ -21,6 +21,12 @@ convert flight_path.ppm flight_path.png
 
 ## Sample Images
 
+### Reflection and Refraction
+
+![Glass Ball with Air Pocket](outputs/ch11/hq_fresnel_effect_success.png "A glass sphere with an air bubble interior")
+
+![Fresnel "Lake Effect"](outputs/ch11/glass_floor_fresnel_test.png "A glass surface covering a floor, showing the Fresnel effect")
+
 ### Patterns
 
 ![Spheres On A Plane with Stripes](outputs/ch10/hq_stripes_and_spheres.png "Some striped spheres sit on a plane, showing the first implementation of a pattern object.")
