@@ -70,20 +70,43 @@ int main() {
                translation_matrix(0, 1, 0),
            Material(&table_pat));
   // table legs
+  Cube table_leg_front_left =
+      Cube(translation_matrix(-2.7, 0, -2.7) *  // move front left
+               translation_matrix(0, 0, 1.5) * scaling_matrix(0.3, 2, 0.3),
+           Material(&table_pat));
+  Cube table_leg_front_right =
+      Cube(translation_matrix(2.8, 0, -2.7) *  // move front right
+               translation_matrix(0, 0, 1.5) * scaling_matrix(0.3, 2, 0.3),
+           Material(&table_pat));
+  Cube table_leg_back_left =
+      Cube(translation_matrix(-2.7, 0, 2.7) *  // move back left
+               translation_matrix(0, 0, 1.5) * scaling_matrix(0.3, 2, 0.3),
+           Material(&table_pat));
+  Cube table_leg_back_right =
+      Cube(translation_matrix(2.8, 0, 2.7) *  // move back right
+               translation_matrix(0, 0, 1.5) * scaling_matrix(0.3, 2, 0.3),
+           Material(&table_pat));
 
   // globe
   Sphere globe =
-      Sphere(translation_matrix(0, 3.5, 2.5),
+      Sphere(translation_matrix(0, 3.8, 2.5),
              Material(&world_pat, Color(0, 0, 0), 0.3, 0.7, 0.2, 10.0));
+
   // globe stand
+  Cube globe_stand =
+      Cube(translation_matrix(0, 2.7, 2.5) * scaling_matrix(0.4, 0.3, 0.4),
+           Material(&gray_w, Color(0, 0, 0), 0.1, 0.9, 0.9, 200.0, 0.1));
 
   // map
+  Cube map =
+      Cube(translation_matrix(0, 2.7, 2.5) * scaling_matrix(0.4, 0.3, 0.4),
+           Material(&gray_w, Color(0, 0, 0), 0.1, 0.9, 0.9, 200.0, 0.1));
 
   // Add a light source
   PointLight light = PointLight(point(-0.5, 10, -4), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 2;
+  int ratio = 1;
   unsigned int x = ratio * 70;
   unsigned int y = ratio * 70;
   Camera camera(x, y, M_PI / 2.1);
@@ -91,9 +114,22 @@ int main() {
       view_transform(point(2, 5, -4), point(-0.1, 2.6, 0), vector(0, 1, 0));
 
   // Create world
-  World w(std::vector<Shape *>{&walls, &roof_and_floor, &mirror, &table_top,
-                               &globe},
-          light);
+  World w(
+      std::vector<Shape *>{
+          &walls,
+          &roof_and_floor,
+          &mirror,
+          &table_top,
+          // globe vars
+          &globe,
+          &globe_stand,
+          // leg vars
+          &table_leg_front_left,
+          &table_leg_front_right,
+          &table_leg_back_left,
+          &table_leg_back_right,
+      },
+      light);
 
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << "New image generation starting!" << std::endl;
