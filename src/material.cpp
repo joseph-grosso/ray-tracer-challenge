@@ -89,3 +89,15 @@ Material glass_material(float refractive_index, float reflective) {
 Material mirror_material() {
   return Material(NULL, Color(0.0, 0.0, 0.0), 0.0, 0.0, 0.5, 400.0, 1.0);
 };
+
+Material paper_material(Pattern *p) {
+  return Material(p, Color(0, 0, 0), 0.1, 0.9, 0.5, 50);
+};
+
+Material paper_material(Color c) {
+  return Material(NULL, c, 0.1, 0.9, 0.5, 50);
+};
+
+Material wood_material(Pattern *p, float shine, float reflectivity) {
+  return Material(p, Color(0, 0, 0), 0.1, 0.9, 0.9, shine, reflectivity);
+};

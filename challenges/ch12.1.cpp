@@ -41,8 +41,7 @@ int main() {
                                         scaling_matrix(0.4, 0.4, 0.4));
 
   // common material
-  Material wood =
-      Material(&table_pat, Color(0, 0, 0), 0.1, 0.9, 0.9, 300.0, 0.15);
+  Material wood = wood_material(&table_pat);
 
   // Define the objects
   // roof and floor
@@ -109,16 +108,28 @@ int main() {
       Cube(translation_matrix(-7.9, 4.5, 2) * scaling_matrix(1.0, 1.5, 3.0),
            Material(&map_pat, Color(0, 0, 0), 0.1, 0.9, 0.1, 30.0));
 
+  // books
+  Matrix initial_movement = translation_matrix(0, 2.45, 0);
+  Cube cover = Cube(initial_movement * scaling_matrix(1, 0.05, 0.8),
+                    Material(NULL, Color(0.43, 0.18, 0.80)));
+  Matrix page_transform = scaling_matrix(0.4, 0.10, 0.7);
+  Matrix page_move_left = translation_matrix(-0.45, 0, 0);
+  Matrix page_move_right = translation_matrix(0.45, 0, 0);
+  Cube page_1 = Cube(page_move_left * initial_movement * page_transform,
+                     paper_material());
+  Cube page_2 = Cube(page_move_right * initial_movement * page_transform,
+                     paper_material());
+
   // Add a light source
   PointLight light = PointLight(point(-0.5, 10, -4), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 2;
-  unsigned int x = ratio * 70;
-  unsigned int y = ratio * 70;
-  Camera camera(x, y, M_PI / 2.1);
+  int ratio = 8;
+  unsigned int x = ratio * 100;
+  unsigned int y = ratio * 80;
+  Camera camera(x, y, M_PI / 2.5);
   camera.transform =
-      view_transform(point(2, 5, -4), point(-0.1, 2.6, 0), vector(0, 1, 0));
+      view_transform(point(3, 4.5, -3.5), point(-0.1, 3.0, 0), vector(0, 1, 0));
 
   // Create world
   World w(
@@ -130,15 +141,18 @@ int main() {
                            &globe, &globe_stand,
                            // table top
                            &table_top,
+                           // books
+                           &cover, &page_1, &page_2,
                            // leg vars
-                           &table_leg_front_left, &table_leg_front_right,
-                           &table_leg_back_left, &table_leg_back_right,
-                           // map var
+                           &table_leg_front_left,  // &table_leg_front_right,
+                           &table_leg_back_left,   // &table_leg_back_right,
+                                                   // map var
                            &map},
       light);
 
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << "New image generation starting!" << std::endl;
+  std::cout << "Pixels generated:" << x * y << std::endl;
 
   // Track how long the actual loops took
   auto start = high_resolution_clock::now();

@@ -10,13 +10,7 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 * Run the command below:
 
 ```bash
- bash ./build.sh
-```
-
-### Converting PPM images to PNG
-
-```bash
-convert flight_path.ppm flight_path.png
+ sh ./build.sh && convert values.ppm ./outputs/ch12/img.png
 ```
 
 ## Sample Images
@@ -66,7 +60,7 @@ convert flight_path.ppm flight_path.png
 - [x] ch9
 - [x] ch10
 - [x] ch11
-- [ ] ch12
+- [x] ch12
 - [ ] ch13
 - [ ] ch14
 - [ ] ch15

@@ -36,3 +36,7 @@ class Material {
 bool operator==(Material lhs, Material rhs);
 Material glass_material(float refractive_index = 1.5, float reflective = 0.0);
 Material mirror_material();
+Material paper_material(Pattern *p);
+Material paper_material(Color c = Color(0.96, 0.93, 0.89));
+Material wood_material(Pattern *p, float shine = 300.0,
+                       float reflectivity = 0.15);
