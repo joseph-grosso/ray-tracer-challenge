@@ -15,6 +15,10 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 
 ## Sample Images
 
+### Cubes
+
+![Study Room](outputs/ch12/hq_study_hall.png "A quiet study room with some maps, a book, and a mirror")
+
 ### Reflection and Refraction
 
 ![Glass Ball with Air Pocket](outputs/ch11/hq_fresnel_effect_success.png "A glass sphere with an air bubble interior")
