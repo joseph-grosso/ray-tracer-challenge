@@ -19,10 +19,12 @@ int main() {
   SolidPattern blue_d = SolidPattern(Color(0.450, 0.584, 0.666));
   SolidPattern brown_l = SolidPattern(Color(0.41, 0.21, 0.0));
   SolidPattern brown_d = SolidPattern(Color(0.35, 0.15, 0.02));
-  SolidPattern green = SolidPattern(Color(0.0, 1.0, 0.0));
+  SolidPattern brown_ed = SolidPattern(Color(0.29, 0.07, 0.05));
+  SolidPattern green_world = SolidPattern(Color(0.53, 0.61, 0.20));
+  SolidPattern blue__world = SolidPattern(Color(0.33, 0.50, 0.79));
   SolidPattern gray_w = SolidPattern(Color(0.33, 0.29, 0.31));
 
-  // room patterns
+  // complex patterns
   StripePattern stripe_pat_1 = StripePattern(
       &red_l, &red_d,
       scaling_matrix(0.25, 0.25, 0.25) * rotation_y_matrix(M_PI / 3));
@@ -32,12 +34,14 @@ int main() {
   PerlinPattern wall_pat =
       PerlinPattern(&brown_l, &brown_d, 0, scaling_matrix(0.1, 0.1, 0.1));
   PerlinPattern table_pat =
-      PerlinPattern(&brown_l, &brown_d, 1, scaling_matrix(0.1, 0.1, 0.1));
+      PerlinPattern(&brown_ed, &brown_d, 1, scaling_matrix(0.1, 0.1, 0.1));
+  PerlinPattern world_pat = PerlinPattern(&green_world, &blue__world, 2,
+                                          scaling_matrix(0.1, 0.1, 0.1));
 
   // Define the objects
   // roof and floor
   Cube roof_and_floor =
-      Cube(scaling_matrix(100, 5, 100) * translation_matrix(0, 1, 0),
+      Cube(scaling_matrix(100, 15, 100) * translation_matrix(0, 1, 0),
            Material(&gray_w, Color(0, 0, 0),  // color
                     0.1,                      // ambient
                     0.5,                      // diffuse
@@ -62,23 +66,31 @@ int main() {
 
   // tabletop
   Cube table_top =
-      Cube(translation_matrix(0, 1.3, 5) * scaling_matrix(1, 0.2, 1) *
+      Cube(translation_matrix(0, 2, 1.5) * scaling_matrix(3, 0.2, 3) *
                translation_matrix(0, 1, 0),
            Material(&table_pat));
+  // table legs
+
+  // globe
+  Sphere globe = Sphere(translation_matrix(0, 3.5, 2.5), Material(&world_pat));
+  // globe stand
+
+  // map
 
   // Add a light source
-  PointLight light = PointLight(point(-1, 3, -4), Color(1, 1, 1));
+  PointLight light = PointLight(point(-0.5, 10, -4), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 3;
+  int ratio = 2;
   unsigned int x = ratio * 70;
   unsigned int y = ratio * 70;
-  Camera camera(x, y, M_PI / 1.8);
+  Camera camera(x, y, M_PI / 2.1);
   camera.transform =
-      view_transform(point(2, 5, -4), point(-0.5, 1, 0), vector(0, 1, 0));
+      view_transform(point(2, 5, -4), point(-0.1, 2.6, 0), vector(0, 1, 0));
 
   // Create world
-  World w(std::vector<Shape *>{&walls, &roof_and_floor, &mirror, &table_top},
+  World w(std::vector<Shape *>{&walls, &roof_and_floor, &mirror, &table_top,
+                               &globe},
           light);
 
   std::cout << std::setprecision(2) << std::fixed;
