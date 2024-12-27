@@ -35,8 +35,14 @@ int main() {
       PerlinPattern(&brown_l, &brown_d, 0, scaling_matrix(0.1, 0.1, 0.1));
   PerlinPattern table_pat =
       PerlinPattern(&brown_ed, &brown_d, 1, scaling_matrix(0.1, 0.1, 0.1));
-  PerlinPattern world_pat = PerlinPattern(&green_world, &blue__world, 2,
+  PerlinPattern globe_pat = PerlinPattern(&green_world, &blue__world, 2,
                                           scaling_matrix(0.1, 0.1, 0.1));
+  PerlinPattern map_pat = PerlinPattern(&green_world, &blue__world, 3,
+                                        scaling_matrix(0.4, 0.4, 0.4));
+
+  // common material
+  Material wood =
+      Material(&table_pat, Color(0, 0, 0), 0.1, 0.9, 0.9, 300.0, 0.15);
 
   // Define the objects
   // roof and floor
@@ -68,29 +74,29 @@ int main() {
   Cube table_top =
       Cube(translation_matrix(0, 2, 1.5) * scaling_matrix(3, 0.2, 3) *
                translation_matrix(0, 1, 0),
-           Material(&table_pat));
+           wood);
   // table legs
   Cube table_leg_front_left =
       Cube(translation_matrix(-2.7, 0, -2.7) *  // move front left
                translation_matrix(0, 0, 1.5) * scaling_matrix(0.3, 2, 0.3),
-           Material(&table_pat));
+           wood);
   Cube table_leg_front_right =
-      Cube(translation_matrix(2.8, 0, -2.7) *  // move front right
+      Cube(translation_matrix(2.7, 0, -2.7) *  // move front right
                translation_matrix(0, 0, 1.5) * scaling_matrix(0.3, 2, 0.3),
-           Material(&table_pat));
+           wood);
   Cube table_leg_back_left =
       Cube(translation_matrix(-2.7, 0, 2.7) *  // move back left
                translation_matrix(0, 0, 1.5) * scaling_matrix(0.3, 2, 0.3),
-           Material(&table_pat));
+           wood);
   Cube table_leg_back_right =
-      Cube(translation_matrix(2.8, 0, 2.7) *  // move back right
+      Cube(translation_matrix(2.7, 0, 2.7) *  // move back right
                translation_matrix(0, 0, 1.5) * scaling_matrix(0.3, 2, 0.3),
-           Material(&table_pat));
+           wood);
 
   // globe
   Sphere globe =
       Sphere(translation_matrix(0, 3.8, 2.5),
-             Material(&world_pat, Color(0, 0, 0), 0.3, 0.7, 0.2, 10.0));
+             Material(&globe_pat, Color(0, 0, 0), 0.3, 0.7, 0.2, 10.0));
 
   // globe stand
   Cube globe_stand =
@@ -99,14 +105,14 @@ int main() {
 
   // map
   Cube map =
-      Cube(translation_matrix(0, 2.7, 2.5) * scaling_matrix(0.4, 0.3, 0.4),
-           Material(&gray_w, Color(0, 0, 0), 0.1, 0.9, 0.9, 200.0, 0.1));
+      Cube(translation_matrix(-7.8, 4.5, 2) * scaling_matrix(1.0, 1.5, 3.0),
+           Material(&map_pat, Color(0, 0, 0), 0.1, 0.9, 0.1, 30.0, 0.1));
 
   // Add a light source
   PointLight light = PointLight(point(-0.5, 10, -4), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 1;
+  int ratio = 3;
   unsigned int x = ratio * 70;
   unsigned int y = ratio * 70;
   Camera camera(x, y, M_PI / 2.1);
@@ -114,22 +120,15 @@ int main() {
       view_transform(point(2, 5, -4), point(-0.1, 2.6, 0), vector(0, 1, 0));
 
   // Create world
-  World w(
-      std::vector<Shape *>{
-          &walls,
-          &roof_and_floor,
-          &mirror,
-          &table_top,
-          // globe vars
-          &globe,
-          &globe_stand,
-          // leg vars
-          &table_leg_front_left,
-          &table_leg_front_right,
-          &table_leg_back_left,
-          &table_leg_back_right,
-      },
-      light);
+  World w(std::vector<Shape *>{&walls, &roof_and_floor, &mirror, &table_top,
+                               // globe vars
+                               &globe, &globe_stand,
+                               // leg vars
+                               &table_leg_front_left, &table_leg_front_right,
+                               &table_leg_back_left, &table_leg_back_right,
+                               // map var
+                               &map},
+          light);
 
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << "New image generation starting!" << std::endl;
