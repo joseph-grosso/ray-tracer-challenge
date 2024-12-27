@@ -85,3 +85,7 @@ Material glass_material(float refractive_index, float reflective) {
   return Material(NULL, Color(0.1, 0.1, 0.1), 0.1, 0.1, 0.1, 300.0, reflective,
                   1.0, refractive_index);
 }
+
+Material mirror_material() {
+  return Material(NULL, Color(0.0, 0.0, 0.0), 0.0, 0.0, 0.5, 400.0, 1.0);
+};

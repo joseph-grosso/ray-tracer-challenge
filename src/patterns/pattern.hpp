@@ -13,7 +13,7 @@ class Pattern {
   Matrix transform;
 
  public:
-  Pattern(Matrix t) : transform(t){};
+  Pattern(Matrix t = identity_matrix(4)) : transform(t){};
   void set_transform(Matrix t) { transform = t; };
   Matrix get_transform() { return transform; };
   // The pattern_at function is purely virtual and must be
