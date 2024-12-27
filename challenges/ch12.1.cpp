@@ -72,7 +72,9 @@ int main() {
   // table legs
 
   // globe
-  Sphere globe = Sphere(translation_matrix(0, 3.5, 2.5), Material(&world_pat));
+  Sphere globe =
+      Sphere(translation_matrix(0, 3.5, 2.5),
+             Material(&world_pat, Color(0, 0, 0), 0.3, 0.7, 0.2, 10.0));
   // globe stand
 
   // map
