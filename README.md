@@ -45,10 +45,6 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 
 ![Simple purple ball](outputs/ch6/classic_purple_sphere.png "The first 3 dimensional object created by the renderer. The shading algorithm brings depth to the image.")
 
-### Deformed Ball
-
-![Deformed red ball](outputs/ch5/sheared_circle.png "A ball deformed by its shearing transformation. ")
-
 ## TODO
 
 ### Chapters
