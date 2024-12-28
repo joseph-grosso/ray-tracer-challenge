@@ -117,9 +117,3 @@ Color World::refracted_color(Computation comps, int remaining) {
   return color_at(refract_ray, remaining - 1) *
          comps.object->get_material().transparency;
 };
-
-float World::calculate_angle_ratio(Computation comps) {
-  float n_ratio = comps.n1 / comps.n2;
-  float cos_i = comps.eyev.dot(comps.normalv);
-  return n_ratio * n_ratio * (1 - cos_i * cos_i);
-}

@@ -19,7 +19,11 @@
 
 class World {
  private:
-  float calculate_angle_ratio(Computation comps);
+  float calculate_angle_ratio(Computation comps) {
+    float n_ratio = comps.n1 / comps.n2;
+    float cos_i = comps.eyev.dot(comps.normalv);
+    return n_ratio * n_ratio * (1 - cos_i * cos_i);
+  };
 
  public:
   std::vector<Shape *> objects;
