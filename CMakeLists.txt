@@ -64,7 +64,7 @@ if (test)
 
   target_link_libraries(
     test.out
-    src
+    raytracer_lib
   )
 
   include(GoogleTest)

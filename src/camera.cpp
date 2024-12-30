@@ -6,13 +6,6 @@
 #include <string>
 #include <vector>
 
-#include "canvas.hpp"
-#include "color.hpp"
-#include "matrix.hpp"
-#include "ray.hpp"
-#include "tuple.hpp"
-#include "world.hpp"
-
 Camera::Camera(unsigned int hsize, unsigned int vsize, float field_of_view) {
   // Computed values
   float half_view = tan(field_of_view / 2);
@@ -54,7 +47,7 @@ Ray Camera::ray_for_pixel(int px, int py) {
 
 Canvas Camera::render(World w, int reflections) {
   Canvas image(hsize, vsize);
-
+#pragma omp parallel for collapse(2) num_threads(4)
   for (int x = 0; x < hsize; x++) {
     for (int y = 0; y < vsize; y++) {
       Ray r = ray_for_pixel(x, y);

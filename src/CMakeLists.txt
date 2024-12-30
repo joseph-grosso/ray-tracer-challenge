@@ -1,5 +1,11 @@
-add_library(
-    src
+cmake_minimum_required(VERSION 3.16)
+
+project(RayTracer)
+
+find_package(OpenMP REQUIRED)
+
+set(
+    SOURCES
     canvas.cpp
     tuple.cpp
     color.cpp
@@ -22,10 +28,15 @@ add_library(
     shapes/cube.cpp
 )
 
+add_library(raytracer_lib ${SOURCES})
+
 message("Raytracer current source dir = ${CMAKE_CURRENT_SOURCE_DIR}")
- 
+# Link OpenMP libraries
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(raytracer_lib PUBLIC OpenMP::OpenMP_CXX)
+endif()
 target_include_directories(
-    src PUBLIC 
+    raytracer_lib PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/patterns
     ${CMAKE_CURRENT_SOURCE_DIR}/shapes

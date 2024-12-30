@@ -124,9 +124,9 @@ int main() {
   PointLight light = PointLight(point(-0.5, 10, -4), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 8;
-  unsigned int x = ratio * 100;
-  unsigned int y = ratio * 80;
+  int ratio = 1;
+  unsigned int x = ratio * 20;
+  unsigned int y = ratio * 20;
   Camera camera(x, y, M_PI / 2.5);
   camera.transform =
       view_transform(point(3, 4.5, -3.5), point(-0.1, 3.0, 0), vector(0, 1, 0));
