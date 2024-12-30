@@ -52,14 +52,13 @@ Ray Camera::ray_for_pixel(int px, int py) {
   return Ray(origin, direction);
 };
 
-Canvas Camera::render(World w) {
+Canvas Camera::render(World w, int reflections) {
   Canvas image(hsize, vsize);
 
   for (int x = 0; x < hsize; x++) {
     for (int y = 0; y < vsize; y++) {
       Ray r = ray_for_pixel(x, y);
-      // TODO: make reflections default configurable
-      Color c = w.color_at(r, 5);
+      Color c = w.color_at(r, reflections);
       image.write_pixel(c, x, y);
     };
   };

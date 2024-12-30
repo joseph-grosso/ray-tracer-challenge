@@ -24,5 +24,5 @@ class Camera {
   // Methods
   Camera(unsigned int hsize, unsigned int vsize, float field_of_view);
   Ray ray_for_pixel(int px, int py);
-  Canvas render(World w);
+  Canvas render(World w, int reflections = 5);
 };

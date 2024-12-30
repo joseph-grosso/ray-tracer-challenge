@@ -144,9 +144,8 @@ int main() {
                            // books
                            &cover, &page_1, &page_2,
                            // leg vars
-                           &table_leg_front_left,  // &table_leg_front_right,
-                           &table_leg_back_left,   // &table_leg_back_right,
-                                                   // map var
+                           &table_leg_front_left, &table_leg_back_left,
+                           // map var
                            &map},
       light);
 
