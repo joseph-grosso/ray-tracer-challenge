@@ -17,19 +17,18 @@
 
 // Chapter 13: Cylinder
 class Cylinder : public Shape {
- private:
+ public:
+  // Attributes
   float minimum;
   float maximum;
-
- public:
+  // Methods
   Cylinder(Matrix t = identity_matrix(4),
            float min = -std::numeric_limits<float>::infinity(),
            float max = std::numeric_limits<float>::infinity(),
            Material m = Material(), bool throws_shadow = true)
-      : Shape(t, m, throws_shadow) {
-    this->minimum = min;
-    this->maximum = max;
-  };
+      : Shape(t, m, throws_shadow), minimum{min}, maximum{max} {};
+  // TODO: get more classes to use the approach above for setting vars in the
+  // constructor
   float get_minimum() { return minimum; };
   float get_maximum() { return maximum; };
   void set_minimum() { this->minimum = minimum; };
