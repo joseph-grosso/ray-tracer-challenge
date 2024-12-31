@@ -2,59 +2,29 @@
 
 #include "intersection.hpp"
 
-// TODO: refactor when an intersection is done on a general "object" class
-// rather than just the sphere class.
 Intersections Cylinder::local_intersect(Ray r) {
-  auto [xtmin, xtmax] = check_axis(r.get_origin().x, r.get_direction().x);
-  auto [ytmin, ytmax] = check_axis(r.get_origin().y, r.get_direction().y);
-  auto [ztmin, ztmax] = check_axis(r.get_origin().z, r.get_direction().z);
+  float a = std::pow(r.get_direction().x, 2) + std::pow(r.get_direction().z, 2);
 
-  std::vector<float> max = std::vector<float>{xtmin, ytmin, ztmin};
-  std::vector<float> min = std::vector<float>{xtmax, ytmax, ztmax};
+  // check if ray is parallel to the y axis
+  if (equalByEpsilon(a, 0)) {
+    return Intersections();
+  };
 
-  float tmin = *std::max_element(max.begin(), max.end());
-  float tmax = *std::min_element(min.begin(), min.end());
+  float b = 2 * r.get_origin().x * r.get_direction().x +
+            2 * r.get_origin().z * r.get_direction().z;
+  float c = std::pow(r.get_origin().x, 2) + std::pow(r.get_origin().z, 2) - 1;
+  float disc = std::pow(b, 2) - 4 * a * c;
 
-  if (tmin > tmax) return Intersections();
+  // ray doesn't intersect cylinder
+  if (disc < 0) {
+    return Intersections();
+  };
 
-  Intersection tmin_inter = Intersection(tmin, this);
-  Intersection tmax_inter = Intersection(tmax, this);
-
-  return Intersections(std::vector<Intersection>{tmin_inter, tmax_inter});
+  // placeholder
+  Intersection placeholder = Intersection(1, this);
+  return Intersections(std::vector<Intersection>{placeholder});
 };
 
-std::tuple<float, float> Cylinder::check_axis(float origin, float direction) {
-  float tmin_numerator = (-1 - origin);
-  float tmax_numerator = (1 - origin);
-  float tmin, tmax;
-
-  if (!equalByEpsilon(direction, 0)) {
-    tmin = tmin_numerator / direction;
-    tmax = tmax_numerator / direction;
-  } else {
-    tmin = tmin_numerator *
-           std::numeric_limits<float>::infinity();  // TODO: use max instead?
-    tmax = tmax_numerator * std::numeric_limits<float>::infinity();
-  };
-
-  if (tmin > tmax) {
-    float temp = tmin;
-    tmin = tmax;
-    tmax = temp;
-  };
-
-  return std::make_tuple(tmin, tmax);
-}
-
 Tuple Cylinder::local_normal_at(float x, float y, float z) {
-  std::vector<float> vals =
-      std::vector<float>{std::abs(x), std::abs(y), std::abs(z)};
-  float maxc = *std::max_element(vals.begin(), vals.end());
-
-  if (maxc == std::abs(x)) {
-    return vector(x, 0, 0);
-  } else if (maxc == std::abs(y)) {
-    return vector(0, y, 0);
-  };
-  return vector(0, 0, z);
+  return vector(0, 0, 0);
 };

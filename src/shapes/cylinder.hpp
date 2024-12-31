@@ -24,7 +24,4 @@ class Cylinder : public Shape {
   Tuple local_normal_at(float x, float y, float z);
   Tuple local_normal_at(Tuple p) { return local_normal_at(p.x, p.y, p.z); };
   Intersections local_intersect(Ray r);
-
- private:
-  std::tuple<float, float> check_axis(float origin, float direction);
 };

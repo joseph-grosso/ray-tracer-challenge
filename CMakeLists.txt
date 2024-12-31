@@ -55,6 +55,7 @@ if (test)
     tests/ch10_patterns_tests.cpp
     tests/ch11_reflections_tests.cpp
     tests/ch12_cube_tests.cpp
+    tests/ch13_cylinder_tests.cpp
   )
 
   target_link_libraries(

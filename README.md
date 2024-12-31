@@ -64,6 +64,9 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 - [ ] ch15
 - [ ] ch16
 - [ ] Bonus chapters (online)
+  - [ ] Soft shadows
+  - [ ] Bounding Boxes
+  - [ ] Texture Mapping
 
 ### Code Enhancements
 
