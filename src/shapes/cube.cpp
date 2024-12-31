@@ -32,8 +32,7 @@ std::tuple<float, float> Cube::check_axis(float origin, float direction) {
     tmin = tmin_numerator / direction;
     tmax = tmax_numerator / direction;
   } else {
-    tmin = tmin_numerator *
-           std::numeric_limits<float>::infinity();  // TODO: use max instead?
+    tmin = tmin_numerator * std::numeric_limits<float>::infinity();
     tmax = tmax_numerator * std::numeric_limits<float>::infinity();
   };
 

@@ -17,10 +17,23 @@
 
 // Chapter 13: Cylinder
 class Cylinder : public Shape {
+ private:
+  float minimum;
+  float maximum;
+
  public:
-  Cylinder(Matrix t = identity_matrix(4), Material m = Material(),
-           bool throws_shadow = true)
-      : Shape(t, m, throws_shadow){};
+  Cylinder(Matrix t = identity_matrix(4),
+           float min = -std::numeric_limits<float>::infinity(),
+           float max = std::numeric_limits<float>::infinity(),
+           Material m = Material(), bool throws_shadow = true)
+      : Shape(t, m, throws_shadow) {
+    this->minimum = min;
+    this->maximum = max;
+  };
+  float get_minimum() { return minimum; };
+  float get_maximum() { return maximum; };
+  void set_minimum() { this->minimum = minimum; };
+  void set_maximum() { this->maximum = maximum; };
   Tuple local_normal_at(float x, float y, float z);
   Tuple local_normal_at(Tuple p) { return local_normal_at(p.x, p.y, p.z); };
   Intersections local_intersect(Ray r);

@@ -77,3 +77,12 @@ INSTANTIATE_TEST_SUITE_P(
                       std::make_tuple(point(0, 5, -1), vector(0, 0, -1)),
                       std::make_tuple(point(0, -2, 1), vector(0, 0, 1)),
                       std::make_tuple(point(-1, 1, 0), vector(-1, 0, 0))));
+
+// Scenario: The default minimum and maximum for a cylinder
+// p182
+TEST(TestCylinderCaps, DefaultMinAndMax) {
+  Cylinder cyl = Cylinder();
+
+  EXPECT_EQ(cyl.get_minimum(), -std::numeric_limits<float>::infinity());
+  EXPECT_EQ(cyl.get_maximum(), std::numeric_limits<float>::infinity());
+}
