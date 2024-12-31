@@ -56,3 +56,24 @@ INSTANTIATE_TEST_SUITE_P(
                       std::make_tuple(point(0, 0, -5), vector(0, 0, 1), 4, 6),
                       std::make_tuple(point(0.5, 0, -5), vector(0.1, 1, 1),
                                       6.80798, 7.08872)));
+
+class TestNormalVector
+    : public testing::TestWithParam<std::tuple<Tuple, Tuple>> {};
+
+// Scenario: Normal vector on a cylinder
+// p181
+TEST_P(TestNormalVector, NormalOfCylinder) {
+  Cylinder cyl = Cylinder();
+  auto [point_, normal] = GetParam();
+
+  Tuple n = cyl.local_normal_at(point_);
+
+  EXPECT_EQ(n, normal);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    TestCylinder, TestNormalVector,
+    ::testing::Values(std::make_tuple(point(1, 0, 0), vector(1, 0, 0)),
+                      std::make_tuple(point(0, 5, -1), vector(0, 0, -1)),
+                      std::make_tuple(point(0, -2, 1), vector(0, 0, 1)),
+                      std::make_tuple(point(-1, 1, 0), vector(-1, 0, 0))));

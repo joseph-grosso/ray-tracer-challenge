@@ -26,5 +26,5 @@ Intersections Cylinder::local_intersect(Ray r) {
 };
 
 Tuple Cylinder::local_normal_at(float x, float y, float z) {
-  return vector(0, 0, 0);
+  return vector(x, 0, z);
 };
