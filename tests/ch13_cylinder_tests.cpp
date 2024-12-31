@@ -86,3 +86,28 @@ TEST(TestCylinderCaps, DefaultMinAndMax) {
   EXPECT_EQ(cyl.get_minimum(), -std::numeric_limits<float>::infinity());
   EXPECT_EQ(cyl.get_maximum(), std::numeric_limits<float>::infinity());
 }
+
+class TestConstrainedCylinder
+    : public testing::TestWithParam<std::tuple<Tuple, Tuple, float>> {};
+
+// Scenario: Intersecting constrained cylinder
+// p183
+TEST_P(TestConstrainedCylinder, IntersectConstrainedCylinder) {
+  Cylinder cyl = Cylinder(identity_matrix(4), 1, 2);
+  auto [point_, direction, count] = GetParam();
+  direction = direction.normalize();
+  Ray r = Ray(point_, direction);
+
+  Intersections xs = cyl.local_intersect(r);
+
+  EXPECT_EQ(xs.count, count);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    TestCylinder, TestConstrainedCylinder,
+    ::testing::Values(std::make_tuple(point(0, 1.5, 0), vector(0.1, 1, 0), 0),
+                      std::make_tuple(point(0, 3, -5), vector(0, 0, 1), 0),
+                      std::make_tuple(point(0, 0, -5), vector(0, 0, 1), 0),
+                      std::make_tuple(point(0, 2, -5), vector(0, 0, 1), 0),
+                      std::make_tuple(point(0, 1, -5), vector(0, 0, 1), 0),
+                      std::make_tuple(point(0, 1.5, -2), vector(0, 0, 1), 2)));

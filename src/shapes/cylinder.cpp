@@ -20,9 +20,27 @@ Intersections Cylinder::local_intersect(Ray r) {
     return Intersections();
   };
 
-  Intersection t0 = Intersection((-b - std::sqrt(disc)) / (2 * a), this);
-  Intersection t1 = Intersection((-b + std::sqrt(disc)) / (2 * a), this);
-  return Intersections(std::vector<Intersection>{t0, t1});
+  float t0 = (-b - std::sqrt(disc)) / (2 * a);
+  float t1 = (-b + std::sqrt(disc)) / (2 * a);
+  if (t0 > t1) {
+    float temp = t1;
+    t1 = t0;
+    t0 = temp;
+  };
+
+  std::vector<Intersection> xs = std::vector<Intersection>{};
+
+  float y0 = r.get_origin().y + t0 * r.get_direction().y;
+  if (minimum < y0 && y0 < maximum) {
+    xs.push_back(Intersection(t0, this));
+  };
+
+  float y1 = r.get_origin().y + t1 * r.get_direction().y;
+  if (minimum < y1 && y1 < maximum) {
+    xs.push_back(Intersection(t1, this));
+  };
+
+  return Intersections(xs);
 };
 
 Tuple Cylinder::local_normal_at(float x, float y, float z) {
