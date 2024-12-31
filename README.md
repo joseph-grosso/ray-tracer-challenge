@@ -27,7 +27,9 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 
 ### Patterns
 
-![Spheres On A Plane with Stripes](outputs/ch10/hq_stripes_and_spheres.png "Some striped spheres sit on a plane, showing the first implementation of a pattern object.")
+![Permutation Pattern example](outputs/ch10/hq_permutation_pattern_example.png "An example of the pattern permuter.")
+
+![Alternating Pattern Floor](outputs/ch10/hq_alternating_floor.png "A great example of combining patterns shown in an infinite plane.")
 
 ### Spheres and Planes
 
@@ -77,6 +79,6 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 - [x] Separate Color class into its own header file
 - [x] Rename all .h files to .hpp
 - [ ] Fix download location of the PerlinNoise file
-- [ ] Implement the "Pattern Permuter" Perlin Noise pattern
+- [x] Implement the "Pattern Permuter" Perlin Noise pattern
 - [ ] Refactor "material" class to improve cpp structure (public attributes -> private)
 

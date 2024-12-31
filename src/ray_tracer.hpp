@@ -12,9 +12,8 @@
 #include "tuple.hpp"
 #include "world.hpp"
 // shapes
-// TODO: move the definitions of these into shared header files in
-// their directory for ease of use
 #include "cube.hpp"
+#include "cylinder.hpp"
 #include "plane.hpp"
 #include "shape.hpp"
 #include "sphere.hpp"
@@ -25,6 +24,7 @@
 #include "gradient_pattern.hpp"
 #include "pattern.hpp"
 #include "perlin_pattern.hpp"
+#include "permutation_pattern.hpp"
 #include "radial_ring_pattern.hpp"
 #include "solid_pattern.hpp"
 #include "stripe_pattern.hpp"

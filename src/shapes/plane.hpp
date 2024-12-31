@@ -29,8 +29,6 @@ class Plane : public Shape {
   };
   Tuple local_normal_at(float x, float y, float z);
   Tuple local_normal_at(Tuple p);
-  // TODO: refactor when an intersection is done on a general "object" class
-  // rather than just the sphere class.
   Intersections local_intersect(Ray r);
 };
 

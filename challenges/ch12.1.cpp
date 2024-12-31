@@ -10,8 +10,8 @@ using namespace std::chrono;
 // cube room
 int main() {
   // base patterns
-  SolidPattern off_white = SolidPattern(Color(0.9, 0.9, 0.9));
-  SolidPattern off_black = SolidPattern(Color(0.1, 0.1, 0.1));
+  SolidPattern off_white = SolidPattern(Color(1, 1, 1));
+  SolidPattern off_black = SolidPattern(Color(0, 0, 0));
 
   SolidPattern red_l = SolidPattern(Color(0.886, 0.247, 0.266));
   SolidPattern red_d = SolidPattern(Color(0.443, 0.121, 0.133));

@@ -15,12 +15,11 @@
 #include "shape.hpp"
 #include "tuple.hpp"
 
-// Chapter 12: Cubes
-class Cube : public Shape {
+// Chapter 13: Cylinder
+class Cylinder : public Shape {
  public:
-  // Methods
-  Cube(Matrix t = identity_matrix(4), Material m = Material(),
-       bool throws_shadow = true)
+  Cylinder(Matrix t = identity_matrix(4), Material m = Material(),
+           bool throws_shadow = true)
       : Shape(t, m, throws_shadow){};
   Tuple local_normal_at(float x, float y, float z);
   Tuple local_normal_at(Tuple p) { return local_normal_at(p.x, p.y, p.z); };
