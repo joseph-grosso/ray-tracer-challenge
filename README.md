@@ -79,5 +79,6 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 - [x] Rename all .h files to .hpp
 - [ ] Fix download location of the PerlinNoise file
 - [x] Implement the "Pattern Permuter" Perlin Noise pattern
-- [ ] Refactor "material" class to improve cpp structure (public attributes -> private)
+- [ ] make redundant private attributes into public variables: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c131-avoid-trivial-getters-and-setters
+- [ ] Use initialization instead of assignment: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c49-prefer-initialization-to-assignment-in-constructors
 
