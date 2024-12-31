@@ -21,18 +21,25 @@ class Cylinder : public Shape {
   // Attributes
   float minimum;
   float maximum;
+  bool closed;
   // Methods
   Cylinder(Matrix t = identity_matrix(4),
            float min = -std::numeric_limits<float>::infinity(),
            float max = std::numeric_limits<float>::infinity(),
-           Material m = Material(), bool throws_shadow = true)
-      : Shape(t, m, throws_shadow), minimum{min}, maximum{max} {};
+           bool closed_ = false, Material m = Material(),
+           bool throws_shadow = true)
+      : Shape(t, m, throws_shadow),
+        minimum{min},
+        maximum{max},
+        closed{closed_} {};
   // TODO: get more classes to use the approach above for setting vars in the
   // constructor
   float get_minimum() { return minimum; };
   float get_maximum() { return maximum; };
-  void set_minimum() { this->minimum = minimum; };
-  void set_maximum() { this->maximum = maximum; };
+  float get_closed() { return maximum; };
+  void set_minimum(float minimum) { this->minimum = minimum; };
+  void set_maximum(float maximum) { this->maximum = maximum; };
+  void set_closed(bool closed) { this->closed = closed; };
   Tuple local_normal_at(float x, float y, float z);
   Tuple local_normal_at(Tuple p) { return local_normal_at(p.x, p.y, p.z); };
   Intersections local_intersect(Ray r);

@@ -111,3 +111,11 @@ INSTANTIATE_TEST_SUITE_P(
                       std::make_tuple(point(0, 2, -5), vector(0, 0, 1), 0),
                       std::make_tuple(point(0, 1, -5), vector(0, 0, 1), 0),
                       std::make_tuple(point(0, 1.5, -2), vector(0, 0, 1), 2)));
+
+// Scenario: The default closed value for a cylinder
+// p185
+TEST(TestCylinderCaps, DefaultNoCaps) {
+  Cylinder cyl = Cylinder();
+
+  EXPECT_FALSE(cyl.closed);
+}
