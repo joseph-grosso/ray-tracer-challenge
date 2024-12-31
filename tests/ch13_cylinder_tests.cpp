@@ -31,3 +31,28 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::Values(std::make_tuple(point(1, 0, 0), vector(0, 1, 0)),
                       std::make_tuple(point(0, 0, 0), vector(0, 1, 0)),
                       std::make_tuple(point(0, 0, -5), vector(1, 1, 1))));
+
+class TestStrike
+    : public testing::TestWithParam<std::tuple<Tuple, Tuple, float, float>> {};
+
+// Scenario: A ray strikes a cylinder
+// p180
+TEST_P(TestStrike, RayHits) {
+  Cylinder cyl = Cylinder();
+  auto [origin, direction, t0, t1] = GetParam();
+  direction = direction.normalize();
+  Ray r = Ray(origin, direction);
+
+  Intersections xs = cyl.local_intersect(r);
+
+  EXPECT_EQ(xs.count, 2);
+  EXPECT_TRUE(equalByEpsilon(xs[0].t, t0));
+  EXPECT_TRUE(equalByEpsilon(xs[1].t, t1));
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    TestCylinder, TestStrike,
+    ::testing::Values(std::make_tuple(point(1, 0, -5), vector(0, 0, 1), 5, 5),
+                      std::make_tuple(point(0, 0, -5), vector(0, 0, 1), 4, 6),
+                      std::make_tuple(point(0.5, 0, -5), vector(0.1, 1, 1),
+                                      6.80798, 7.08872)));

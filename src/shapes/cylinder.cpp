@@ -20,9 +20,9 @@ Intersections Cylinder::local_intersect(Ray r) {
     return Intersections();
   };
 
-  // placeholder
-  Intersection placeholder = Intersection(1, this);
-  return Intersections(std::vector<Intersection>{placeholder});
+  Intersection t0 = Intersection((-b - std::sqrt(disc)) / (2 * a), this);
+  Intersection t1 = Intersection((-b + std::sqrt(disc)) / (2 * a), this);
+  return Intersections(std::vector<Intersection>{t0, t1});
 };
 
 Tuple Cylinder::local_normal_at(float x, float y, float z) {
