@@ -31,17 +31,13 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 
 ![Alternating Pattern Floor](outputs/ch10/hq_alternating_floor.png "A great example of combining patterns shown in an infinite plane.")
 
-### Spheres and Planes
+### "Hand Puppet"
 
-![Walls with Planes](outputs/ch9/high_res_multi_wall_pic.png "A wall made of planes interacting with a deformed sphere.")
+![Hand puppet](outputs/ch8/hi_res_hand_puppet.png "A 'hand puppet' made up of transformed spheres, highlighting the effect of shadows.")
 
 ### Spheres with shadows
 
 ![Spheres with shadows](outputs/ch9/high_res_plane_pic.png "Spheres with shadows from an outside light source on an infinite plane.")
-
-### "Hand Puppet"
-
-![Hand puppet](outputs/ch8/hi_res_hand_puppet.png "A 'hand puppet' made up of transformed spheres, highlighting the effect of shadows.")
 
 ### Baby's First 3D Rendering
 
