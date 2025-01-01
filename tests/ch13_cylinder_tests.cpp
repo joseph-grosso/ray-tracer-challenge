@@ -119,3 +119,27 @@ TEST(TestCylinderCaps, DefaultNoCaps) {
 
   EXPECT_FALSE(cyl.closed);
 }
+
+class TestCappedCylinder
+    : public testing::TestWithParam<std::tuple<Tuple, Tuple, float>> {};
+
+// Scenario: Intersecting constrained, capped cylinder
+// p185
+TEST_P(TestCappedCylinder, IntersectCappedCylinder) {
+  Cylinder cyl = Cylinder(identity_matrix(4), 1, 2, true);
+  auto [point_, direction, count] = GetParam();
+  direction = direction.normalize();
+  Ray r = Ray(point_, direction);
+
+  Intersections xs = cyl.local_intersect(r);
+
+  EXPECT_EQ(xs.count, count);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    TestCylinder, TestCappedCylinder,
+    ::testing::Values(std::make_tuple(point(0, 3, 0), vector(0, -1, 0), 2),
+                      std::make_tuple(point(0, 3, -2), vector(0, -1, 2), 2),
+                      std::make_tuple(point(0, 4, -2), vector(0, -1, 1), 2),
+                      std::make_tuple(point(0, 0, -2), vector(0, 1, 2), 2),
+                      std::make_tuple(point(0, -1, -2), vector(0, 1, 1), 2)));
