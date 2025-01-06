@@ -17,6 +17,9 @@
 
 // Chapter 13: Cylinder
 class Cylinder : public Shape {
+ private:
+  bool check_cap(Ray r, float t);
+
  public:
   // Attributes
   float minimum;
@@ -43,4 +46,5 @@ class Cylinder : public Shape {
   Tuple local_normal_at(float x, float y, float z);
   Tuple local_normal_at(Tuple p) { return local_normal_at(p.x, p.y, p.z); };
   Intersections local_intersect(Ray r);
+  void intersect_caps(Ray ray, std::vector<Intersection> *xs);
 };

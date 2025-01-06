@@ -4,10 +4,12 @@
 
 Intersections Cylinder::local_intersect(Ray r) {
   float a = std::pow(r.get_direction().x, 2) + std::pow(r.get_direction().z, 2);
+  std::vector<Intersection> xs = std::vector<Intersection>{};
 
   // check if ray is parallel to the y axis
   if (equalByEpsilon(a, 0)) {
-    return Intersections();
+    intersect_caps(r, &xs);
+    return xs;
   };
 
   float b = 2 * r.get_origin().x * r.get_direction().x +
@@ -28,8 +30,6 @@ Intersections Cylinder::local_intersect(Ray r) {
     t0 = temp;
   };
 
-  std::vector<Intersection> xs = std::vector<Intersection>{};
-
   float y0 = r.get_origin().y + t0 * r.get_direction().y;
   if (minimum < y0 && y0 < maximum) {
     xs.push_back(Intersection(t0, this));
@@ -40,9 +40,36 @@ Intersections Cylinder::local_intersect(Ray r) {
     xs.push_back(Intersection(t1, this));
   };
 
+  intersect_caps(r, &xs);
+
   return Intersections(xs);
 };
 
 Tuple Cylinder::local_normal_at(float x, float y, float z) {
   return vector(x, 0, z);
+};
+
+bool Cylinder::check_cap(Ray r, float t) {
+  float x = r.get_origin().x + t * r.get_direction().x;
+  float z = r.get_origin().z + t * r.get_direction().z;
+
+  float val = std::pow(x, 2) + std::pow(z, 2);
+
+  return val <= 1.0 || equalByEpsilon(val, 1.0);
+};
+
+void Cylinder::intersect_caps(Ray ray, std::vector<Intersection> *xs) {
+  if (!this->closed || equalByEpsilon(ray.get_direction().y, 0)) {
+    return;
+  };
+
+  float t = (minimum - ray.get_origin().y) / ray.get_direction().y;
+  if (check_cap(ray, t)) {
+    xs->push_back(Intersection(t, this));
+  };
+
+  t = (maximum - ray.get_origin().y) / ray.get_direction().y;
+  if (check_cap(ray, t)) {
+    xs->push_back(Intersection(t, this));
+  };
 };
