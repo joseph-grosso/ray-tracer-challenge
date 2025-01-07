@@ -120,6 +120,29 @@ TEST(TestCylinderCaps, DefaultNoCaps) {
   EXPECT_FALSE(cyl.closed);
 }
 
+class TestCappedCylinderNormal
+    : public testing::TestWithParam<std::tuple<Tuple, Tuple>> {};
+
+// Scenario: Normal vector on a cylinder's end caps
+// p187
+TEST_P(TestCappedCylinderNormal, IntersectCappedCylinder) {
+  Cylinder cyl = Cylinder(identity_matrix(4), 1, 2, true);
+  auto [point_, normal] = GetParam();
+
+  Tuple n = cyl.local_normal_at(point_);
+
+  EXPECT_EQ(n, normal);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    TestCylinder, TestCappedCylinderNormal,
+    ::testing::Values(std::make_tuple(point(0, 1, 0), vector(0, -1, 0)),
+                      std::make_tuple(point(0.5, 1, 0), vector(0, -1, 0)),
+                      std::make_tuple(point(0, 1, 0.5), vector(0, -1, 0)),
+                      std::make_tuple(point(0, 2, 0), vector(0, 1, 0)),
+                      std::make_tuple(point(0.5, 2, 0), vector(0, 1, 0)),
+                      std::make_tuple(point(0, 2, 0.5), vector(0, 1, 0))));
+
 class TestCappedCylinder
     : public testing::TestWithParam<std::tuple<Tuple, Tuple, float>> {};
 
