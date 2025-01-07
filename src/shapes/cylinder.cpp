@@ -46,6 +46,16 @@ Intersections Cylinder::local_intersect(Ray r) {
 };
 
 Tuple Cylinder::local_normal_at(float x, float y, float z) {
+  // square of distance from the y axis
+  float dist = std::pow(x, 2) + std::pow(z, 2);
+
+  if (dist < 1 && y >= maximum - 0.0001) {  // TODO: replace with the epsilon
+    return vector(0, 1, 0);
+  } else if (dist < 1 &&
+             y <= minimum + 0.0001) {  // TODO: replace with the epsilon
+    return vector(0, -1, 0);
+  };
+
   return vector(x, 0, z);
 };
 
