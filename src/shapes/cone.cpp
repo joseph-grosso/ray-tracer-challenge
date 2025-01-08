@@ -1,5 +1,7 @@
 #include "cone.hpp"
 
+#include <iostream>
+
 #include "intersection.hpp"
 
 Intersections Cone::local_intersect(Ray r) {
@@ -19,9 +21,8 @@ Intersections Cone::local_intersect(Ray r) {
       return Intersections();
     } else {
       // if a is zero but b isn't:
-      // return - c / (2 * b)
+      // c / (2 * b)
       xs.push_back(Intersection(-c / (2 * b), this));
-      return Intersections(xs);
     };
   };
 
@@ -70,13 +71,13 @@ Tuple Cone::local_normal_at(float x, float y, float z) {
   return vector(x, 0, z);
 };
 
-bool Cone::check_cap(Ray r, float t) {
+bool Cone::check_cap(Ray r, float t, float radius) {
   float x = r.get_origin().x + t * r.get_direction().x;
   float z = r.get_origin().z + t * r.get_direction().z;
 
   float val = std::pow(x, 2) + std::pow(z, 2);
 
-  return val <= 1.0 || equalByEpsilon(val, 1.0);
+  return val <= std::abs(radius) || equalByEpsilon(val, 1.0);
 };
 
 void Cone::intersect_caps(Ray ray, std::vector<Intersection> *xs) {
@@ -85,12 +86,12 @@ void Cone::intersect_caps(Ray ray, std::vector<Intersection> *xs) {
   };
 
   float t = (minimum - ray.get_origin().y) / ray.get_direction().y;
-  if (check_cap(ray, t)) {
+  if (check_cap(ray, t, minimum)) {
     xs->push_back(Intersection(t, this));
   };
 
   t = (maximum - ray.get_origin().y) / ray.get_direction().y;
-  if (check_cap(ray, t)) {
+  if (check_cap(ray, t, maximum)) {
     xs->push_back(Intersection(t, this));
   };
 };

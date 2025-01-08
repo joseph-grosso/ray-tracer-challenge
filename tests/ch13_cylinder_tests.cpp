@@ -205,3 +205,25 @@ TEST(TestCone, ConeIntersectWithParallelRay) {
   EXPECT_EQ(xs.count, 1);
   EXPECT_TRUE(equalByEpsilon(xs[0].t, 0.35355));
 }
+
+class TestConeEndCaps
+    : public testing::TestWithParam<std::tuple<Tuple, Tuple, float>> {};
+
+// Scenario: A ray intersects a cone's end caps
+// p190
+TEST_P(TestConeEndCaps, ConeRayHitsCaps) {
+  Cone c = Cone(identity_matrix(4), -0.5, 0.5, true);
+  auto [origin, direction, count] = GetParam();
+  direction = direction.normalize();
+  Ray r = Ray(origin, direction);
+
+  Intersections xs = c.local_intersect(r);
+
+  EXPECT_EQ(xs.count, count);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    TestCone, TestConeEndCaps,
+    ::testing::Values(std::make_tuple(point(0, 0, -5), vector(0, 1, 0), 0),
+                      std::make_tuple(point(0, 0, -0.25), vector(0, 1, 1), 2),
+                      std::make_tuple(point(0, 0, -0.25), vector(0, 1, 0), 4)));

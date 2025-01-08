@@ -18,7 +18,7 @@
 // Chapter 13: Cone
 class Cone : public Shape {
  private:
-  bool check_cap(Ray r, float t);
+  bool check_cap(Ray r, float t, float y_val);
 
  public:
   // Attributes
