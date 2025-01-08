@@ -18,10 +18,11 @@ class Shape {
   bool throws_shadow;
 
  public:
+  // Attributes
+  Shape *parent;
   // Methods
   Shape(Matrix t = identity_matrix(4), Material m = Material(),
-        bool throws_shadow = true);
-  Shape(Matrix t) : Shape(t, Material()){};
+        bool throws_shadow = true, Shape *parent = NULL);
   Shape(Material m) : Shape(identity_matrix(4), m){};
   Matrix get_transform();
   void set_transform(Matrix);

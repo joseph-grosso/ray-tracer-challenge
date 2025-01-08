@@ -11,10 +11,11 @@
 #include "tuple.hpp"
 
 // Chapter 9: Shapes and Planes
-Shape::Shape(Matrix t, Material m, bool throws_shadow) {
+Shape::Shape(Matrix t, Material m, bool throws_shadow, Shape* parent) {
   this->transformation = t;
   this->material = m;
   this->throws_shadow = throws_shadow;
+  this->parent = parent;
 };
 
 Matrix Shape::get_transform() { return transformation; };

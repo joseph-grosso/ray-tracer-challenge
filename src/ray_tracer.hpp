@@ -15,6 +15,7 @@
 #include "cone.hpp"
 #include "cube.hpp"
 #include "cylinder.hpp"
+#include "group.hpp"
 #include "plane.hpp"
 #include "shape.hpp"
 #include "sphere.hpp"

@@ -169,3 +169,12 @@ TEST(TestPlanes, IntersectRayBelow) {
   EXPECT_EQ(xs[0].t, 1);
   EXPECT_EQ(xs[0].object, &p);
 }
+
+// ch14: Groups
+// Scenario: All shapes have a parent attribute
+// p195
+TEST(TestAbstractShape, ParentAttribute) {
+  TestShape s = TestShape();
+
+  EXPECT_EQ(s.parent, nullptr);
+}
