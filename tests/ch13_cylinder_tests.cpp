@@ -227,3 +227,24 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::Values(std::make_tuple(point(0, 0, -5), vector(0, 1, 0), 0),
                       std::make_tuple(point(0, 0, -0.25), vector(0, 1, 1), 2),
                       std::make_tuple(point(0, 0, -0.25), vector(0, 1, 0), 4)));
+
+class TestConeCapNormals
+    : public testing::TestWithParam<std::tuple<Tuple, Tuple>> {};
+
+// Scenario: A ray intersects a cone's end caps
+// p190
+TEST_P(TestConeCapNormals, ConeRayHitsCaps) {
+  Cone c = Cone();
+  auto [point_, normal] = GetParam();
+
+  Tuple n = c.local_normal_at(point_);
+
+  EXPECT_EQ(n, normal);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    TestCone, TestConeCapNormals,
+    ::testing::Values(std::make_tuple(point(0, 0, 0), vector(0, 0, 0)),
+                      std::make_tuple(point(1, 1, 1),
+                                      vector(1, -std::sqrt(2), 1)),
+                      std::make_tuple(point(-1, -1, 0), vector(-1, 1, 0))));

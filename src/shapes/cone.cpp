@@ -68,7 +68,11 @@ Tuple Cone::local_normal_at(float x, float y, float z) {
     return vector(0, -1, 0);
   };
 
-  return vector(x, 0, z);
+  float y_return = std::sqrt(std::pow(x, 2) + std::pow(z, 2));
+  if (y > 0) {
+    y_return = -y_return;
+  }
+  return vector(x, y_return, z);
 };
 
 bool Cone::check_cap(Ray r, float t, float radius) {
