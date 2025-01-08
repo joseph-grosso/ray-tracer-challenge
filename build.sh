@@ -2,6 +2,6 @@ set -eux
 
 cd build
 cmake ..
-make
+make challenge.out
 cd ..
 ./build/challenges/challenge.out
