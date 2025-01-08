@@ -166,3 +166,42 @@ INSTANTIATE_TEST_SUITE_P(
                       std::make_tuple(point(0, 4, -2), vector(0, -1, 1), 2),
                       std::make_tuple(point(0, 0, -2), vector(0, 1, 2), 2),
                       std::make_tuple(point(0, -1, -2), vector(0, 1, 1), 2)));
+
+class TestConeStrike
+    : public testing::TestWithParam<std::tuple<Tuple, Tuple, float, float>> {};
+
+// Scenario: A ray strikes a cone
+// p189
+TEST_P(TestConeStrike, ConeRayHits) {
+  Cone c = Cone();
+  auto [origin, direction, t0, t1] = GetParam();
+  direction = direction.normalize();
+  Ray r = Ray(origin, direction);
+
+  Intersections xs = c.local_intersect(r);
+
+  EXPECT_EQ(xs.count, 2);
+  EXPECT_TRUE(equalByEpsilon(xs[0].t, t0));
+  EXPECT_TRUE(equalByEpsilon(xs[1].t, t1));
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    TestCone, TestConeStrike,
+    ::testing::Values(std::make_tuple(point(0, 0, -5), vector(0, 0, 1), 5, 5),
+                      std::make_tuple(point(0, 0, -5), vector(1, 1, 1), 8.66025,
+                                      8.66025),
+                      std::make_tuple(point(1, 1, -5), vector(-0.5, -1, 1),
+                                      4.55006, 49.44994)));
+
+// Scenario: A ray strikes a cone
+// p190
+TEST(TestCone, ConeIntersectWithParallelRay) {
+  Cone c = Cone();
+  auto direction = vector(0, 1, 1).normalize();
+  Ray r = Ray(point(0, 0, -1), direction);
+
+  Intersections xs = c.local_intersect(r);
+
+  EXPECT_EQ(xs.count, 1);
+  EXPECT_TRUE(equalByEpsilon(xs[0].t, 0.35355));
+}

@@ -12,6 +12,7 @@
 #include "tuple.hpp"
 #include "world.hpp"
 // shapes
+#include "cone.hpp"
 #include "cube.hpp"
 #include "cylinder.hpp"
 #include "plane.hpp"
