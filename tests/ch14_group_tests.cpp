@@ -16,4 +16,29 @@ TEST(TestGroups, CreateNewGroup) {
 
   EXPECT_EQ(g.get_transform(), identity_matrix(4));
   EXPECT_EQ(g.get_count(), 0);
+  EXPECT_EQ(g.is_empty(), true);
+}
+
+class TestShape : public Shape {
+ public:
+  // default ray
+  Ray saved_ray = Ray(point(0, 0, 0), vector(1, 0, 0));
+  Intersections local_intersect(Ray r) {
+    this->saved_ray = r;
+    return Intersections();
+  };
+  Tuple local_normal_at(Tuple p) { return vector(p.x, p.y, p.z); };
+};
+
+// Scenario: Adding a child to a group
+// p195
+TEST(TestGroups, AddChildToGroup) {
+  Group g = Group();
+  TestShape s = TestShape();
+
+  g.add_child(&s);
+
+  EXPECT_EQ(g.get_transform(), identity_matrix(4));
+  EXPECT_EQ(g.is_empty(), false);
+  EXPECT_EQ(&g, s.parent);
 }
