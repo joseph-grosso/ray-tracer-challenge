@@ -42,3 +42,14 @@ TEST(TestGroups, AddChildToGroup) {
   EXPECT_EQ(g.is_empty(), false);
   EXPECT_EQ(&g, s.parent);
 }
+
+// Scenario: Intersecting a ray with an empty group
+// p196
+TEST(TestGroups, IntersectingEmptyGroup) {
+  Group g = Group();
+  Ray r = Ray(point(0, 0, 0), vector(0, 0, 1));
+
+  Intersections xs = g.local_intersect(r);
+
+  EXPECT_EQ(xs.count, 0);
+}
