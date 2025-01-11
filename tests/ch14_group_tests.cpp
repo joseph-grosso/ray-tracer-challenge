@@ -76,3 +76,20 @@ TEST(TestGroups, IntersectingNonemptyGroup) {
   EXPECT_EQ(xs[2].object, &s1);
   EXPECT_EQ(xs[3].object, &s1);
 }
+
+// Scenario: Intersecting a transformed group
+// p197
+TEST(TestGroups, IntersectingTransformedGroup) {
+  Group g = Group(scaling_matrix(2, 2, 2));
+  Sphere s1 = Sphere(translation_matrix(5, 0, 0));
+
+  g.add_child(&s1);
+
+  Ray r = Ray(point(10, 0, -10), vector(0, 0, 1));
+
+  Intersections xs = g.intersect(r);
+
+  EXPECT_EQ(xs.count, 2);
+  EXPECT_EQ(xs[0].object, &s1);
+  EXPECT_EQ(xs[1].object, &s1);
+}
