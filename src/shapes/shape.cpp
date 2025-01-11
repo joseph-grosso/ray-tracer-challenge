@@ -31,14 +31,12 @@ Intersections Shape::intersect(Ray r) {
   return local_intersect(local_ray);
 };
 
-// page 120 of RTC
-Tuple Shape::normal_at(Tuple p) {
-  Tuple local_point = get_transform().inverse() * p;
+// page 120 AND page 200 of RTC
+Tuple Shape::normal_at(Tuple world_point) {
+  Tuple local_point = world_to_object(world_point);
   Tuple local_normal = local_normal_at(local_point);
-  Tuple world_normal = get_transform().inverse().transpose() * local_normal;
-  world_normal.w = 0;
 
-  return world_normal.normalize();
+  return normal_to_world(local_normal);
 };
 
 Tuple Shape::normal_at(float x, float y, float z) {

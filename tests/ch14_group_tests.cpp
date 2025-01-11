@@ -124,9 +124,9 @@ TEST(TestGroups, NormalToWorldSpace) {
   EXPECT_EQ(n, vector(0.2857, 0.4286, -0.8571));
 }
 
-// Scenario: Converting a normal from object to world space
-// p198
-TEST(TestGroups, NormalToWorldSpace) {
+// Scenario: Finding the normal on a child object
+// p199
+TEST(TestGroups, NormalOfChildObject) {
   Group g1 = Group(rotation_y_matrix(M_PI_2));
   Group g2 = Group(scaling_matrix(1, 2, 3));
   Sphere s = Sphere(translation_matrix(5, 0, 0));
@@ -134,7 +134,7 @@ TEST(TestGroups, NormalToWorldSpace) {
   g1.add_child(&g2);
   g2.add_child(&s);
 
-  Tuple n = s.normal_to_world(vector(sqrt(3) / 3, sqrt(3) / 3, sqrt(3) / 3));
+  Tuple n = s.normal_at(point(1.7321, 1.1547, -5.5774));
 
   EXPECT_EQ(n, vector(0.2857, 0.4286, -0.8571));
 }
