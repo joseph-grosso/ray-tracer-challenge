@@ -53,3 +53,26 @@ TEST(TestGroups, IntersectingEmptyGroup) {
 
   EXPECT_EQ(xs.count, 0);
 }
+
+// Scenario: Intersecting a ray with a nonempty group
+// p196
+TEST(TestGroups, IntersectingNonemptyGroup) {
+  Group g = Group();
+  Sphere s1 = Sphere();
+  Sphere s2 = Sphere(translation_matrix(0, 0, -3));
+  Sphere s3 = Sphere(translation_matrix(5, 0, 0));
+
+  g.add_child(&s1);
+  g.add_child(&s2);
+  g.add_child(&s3);
+
+  Ray r = Ray(point(0, 0, -5), vector(0, 0, 1));
+
+  Intersections xs = g.local_intersect(r);
+
+  EXPECT_EQ(xs.count, 4);
+  EXPECT_EQ(xs[0].object, &s2);
+  EXPECT_EQ(xs[1].object, &s2);
+  EXPECT_EQ(xs[2].object, &s1);
+  EXPECT_EQ(xs[3].object, &s1);
+}

@@ -7,8 +7,7 @@
 
 class Intersections {
  public:
-  Intersections() : Intersections(std::vector<Intersection>{}){};
-  Intersections(std::vector<Intersection>);
+  Intersections(std::vector<Intersection> = std::vector<Intersection>{});
   std::vector<Intersection> data;
   int count;
   Intersection operator[](int);
