@@ -56,3 +56,11 @@ Tuple Shape::world_to_object(Tuple p) {
 
   return transformation.inverse() * point_;
 };
+
+Tuple Shape::normal_to_world(Tuple n) {
+  Tuple normal = transformation.inverse().transpose() * n;
+  normal.w = 0;
+  normal = normal.normalize();
+
+  return (parent != nullptr) ? parent->normal_to_world(normal) : normal;
+};
