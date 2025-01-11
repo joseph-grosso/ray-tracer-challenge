@@ -50,3 +50,9 @@ void Shape::set_throws_shadow(bool throws_shadow) {
 }
 
 bool Shape::get_throws_shadow() { return throws_shadow; }
+
+Tuple Shape::world_to_object(Tuple p) {
+  Tuple point_ = (parent != nullptr) ? parent->world_to_object(p) : p;
+
+  return transformation.inverse() * point_;
+};

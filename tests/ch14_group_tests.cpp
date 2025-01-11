@@ -93,3 +93,18 @@ TEST(TestGroups, IntersectingTransformedGroup) {
   EXPECT_EQ(xs[0].object, &s1);
   EXPECT_EQ(xs[1].object, &s1);
 }
+
+// Scenario: Converting a point from world to object space
+// p198
+TEST(TestGroups, GroupPointToObjectSpace) {
+  Group g1 = Group(rotation_y_matrix(M_PI_2));
+  Group g2 = Group(scaling_matrix(2, 2, 2));
+  Sphere s = Sphere(translation_matrix(5, 0, 0));
+
+  g1.add_child(&g2);
+  g2.add_child(&s);
+
+  Tuple p = s.world_to_object(point(-2, 0, -10));
+
+  EXPECT_EQ(p, point(0, 0, -1));
+}
