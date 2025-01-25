@@ -19,6 +19,7 @@
 #include "plane.hpp"
 #include "shape.hpp"
 #include "sphere.hpp"
+#include "triangle.hpp"
 // patterns
 #include "blend_pattern.hpp"
 #include "checkers_pattern.hpp"

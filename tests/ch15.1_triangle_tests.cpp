@@ -29,7 +29,7 @@ TEST(TestTriangles, CreateNewTriangle) {
 
 // Scenario: Finding the noraml on a triangle
 // p209
-TEST(TestTriangles, CreateNewTriangle) {
+TEST(TestTriangles, TriangleNormal) {
   Tuple p1 = point(0, 1, 0);
   Tuple p2 = point(-1, 0, 0);
   Tuple p3 = point(1, 0, 0);
