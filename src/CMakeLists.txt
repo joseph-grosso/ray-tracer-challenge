@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(RayTracer)
 
 find_package(OpenMP REQUIRED)
+find_package(OpenGL REQUIRED)
 
 set(
     SOURCES
@@ -19,6 +20,7 @@ set(
     world.cpp
     computation.cpp
     camera.cpp
+    obj_loader.cpp
     # patterns folder
     patterns/pattern.cpp
     # shapes folder

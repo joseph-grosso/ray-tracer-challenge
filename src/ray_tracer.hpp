@@ -7,6 +7,7 @@
 #include "lights.hpp"
 #include "material.hpp"
 #include "matrix.hpp"
+#include "obj_loader.hpp"
 #include "ray.hpp"
 #include "transform.hpp"
 #include "tuple.hpp"
