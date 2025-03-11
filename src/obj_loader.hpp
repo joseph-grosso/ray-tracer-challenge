@@ -13,52 +13,24 @@ class OBJParser {
  public:
   OBJParser() { ignored_lines = 0; };
   std::string file_path;
-  Tuple get_vertices(int i) {
-    if (i == 0) {
+  Tuple get_vertex(unsigned int i) {
+    if (i > vertices_.size()) {
+      throw std::invalid_argument(
+          "Requested index greater than number of vertices.");
+    } else if (i == 0) {
       throw std::invalid_argument("Parsers are indexed at 1, not 0.");
     };
-    return vertices_[i];
+    return *vertices_[i - 1];
   };
   void parse_obj_file(std::string file_path);
   unsigned int get_ignored_lines() { return ignored_lines; };
-  // Split a String into a string array at a given token
-  // inline void split(const std::string &in, std::vector<std::string> &out,
-  // std::string token) { 	out.clear();
+  std::string firstToken(const std::string in);
+  std::string tail(const std::string in);
+  std::vector<std::string> split(const std::string in,
+                                 std::string split_token = " ");
+  Tuple *create_point(const std::string tail);
 
-  // 	std::string temp;
-
-  // 	for (int i = 0; i < int(in.size()); i++)
-  // 	{
-  // 		std::string test = in.substr(i, token.size());
-
-  // 		if (test == token)
-  // 		{
-  // 			if (!temp.empty())
-  // 			{
-  // 				out.push_back(temp);
-  // 				temp.clear();
-  // 				i += (int)token.size() - 1;
-  // 			}
-  // 			else
-  // 			{
-  // 				out.push_back("");
-  // 			}
-  // 		}
-  // 		else if (i + token.size() >= in.size())
-  // 		{
-  // 			temp += in.substr(i, token.size());
-  // 			out.push_back(temp);
-  // 			break;
-  // 		}
-  // 		else
-  // 		{
-  // 			temp += in[i];
-  // 		}
-  // 	}
-  // }
  private:
-  std::vector<Tuple> vertices_;
+  std::vector<Tuple *> vertices_;
   unsigned int ignored_lines;
 };
-
-// bool operator==(Material lhs, Material rhs);
