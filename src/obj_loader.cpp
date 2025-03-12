@@ -27,7 +27,7 @@ void OBJParser::parse_obj_file(std::string file_path) {
     if (first_token == "v") {
       vertices_.push_back(create_point(tail(curline)));
     } else if (first_token == "f") {
-      default_group.add_child(create_triangle(tail(curline)));
+      fan_triangulation(tail(curline));
     } else {
       ignored_lines++;
     };
@@ -92,15 +92,15 @@ std::vector<std::string> OBJParser::split(const std::string in,
 
 Tuple* OBJParser::create_point(const std::string tail) {
   std::vector<std::string> vals = split(tail);
-  // TODO: fix to create the object using the point() construct.
   return new Tuple(std::stof(vals[0]), std::stof(vals[1]), std::stof(vals[2]),
                    1);
 };
 
-Triangle* OBJParser::create_triangle(std::string tail) {
+void OBJParser::fan_triangulation(std::string tail) {
   std::vector<std::string> vals = split(tail);
-  // TODO: fix to create the object using the point() construct.
-  return new Triangle(get_vertex(std::stoi(vals[0])),
-                      get_vertex(std::stoi(vals[1])),
-                      get_vertex(std::stoi(vals[2])));
+  for (int i = 1; i < vals.size() - 1; i++) {
+    default_group.add_child(new Triangle(get_vertex(std::stoi(vals[0])),
+                                         get_vertex(std::stoi(vals[i])),
+                                         get_vertex(std::stoi(vals[i + 1]))));
+  };
 };

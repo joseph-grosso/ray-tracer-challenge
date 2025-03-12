@@ -36,7 +36,7 @@ class OBJParser {
   std::vector<std::string> split(const std::string in,
                                  std::string split_token = " ");
   Tuple *create_point(const std::string tail);
-  Triangle *create_triangle(std::string tail);
+  void fan_triangulation(std::string tail);
 
  private:
   std::vector<Tuple *> vertices_;
