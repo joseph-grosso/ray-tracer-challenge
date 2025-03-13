@@ -20,19 +20,35 @@ void OBJParser::parse_obj_file(std::string file_path) {
         "Impossible to open the file! Are you in the right path?");
   };
 
-  std::string curline, first_token;
+  std::string curline;
 
   while (std::getline(file, curline)) {
-    first_token = firstToken(curline);
-    if (first_token == "v") {
-      vertices_.push_back(create_point(tail(curline)));
-    } else if (first_token == "f") {
-      fan_triangulation(tail(curline));
-    } else {
-      ignored_lines++;
-    };
+    parse_line(curline);
   };
+
   std::cout << "OBJ file " << file_path << " successfully loaded.\n";
+};
+
+void OBJParser::parse_line(std::string curline) {
+  std::string first_token = firstToken(curline);
+  if (first_token == "v") {
+    vertices_.push_back(create_point(tail(curline)));
+  } else if (first_token == "f") {
+    initialize_triangles(tail(curline));
+  } else if (first_token == "g") {
+    update_group(tail(curline));
+  } else {
+    ignored_lines++;
+  };
+}
+
+void OBJParser::update_group(std::string tail) {
+  _current_group_name = tail;
+  if (!_groups.contains(tail)) {
+    Group* g = new Group;
+    default_group.add_child(g);
+    _groups.insert({tail, g});
+  };
 };
 
 // Get first token of string
@@ -96,11 +112,21 @@ Tuple* OBJParser::create_point(const std::string tail) {
                    1);
 };
 
-void OBJParser::fan_triangulation(std::string tail) {
-  std::vector<std::string> vals = split(tail);
-  for (int i = 1; i < vals.size() - 1; i++) {
-    default_group.add_child(new Triangle(get_vertex(std::stoi(vals[0])),
-                                         get_vertex(std::stoi(vals[i])),
-                                         get_vertex(std::stoi(vals[i + 1]))));
+void OBJParser::initialize_triangles(std::string tail) {
+  if (_current_group_name == "") {
+    fan_triangulation(tail, &default_group);
+  } else {
+    fan_triangulation(tail, _groups.at(_current_group_name));
   };
 };
+
+void OBJParser::fan_triangulation(std::string tail, Group* g) {
+  std::vector<std::string> vals = split(tail);
+  for (int i = 1; i < vals.size() - 1; i++) {
+    g->add_child(new Triangle(get_vertex(std::stoi(vals[0])),
+                              get_vertex(std::stoi(vals[i])),
+                              get_vertex(std::stoi(vals[i + 1]))));
+  };
+};
+
+Group* OBJParser::get_named_group(std::string key) { return _groups.at(key); };

@@ -48,8 +48,8 @@ TEST(TestOBJ, ParsingTriangleFaces) {
   o.parse_obj_file("tests/obj_files/ch15.triangle_faces.obj");
 
   Group g = o.default_group;
-  Triangle t1 = *(Triangle*)g.get_child(0);
-  Triangle t2 = *(Triangle*)g.get_child(1);
+  Triangle t1 = *(Triangle *)g.get_child(0);
+  Triangle t2 = *(Triangle *)g.get_child(1);
 
   EXPECT_EQ(o.get_ignored_lines(), 1);
   EXPECT_EQ(t1.p1, o.get_vertex(1));
@@ -67,9 +67,9 @@ TEST(TestOBJ, ParsingPolygoneFaces) {
   o.parse_obj_file("tests/obj_files/ch15.polygon_faces.obj");
 
   Group g = o.default_group;
-  Triangle t1 = *(Triangle*)g.get_child(0);
-  Triangle t2 = *(Triangle*)g.get_child(1);
-  Triangle t3 = *(Triangle*)g.get_child(2);
+  Triangle t1 = *(Triangle *)g.get_child(0);
+  Triangle t2 = *(Triangle *)g.get_child(1);
+  Triangle t3 = *(Triangle *)g.get_child(2);
 
   EXPECT_EQ(o.get_ignored_lines(), 1);
   EXPECT_EQ(t1.p1, o.get_vertex(1));
@@ -81,4 +81,23 @@ TEST(TestOBJ, ParsingPolygoneFaces) {
   EXPECT_EQ(t3.p1, o.get_vertex(1));
   EXPECT_EQ(t3.p2, o.get_vertex(4));
   EXPECT_EQ(t3.p3, o.get_vertex(5));
+}
+
+// Scenario: Triangles in groups
+// p217
+TEST(TestOBJ, TrianglesInGroups) {
+  OBJParser o;
+  o.parse_obj_file("tests/obj_files/ch15.triangle_groups.obj");
+
+  Group g1 = *o.get_named_group("FirstGroup");
+  Group g2 = *o.get_named_group("SecondGroup");
+  Triangle t1 = *(Triangle *)g1.get_child(0);
+  Triangle t2 = *(Triangle *)g2.get_child(0);
+
+  EXPECT_EQ(t1.p1, o.get_vertex(1));
+  EXPECT_EQ(t1.p2, o.get_vertex(2));
+  EXPECT_EQ(t1.p3, o.get_vertex(3));
+  EXPECT_EQ(t2.p1, o.get_vertex(1));
+  EXPECT_EQ(t2.p2, o.get_vertex(3));
+  EXPECT_EQ(t2.p3, o.get_vertex(4));
 }
