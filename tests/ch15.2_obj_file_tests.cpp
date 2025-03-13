@@ -101,3 +101,19 @@ TEST(TestOBJ, TrianglesInGroups) {
   EXPECT_EQ(t2.p2, o.get_vertex(3));
   EXPECT_EQ(t2.p3, o.get_vertex(4));
 }
+
+// Scenario: Converting an OBJ file to a group
+// p218
+TEST(TestOBJ, OBJFileToGroup) {
+  OBJParser o;
+  o.parse_obj_file("tests/obj_files/ch15.triangle_groups.obj");
+
+  Group file_group = *o.obj_to_group();
+  Group *g1 = o.get_named_group("FirstGroup");
+  Group *g2 = o.get_named_group("SecondGroup");
+
+  // TODO: test that pointer is in list of children,
+  //       not that it's at a specific index.
+  EXPECT_EQ(file_group.get_child(0), g1);
+  EXPECT_EQ(file_group.get_child(1), g2);
+}

@@ -130,3 +130,4 @@ void OBJParser::fan_triangulation(std::string tail, Group* g) {
 };
 
 Group* OBJParser::get_named_group(std::string key) { return _groups.at(key); };
+Group* OBJParser::obj_to_group() { return &default_group; };

@@ -43,6 +43,7 @@ class OBJParser {
   void initialize_triangles(std::string tail);
   void fan_triangulation(std::string tail, Group *g);
   Group *get_named_group(std::string key);
+  Group *obj_to_group();
 
  private:
   std::vector<Tuple *> vertices_;
