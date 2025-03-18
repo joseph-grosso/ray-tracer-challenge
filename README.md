@@ -10,7 +10,7 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 * Run the command below:
 
 ```bash
- sh ./build.sh && convert values.ppm ./outputs/ch12/img.png
+ sh ./build.sh && convert values.ppm ./img.png
 ```
 
 ## Sample Images
