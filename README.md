@@ -15,6 +15,10 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 
 ## Sample Images
 
+### .obj Files
+
+![Teapot](outputs/ch15/hr_teapot_with_floor.png "An example of the Utah Teapot, generated using a simple .obj file.")
+
 ### Cubes
 
 ![Study Room](outputs/ch12/hq_study_hall.png "A quiet study room with some maps, a book, and a mirror")
