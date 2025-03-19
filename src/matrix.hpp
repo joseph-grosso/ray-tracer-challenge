@@ -3,7 +3,19 @@
 #include <string>
 #include <vector>
 
+#include <eigen3/Eigen/Dense>
+
 #include "tuple.hpp"
+#include <numeric>
+
+// TODO: remove
+#include <algorithm>
+#include <iostream>
+#include <ostream>
+#include <stdexcept>
+#include <sstream>
+
+typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> MatD;
 
 // Chapter 3: Matrix Math
 class Matrix {
@@ -11,27 +23,30 @@ class Matrix {
   unsigned int rows_;
   unsigned int columns_;
   std::vector<float> data_;
-  void check_valid_row_coord(unsigned int row_coord);
-  void check_valid_column_coord(unsigned int column_coord);
-  Matrix cofactor_matrix();
+  Eigen::MatrixXf _eigen_data;
+
 
  public:
   // Methods
   Matrix(unsigned int rows = 4, unsigned int columns = 4,
          std::vector<float> data = std::vector<float>{1, 0, 0, 0, 0, 1, 0, 0, 0,
                                                       0, 1, 0, 0, 0, 0, 1});
+  Matrix(Eigen::MatrixXf eigen_data);
   float get_point(unsigned int row, unsigned int col);
   std::vector<float> get_row(unsigned int row);
   std::vector<float> get_column(unsigned int col);
   unsigned int get_row_count();
   unsigned int get_column_count();
   unsigned int get_elements_count();
+  Eigen::MatrixXf get_eigen_data();
   std::vector<float> get_matrix_data();
   Matrix transpose();
   float determinant();
-  float minor(unsigned int row, unsigned int col);
-  Matrix submatrix(unsigned int row, unsigned int col);
-  float cofactor(unsigned int row, unsigned int col);
+  // TODO: Refactor these functions to use Eigen directly
+  // float minor(unsigned int row, unsigned int col);
+  // Matrix submatrix(unsigned int row, unsigned int col);
+  // float cofactor(unsigned int row, unsigned int col);
+  // Matrix cofactor_matrix();
   Matrix inverse();
   bool is_square();
   bool is_invertible();

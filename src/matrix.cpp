@@ -1,18 +1,8 @@
 #include "matrix.hpp"
 
-#include <numeric>
-#include <vector>
-
-#include "tuple.hpp"
-// TODO: remove
-#include <algorithm>
-#include <iostream>
-#include <ostream>
-#include <stdexcept>
-#include <string>
 
 // Chapter 3: Matrix Math
-Matrix::Matrix(unsigned int rows, unsigned int columns,
+Matrix::Matrix( unsigned int rows,  unsigned int columns,
                std::vector<float> data) {
   if (rows * columns != data.size()) {
     throw std::invalid_argument(
@@ -20,39 +10,42 @@ Matrix::Matrix(unsigned int rows, unsigned int columns,
   };
   rows_ = rows;
   columns_ = columns;
+  // TODO: delete references to data_
   data_ = data;
+  _eigen_data = Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>(data.data(), rows_, columns_);
+};
+
+Matrix::Matrix(Eigen::MatrixXf eigen_data) {
+  rows_ = eigen_data.rows();
+  columns_ = eigen_data.cols();
+  _eigen_data = eigen_data;
+  data_ = std::vector<float>(eigen_data.data(), eigen_data.data() + eigen_data.size());
 };
 
 // Matrix(unsigned int rows, unsigned int columns, float data[]);
 float Matrix::get_point(unsigned int row, unsigned int col) {
-  check_valid_row_coord(row);
-  check_valid_column_coord(col);
-  return data_[row * columns_ + col];
+  // TODO: Add a try-catch block to handle out of range errors?
+  return _eigen_data(row, col);
 };
 
 std::vector<float> Matrix::get_row(unsigned int row) {
-  check_valid_row_coord(row);
-  int start_index = row * columns_;
-  int end_index = start_index + columns_;
-  return std::vector<float>(data_.begin() + start_index,
-                            data_.begin() + end_index);
+  // TODO: Add a try-catch block to handle out of range errors?
+  Eigen::VectorXf eigen_row = _eigen_data.row(row);
+  return std::vector<float>(eigen_row.data(), eigen_row.data() + eigen_row.size());
 };
 
 std::vector<float> Matrix::get_column(unsigned int col) {
-  check_valid_column_coord(col);
-  std::vector<float> col_vector;
-  for (int i = 0; i < data_.size(); i++) {
-    if ((i % columns_) == col) {
-      col_vector.push_back(data_[i]);
-    };
-  };
-  return col_vector;
+  Eigen::VectorXf eigen_col = _eigen_data.col(col);
+  return std::vector<float>(eigen_col.data(), eigen_col.data() + eigen_col.size());
 };
+
+Eigen::MatrixXf Matrix::get_eigen_data() { return _eigen_data; };
 
 unsigned int Matrix::get_row_count() { return rows_; };
 
 unsigned int Matrix::get_column_count() { return columns_; };
 
+// TODO: Delete this function
 std::vector<float> Matrix::get_matrix_data() {
   std::vector<float> copy = data_;
   return copy;
@@ -60,36 +53,15 @@ std::vector<float> Matrix::get_matrix_data() {
 
 // Arithmetic operator overloads
 bool operator==(Matrix lhs, Matrix rhs) {
-  if (lhs.get_row_count() != rhs.get_row_count() ||
-      lhs.get_column_count() != rhs.get_column_count()) {
-    return false;
-  };
-  std::vector<float> lhs_data = lhs.get_matrix_data();
-  std::vector<float> rhs_data = rhs.get_matrix_data();
-  for (int i = 0; i < lhs_data.size(); i++) {
-    if (!equalByEpsilon(lhs_data[i], rhs_data[i])) {
-      return false;
-    };
-  };
-  return true;
+  return lhs.get_eigen_data().isApprox(rhs.get_eigen_data(), 1e-4);
 };
 
 bool operator!=(Matrix lhs, Matrix rhs) { return !operator==(lhs, rhs); };
 
 Matrix operator*(Matrix lhs, Matrix rhs) {
-  unsigned int new_rows = lhs.get_row_count();
-  unsigned int new_cols = rhs.get_column_count();
-  std::vector<float> new_data;
-  for (int i = 0; i < new_rows; i++) {
-    for (int j = 0; j < new_cols; j++) {
-      new_data.push_back(
-          // TODO: Find if there's a better way to use this other than a static
-          // method.
-          dot_product(lhs.get_row(i), rhs.get_column(j)));
-    };
-  };
-
-  return Matrix(new_rows, new_cols, new_data);
+  Eigen::MatrixXf lhs_mat = lhs.get_eigen_data();
+  Eigen::MatrixXf rhs_mat = rhs.get_eigen_data();
+  return Matrix(lhs_mat * rhs_mat);
 };
 
 Tuple operator*(Matrix m, Tuple t) {
@@ -105,12 +77,7 @@ Tuple operator*(Matrix m, Tuple t) {
 };
 
 Matrix operator*(Matrix m, float x) {
-  std::vector<float> input = m.get_matrix_data();
-  std::vector<float> output;
-  for (int i = 0; i < input.size(); i++) {
-    output.push_back(input[i] * x);
-  };
-  return Matrix(m.get_row_count(), m.get_column_count(), output);
+  return Matrix(m.get_eigen_data() * x);
 };
 
 float dot_product(std::vector<float> v1, std::vector<float> v2) {
@@ -121,19 +88,19 @@ float dot_product(std::vector<float> v1, std::vector<float> v2) {
   return std::inner_product(v1.begin(), v1.end(), v2.begin(), 0.0);
 };
 
-void Matrix::check_valid_row_coord(unsigned int row_coord) {
-  if (row_coord >= rows_) {
-    throw std::invalid_argument("Row coordinate out of range of matrix");
-  };
-  return;
-};
+// void Matrix::check_valid_row_coord(unsigned int row_coord) {
+//   if (row_coord >= rows_) {
+//     throw std::invalid_argument("Row coordinate out of range of matrix");
+//   };
+//   return;
+// };
 
-void Matrix::check_valid_column_coord(unsigned int column_coord) {
-  if (column_coord >= columns_) {
-    throw std::invalid_argument("Column coordinate out of range of matrix");
-  };
-  return;
-};
+// void Matrix::check_valid_column_coord(unsigned int column_coord) {
+//   if (column_coord >= columns_) {
+//     throw std::invalid_argument("Column coordinate out of range of matrix");
+//   };
+//   return;
+// };
 
 // TODO: Remove once you're done debugging tests.
 template <typename S>
@@ -147,105 +114,70 @@ std::ostream &operator<<(std::ostream &os, const std::vector<S> &vector) {
 };
 
 Matrix Matrix::transpose() {
-  std::vector<float> new_data;
-  std::vector<float> current_col;
-  for (int i = 0; i < columns_; i++) {
-    current_col = get_column(i);
-    std::copy(current_col.begin(), current_col.end(),
-              std::back_inserter(new_data));
-  };
-  return Matrix(columns_, rows_, new_data);
+  return Matrix(_eigen_data.transpose());
 };
 
-Matrix Matrix::cofactor_matrix() {
-  if (get_row_count() == 1 && get_column_count() == 1) {
-    std::vector<float> id_data = {1};
-    return Matrix(1, 1, id_data);
-  }
-  std::vector<float> cofactor_input;
-  for (int i = 0; i < rows_; i++) {
-    for (int j = 0; j < columns_; j++) {
-      cofactor_input.push_back(cofactor(i, j));
-    };
-  };
+// Matrix Matrix::cofactor_matrix() {
+//   if (get_row_count() == 1 && get_column_count() == 1) {
+//     std::vector<float> id_data = {1};
+//     return Matrix(1, 1, id_data);
+//   }
+//   std::vector<float> cofactor_input;
+//   for (int i = 0; i < rows_; i++) {
+//     for (int j = 0; j < columns_; j++) {
+//       cofactor_input.push_back(cofactor(i, j));
+//     };
+//   };
 
-  return Matrix(rows_, columns_, cofactor_input);
-};
+//   return Matrix(rows_, columns_, cofactor_input);
+// };
 
 Matrix Matrix::inverse() {
-  Matrix cofactor_mat = cofactor_matrix();
-  Matrix transposed_cofactors = cofactor_mat.transpose();
-  float inverted_determinant = 1 / determinant();
-
-  return transposed_cofactors * inverted_determinant;
+  return Matrix(_eigen_data.inverse());
 };
 
 float Matrix::determinant() {
   if (!is_square()) {
     throw std::invalid_argument("Row coordinate out of range of matrix");
   };
-  float det = 0;
 
-  if (get_column_count() == 1 && get_row_count() == 1) {
-    return get_point(0, 0);
-  };
-
-  if (get_column_count() == 2 && get_row_count() == 2) {
-    return get_point(0, 0) * get_point(1, 1) -
-           get_point(0, 1) * get_point(1, 0);
-  };
-
-  for (int i = 0; i < columns_; i++) {
-    det += get_point(0, i) * cofactor(0, i);
-  };
-  return det;
+  return _eigen_data.determinant();
 };
 
-float Matrix::minor(unsigned int row, unsigned int col) {
-  return submatrix(row, col).determinant();
-};
+// float Matrix::minor(unsigned int row, unsigned int col) {
+//   return submatrix(row, col).determinant();
+// };
 
-float Matrix::cofactor(unsigned int row, unsigned int col) {
-  return ((row + col) % 2 == 1) ? -minor(row, col) : minor(row, col);
-};
+// float Matrix::cofactor(unsigned int row, unsigned int col) {
+//   return ((row + col) % 2 == 1) ? -minor(row, col) : minor(row, col);
+// };
 
-Matrix Matrix::submatrix(unsigned int row, unsigned int col) {
-  std::vector<float> new_data;
-  for (int i = 0; i < rows_; i++) {
-    for (int j = 0; j < columns_; j++) {
-      if (i != row && j != col) {
-        new_data.push_back(get_point(i, j));
-      };
-    };
-  };
-  return Matrix(rows_ - 1, columns_ - 1, new_data);
-};
+// Matrix Matrix::submatrix(unsigned int row, unsigned int col) {
+//   std::vector<float> new_data;
+//   for (int i = 0; i < rows_; i++) {
+//     for (int j = 0; j < columns_; j++) {
+//       if (i != row && j != col) {
+//         new_data.push_back(get_point(i, j));
+//       };
+//     };
+//   };
+//   return Matrix(rows_ - 1, columns_ - 1, new_data);
+// };
 
 bool Matrix::is_square() { return rows_ == columns_; };
 
-bool Matrix::is_invertible() { return determinant() != 0; };
+bool Matrix::is_invertible() { return !equalByEpsilon(determinant(), 0); };
 
 std::string Matrix::to_string() {
-  std::string val;
-  for (int i = 0; i < get_elements_count(); i++) {
-    if (i % columns_ == 0 && i != 0) {
-      val += "\n";
-    };
-    val += std::to_string(data_[i]) + " ";
-  };
-  return val;
+  std::stringstream ss;
+  ss << _eigen_data;
+  return ss.str();
 };
 
 unsigned int Matrix::get_elements_count() { return rows_ * columns_; };
 
 Matrix identity_matrix(int size) {
-  std::vector<float> data;
-  for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size; j++) {
-      data.push_back((i == j) ? 1 : 0);
-    };
-  };
-  return Matrix(size, size, data);
+  return Matrix(Eigen::MatrixXf::Identity(size, size));
 };
 
 // Chapter 7: Making a Scene

@@ -47,3 +47,9 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/patterns
     ${CMAKE_CURRENT_SOURCE_DIR}/shapes
 )
+
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+
+include_directories(${EIGEN_INCLUDE_DIR})
+
+target_link_libraries(raytracer_lib PUBLIC Eigen3::Eigen)

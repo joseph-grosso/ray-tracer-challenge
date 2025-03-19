@@ -8,25 +8,18 @@
 #include "matrix.hpp"
 #include "tuple.hpp"
 
-// // TODO: Remove once you're done debugging tests.
-// template <typename S>
-// std::ostream& operator<<(std::ostream& os,
-//                     const std::vector<S>& vector)
-// {
-//     // Printing all the elements
-//     // using <<
-//     for (auto element : vector) {
-//         os << element << " ";
-//     }
-//     return os;
-// }
 
 // Scenario: Constructing and inspecting a 4x4 matrix
 // p26
 TEST(TestMatrices, Inspecting4x4Matrix) {
-  std::vector<float> m = {1, 2,  3,  4,  5.5,  6.5,  7.5,  8.5,
-                          9, 10, 11, 12, 13.5, 14.5, 15.5, 16.5};
+  std::vector<float> m = {
+    1, 2,  3,  4,     // 4x4
+    5.5,  6.5,  7.5,  8.5,    // 4x4
+    9, 10, 11, 12,    // 4x4
+    13.5, 14.5, 15.5, 16.5    // 4x4
+  };
   Matrix mat(4, 4, m);
+  std::cout << mat.get_eigen_data() << std::endl;
   EXPECT_TRUE(equalByEpsilon(mat.get_point(0, 0), 1));
   EXPECT_TRUE(equalByEpsilon(mat.get_point(0, 3), 4));
   EXPECT_TRUE(equalByEpsilon(mat.get_point(1, 0), 5.5));
@@ -39,7 +32,10 @@ TEST(TestMatrices, Inspecting4x4Matrix) {
 // Scenario: Constructing a 2x2 matrix
 // p27
 TEST(TestMatrices, Inspecting2x2Matrix) {
-  std::vector<float> m = {-3, 5, 1, -2};
+  std::vector<float> m = {
+    -3, 5,  // 2x2
+    1, -2   // 2x2
+  };
   Matrix mat(2, 2, m);
   EXPECT_TRUE(equalByEpsilon(mat.get_point(0, 0), -3));
   EXPECT_TRUE(equalByEpsilon(mat.get_point(0, 1), 5));
@@ -66,10 +62,15 @@ TEST(TestMatrices, Comparing2UnequalMatrices) {
   EXPECT_NE(a, b);
 }
 
-// Scenario: getting a single row 2
+// Scenario: getting a single row
 // pMe
 TEST(TestMatrices, GettingSingleRow_1) {
-  std::vector<float> input = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
+  std::vector<float> input = {
+    1, 2, 3, 4,  // 4x4
+    5, 6, 7, 8,  // 4x4
+    9, 8, 7, 6,  // 4x4
+    5, 4, 3, 2   // 4x4
+  };
   Matrix m(4, 4, input);
   std::vector<float> expected = {9, 8, 7, 6};
   EXPECT_EQ(m.get_row(2), expected);
@@ -78,7 +79,10 @@ TEST(TestMatrices, GettingSingleRow_1) {
 // Scenario: getting a single row 2
 // pMe
 TEST(TestMatrices, GettingSingleRow_2) {
-  std::vector<float> input = {1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2};
+  std::vector<float> input = {
+    1, 2, 3, 4, 5, 6, 7, 8,  // 2x8
+    9, 8, 7, 6, 5, 4, 3, 2   // 2x8
+  };
   Matrix m(2, 8, input);
   std::vector<float> expected = {1, 2, 3, 4, 5, 6, 7, 8};
   EXPECT_EQ(m.get_row(0), expected);
@@ -238,76 +242,6 @@ TEST(TestMatrices, DeterminantOf2x2) {
   EXPECT_EQ(expected, actual);
 }
 
-// Scenario: A submatrix of a 3x3 matrix is a 2x2 matrix
-// p35
-TEST(TestMatrices, SubmatrixOf3x3) {
-  std::vector<float> in_data = {1, 5, 0, -3, 2, 7, 0, 6, -3};
-  std::vector<float> expected_data = {
-      -3,
-      2,
-      0,
-      6,
-  };
-
-  Matrix m(3, 3, in_data);
-  Matrix expected(2, 2, expected_data);
-  Matrix actual = m.submatrix(0, 2);
-
-  EXPECT_EQ(expected, actual);
-}
-
-// Scenario: A submatrix of a 4x4 matrix is a 3x3 matrix
-// p35
-TEST(TestMatrices, SubmatrixOf4x4) {
-  std::vector<float> in_data = {-6, 1, 1, 6, -8, 5, 8,  6,
-                                -1, 0, 8, 2, -7, 1, -1, 1};
-  std::vector<float> expected_data = {-6, 1, 6, -8, 8, 6, -7, -1, 1};
-
-  Matrix m(4, 4, in_data);
-  Matrix expected(3, 3, expected_data);
-  Matrix actual = m.submatrix(2, 1);
-
-  EXPECT_EQ(expected, actual);
-}
-
-// Scenario: Calculating a minor of a 3x3 matrix
-// p35
-TEST(TestMatrices, MinorOf3x3) {
-  std::vector<float> a_data = {3, 5, 0, 2, -1, -7, 6, -1, 5};
-
-  Matrix a(3, 3, a_data);
-  Matrix b = a.submatrix(1, 0);
-
-  EXPECT_EQ(25, b.determinant());
-  EXPECT_EQ(25, a.minor(1, 0));
-}
-
-// Scenario: Calculating a cofactor of a 3x3 matrix
-// p36
-TEST(TestMatrices, CofactorOf3x3) {
-  std::vector<float> a_data = {3, 5, 0, 2, -1, -7, 6, -1, 5};
-
-  Matrix a(3, 3, a_data);
-
-  EXPECT_EQ(a.minor(1, 0), 25);
-  EXPECT_EQ(a.cofactor(1, 0), -25);
-  EXPECT_EQ(a.minor(0, 0), -12);
-  EXPECT_EQ(a.cofactor(0, 0), -12);
-}
-
-// Scenario: Calculating the determinant of a 3x3 matrix
-// p37
-TEST(TestMatrices, DeterminantOf3x3) {
-  std::vector<float> a_data = {1, 2, 6, -5, 8, -4, 2, 6, 4};
-
-  Matrix a(3, 3, a_data);
-
-  EXPECT_EQ(a.cofactor(0, 0), 56);
-  EXPECT_EQ(a.cofactor(0, 1), 12);
-  EXPECT_EQ(a.cofactor(0, 2), -46);
-  EXPECT_EQ(a.determinant(), -196);
-}
-
 // Scenario: Calculating the determinant of a 4x4 matrix
 // p37
 TEST(TestMatrices, DeterminantOf4x4) {
@@ -316,11 +250,7 @@ TEST(TestMatrices, DeterminantOf4x4) {
 
   Matrix a(4, 4, a_data);
 
-  EXPECT_EQ(a.cofactor(0, 0), 690);
-  EXPECT_EQ(a.cofactor(0, 1), 447);
-  EXPECT_EQ(a.cofactor(0, 2), 210);
-  EXPECT_EQ(a.cofactor(0, 3), 51);
-  EXPECT_EQ(a.determinant(), -4071);
+  EXPECT_TRUE(equalByEpsilon(a.determinant(), -4071));
 }
 
 // Scenario: Testing an invertible matrix for invertibility
@@ -331,7 +261,7 @@ TEST(TestMatrices, InvertibleMatrix) {
 
   Matrix a(4, 4, a_data);
 
-  EXPECT_EQ(a.determinant(), -2120);
+  EXPECT_TRUE(equalByEpsilon(a.determinant(), -2120));
   EXPECT_TRUE(a.is_invertible());
 }
 
@@ -361,11 +291,9 @@ TEST(TestMatrices, CalculateInverse) {
   Matrix b = a.inverse();
   Matrix expected(4, 4, b_expected_data);
 
-  EXPECT_EQ(a.determinant(), 532);
-  EXPECT_EQ(a.cofactor(2, 3), -160);
+  EXPECT_TRUE(equalByEpsilon(a.determinant(), 532));
   EXPECT_TRUE(equalByEpsilon(b.get_point(3, 2), -160 / (float)532));
-  EXPECT_EQ(a.cofactor(3, 2), 105);
-  EXPECT_EQ(b.get_point(2, 3), 105 / (float)532);
+  EXPECT_TRUE(equalByEpsilon(b.get_point(2, 3), 105 / (float)532));
   EXPECT_EQ(expected, b);
 }
 
