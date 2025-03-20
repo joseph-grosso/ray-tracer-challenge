@@ -17,7 +17,7 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 
 ### .obj Files
 
-![Teapot](outputs/ch15/hr_teapot_with_floor.png "An example of the Utah Teapot, generated using a simple .obj file.")
+![Teapot](outputs/ch15/hhq_teacup.png "An example of the Utah Teapot, generated using a simple .obj file.")
 
 ### Cubes
 
@@ -63,8 +63,8 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 - [x] ch10
 - [x] ch11
 - [x] ch12
-- [ ] ch13
-- [ ] ch14
+- [x] ch13
+- [x] ch14
 - [ ] ch15
 - [ ] ch16
 - [ ] Bonus chapters (online)
