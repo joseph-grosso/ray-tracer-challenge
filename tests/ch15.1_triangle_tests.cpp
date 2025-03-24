@@ -110,3 +110,40 @@ TEST(TestTriangles, RayHitsTriangle) {
   EXPECT_EQ(xs.count, 1);
   EXPECT_TRUE(equalByEpsilon(xs[0].t, 2));
 }
+
+
+// Fixture: Set up smooth triangle
+// p220
+class TestSmoothTriangle : public testing::Test {
+  protected:
+    Tuple p1 = point(0, 1, 0);
+    Tuple p2 = point(-1, 0, 0);
+    Tuple p3 = point(1, 0, 0);
+    Tuple n1 = vector(0, 1, 0);
+    Tuple n2 = vector(-1, 0, 0);
+    Tuple n3 = vector(1, 0, 0);
+    SmoothTriangle tri = SmoothTriangle(p1, p2, p3, n1, n2, n3);
+};
+ 
+ // Scenario: Constructing a smooth triangle
+ // p221
+ TEST_F(TestSmoothTriangle, ConstructingSmoothTriangle) { 
+  EXPECT_EQ(tri.p1, p1);
+  EXPECT_EQ(tri.p2, p2);
+  EXPECT_EQ(tri.p3, p3);
+  EXPECT_EQ(tri.n1, n1);
+  EXPECT_EQ(tri.n2, n2);
+  EXPECT_EQ(tri.n3, n3);
+}
+  
+// // Scenario: Constructing a smooth triangle
+// // p221
+// TEST_F(TestSmoothTriangle, ConstructingSmoothTriangle) { 
+//   EXPECT_EQ(tri.p1, p1);
+//   EXPECT_EQ(tri.p2, p2);
+//   EXPECT_EQ(tri.p3, p3);
+//   EXPECT_EQ(tri.n1, n1);
+//   EXPECT_EQ(tri.n2, n2);
+//   EXPECT_EQ(tri.n3, n3);
+// }
+ 

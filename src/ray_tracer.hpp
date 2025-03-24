@@ -21,6 +21,7 @@
 #include "shape.hpp"
 #include "sphere.hpp"
 #include "triangle.hpp"
+#include "smooth_triangle.hpp"
 // patterns
 #include "blend_pattern.hpp"
 #include "checkers_pattern.hpp"

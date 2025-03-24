@@ -11,6 +11,7 @@
 #include "matrix.hpp"
 #include "ray.hpp"
 #include "sphere.hpp"
+#include "smooth_triangle.hpp"
 #include "transform.hpp"
 #include "tuple.hpp"
 
@@ -239,4 +240,32 @@ TEST(TestRays, TestSphereEquality) {
   EXPECT_NE(Sphere(translation_matrix(1, 2, 3)), Sphere(Material()));
   EXPECT_NE(Sphere(), Sphere(Material(Color(10, 1, 1), 1, 1, 1, 1.0)));
   EXPECT_NE(Sphere(translation_matrix(1, 2, 3)), Sphere());
+}
+
+// ch15: intersections with triangles include u and v values
+// Scenario: Regular intersection u and v values are NaN
+// pMe
+TEST(TestIntersections, TestIntersectNaNs) {
+  Sphere s = Sphere();
+  Intersection i = Intersection(10.0, &s);
+
+  EXPECT_EQ(i.object, &s);
+  EXPECT_TRUE(equalByEpsilon(i.t, 10.0));
+  EXPECT_TRUE(std::isnan(i.u));
+  EXPECT_TRUE(std::isnan(i.v));
+}
+
+// Scenario: Triangle intersection u and v values can be set
+// p221
+TEST(TestIntersections, TestTriangleIntersectUAndV) {
+  SmoothTriangle s = SmoothTriangle(
+    point(1, 0, 0), point(0, 1, 0), point(1, 1, 0),  // points
+    vector(1, 0, 0),     vector(1, 0, 0),     vector(1, 0, 0)
+  );
+  Intersection i = Intersection(3.5, &s, 0.4, 0.2);
+
+  EXPECT_EQ(i.object, &s);
+  EXPECT_TRUE(equalByEpsilon(i.t, 3.5));
+  EXPECT_TRUE(equalByEpsilon(i.u, 0.4));
+  EXPECT_TRUE(equalByEpsilon(i.v, 0.2));
 }

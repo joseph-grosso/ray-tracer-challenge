@@ -11,10 +11,12 @@
 
 Intersection::Intersection() { this->empty = true; };
 
-Intersection::Intersection(float t, Shape *const obj) {
+Intersection::Intersection(float t, Shape *const obj, float u, float v) {
   this->t = t;
   this->object = obj;
   this->empty = false;
+  this->u = u;
+  this->v = v;
 };
 
 bool Intersection::is_empty() { return empty; };

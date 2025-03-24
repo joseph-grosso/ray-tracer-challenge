@@ -32,6 +32,7 @@ set(
     shapes/cone.cpp
     shapes/group.cpp
     shapes/triangle.cpp
+    shapes/smooth_triangle.cpp
 )
 
 add_library(raytracer_lib ${SOURCES})

@@ -2,6 +2,8 @@
 
 #include <tuple>
 #include <vector>
+#include <limits>
+#include <cmath>
 
 #include "computation.hpp"
 #include "ray.hpp"
@@ -15,8 +17,10 @@ class Intersection {
 
  public:
   Intersection();
-  Intersection(float t, Shape *const obj);
+  Intersection(float t, Shape *const obj, float u = std::numeric_limits<float>::quiet_NaN(), float v = std::numeric_limits<float>::quiet_NaN());
   float t;
+  float u;  // Only for use when constructing Triangles
+  float v;  // Only for use when constructing Triangles
   // TODO: use OOP to generalize this object class
   Shape *object;
   bool is_empty();
