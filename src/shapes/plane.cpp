@@ -7,7 +7,7 @@ Tuple Plane::local_normal_at(float x, float y, float z) {
   return local_normal_at(point(x, y, z));
 };
 
-Tuple Plane::local_normal_at(Tuple p) { return normal; };
+Tuple Plane::local_normal_at(Tuple p, Intersection i) { return normal; };
 
 // TODO: refactor when an intersection is done on a general "object" class
 // rather than just the sphere class.

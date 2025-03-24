@@ -23,7 +23,7 @@ class Cube : public Shape {
        bool throws_shadow = true)
       : Shape(t, m, throws_shadow){};
   Tuple local_normal_at(float x, float y, float z);
-  Tuple local_normal_at(Tuple p) { return local_normal_at(p.x, p.y, p.z); };
+  Tuple local_normal_at(Tuple p, Intersection i = Intersection()) { return local_normal_at(p.x, p.y, p.z); };
   Intersections local_intersect(Ray r);
 
  private:

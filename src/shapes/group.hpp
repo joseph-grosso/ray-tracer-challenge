@@ -34,7 +34,7 @@ class Group : public Shape {
   int get_number_of_children() { return children.size(); };
   Shape *get_child(int i) { return children[i]; };
   Tuple local_normal_at(float x, float y, float z);
-  Tuple local_normal_at(Tuple p);
+  Tuple local_normal_at(Tuple p, Intersection i = Intersection());
   std::string to_string();
   Intersections local_intersect(Ray r);
 };

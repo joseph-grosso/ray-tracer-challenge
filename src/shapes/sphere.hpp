@@ -30,7 +30,7 @@ class Sphere : public Shape {
   Tuple get_center();
   float get_radius();
   Tuple local_normal_at(float x, float y, float z);
-  Tuple local_normal_at(Tuple p);
+  Tuple local_normal_at(Tuple p, Intersection i = Intersection());
   std::string to_string();
   Intersections local_intersect(Ray r);
 };

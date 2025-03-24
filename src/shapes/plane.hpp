@@ -28,7 +28,7 @@ class Plane : public Shape {
     this->point_inside = point(0, 0, 0);
   };
   Tuple local_normal_at(float x, float y, float z);
-  Tuple local_normal_at(Tuple p);
+  Tuple local_normal_at(Tuple p, Intersection i = Intersection());
   Intersections local_intersect(Ray r);
 };
 

@@ -19,7 +19,7 @@ Tuple Sphere::local_normal_at(float x, float y, float z) {
   return local_normal_at(point(x, y, z));
 };
 
-Tuple Sphere::local_normal_at(Tuple p) {
+Tuple Sphere::local_normal_at(Tuple p, Intersection i) {
   // Algorithm explanation: p80 - p82
   return p - point(0, 0, 0);
 };

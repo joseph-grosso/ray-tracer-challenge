@@ -32,9 +32,9 @@ Intersections Shape::intersect(Ray r) {
 };
 
 // page 120 AND page 200 of RTC
-Tuple Shape::normal_at(Tuple world_point) {
+Tuple Shape::normal_at(Tuple world_point, Intersection i) {
   Tuple local_point = world_to_object(world_point);
-  Tuple local_normal = local_normal_at(local_point);
+  Tuple local_normal = local_normal_at(local_point, i);
 
   return normal_to_world(local_normal);
 };

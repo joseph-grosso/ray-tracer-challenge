@@ -41,7 +41,7 @@ class Cone : public Shape {
   void set_maximum(float maximum) { this->maximum = maximum; };
   void set_closed(bool closed) { this->closed = closed; };
   Tuple local_normal_at(float x, float y, float z);
-  Tuple local_normal_at(Tuple p) { return local_normal_at(p.x, p.y, p.z); };
+  Tuple local_normal_at(Tuple p, Intersection i = Intersection()) { return local_normal_at(p.x, p.y, p.z); };
   Intersections local_intersect(Ray r);
   void intersect_caps(Ray ray, std::vector<Intersection> *xs);
 };

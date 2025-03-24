@@ -137,8 +137,8 @@ class TestSmoothTriangle : public testing::Test {
   EXPECT_EQ(tri.n3, n3);
 }
   
-// Scenario: Constructing a smooth triangle
-// p221
+// Scenario: An intersection with a smooth triangle stores u/v
+// p222
 TEST_F(TestSmoothTriangle, IntersectHasUAndV) { 
   Ray r = Ray(point(-0.2, 0.3, -2), vector(0, 0, 1));
   Intersections xs = tri.local_intersect(r);
@@ -146,4 +146,13 @@ TEST_F(TestSmoothTriangle, IntersectHasUAndV) {
   EXPECT_TRUE(equalByEpsilon(xs[0].u, 0.45));
   EXPECT_TRUE(equalByEpsilon(xs[0].v, 0.25));  
 }
- 
+
+// Scenario: A smooth triangle uses u/v to interpolate the normal
+// p222
+TEST_F(TestSmoothTriangle, NormalInterpolation) { 
+  Ray r = Ray(point(-0.2, 0.3, -2), vector(0, 0, 1));
+  Intersection i = Intersection(1, &tri, 0.45, 0.25);
+  Tuple n = tri.normal_at(point(0, 0, 0), i);
+
+  EXPECT_EQ(n, vector(-0.5547, 0.83205, 0));
+}

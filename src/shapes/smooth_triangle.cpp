@@ -30,4 +30,6 @@ Intersections SmoothTriangle::local_intersect(Ray r) {
   return Intersections(std::vector<Intersection>{i});
 };
 
-Tuple SmoothTriangle::local_normal_at(float x, float y, float z) { return n1; };
+Tuple SmoothTriangle::local_normal_at(float x, float y, float z, Intersection i) {
+  return n2 * i.u + n3 * i.v + n1 * (1 - i.u - i.v);
+};

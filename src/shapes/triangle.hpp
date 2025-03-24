@@ -37,6 +37,6 @@ class Triangle : public Shape {
         e2{p3_ - p1_},
         normal{e2.cross(e1).normalize()} {};
   Tuple local_normal_at(float x, float y, float z);
-  Tuple local_normal_at(Tuple p) { return local_normal_at(p.x, p.y, p.z); };
+  Tuple local_normal_at(Tuple p, Intersection i = Intersection()) { return local_normal_at(p.x, p.y, p.z); };
   Intersections local_intersect(Ray r);
 };

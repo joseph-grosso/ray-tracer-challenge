@@ -32,9 +32,9 @@ class Shape {
   void set_material(Material);
   Intersections intersect(Ray r);
   virtual Intersections local_intersect(Ray r) = 0;
-  Tuple normal_at(Tuple world_point);
+  Tuple normal_at(Tuple world_point, Intersection i = Intersection());
   Tuple normal_at(float x, float y, float z);
-  virtual Tuple local_normal_at(Tuple p) = 0;
+  virtual Tuple local_normal_at(Tuple p, Intersection i = Intersection()) = 0;
   Tuple world_to_object(Tuple p);
   Tuple normal_to_world(Tuple n);
 };
