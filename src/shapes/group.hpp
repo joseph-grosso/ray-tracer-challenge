@@ -31,6 +31,7 @@ class Group : public Shape {
     children.push_back(s);
     s->parent = this;
   };
+  int get_number_of_children() { return children.size(); };
   Shape *get_child(int i) { return children[i]; };
   Tuple local_normal_at(float x, float y, float z);
   Tuple local_normal_at(Tuple p);
