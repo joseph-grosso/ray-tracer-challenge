@@ -7,7 +7,8 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ray_tracer.hpp"
+#include "triangle.hpp"
+#include "smooth_triangle.hpp"
 
 // Scenario: Constructing a triangle
 // p208
@@ -136,14 +137,13 @@ class TestSmoothTriangle : public testing::Test {
   EXPECT_EQ(tri.n3, n3);
 }
   
-// // Scenario: Constructing a smooth triangle
-// // p221
-// TEST_F(TestSmoothTriangle, ConstructingSmoothTriangle) { 
-//   EXPECT_EQ(tri.p1, p1);
-//   EXPECT_EQ(tri.p2, p2);
-//   EXPECT_EQ(tri.p3, p3);
-//   EXPECT_EQ(tri.n1, n1);
-//   EXPECT_EQ(tri.n2, n2);
-//   EXPECT_EQ(tri.n3, n3);
-// }
+// Scenario: Constructing a smooth triangle
+// p221
+TEST_F(TestSmoothTriangle, IntersectHasUAndV) { 
+  Ray r = Ray(point(-0.2, 0.3, -2), vector(0, 0, 1));
+  Intersections xs = tri.local_intersect(r);
+
+  EXPECT_TRUE(equalByEpsilon(xs[0].u, 0.45));
+  EXPECT_TRUE(equalByEpsilon(xs[0].v, 0.25));  
+}
  

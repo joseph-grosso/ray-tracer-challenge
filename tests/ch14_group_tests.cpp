@@ -7,7 +7,9 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ray_tracer.hpp"
+#include "group.hpp"
+#include "sphere.hpp"
+#include "transform.hpp"
 
 // Scenario: Creating a new group
 // p195

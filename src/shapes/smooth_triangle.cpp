@@ -26,7 +26,7 @@ Intersections SmoothTriangle::local_intersect(Ray r) {
 
   float t = f * e2.dot(origin_cross_e1);
 
-  Intersection i = Intersection(t, this);
+  Intersection i = Intersection(t, this, u, v);
   return Intersections(std::vector<Intersection>{i});
 };
 

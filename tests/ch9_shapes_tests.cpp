@@ -8,7 +8,12 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ray_tracer.hpp"
+
+#include "shape.hpp"
+#include "sphere.hpp"
+#include "transform.hpp"
+#include "plane.hpp"
+
 
 class TestShape : public Shape {
  public:

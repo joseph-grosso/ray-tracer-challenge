@@ -9,7 +9,9 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ray_tracer.hpp"
+
+#include "cube.hpp"
+
 
 class TestCubeIntersection
     : public testing::TestWithParam<std::tuple<Tuple, Tuple, float, float>> {};

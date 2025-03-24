@@ -7,7 +7,10 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ray_tracer.hpp"
+
+#include "world.hpp"
+#include "sphere.hpp"
+#include "camera.hpp"
 
 // Scenario: Creating a world
 // p92

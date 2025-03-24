@@ -7,7 +7,9 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ray_tracer.hpp"
+
+#include "world.hpp"
+#include "sphere.hpp"
 
 // Fixture: Set up the material and positions
 // p86

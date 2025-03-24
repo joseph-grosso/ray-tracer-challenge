@@ -9,7 +9,8 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ray_tracer.hpp"
+#include "cylinder.hpp"
+#include "cone.hpp"
 
 class TestMiss : public testing::TestWithParam<std::tuple<Tuple, Tuple>> {};
 

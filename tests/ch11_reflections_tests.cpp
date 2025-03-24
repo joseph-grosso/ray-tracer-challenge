@@ -9,7 +9,11 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ray_tracer.hpp"
+// #include "ray_tracer.hpp"
+#include "material.hpp"
+#include "plane.hpp"
+#include "world.hpp"
+#include "sphere.hpp"
 
 // Scenario: Reflectivity for the default material
 // p143

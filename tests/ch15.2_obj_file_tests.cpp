@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ray_tracer.hpp"
+#include "obj_loader.hpp"
 
 // Scenario: Ignore unrecognized lines
 // p213
