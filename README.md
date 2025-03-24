@@ -85,4 +85,5 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 - [x] Implement the "Pattern Permuter" Perlin Noise pattern
 - [ ] make redundant private attributes into public variables: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c131-avoid-trivial-getters-and-setters
 - [ ] Use initialization instead of assignment: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c49-prefer-initialization-to-assignment-in-constructors
+- [ ] Install pre-commit on your new machine 
 
