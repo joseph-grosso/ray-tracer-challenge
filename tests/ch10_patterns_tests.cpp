@@ -7,18 +7,18 @@
 #include <vector>
 
 #include "gtest/gtest.h"
+#include "material.hpp"
 #include "pattern.hpp"
 #include "solid_pattern.hpp"
-#include "stripe_pattern.hpp"
-#include "material.hpp"
 #include "sphere.hpp"
+#include "stripe_pattern.hpp"
 #include "transform.hpp"
 
 // TODO: group all patterns into one hpp
-#include "gradient_pattern.hpp"
-#include "conical_ring_pattern.hpp"
 #include "blend_pattern.hpp"
 #include "checkers_pattern.hpp"
+#include "conical_ring_pattern.hpp"
+#include "gradient_pattern.hpp"
 #include "radial_ring_pattern.hpp"
 
 // Fixture: Set up the material and positions

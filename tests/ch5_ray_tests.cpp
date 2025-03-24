@@ -10,8 +10,8 @@
 #include "intersections.hpp"
 #include "matrix.hpp"
 #include "ray.hpp"
-#include "sphere.hpp"
 #include "smooth_triangle.hpp"
+#include "sphere.hpp"
 #include "transform.hpp"
 #include "tuple.hpp"
 
@@ -258,10 +258,9 @@ TEST(TestIntersections, TestIntersectNaNs) {
 // Scenario: Triangle intersection u and v values can be set
 // p221
 TEST(TestIntersections, TestTriangleIntersectUAndV) {
-  SmoothTriangle s = SmoothTriangle(
-    point(1, 0, 0), point(0, 1, 0), point(1, 1, 0),  // points
-    vector(1, 0, 0),     vector(1, 0, 0),     vector(1, 0, 0)
-  );
+  SmoothTriangle s =
+      SmoothTriangle(point(1, 0, 0), point(0, 1, 0), point(1, 1, 0),  // points
+                     vector(1, 0, 0), vector(1, 0, 0), vector(1, 0, 0));
   Intersection i = Intersection(3.5, &s, 0.4, 0.2);
 
   EXPECT_EQ(i.object, &s);

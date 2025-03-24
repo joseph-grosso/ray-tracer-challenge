@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 
-#include "gtest/gtest.h"
 #include "group.hpp"
+#include "gtest/gtest.h"
 #include "sphere.hpp"
 #include "transform.hpp"
 
@@ -29,7 +29,9 @@ class TestShape : public Shape {
     this->saved_ray = r;
     return Intersections();
   };
-  Tuple local_normal_at(Tuple p, Intersection i) { return vector(p.x, p.y, p.z); };
+  Tuple local_normal_at(Tuple p, Intersection i) {
+    return vector(p.x, p.y, p.z);
+  };
 };
 
 // Scenario: Adding a child to a group

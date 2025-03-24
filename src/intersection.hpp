@@ -1,9 +1,9 @@
 #pragma once
 
+#include <cmath>
+#include <limits>
 #include <tuple>
 #include <vector>
-#include <limits>
-#include <cmath>
 
 #include "computation.hpp"
 #include "ray.hpp"
@@ -17,7 +17,9 @@ class Intersection {
 
  public:
   Intersection();
-  Intersection(float t, Shape *const obj, float u = std::numeric_limits<float>::quiet_NaN(), float v = std::numeric_limits<float>::quiet_NaN());
+  Intersection(float t, Shape *const obj,
+               float u = std::numeric_limits<float>::quiet_NaN(),
+               float v = std::numeric_limits<float>::quiet_NaN());
   float t;
   float u;  // Only for use when constructing Triangles
   float v;  // Only for use when constructing Triangles

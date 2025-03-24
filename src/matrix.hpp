@@ -1,21 +1,21 @@
 #pragma once
 
+#include <eigen3/Eigen/Dense>
+#include <numeric>
 #include <string>
 #include <vector>
 
-#include <eigen3/Eigen/Dense>
-
 #include "tuple.hpp"
-#include <numeric>
 
 // TODO: remove
 #include <algorithm>
 #include <iostream>
 #include <ostream>
-#include <stdexcept>
 #include <sstream>
+#include <stdexcept>
 
-typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> MatD;
+typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>
+    MatD;
 
 // Chapter 3: Matrix Math
 class Matrix {
@@ -24,7 +24,6 @@ class Matrix {
   unsigned int columns_;
   std::vector<float> data_;
   Eigen::MatrixXf _eigen_data;
-
 
  public:
   // Methods

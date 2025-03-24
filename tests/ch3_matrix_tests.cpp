@@ -8,15 +8,14 @@
 #include "matrix.hpp"
 #include "tuple.hpp"
 
-
 // Scenario: Constructing and inspecting a 4x4 matrix
 // p26
 TEST(TestMatrices, Inspecting4x4Matrix) {
   std::vector<float> m = {
-    1, 2,  3,  4,     // 4x4
-    5.5,  6.5,  7.5,  8.5,    // 4x4
-    9, 10, 11, 12,    // 4x4
-    13.5, 14.5, 15.5, 16.5    // 4x4
+      1,    2,    3,    4,    // 4x4
+      5.5,  6.5,  7.5,  8.5,  // 4x4
+      9,    10,   11,   12,   // 4x4
+      13.5, 14.5, 15.5, 16.5  // 4x4
   };
   Matrix mat(4, 4, m);
   std::cout << mat.get_eigen_data() << std::endl;
@@ -33,8 +32,8 @@ TEST(TestMatrices, Inspecting4x4Matrix) {
 // p27
 TEST(TestMatrices, Inspecting2x2Matrix) {
   std::vector<float> m = {
-    -3, 5,  // 2x2
-    1, -2   // 2x2
+      -3, 5,  // 2x2
+      1, -2   // 2x2
   };
   Matrix mat(2, 2, m);
   EXPECT_TRUE(equalByEpsilon(mat.get_point(0, 0), -3));
@@ -66,10 +65,10 @@ TEST(TestMatrices, Comparing2UnequalMatrices) {
 // pMe
 TEST(TestMatrices, GettingSingleRow_1) {
   std::vector<float> input = {
-    1, 2, 3, 4,  // 4x4
-    5, 6, 7, 8,  // 4x4
-    9, 8, 7, 6,  // 4x4
-    5, 4, 3, 2   // 4x4
+      1, 2, 3, 4,  // 4x4
+      5, 6, 7, 8,  // 4x4
+      9, 8, 7, 6,  // 4x4
+      5, 4, 3, 2   // 4x4
   };
   Matrix m(4, 4, input);
   std::vector<float> expected = {9, 8, 7, 6};
@@ -80,8 +79,8 @@ TEST(TestMatrices, GettingSingleRow_1) {
 // pMe
 TEST(TestMatrices, GettingSingleRow_2) {
   std::vector<float> input = {
-    1, 2, 3, 4, 5, 6, 7, 8,  // 2x8
-    9, 8, 7, 6, 5, 4, 3, 2   // 2x8
+      1, 2, 3, 4, 5, 6, 7, 8,  // 2x8
+      9, 8, 7, 6, 5, 4, 3, 2   // 2x8
   };
   Matrix m(2, 8, input);
   std::vector<float> expected = {1, 2, 3, 4, 5, 6, 7, 8};

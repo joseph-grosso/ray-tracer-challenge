@@ -8,10 +8,8 @@
 #include <string>
 #include <vector>
 
-#include "gtest/gtest.h"
-
 #include "cube.hpp"
-
+#include "gtest/gtest.h"
 
 class TestCubeIntersection
     : public testing::TestWithParam<std::tuple<Tuple, Tuple, float, float>> {};

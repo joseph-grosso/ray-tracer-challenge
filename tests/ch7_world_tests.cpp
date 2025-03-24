@@ -6,11 +6,10 @@
 #include <string>
 #include <vector>
 
-#include "gtest/gtest.h"
-
-#include "world.hpp"
-#include "sphere.hpp"
 #include "camera.hpp"
+#include "gtest/gtest.h"
+#include "sphere.hpp"
+#include "world.hpp"
 
 // Scenario: Creating a world
 // p92

@@ -39,13 +39,12 @@ int main() {
 
   Group *heart = o.obj_to_group();
   for (int i = 0; i < heart->get_number_of_children(); i++) {
-    heart->get_child(i)->set_material(Material(
-        NULL, Color(1, 0, 0),  // color
-        0.1,  // ambient
-        0.9,  // diffuse
-        0.9,  // specular
-        400   // shininess
-        ));
+    heart->get_child(i)->set_material(Material(NULL, Color(1, 0, 0),  // color
+                                               0.1,                   // ambient
+                                               0.9,                   // diffuse
+                                               0.9,  // specular
+                                               400   // shininess
+                                               ));
   }
 
   Tuple camera_point = point(65, 15, 30);

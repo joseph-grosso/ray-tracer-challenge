@@ -12,8 +12,8 @@
 // #include "ray_tracer.hpp"
 #include "material.hpp"
 #include "plane.hpp"
-#include "world.hpp"
 #include "sphere.hpp"
+#include "world.hpp"
 
 // Scenario: Reflectivity for the default material
 // p143
@@ -417,7 +417,9 @@ class TestShape : public Shape {
     this->saved_ray = r;
     return Intersections();
   };
-  Tuple local_normal_at(Tuple p, Intersection i) { return vector(p.x, p.y, p.z); };
+  Tuple local_normal_at(Tuple p, Intersection i) {
+    return vector(p.x, p.y, p.z);
+  };
 };
 
 // Scenario: shape object has a bool representing whether it throws a shadow

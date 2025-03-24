@@ -8,12 +8,10 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-
+#include "plane.hpp"
 #include "shape.hpp"
 #include "sphere.hpp"
 #include "transform.hpp"
-#include "plane.hpp"
-
 
 class TestShape : public Shape {
  public:
@@ -23,7 +21,9 @@ class TestShape : public Shape {
     this->saved_ray = r;
     return Intersections();
   };
-  Tuple local_normal_at(Tuple p, Intersection i) { return vector(p.x, p.y, p.z); };
+  Tuple local_normal_at(Tuple p, Intersection i) {
+    return vector(p.x, p.y, p.z);
+  };
 };
 
 // Chapter 9: Refactoring Shapes

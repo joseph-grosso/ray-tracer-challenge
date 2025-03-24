@@ -7,9 +7,8 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-
-#include "world.hpp"
 #include "sphere.hpp"
+#include "world.hpp"
 
 // Fixture: Set up the material and positions
 // p86

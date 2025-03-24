@@ -13,8 +13,8 @@
 #include "matrix.hpp"
 #include "ray.hpp"
 #include "shape.hpp"
-#include "tuple.hpp"
 #include "triangle.hpp"
+#include "tuple.hpp"
 
 // Chapter 15: Triangle sections
 class SmoothTriangle : public Shape {
@@ -30,8 +30,9 @@ class SmoothTriangle : public Shape {
   Tuple e1;
   Tuple e2;
   // Methods
-  SmoothTriangle(Tuple p1_, Tuple p2_, Tuple p3_, Tuple n1_, Tuple n2_, Tuple n3_, Matrix t = identity_matrix(4),
-           Material m = Material(), bool throws_shadow = true)
+  SmoothTriangle(Tuple p1_, Tuple p2_, Tuple p3_, Tuple n1_, Tuple n2_,
+                 Tuple n3_, Matrix t = identity_matrix(4),
+                 Material m = Material(), bool throws_shadow = true)
       : Shape(t, m, throws_shadow),
         p1{p1_},
         p2{p2_},
@@ -42,6 +43,8 @@ class SmoothTriangle : public Shape {
         e1{p2_ - p1_},
         e2{p3_ - p1_} {};
   Tuple local_normal_at(float x, float y, float z, Intersection i);
-  Tuple local_normal_at(Tuple p, Intersection i) { return local_normal_at(p.x, p.y, p.z, i); };
+  Tuple local_normal_at(Tuple p, Intersection i) {
+    return local_normal_at(p.x, p.y, p.z, i);
+  };
   Intersections local_intersect(Ray r);
 };

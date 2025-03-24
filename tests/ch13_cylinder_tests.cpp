@@ -8,9 +8,9 @@
 #include <string>
 #include <vector>
 
-#include "gtest/gtest.h"
-#include "cylinder.hpp"
 #include "cone.hpp"
+#include "cylinder.hpp"
+#include "gtest/gtest.h"
 
 class TestMiss : public testing::TestWithParam<std::tuple<Tuple, Tuple>> {};
 

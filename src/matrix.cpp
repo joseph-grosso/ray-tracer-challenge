@@ -1,8 +1,7 @@
 #include "matrix.hpp"
 
-
 // Chapter 3: Matrix Math
-Matrix::Matrix( unsigned int rows,  unsigned int columns,
+Matrix::Matrix(unsigned int rows, unsigned int columns,
                std::vector<float> data) {
   if (rows * columns != data.size()) {
     throw std::invalid_argument(
@@ -12,14 +11,17 @@ Matrix::Matrix( unsigned int rows,  unsigned int columns,
   columns_ = columns;
   // TODO: delete references to data_
   data_ = data;
-  _eigen_data = Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>(data.data(), rows_, columns_);
+  _eigen_data = Eigen::Map<
+      Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>(
+      data.data(), rows_, columns_);
 };
 
 Matrix::Matrix(Eigen::MatrixXf eigen_data) {
   rows_ = eigen_data.rows();
   columns_ = eigen_data.cols();
   _eigen_data = eigen_data;
-  data_ = std::vector<float>(eigen_data.data(), eigen_data.data() + eigen_data.size());
+  data_ = std::vector<float>(eigen_data.data(),
+                             eigen_data.data() + eigen_data.size());
 };
 
 // Matrix(unsigned int rows, unsigned int columns, float data[]);
@@ -31,12 +33,14 @@ float Matrix::get_point(unsigned int row, unsigned int col) {
 std::vector<float> Matrix::get_row(unsigned int row) {
   // TODO: Add a try-catch block to handle out of range errors?
   Eigen::VectorXf eigen_row = _eigen_data.row(row);
-  return std::vector<float>(eigen_row.data(), eigen_row.data() + eigen_row.size());
+  return std::vector<float>(eigen_row.data(),
+                            eigen_row.data() + eigen_row.size());
 };
 
 std::vector<float> Matrix::get_column(unsigned int col) {
   Eigen::VectorXf eigen_col = _eigen_data.col(col);
-  return std::vector<float>(eigen_col.data(), eigen_col.data() + eigen_col.size());
+  return std::vector<float>(eigen_col.data(),
+                            eigen_col.data() + eigen_col.size());
 };
 
 Eigen::MatrixXf Matrix::get_eigen_data() { return _eigen_data; };
@@ -76,9 +80,7 @@ Tuple operator*(Matrix m, Tuple t) {
                dot_product(m.get_row(3), tup_as_vector));
 };
 
-Matrix operator*(Matrix m, float x) {
-  return Matrix(m.get_eigen_data() * x);
-};
+Matrix operator*(Matrix m, float x) { return Matrix(m.get_eigen_data() * x); };
 
 float dot_product(std::vector<float> v1, std::vector<float> v2) {
   if (v1.size() != v2.size()) {
@@ -113,9 +115,7 @@ std::ostream &operator<<(std::ostream &os, const std::vector<S> &vector) {
   return os;
 };
 
-Matrix Matrix::transpose() {
-  return Matrix(_eigen_data.transpose());
-};
+Matrix Matrix::transpose() { return Matrix(_eigen_data.transpose()); };
 
 // Matrix Matrix::cofactor_matrix() {
 //   if (get_row_count() == 1 && get_column_count() == 1) {
@@ -132,9 +132,7 @@ Matrix Matrix::transpose() {
 //   return Matrix(rows_, columns_, cofactor_input);
 // };
 
-Matrix Matrix::inverse() {
-  return Matrix(_eigen_data.inverse());
-};
+Matrix Matrix::inverse() { return Matrix(_eigen_data.inverse()); };
 
 float Matrix::determinant() {
   if (!is_square()) {
