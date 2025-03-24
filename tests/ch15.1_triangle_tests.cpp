@@ -156,3 +156,15 @@ TEST_F(TestSmoothTriangle, NormalInterpolation) {
 
   EXPECT_EQ(n, vector(-0.5547, 0.83205, 0));
 }
+
+// Scenario: preparing the normal on a smooth triangle
+// p222
+TEST_F(TestSmoothTriangle, SmoothTriangleComputations) { 
+  Intersection i = Intersection(1, &tri, 0.45, 0.25);
+  Ray r = Ray(point(-0.2, 0.3, -2), vector(0, 0, 1));
+  Intersections xs = Intersections(std::vector<Intersection> {i});
+
+  Computation comps = i.prepare_computations(r, xs);
+
+  EXPECT_EQ(comps.normalv, vector(-0.5547, 0.83205, 0));
+}
