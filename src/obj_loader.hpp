@@ -8,9 +8,11 @@
 #include <tuple.hpp>
 #include <unordered_map>
 #include <vector>
+#include <algorithm> //std::transform
 
 #include "group.hpp"
 #include "triangle.hpp"
+#include "smooth_triangle.hpp"
 
 class OBJParser {
  public:

@@ -134,8 +134,15 @@ TEST(TestOBJ, VertexNormalRecords) {
 TEST(TestOBJ, FacesWithNormals) {
   OBJParser o;
   o.parse_obj_file("tests/obj_files/ch15.faces_with_normals.obj");
-
-  // EXPECT_EQ(o.get_normal_vector(1), vector(0, 0, 1));
-  // EXPECT_EQ(o.get_normal_vector(2), vector(0.707, 0, -0.707));
-  // EXPECT_EQ(o.get_normal_vector(3), vector(1, 2, 3));
+  Group g = o.default_group;
+  SmoothTriangle t1 = *(SmoothTriangle *)g.get_child(0);
+  SmoothTriangle t2 = *(SmoothTriangle *)g.get_child(1);
+  
+  EXPECT_EQ(t1.p1, o.get_vertex(1));
+  EXPECT_EQ(t1.p2, o.get_vertex(2));
+  EXPECT_EQ(t1.p3, o.get_vertex(3));
+  EXPECT_EQ(t1.n1, o.get_normal_vector(3));
+  EXPECT_EQ(t1.n2, o.get_normal_vector(1));
+  EXPECT_EQ(t1.n3, o.get_normal_vector(2));
+  EXPECT_EQ(t1, t2);
 }

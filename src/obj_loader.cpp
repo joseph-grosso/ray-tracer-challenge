@@ -133,11 +133,58 @@ void OBJParser::initialize_triangles(std::string tail) {
 };
 
 void OBJParser::fan_triangulation(std::string tail, Group* g) {
+  // Lots of TODOs in this parsing logic!
   std::vector<std::string> vals = split(tail);
+  std::vector<std::vector<std::string>> all_split;
+  int vertex_type;
+  for (auto i : vals) {
+    all_split.push_back(split(i, "/"));
+  };
+  // TODO: fix ref to all_split[0] to something more complete -
+  //       don't simply check the first value
+  if (all_split[0].size() == 1) {
+    vertex_type = 1;
+  } else if (all_split[0].size() == 2) {
+    vertex_type = 2;
+  } else if (all_split[0].size() == 3) {
+    // TODO: add handling logic for Texture type
+    vertex_type = 3;
+  };
+
   for (int i = 1; i < vals.size() - 1; i++) {
-    g->add_child(new Triangle(get_vertex(std::stoi(vals[0])),
-                              get_vertex(std::stoi(vals[i])),
-                              get_vertex(std::stoi(vals[i + 1]))));
+    switch (vertex_type) {
+      case 1:  // Position only
+      {
+        g->add_child(new Triangle(get_vertex(std::stoi(vals[0])),
+                                  get_vertex(std::stoi(vals[i])),
+                                  get_vertex(std::stoi(vals[i + 1]))));
+        break;
+      }
+      case 2:  // Position and texture
+      {
+        // TODO: add texture handling logic
+        g->add_child(new Triangle(get_vertex(std::stoi(vals[0])),
+                          get_vertex(std::stoi(vals[i])),
+                          get_vertex(std::stoi(vals[i + 1]))));
+        break;
+      }
+      case 3:  // Position, texture, and normal
+      {
+        g->add_child(new SmoothTriangle(
+          get_vertex(std::stoi(all_split[0][0])),
+          get_vertex(std::stoi(all_split[i][0])),
+          get_vertex(std::stoi(all_split[i + 1][0])),
+          get_normal_vector(std::stoi(all_split[0][2])),
+          get_normal_vector(std::stoi(all_split[i][2])),
+          get_normal_vector(std::stoi(all_split[i + 1][2]))
+        ));
+        break;
+      }
+      default: 
+      {
+        break;
+      };
+    }
   };
 };
 

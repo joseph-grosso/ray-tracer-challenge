@@ -48,3 +48,5 @@ class SmoothTriangle : public Shape {
   };
   Intersections local_intersect(Ray r);
 };
+
+bool operator==(SmoothTriangle lhs, SmoothTriangle rhs);

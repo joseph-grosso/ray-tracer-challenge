@@ -34,3 +34,18 @@ Tuple SmoothTriangle::local_normal_at(float x, float y, float z,
                                       Intersection i) {
   return n2 * i.u + n3 * i.v + n1 * (1 - i.u - i.v);
 };
+
+bool operator==(SmoothTriangle lhs, SmoothTriangle rhs) {
+  return   
+    lhs.p1 == rhs.p1 && 
+    lhs.p2 == rhs.p2 && 
+    lhs.p3 == rhs.p3 && 
+    lhs.n1 == rhs.n1 && 
+    lhs.n2 == rhs.n2 && 
+    lhs.n3 == rhs.n3 && 
+    lhs.e1 == rhs.e1 && 
+    lhs.e2 == rhs.e2 &&
+    lhs.get_material() == rhs.get_material() &&
+    lhs.get_transform() == rhs.get_transform() &&
+    lhs.get_throws_shadow() == rhs.get_throws_shadow();
+}
