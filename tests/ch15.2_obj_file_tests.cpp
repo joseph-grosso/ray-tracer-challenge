@@ -117,3 +117,25 @@ TEST(TestOBJ, OBJFileToGroup) {
   EXPECT_EQ(file_group.get_child(0), g1);
   EXPECT_EQ(file_group.get_child(1), g2);
 }
+
+// Scenario: Vertex normal records
+// p223
+TEST(TestOBJ, VertexNormalRecords) {
+  OBJParser o;
+  o.parse_obj_file("tests/obj_files/ch15.vertex_normal_records.obj");
+
+  EXPECT_EQ(o.get_normal_vector(1), vector(0, 0, 1));
+  EXPECT_EQ(o.get_normal_vector(2), vector(0.707, 0, -0.707));
+  EXPECT_EQ(o.get_normal_vector(3), vector(1, 2, 3));
+}
+
+// Scenario: Faces with normals
+// p224
+TEST(TestOBJ, FacesWithNormals) {
+  OBJParser o;
+  o.parse_obj_file("tests/obj_files/ch15.faces_with_normals.obj");
+
+  // EXPECT_EQ(o.get_normal_vector(1), vector(0, 0, 1));
+  // EXPECT_EQ(o.get_normal_vector(2), vector(0.707, 0, -0.707));
+  // EXPECT_EQ(o.get_normal_vector(3), vector(1, 2, 3));
+}

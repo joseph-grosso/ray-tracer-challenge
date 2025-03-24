@@ -26,20 +26,31 @@ class OBJParser {
     if (i > vertices_.size()) {
       throw std::invalid_argument(
           "Requested index greater than number of vertices.");
-    } else if (i == 0) {
+    } else if (i <= 0) {
       throw std::invalid_argument("Parsers are indexed at 1, not 0.");
     };
     return *vertices_[i - 1];
   };
+  Tuple get_normal_vector(unsigned int i) {
+    if (i > normal_vectors_.size()) {
+      throw std::invalid_argument(
+          "Requested index greater than number of normal vectors.");
+    } else if (i <= 0) {
+      throw std::invalid_argument("Parsers are indexed at 1, not 0.");
+    };
+    return *normal_vectors_[i - 1];
+  };
   void parse_obj_file(std::string file_path);
   void parse_line(std::string curline);
   void update_group(std::string curline);
+  void parse_normals(std::string tail);
   unsigned int get_ignored_lines() { return ignored_lines; };
   std::string firstToken(const std::string in);
   std::string tail(const std::string in);
   std::vector<std::string> split(const std::string in,
-                                 std::string split_token = " ");
+    std::string split_token = " ");
   Tuple *create_point(const std::string tail);
+  Tuple* create_vector(const std::string tail);
   void initialize_triangles(std::string tail);
   void fan_triangulation(std::string tail, Group *g);
   Group *get_named_group(std::string key);
@@ -50,4 +61,5 @@ class OBJParser {
   unsigned int ignored_lines;
   std::string _current_group_name;
   std::unordered_map<std::string, Group *> _groups;
+  std::vector<Tuple *> normal_vectors_;
 };

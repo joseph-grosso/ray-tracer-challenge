@@ -167,3 +167,4 @@ TEST_F(TestSmoothTriangle, SmoothTriangleComputations) {
 
   EXPECT_EQ(comps.normalv, vector(-0.5547, 0.83205, 0));
 }
+

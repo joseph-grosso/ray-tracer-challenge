@@ -37,6 +37,8 @@ void OBJParser::parse_line(std::string curline) {
     initialize_triangles(tail(curline));
   } else if (first_token == "g") {
     update_group(tail(curline));
+  } else if (first_token == "vn") {
+    parse_normals(tail(curline));
   } else {
     ignored_lines++;
   };
@@ -50,6 +52,10 @@ void OBJParser::update_group(std::string tail) {
     _groups.insert({tail, g});
   };
 };
+
+void OBJParser::parse_normals(std::string tail) {
+  normal_vectors_.push_back(create_vector(tail));
+}
 
 // Get first token of string
 std::string OBJParser::firstToken(const std::string in) {
@@ -110,6 +116,12 @@ Tuple* OBJParser::create_point(const std::string tail) {
   std::vector<std::string> vals = split(tail);
   return new Tuple(std::stof(vals[0]), std::stof(vals[1]), std::stof(vals[2]),
                    1);
+};
+
+Tuple* OBJParser::create_vector(const std::string tail) {
+  std::vector<std::string> vals = split(tail);
+  return new Tuple(std::stof(vals[0]), std::stof(vals[1]), std::stof(vals[2]),
+                   0);
 };
 
 void OBJParser::initialize_triangles(std::string tail) {
