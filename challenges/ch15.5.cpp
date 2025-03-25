@@ -45,22 +45,38 @@ int main() {
                                0.0,                             // specular
                                500                             // shininess
     );
+    SolidPattern sand_1 = SolidPattern(Color(0.8509, 0.7647, 0.6627));
+    SolidPattern sand_2 = SolidPattern(Color(0.7490, 0.6078, 0.4784));
+    Pattern * desert_floor_pat = new PerlinPattern(&sand_1, &sand_2, 26,
+        identity_matrix(4),
+        true  // fade_together
+    );
+
+  Material desert_floor_mat = Material(desert_floor_pat, 
+    Color(-1, -1, -1),    // color
+    0.2,        // ambient
+    0.9,        // diffuse
+    1.4,        // specular
+    10         // shininess
+  );
+  Plane * floor = new Plane(identity_matrix(), desert_floor_mat);
   cowboy_supplies->set_all_materials(leather_mat);
-  Tuple L_and_P = point(-3, 3, 3);
+  Tuple camera_point = point(-3, 3, 3);
+  Tuple light_point = point(0, 5, 10);
 
   // Add a light source
-  PointLight light = PointLight(L_and_P, Color(1, 1, 1));
+  PointLight light = PointLight(light_point, Color(1, 1, 1));
 
   // Create camera
-  int ratio = 80;
+  int ratio = 20;
   unsigned int x = ratio * 10;
   unsigned int y = ratio * 5;
   Camera camera(x, y, M_PI / 7.5);
   camera.transform =
-      view_transform(L_and_P, point(0, 0.75, -0.1), vector(0, 1.5, 0));
+      view_transform(camera_point, point(0, 0.75, -0.1), vector(0, 1.5, 0));
 
   // Create world
-  World w(std::vector<Shape *>{cowboy_supplies}, light);
+  World w(std::vector<Shape *>{cowboy_supplies, floor}, light);
 
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << "New image generation starting!" << std::endl;
