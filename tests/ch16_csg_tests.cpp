@@ -6,15 +6,22 @@
 #include <string>
 #include <vector>
 
+#include "csg.hpp"
+#include "cube.hpp"
 #include "gtest/gtest.h"
-#include "ray_tracer.hpp"
+#include "sphere.hpp"
 
 // Scenario: CSG is created with an operation and two shapes
 // p230
-TEST(TestCSG, CreateNewGroup) {
-  Group g = Group();
+TEST(TestCSG, CreateNewCSG) {
+  Sphere s1 = Sphere();
+  Cube s2 = Cube();
 
-  EXPECT_EQ(g.get_transform(), identity_matrix(4));
-  EXPECT_EQ(g.get_count(), 0);
-  EXPECT_EQ(g.is_empty(), true);
+  CSG c = CSG("union", &s1, &s2);
+
+  EXPECT_EQ(c.get_operation(), "union");
+  EXPECT_EQ(c.get_left(), &s1);
+  EXPECT_EQ(c.get_right(), &s2);
+  EXPECT_EQ(s1.parent, &c);
+  EXPECT_EQ(s2.parent, &c);
 }

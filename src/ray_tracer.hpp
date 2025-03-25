@@ -14,6 +14,7 @@
 #include "world.hpp"
 // shapes
 #include "cone.hpp"
+#include "csg.hpp"
 #include "cube.hpp"
 #include "cylinder.hpp"
 #include "group.hpp"

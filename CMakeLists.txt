@@ -60,7 +60,7 @@ if (test)
     tests/ch14_group_tests.cpp
     tests/ch15.1_triangle_tests.cpp
     tests/ch15.2_obj_file_tests.cpp
-    # tests/ch16_csg_tests.cpp
+    tests/ch16_csg_tests.cpp
   )
 
   target_link_libraries(
