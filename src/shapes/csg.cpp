@@ -24,3 +24,25 @@ bool CSG::intersection_allowed(bool lhit, bool inl, bool inr) {
   };
   return false;
 };
+
+Intersections CSG::filter_intersections(Intersections xs) {
+  bool inl = false;
+  bool inr = false;
+  bool lhit;
+
+  auto result = std::vector<Intersection>{};
+
+  for (auto i : xs.data) {
+    lhit = left->includes(i.object);  // virtual method for getting values
+    if (intersection_allowed(lhit, inl, inr)) {
+      result.push_back(i);
+    };
+
+    if (lhit) {
+      inl = !inl;
+    } else {
+      inr = !inr;
+    };
+  };
+  return Intersections(result);
+};

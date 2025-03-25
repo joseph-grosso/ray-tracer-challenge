@@ -37,4 +37,5 @@ class Shape {
   virtual Tuple local_normal_at(Tuple p, Intersection i = Intersection()) = 0;
   Tuple world_to_object(Tuple p);
   Tuple normal_to_world(Tuple n);
+  virtual bool includes(Shape *target) { return this == target; };
 };

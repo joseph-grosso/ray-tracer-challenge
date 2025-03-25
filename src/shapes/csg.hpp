@@ -38,4 +38,8 @@ class CSG : public Shape {
   std::string to_string();
   Intersections local_intersect(Ray r);
   bool intersection_allowed(bool lhit, bool inl, bool inr);
+  Intersections filter_intersections(Intersections xs);
+  bool includes(Shape *target) override {
+    return left->includes(target) || right->includes(target);
+  };
 };

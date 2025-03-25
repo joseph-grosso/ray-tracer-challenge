@@ -38,4 +38,12 @@ class Group : public Shape {
   Tuple local_normal_at(Tuple p, Intersection i = Intersection());
   std::string to_string();
   Intersections local_intersect(Ray r);
+  bool includes(Shape *target) override {
+    for (auto i : children) {
+      if (i->includes(target)) {
+        return true;
+      };
+    };
+    return false;
+  };
 };

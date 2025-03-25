@@ -72,3 +72,30 @@ INSTANTIATE_TEST_SUITE_P(
         std::make_tuple(CSGOperation::DIFFERENCE, false, true, false, true),
         std::make_tuple(CSGOperation::DIFFERENCE, false, false, true, false),
         std::make_tuple(CSGOperation::DIFFERENCE, false, false, false, false)));
+
+class TestCSGHitFiltering
+    : public testing::TestWithParam<std::tuple<CSGOperation, int, int>> {};
+
+// Scenario: Filtering a list of intersections
+// p234
+TEST_P(TestCSGHitFiltering, TestIntersectFilter) {
+  auto [op, x0, x1] = GetParam();
+  auto s1 = Sphere();
+  auto s2 = Cube();
+  CSG c = CSG(op, &s1, &s2);
+  Intersections xs = Intersections(
+      std::vector<Intersection>{Intersection(1, &s1), Intersection(2, &s2),
+                                Intersection(3, &s1), Intersection(4, &s2)});
+
+  auto result = c.filter_intersections(xs);
+
+  EXPECT_EQ(result.count, 2);
+  EXPECT_EQ(result[0], xs[x0]);
+  EXPECT_EQ(result[1], xs[x1]);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    TestCSGHits, TestCSGHitFiltering,
+    ::testing::Values(std::make_tuple(CSGOperation::UNION, 0, 3),
+                      std::make_tuple(CSGOperation::INTERSECTION, 1, 2),
+                      std::make_tuple(CSGOperation::DIFFERENCE, 0, 1)));
