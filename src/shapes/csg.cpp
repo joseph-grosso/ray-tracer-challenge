@@ -13,3 +13,14 @@ std::string CSG::to_string() { return "CSG"; };
 Intersections CSG::local_intersect(Ray r) {
   return Intersections(std::vector<Intersection>{});
 };
+
+bool CSG::intersection_allowed(bool lhit, bool inl, bool inr) {
+  if (operation == CSGOperation::UNION) {
+    return (lhit && !inr) || (!lhit && !inl);
+  } else if (operation == CSGOperation::INTERSECTION) {
+    return (lhit && inr) || (!lhit && inl);
+  } else if (operation == CSGOperation::DIFFERENCE) {
+    return (lhit && !inr) || (!lhit && inl);
+  };
+  return false;
+};

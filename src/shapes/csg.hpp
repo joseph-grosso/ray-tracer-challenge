@@ -14,15 +14,17 @@
 #include "tuple.hpp"
 
 // Chapter 16: CSG
+enum class CSGOperation { UNION, INTERSECTION, DIFFERENCE };
+
 class CSG : public Shape {
  private:
-  std::string operation;
+  CSGOperation operation;
   Shape *left;
   Shape *right;
 
  public:
   // Methods
-  CSG(std::string operation_, Shape *left_, Shape *right_,
+  CSG(CSGOperation operation_, Shape *left_, Shape *right_,
       Matrix t = identity_matrix(4))
       : Shape(t), operation{operation_}, left{left_}, right{right_} {
     left->parent = this;
@@ -30,9 +32,10 @@ class CSG : public Shape {
   };
   Shape *get_left() { return left; };
   Shape *get_right() { return right; };
-  std::string get_operation() { return operation; };
+  CSGOperation get_operation() const { return operation; };
   Tuple local_normal_at(float x, float y, float z);
   Tuple local_normal_at(Tuple p, Intersection i = Intersection());
   std::string to_string();
   Intersections local_intersect(Ray r);
+  bool intersection_allowed(bool lhit, bool inl, bool inr);
 };
