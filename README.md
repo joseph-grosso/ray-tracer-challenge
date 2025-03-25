@@ -17,6 +17,8 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 
 ### .obj Files
 
+![Cowboy Hat](outputs/ch15/hr_cowboy_supplies.png "A polygonal cowboy hat, and possible some tools? Laying in the desert. Taken from a freely available 3D model online and converted to .obj format.")
+
 ![Polygonal Teapot](outputs/ch15/hhq_teacup.png "An example of the Utah Teapot, generated using a simple .obj file.") ![Smooth Teapot](outputs/ch15/hr_smooth_teapot_.png "An example of the Utah Teapot, with surface smoothing.")
 
 ### Cubes
@@ -65,14 +67,22 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 - [x] ch12
 - [x] ch13
 - [x] ch14
-- [ ] ch15
-- [ ] ch16
-- [ ] Bonus chapters (online)
-  - [ ] Soft shadows
+- [x] ch15
+- [x] ch16
+- [ ] Bonus chapters (online):
+  - [ ] Soft shadows (multiple light sources)
   - [ ] Bounding Boxes
   - [ ] Texture Mapping
+- [ ] Other interesting challenges:
+  - [ ] Motion blur
+  - [ ] Anti-aliasing
+  - [ ] Normal Perturbation
+  - [ ] Torus primitive/quadratic equation solvers
+  - [ ] YAML file parser
+  - [ ] Square intersection optimizations
+  - [ ] GPU optimization (Google Colab?)
 
-### Code Enhancements
+### Code Enhancements (TODOs)
 
 - [x] Move common Shape functionality to a separate file
 - [x] Move Shape objects code into its own folder
