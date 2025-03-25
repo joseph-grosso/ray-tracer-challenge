@@ -10,6 +10,7 @@
 #include "cube.hpp"
 #include "gtest/gtest.h"
 #include "sphere.hpp"
+#include "transform.hpp"
 
 // Scenario: CSG is created with an operation and two shapes
 // p230
@@ -99,3 +100,34 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::Values(std::make_tuple(CSGOperation::UNION, 0, 3),
                       std::make_tuple(CSGOperation::INTERSECTION, 1, 2),
                       std::make_tuple(CSGOperation::DIFFERENCE, 0, 1)));
+
+// TODO: add in tests for nested CSG and group objects testing "includes"
+// overrides
+
+// Scenario: A ray misses a CSG object
+// p236
+TEST(TESTCSG, TESTCSGRayMiss) {
+  auto c = CSG(CSGOperation::UNION, new Sphere(), new Cube());
+  auto r = Ray(point(0, 2, -5), vector(0, 0, 1));
+
+  auto xs = c.local_intersect(r);
+
+  EXPECT_EQ(xs.count, 0);
+}
+
+// Scenario: A ray hits a CSG object
+// p236
+TEST(TESTCSG, TESTCSGRayHit) {
+  auto s1 = Sphere();
+  auto s2 = Sphere(translation_matrix(0, 0, 0.5));
+  auto c = CSG(CSGOperation::UNION, &s1, &s2);
+  auto r = Ray(point(0, 0, -5), vector(0, 0, 1));
+
+  auto xs = c.local_intersect(r);
+
+  EXPECT_EQ(xs.count, 2);
+  EXPECT_TRUE(equalByEpsilon(xs[0].t, 4));
+  EXPECT_EQ(xs[0].object, &s1);
+  EXPECT_TRUE(equalByEpsilon(xs[1].t, 6.5));
+  EXPECT_EQ(xs[1].object, &s2);
+}

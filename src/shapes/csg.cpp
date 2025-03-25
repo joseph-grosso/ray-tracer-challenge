@@ -11,7 +11,16 @@ Tuple CSG::local_normal_at(Tuple p, Intersection i) {
 std::string CSG::to_string() { return "CSG"; };
 
 Intersections CSG::local_intersect(Ray r) {
-  return Intersections(std::vector<Intersection>{});
+  auto leftxs = left->intersect(r);
+  auto rightxs = right->intersect(r);
+
+  std::vector<Intersection> xs;
+  xs.reserve(leftxs.data.size() + rightxs.data.size());  // preallocate memory
+  xs.insert(xs.end(), leftxs.data.begin(), leftxs.data.end());
+  xs.insert(xs.end(), rightxs.data.begin(), rightxs.data.end());
+  std::sort(xs.begin(), xs.end());
+
+  return filter_intersections(Intersections(xs));
 };
 
 bool CSG::intersection_allowed(bool lhit, bool inl, bool inr) {
