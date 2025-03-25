@@ -26,3 +26,10 @@ Intersections Group::local_intersect(Ray r) {
   std::sort(xs.begin(), xs.end());
   return Intersections(xs);
 };
+
+void Group::set_all_materials(Material m) {
+  // TODO: for nested groups you'll need a better setter method call
+  for (auto child : children) {
+    child->set_material(m);
+  };
+};

@@ -17,7 +17,7 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
 
 ### .obj Files
 
-![Teapot](outputs/ch15/hhq_teacup.png "An example of the Utah Teapot, generated using a simple .obj file.")
+![Polygonal Teapot](outputs/ch15/hhq_teacup.png "An example of the Utah Teapot, generated using a simple .obj file.") ![Smooth Teapot](outputs/ch15/hr_smooth_teapot_.png "An example of the Utah Teapot, with surface smoothing.")
 
 ### Cubes
 
