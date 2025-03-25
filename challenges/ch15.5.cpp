@@ -52,7 +52,7 @@ int main() {
   PointLight light = PointLight(L_and_P, Color(1, 1, 1));
 
   // Create camera
-  int ratio = 10;
+  int ratio = 80;
   unsigned int x = ratio * 10;
   unsigned int y = ratio * 5;
   Camera camera(x, y, M_PI / 7.5);
