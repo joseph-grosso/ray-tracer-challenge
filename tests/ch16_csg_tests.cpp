@@ -46,6 +46,7 @@ TEST_P(TestCSGOps, TestIntersectAllowed) {
 INSTANTIATE_TEST_SUITE_P(
     TestCSGRules, TestCSGOps,
     ::testing::Values(
+        //              operation,           lhit, inl,  inr,  expected
         // UNION tests
         std::make_tuple(CSGOperation::UNION, true, true, true, false),
         std::make_tuple(CSGOperation::UNION, true, true, false, true),
