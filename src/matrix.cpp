@@ -9,8 +9,6 @@ Matrix::Matrix(unsigned int rows, unsigned int columns,
   };
   rows_ = rows;
   columns_ = columns;
-  // TODO: delete references to data_
-  data_ = data;
   _eigen_data = Eigen::Map<
       Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>(
       data.data(), rows_, columns_);
@@ -20,8 +18,6 @@ Matrix::Matrix(Eigen::MatrixXf eigen_data) {
   rows_ = eigen_data.rows();
   columns_ = eigen_data.cols();
   _eigen_data = eigen_data;
-  data_ = std::vector<float>(eigen_data.data(),
-                             eigen_data.data() + eigen_data.size());
 };
 
 // Matrix(unsigned int rows, unsigned int columns, float data[]);
@@ -48,12 +44,6 @@ Eigen::MatrixXf Matrix::get_eigen_data() { return _eigen_data; };
 unsigned int Matrix::get_row_count() { return rows_; };
 
 unsigned int Matrix::get_column_count() { return columns_; };
-
-// TODO: Delete this function
-std::vector<float> Matrix::get_matrix_data() {
-  std::vector<float> copy = data_;
-  return copy;
-};
 
 // Arithmetic operator overloads
 bool operator==(Matrix lhs, Matrix rhs) {
@@ -90,20 +80,6 @@ float dot_product(std::vector<float> v1, std::vector<float> v2) {
   return std::inner_product(v1.begin(), v1.end(), v2.begin(), 0.0);
 };
 
-// void Matrix::check_valid_row_coord(unsigned int row_coord) {
-//   if (row_coord >= rows_) {
-//     throw std::invalid_argument("Row coordinate out of range of matrix");
-//   };
-//   return;
-// };
-
-// void Matrix::check_valid_column_coord(unsigned int column_coord) {
-//   if (column_coord >= columns_) {
-//     throw std::invalid_argument("Column coordinate out of range of matrix");
-//   };
-//   return;
-// };
-
 // TODO: Remove once you're done debugging tests.
 template <typename S>
 std::ostream &operator<<(std::ostream &os, const std::vector<S> &vector) {
@@ -117,21 +93,6 @@ std::ostream &operator<<(std::ostream &os, const std::vector<S> &vector) {
 
 Matrix Matrix::transpose() { return Matrix(_eigen_data.transpose()); };
 
-// Matrix Matrix::cofactor_matrix() {
-//   if (get_row_count() == 1 && get_column_count() == 1) {
-//     std::vector<float> id_data = {1};
-//     return Matrix(1, 1, id_data);
-//   }
-//   std::vector<float> cofactor_input;
-//   for (int i = 0; i < rows_; i++) {
-//     for (int j = 0; j < columns_; j++) {
-//       cofactor_input.push_back(cofactor(i, j));
-//     };
-//   };
-
-//   return Matrix(rows_, columns_, cofactor_input);
-// };
-
 Matrix Matrix::inverse() { return Matrix(_eigen_data.inverse()); };
 
 float Matrix::determinant() {
@@ -141,26 +102,6 @@ float Matrix::determinant() {
 
   return _eigen_data.determinant();
 };
-
-// float Matrix::minor(unsigned int row, unsigned int col) {
-//   return submatrix(row, col).determinant();
-// };
-
-// float Matrix::cofactor(unsigned int row, unsigned int col) {
-//   return ((row + col) % 2 == 1) ? -minor(row, col) : minor(row, col);
-// };
-
-// Matrix Matrix::submatrix(unsigned int row, unsigned int col) {
-//   std::vector<float> new_data;
-//   for (int i = 0; i < rows_; i++) {
-//     for (int j = 0; j < columns_; j++) {
-//       if (i != row && j != col) {
-//         new_data.push_back(get_point(i, j));
-//       };
-//     };
-//   };
-//   return Matrix(rows_ - 1, columns_ - 1, new_data);
-// };
 
 bool Matrix::is_square() { return rows_ == columns_; };
 

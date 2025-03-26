@@ -22,7 +22,6 @@ class Matrix {
  private:
   unsigned int rows_;
   unsigned int columns_;
-  std::vector<float> data_;
   Eigen::MatrixXf _eigen_data;
 
  public:
@@ -38,7 +37,6 @@ class Matrix {
   unsigned int get_column_count();
   unsigned int get_elements_count();
   Eigen::MatrixXf get_eigen_data();
-  std::vector<float> get_matrix_data();
   Matrix transpose();
   float determinant();
   // TODO: Refactor these functions to use Eigen directly
