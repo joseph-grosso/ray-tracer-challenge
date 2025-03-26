@@ -34,14 +34,7 @@ Color operator*(Color lhs, Color rhs) {
   return Color(lhs.red * rhs.red, lhs.green * rhs.green, lhs.blue * rhs.blue);
 };
 
-// Chpater 6: Light and Shading
-Tuple Tuple::reflect(Tuple normal) {
-  if (!isVector() || !normal.isVector()) {
-    throw std::invalid_argument("Both input tuples must be vectors.");
-  }
-  return *this - (normal * 2) * dot(normal);
-};
-
+// Chapter 6: Light and Shading
 std::string Color::to_string() {
   return "Color(red=" + std::to_string(red) +
          ", green=" + std::to_string(green) + ", blue=" + std::to_string(blue) +

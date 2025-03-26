@@ -63,11 +63,7 @@ Tuple operator*(Matrix m, Tuple t) {
     throw std::invalid_argument(
         "Unfit matrix: Matrix must be 4x4 to multiply with a tuple.");
   };
-  std::vector<float> tup_as_vector = {t.x, t.y, t.z, t.w};
-  return Tuple(dot_product(m.get_row(0), tup_as_vector),
-               dot_product(m.get_row(1), tup_as_vector),
-               dot_product(m.get_row(2), tup_as_vector),
-               dot_product(m.get_row(3), tup_as_vector));
+  return Tuple(m.get_eigen_data() * t.values);
 };
 
 Matrix operator*(Matrix m, float x) { return Matrix(m.get_eigen_data() * x); };
