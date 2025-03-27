@@ -5,7 +5,8 @@
 Intersections Cylinder::local_intersect(Ray r) {
   std::vector<Intersection> xs = std::vector<Intersection>{};
 
-  float a = std::pow(r.get_direction().x, 2) + std::pow(r.get_direction().z, 2);
+  float a =
+      std::pow(r.get_direction().x(), 2) + std::pow(r.get_direction().z(), 2);
 
   // check if ray is parallel to the y axis
   if (equalByEpsilon(a, 0)) {
@@ -13,9 +14,10 @@ Intersections Cylinder::local_intersect(Ray r) {
     return xs;
   };
 
-  float b = 2 * r.get_origin().x * r.get_direction().x +
-            2 * r.get_origin().z * r.get_direction().z;
-  float c = std::pow(r.get_origin().x, 2) + std::pow(r.get_origin().z, 2) - 1;
+  float b = 2 * r.get_origin().x() * r.get_direction().x() +
+            2 * r.get_origin().z() * r.get_direction().z();
+  float c =
+      std::pow(r.get_origin().x(), 2) + std::pow(r.get_origin().z(), 2) - 1;
   float disc = std::pow(b, 2) - 4 * a * c;
 
   // ray doesn't intersect cylinder
@@ -31,12 +33,12 @@ Intersections Cylinder::local_intersect(Ray r) {
     t0 = temp;
   };
 
-  float y0 = r.get_origin().y + t0 * r.get_direction().y;
+  float y0 = r.get_origin().y() + t0 * r.get_direction().y();
   if (minimum < y0 && y0 < maximum) {
     xs.push_back(Intersection(t0, this));
   };
 
-  float y1 = r.get_origin().y + t1 * r.get_direction().y;
+  float y1 = r.get_origin().y() + t1 * r.get_direction().y();
   if (minimum < y1 && y1 < maximum) {
     xs.push_back(Intersection(t1, this));
   };
@@ -61,8 +63,8 @@ Tuple Cylinder::local_normal_at(float x, float y, float z) {
 };
 
 bool Cylinder::check_cap(Ray r, float t) {
-  float x = r.get_origin().x + t * r.get_direction().x;
-  float z = r.get_origin().z + t * r.get_direction().z;
+  float x = r.get_origin().x() + t * r.get_direction().x();
+  float z = r.get_origin().z() + t * r.get_direction().z();
 
   float val = std::pow(x, 2) + std::pow(z, 2);
 
@@ -70,16 +72,16 @@ bool Cylinder::check_cap(Ray r, float t) {
 };
 
 void Cylinder::intersect_caps(Ray ray, std::vector<Intersection> *xs) {
-  if (!this->closed || equalByEpsilon(ray.get_direction().y, 0)) {
+  if (!this->closed || equalByEpsilon(ray.get_direction().y(), 0)) {
     return;
   };
 
-  float t = (minimum - ray.get_origin().y) / ray.get_direction().y;
+  float t = (minimum - ray.get_origin().y()) / ray.get_direction().y();
   if (check_cap(ray, t)) {
     xs->push_back(Intersection(t, this));
   };
 
-  t = (maximum - ray.get_origin().y) / ray.get_direction().y;
+  t = (maximum - ray.get_origin().y()) / ray.get_direction().y();
   if (check_cap(ray, t)) {
     xs->push_back(Intersection(t, this));
   };

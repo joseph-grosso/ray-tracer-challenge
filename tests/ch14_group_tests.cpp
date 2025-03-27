@@ -30,7 +30,7 @@ class TestShape : public Shape {
     return Intersections();
   };
   Tuple local_normal_at(Tuple p, Intersection i) {
-    return vector(p.x, p.y, p.z);
+    return vector(p.x(), p.y(), p.z());
   };
 };
 

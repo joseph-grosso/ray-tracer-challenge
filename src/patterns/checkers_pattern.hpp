@@ -22,8 +22,9 @@ class CheckersPattern : public Pattern {
   Pattern *get_a() { return a; };
   Pattern *get_b() { return b; };
   Color pattern_at(Tuple p) {
-    int abs_distances = (int)std::abs(std::floor(p.x)) +
-                        std::abs(std::floor(p.y)) + std::abs(std::floor(p.z));
+    int abs_distances = (int)std::abs(std::floor(p.x())) +
+                        std::abs(std::floor(p.y())) +
+                        std::abs(std::floor(p.z()));
     return abs_distances % 2 == 0
                ? a->pattern_at(a->get_transform().inverse() * p)
                : b->pattern_at(b->get_transform().inverse() * p);

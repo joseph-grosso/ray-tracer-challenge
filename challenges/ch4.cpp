@@ -44,9 +44,9 @@ int main() {
     canvas_pos = map_to_canvas * pos;
     reflected_canvas_pos = translation_matrix(40, 0, 0) * canvas_pos;
     // Fill in canvas at the canvas coords
-    c.write_pixel(Color(1, 0, 0), canvas_pos.x, canvas_pos.y);
-    c.write_pixel(Color(1, 0, 0), reflected_canvas_pos.x,
-                  reflected_canvas_pos.y);
+    c.write_pixel(Color(1, 0, 0), canvas_pos.x(), canvas_pos.y());
+    c.write_pixel(Color(1, 0, 0), reflected_canvas_pos.x(),
+                  reflected_canvas_pos.y());
     // Rotate base position
     pos = one_clock_turn * pos;
   };
@@ -61,7 +61,7 @@ int main() {
     canvas_pos = map_to_canvas * line_pos;
     reflected_canvas_pos = translation_matrix(40, 0, 0) * canvas_pos;
     // Fill in canvas at the canvas coords
-    c.write_pixel(Color(1, 0, 0), canvas_pos.x, canvas_pos.y);
+    c.write_pixel(Color(1, 0, 0), canvas_pos.x(), canvas_pos.y());
     // Move base position
     line_pos = movement * line_pos;
   };
@@ -75,7 +75,7 @@ int main() {
     canvas_pos = map_to_canvas * line_pos;
     reflected_canvas_pos = translation_matrix(40, 0, 0) * canvas_pos;
     // Fill in canvas at the canvas coords
-    c.write_pixel(Color(1, 0, 0), canvas_pos.x, canvas_pos.y);
+    c.write_pixel(Color(1, 0, 0), canvas_pos.x(), canvas_pos.y());
     // Move base position
     line_pos = movement * line_pos;
   };
@@ -103,7 +103,7 @@ int main() {
 //     // Remap current point to canvas_pos
 //     canvas_pos = scale * pos_circles;
 //     // Fill in canvas at the canvas coords
-//     c.write_pixel(Color(1, 0, 0), canvas_pos.x, canvas_pos.y);
+//     c.write_pixel(Color(1, 0, 0), canvas_pos.x(), canvas_pos.y());
 //     // Rotate base position
 //     pos_circles = one_of_10_rotations * pos_circles;
 // };

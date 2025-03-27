@@ -87,7 +87,7 @@ TEST_P(TestCubeNormal, CubeSurfaceNormalAlternative) {
 
   Cube c = Cube();
 
-  Tuple actual_normal = c.local_normal_at(point_.x, point_.y, point_.z);
+  Tuple actual_normal = c.local_normal_at(point_.x(), point_.y(), point_.z());
 
   ASSERT_EQ(actual_normal, expected_normal);
 }

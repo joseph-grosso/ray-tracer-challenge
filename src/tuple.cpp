@@ -12,30 +12,34 @@ bool equalByEpsilon(float a, float b, float epsilon) {
 }
 
 bool operator==(Tuple lhs, Tuple rhs) {
-  return equalByEpsilon(lhs.x, rhs.x) && equalByEpsilon(lhs.y, rhs.y) &&
-         equalByEpsilon(lhs.z, rhs.z) && equalByEpsilon(lhs.w, rhs.w);
+  return equalByEpsilon(lhs.x(), rhs.x()) && equalByEpsilon(lhs.y(), rhs.y()) &&
+         equalByEpsilon(lhs.z(), rhs.z()) && equalByEpsilon(lhs.w(), rhs.w());
 }
 
 Tuple operator+(Tuple lhs, Tuple rhs) {
-  return Tuple(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w);
+  return Tuple(lhs.x() + rhs.x(), lhs.y() + rhs.y(), lhs.z() + rhs.z(),
+               lhs.w() + rhs.w());
 }
 
 Tuple operator-(Tuple lhs, Tuple rhs) {
-  return Tuple(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w);
+  return Tuple(lhs.x() - rhs.x(), lhs.y() - rhs.y(), lhs.z() - rhs.z(),
+               lhs.w() - rhs.w());
 }
 
-Tuple operator-(Tuple tup) { return Tuple(-tup.x, -tup.y, -tup.z, -tup.w); }
+Tuple operator-(Tuple tup) {
+  return Tuple(-tup.x(), -tup.y(), -tup.z(), -tup.w());
+}
 
 Tuple operator*(Tuple tup, float a) {
-  return Tuple(tup.x * a, tup.y * a, tup.z * a, tup.w * a);
+  return Tuple(tup.x() * a, tup.y() * a, tup.z() * a, tup.w() * a);
 };
 
 Tuple operator*(float a, Tuple tup) {
-  return Tuple(tup.x * a, tup.y * a, tup.z * a, tup.w * a);
+  return Tuple(tup.x() * a, tup.y() * a, tup.z() * a, tup.w() * a);
 };
 
 Tuple operator/(Tuple tup, float a) {
-  return Tuple(tup.x / a, tup.y / a, tup.z / a, tup.w / a);
+  return Tuple(tup.x() / a, tup.y() / a, tup.z() / a, tup.w() / a);
 };
 
 // Chapter 7: Making a Scene

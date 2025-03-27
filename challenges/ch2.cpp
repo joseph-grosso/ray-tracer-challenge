@@ -64,13 +64,14 @@ int main() {
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << "New flight starting!" << std::endl;
 
-  while (p.position.y > 0) {
-    // fill_in_canvas_at_position(c, (int) p.position.x, (int) p.position.y);
+  while (p.position.y() > 0) {
+    // fill_in_canvas_at_position(c, (int) p.position.x(), (int)
+    // p.position.y());
     std::cout << "Filling canvas at position" << std::endl;
-    std::cout << "i value: " << std::to_string(p.position.x) << std::endl;
-    std::cout << "j value: " << std::to_string(p.position.y) << std::endl;
-    for (int i = (int)p.position.x; i <= (int)p.position.x + 5; i++) {
-      for (int j = (int)p.position.y; j <= (int)p.position.y + 5; j++) {
+    std::cout << "i value: " << std::to_string(p.position.x()) << std::endl;
+    std::cout << "j value: " << std::to_string(p.position.y()) << std::endl;
+    for (int i = (int)p.position.x(); i <= (int)p.position.x() + 5; i++) {
+      for (int j = (int)p.position.y(); j <= (int)p.position.y() + 5; j++) {
         if (i >= 0 && i < c.get_width() && j >= 0 && j < c.get_height()) {
           c.write_pixel(Color(1, 0, 0), i, c.get_height() - j);
         };

@@ -28,9 +28,12 @@ class PermutationPattern : public Pattern {
   };
   Pattern *get_base_pattern() { return base_pattern; };
   Color pattern_at(Tuple p) {
-    double pval_x = perlin_x.octave3D_11(p.x, p.y, p.z, 3) * noise_scaling;
-    double pval_y = perlin_y.octave3D_11(p.x, p.y, p.z, 3) * noise_scaling;
-    double pval_z = perlin_z.octave3D_11(p.x, p.y, p.z, 3) * noise_scaling;
+    double pval_x =
+        perlin_x.octave3D_11(p.x(), p.y(), p.z(), 3) * noise_scaling;
+    double pval_y =
+        perlin_y.octave3D_11(p.x(), p.y(), p.z(), 3) * noise_scaling;
+    double pval_z =
+        perlin_z.octave3D_11(p.x(), p.y(), p.z(), 3) * noise_scaling;
 
     return base_pattern->pattern_at(p + vector(pval_x, pval_y, pval_z));
   };

@@ -44,7 +44,7 @@ class SmoothTriangle : public Shape {
         e2{p3_ - p1_} {};
   Tuple local_normal_at(float x, float y, float z, Intersection i);
   Tuple local_normal_at(Tuple p, Intersection i) {
-    return local_normal_at(p.x, p.y, p.z, i);
+    return local_normal_at(p.x(), p.y(), p.z(), i);
   };
   Intersections local_intersect(Ray r);
 };

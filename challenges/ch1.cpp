@@ -47,10 +47,10 @@ int main() {
   cout << setprecision(2) << fixed;
   cout << "New flight starting!" << endl;
 
-  while (p.position.y > 0) {
-    cout << " x: " << p.position.x << "\t";
-    cout << "|y: " << p.position.y << "\t";
-    cout << "|z: " << p.position.z << "\t" << endl;
+  while (p.position.y() > 0) {
+    cout << " x: " << p.position.x() << "\t";
+    cout << "|y: " << p.position.y() << "\t";
+    cout << "|z: " << p.position.z() << "\t" << endl;
     p = tick_projectile(e, p);
   };
 

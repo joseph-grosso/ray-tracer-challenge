@@ -22,7 +22,7 @@ class StripePattern : public Pattern {
   Pattern* get_a() { return a; };
   Pattern* get_b() { return b; };
   Color pattern_at(Tuple p) {
-    return ((int)std::floor(p.x) % 2 == 0)
+    return ((int)std::floor(p.x()) % 2 == 0)
                ? a->pattern_at(a->get_transform().inverse() * p)
                : b->pattern_at(b->get_transform().inverse() * p);
   };

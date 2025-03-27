@@ -29,12 +29,12 @@ class PerlinPattern : public Pattern {
   Color pattern_at(Tuple p) {
     Color a_color = a->pattern_at(a->get_transform().inverse() * p);
     Color b_color = b->pattern_at(b->get_transform().inverse() * p);
-    double perlin_value = perlin.noise3D_01(p.x, p.y, p.z);
+    double perlin_value = perlin.noise3D_01(p.x(), p.y(), p.z());
 
     if (fade_together) {
       return (perlin_value * a_color) +
-             ((1 - perlin.noise3D_01(p.x, p.y, p.z)) * b_color);
+             ((1 - perlin.noise3D_01(p.x(), p.y(), p.z())) * b_color);
     };
-    return perlin.noise3D_01(p.x, p.y, p.z) > 0.5 ? a_color : b_color;
+    return perlin.noise3D_01(p.x(), p.y(), p.z()) > 0.5 ? a_color : b_color;
   };
 };

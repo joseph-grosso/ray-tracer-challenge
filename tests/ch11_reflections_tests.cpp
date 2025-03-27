@@ -210,8 +210,8 @@ TEST(TestTransparencyAndRefraction, UnderPoint) {
 
   Computation comps = i.prepare_computations(r, xs);
 
-  EXPECT_TRUE(comps.under_point.z > 0.001);
-  EXPECT_TRUE(comps.point.z < comps.under_point.z);
+  EXPECT_TRUE(comps.under_point.z() > 0.001);
+  EXPECT_TRUE(comps.point.z() < comps.under_point.z());
 }
 
 // Scenario: The refracted color with an opaque surface
@@ -275,7 +275,7 @@ TEST(TestTransparencyAndRefraction, RefractedColorTIR) {
 class TestPattern : public Pattern {
  public:
   TestPattern(Matrix t = identity_matrix(4)) : Pattern(t){};
-  Color pattern_at(Tuple p) { return Color(20, p.y, p.z); };
+  Color pattern_at(Tuple p) { return Color(20, p.y(), p.z()); };
 };
 
 // Scenario: The refracted color with a refracted ray
@@ -418,7 +418,7 @@ class TestShape : public Shape {
     return Intersections();
   };
   Tuple local_normal_at(Tuple p, Intersection i) {
-    return vector(p.x, p.y, p.z);
+    return vector(p.x(), p.y(), p.z());
   };
 };
 

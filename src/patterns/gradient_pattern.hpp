@@ -26,7 +26,7 @@ class GradientPattern : public Pattern {
     Color b_col = b->pattern_at(b->get_transform().inverse() * p);
 
     Color distance = b_col - a_col;
-    float fraction = p.x - floor(p.x);
+    float fraction = p.x() - floor(p.x());
 
     return a_col + (distance * fraction);
   };

@@ -85,11 +85,12 @@ Matrix view_transform(Tuple from, Tuple to, Tuple up) {
   // Compute "true up" with the cross of left and forward
   Tuple true_up = left.cross(forward);
   // Create the orientation matrix using computed vectors
-  Matrix orientation(4, 4,
-                     std::vector<float>{left.x, left.y, left.z, 0, true_up.x,
-                                        true_up.y, true_up.z, 0, -forward.x,
-                                        -forward.y, -forward.z, 0, 0, 0, 0, 1});
+  Matrix orientation(
+      4, 4,
+      std::vector<float>{left.x(), left.y(), left.z(), 0, true_up.x(),
+                         true_up.y(), true_up.z(), 0, -forward.x(),
+                         -forward.y(), -forward.z(), 0, 0, 0, 0, 1});
 
   // Translate the scene into place before orienting it
-  return orientation * translation_matrix(-from.x, -from.y, -from.z);
+  return orientation * translation_matrix(-from.x(), -from.y(), -from.z());
 };

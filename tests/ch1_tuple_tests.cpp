@@ -7,10 +7,10 @@
 // page 4
 TEST(TestTuples, TupleDesign) {
   Tuple a(4.3, -4.2, 3.1, 1.0);
-  EXPECT_TRUE(equalByEpsilon(a.x, 4.3));
-  EXPECT_TRUE(equalByEpsilon(a.y, -4.2));
-  EXPECT_TRUE(equalByEpsilon(a.z, 3.1));
-  EXPECT_TRUE(equalByEpsilon(a.w, 1.0));
+  EXPECT_TRUE(equalByEpsilon(a.x(), 4.3));
+  EXPECT_TRUE(equalByEpsilon(a.y(), -4.2));
+  EXPECT_TRUE(equalByEpsilon(a.z(), 3.1));
+  EXPECT_TRUE(equalByEpsilon(a.w(), 1.0));
   EXPECT_TRUE(a.isPoint());
   EXPECT_TRUE(!a.isVector());
 };
@@ -19,10 +19,10 @@ TEST(TestTuples, TupleDesign) {
 // page 4
 TEST(TestTuples, VectorDesign) {
   Tuple b(4.3, -4.2, 3.1, 0.0);
-  EXPECT_TRUE(equalByEpsilon(b.x, 4.3));
-  EXPECT_TRUE(equalByEpsilon(b.y, -4.2));
-  EXPECT_TRUE(equalByEpsilon(b.z, 3.1));
-  EXPECT_TRUE(equalByEpsilon(b.w, 0));
+  EXPECT_TRUE(equalByEpsilon(b.x(), 4.3));
+  EXPECT_TRUE(equalByEpsilon(b.y(), -4.2));
+  EXPECT_TRUE(equalByEpsilon(b.z(), 3.1));
+  EXPECT_TRUE(equalByEpsilon(b.w(), 0));
   EXPECT_TRUE(!b.isPoint());
   EXPECT_TRUE(b.isVector());
 };

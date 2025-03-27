@@ -5,9 +5,9 @@
 // TODO: refactor when an intersection is done on a general "object" class
 // rather than just the sphere class.
 Intersections Cube::local_intersect(Ray r) {
-  auto [xtmin, xtmax] = check_axis(r.get_origin().x, r.get_direction().x);
-  auto [ytmin, ytmax] = check_axis(r.get_origin().y, r.get_direction().y);
-  auto [ztmin, ztmax] = check_axis(r.get_origin().z, r.get_direction().z);
+  auto [xtmin, xtmax] = check_axis(r.get_origin().x(), r.get_direction().x());
+  auto [ytmin, ytmax] = check_axis(r.get_origin().y(), r.get_direction().y());
+  auto [ztmin, ztmax] = check_axis(r.get_origin().z(), r.get_direction().z());
 
   std::vector<float> max = std::vector<float>{xtmin, ytmin, ztmin};
   std::vector<float> min = std::vector<float>{xtmax, ytmax, ztmax};

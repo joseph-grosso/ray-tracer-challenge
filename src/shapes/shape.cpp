@@ -57,7 +57,7 @@ Tuple Shape::world_to_object(Tuple p) {
 
 Tuple Shape::normal_to_world(Tuple n) {
   Tuple normal = transformation.inverse().transpose() * n;
-  Tuple normal_zeroed_w = vector(normal.x, normal.y, normal.z);
+  Tuple normal_zeroed_w = vector(normal.x(), normal.y(), normal.z());
   normal = normal_zeroed_w.normalize();
 
   return (parent != nullptr) ? parent->normal_to_world(normal) : normal;

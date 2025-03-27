@@ -99,6 +99,6 @@ TEST(TestShadows, HitOffsetAtPoint) {
   Intersection i(5, &s);
   Computation comps = i.prepare_computations(r, Intersections());
 
-  EXPECT_TRUE(comps.over_point.z < -EPSILON / 2);
-  EXPECT_TRUE(comps.point.z > comps.over_point.z);
+  EXPECT_TRUE(comps.over_point.z() < -EPSILON / 2);
+  EXPECT_TRUE(comps.point.z() > comps.over_point.z());
 }

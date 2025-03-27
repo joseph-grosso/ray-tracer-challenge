@@ -129,7 +129,7 @@ TEST_F(TestPatterns_Fixture, StripesWithBothTransforms) {
 class TestPattern : public Pattern {
  public:
   TestPattern(Matrix t = identity_matrix(4)) : Pattern(t){};
-  Color pattern_at(Tuple p) { return Color(p.x, p.y, p.z); };
+  Color pattern_at(Tuple p) { return Color(p.x(), p.y(), p.z()); };
 };
 
 // Scenario: The default pattern transformation
