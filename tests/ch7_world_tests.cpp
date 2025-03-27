@@ -217,11 +217,10 @@ TEST(TestCameraTransform, ArbitraryTransform) {
   Tuple up = vector(1, 1, 0);
 
   Matrix actual = view_transform(from, to, up);
-  Matrix expected(
-      4, 4,
-      std::vector<float>{-0.50709, 0.50709, 0.67612, -2.36643, 0.76772, 0.60609,
-                         0.12122, -2.82843, -0.35857, 0.59761, -0.71714,
-                         0.00000, 0.00000, 0.00000, 0.00000, 1.00000});
+  Matrix expected(std::vector<float>{-0.50709, 0.50709, 0.67612, -2.36643,
+                                     0.76772, 0.60609, 0.12122, -2.82843,
+                                     -0.35857, 0.59761, -0.71714, 0.00000,
+                                     0.00000, 0.00000, 0.00000, 1.00000});
   EXPECT_EQ(expected, actual);
 }
 
@@ -237,7 +236,7 @@ TEST(TestCamera, ConstructingCamera) {
   EXPECT_EQ(c.hsize, 160);
   EXPECT_EQ(c.vsize, 120);
   EXPECT_TRUE(equalByEpsilon(c.field_of_view, M_PI / 2));
-  EXPECT_EQ(c.transform, Matrix(4));
+  EXPECT_EQ(c.transform, Matrix());
 }
 
 // Scenario: The pixel size for a horizontal canvas

@@ -20,16 +20,17 @@ typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>
 // Chapter 3: Matrix Math
 class Matrix {
  private:
-  unsigned int rows_;
-  unsigned int columns_;
   Eigen::MatrixXf _eigen_data;
 
  public:
   // Methods
-  Matrix(unsigned int rows = 4, unsigned int columns = 4,
-         std::vector<float> data = std::vector<float>{1, 0, 0, 0, 0, 1, 0, 0, 0,
-                                                      0, 1, 0, 0, 0, 0, 1});
-  Matrix(Eigen::MatrixXf eigen_data);
+  Matrix(std::vector<float> data = std::vector<float>{
+             1.0, 0.0, 0.0, 0.0,  // 4x4
+             0.0, 1.0, 0.0, 0.0,  // 4x4
+             0.0, 0.0, 1.0, 0.0,  // 4x4
+             0.0, 0.0, 0.0, 1.0   // 4x4
+         });
+  Matrix(Eigen::Matrix4f eigen_data);
   float get_point(unsigned int row, unsigned int col);
   std::vector<float> get_row(unsigned int row);
   std::vector<float> get_column(unsigned int col);

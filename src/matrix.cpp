@@ -1,24 +1,15 @@
 #include "matrix.hpp"
 
 // Chapter 3: Matrix Math
-Matrix::Matrix(unsigned int rows, unsigned int columns,
-               std::vector<float> data) {
-  if (rows * columns != data.size()) {
-    throw std::invalid_argument(
-        "rows * columns must equal the size of input data.");
+Matrix::Matrix(std::vector<float> data) {
+  if (16 != data.size()) {
+    throw std::invalid_argument("Input data must have 16 values.");
   };
-  rows_ = rows;
-  columns_ = columns;
-  _eigen_data = Eigen::Map<
-      Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>(
-      data.data(), rows_, columns_);
+  _eigen_data = Eigen::Map<Eigen::Matrix<float, 4, 4, Eigen::RowMajor>>(
+      data.data(), 4, 4);
 };
 
-Matrix::Matrix(Eigen::MatrixXf eigen_data) {
-  rows_ = eigen_data.rows();
-  columns_ = eigen_data.cols();
-  _eigen_data = eigen_data;
-};
+Matrix::Matrix(Eigen::Matrix4f eigen_data) { _eigen_data = eigen_data; };
 
 // Matrix(unsigned int rows, unsigned int columns, float data[]);
 float Matrix::get_point(unsigned int row, unsigned int col) {
@@ -41,9 +32,9 @@ std::vector<float> Matrix::get_column(unsigned int col) {
 
 Eigen::MatrixXf Matrix::get_eigen_data() { return _eigen_data; };
 
-unsigned int Matrix::get_row_count() { return rows_; };
+unsigned int Matrix::get_row_count() { return _eigen_data.rows(); };
 
-unsigned int Matrix::get_column_count() { return columns_; };
+unsigned int Matrix::get_column_count() { return _eigen_data.cols(); };
 
 // Arithmetic operator overloads
 bool operator==(Matrix lhs, Matrix rhs) {
@@ -99,7 +90,7 @@ float Matrix::determinant() {
   return _eigen_data.determinant();
 };
 
-bool Matrix::is_square() { return rows_ == columns_; };
+bool Matrix::is_square() { return _eigen_data.rows() == _eigen_data.cols(); };
 
 bool Matrix::is_invertible() { return !equalByEpsilon(determinant(), 0); };
 
@@ -109,7 +100,9 @@ std::string Matrix::to_string() {
   return ss.str();
 };
 
-unsigned int Matrix::get_elements_count() { return rows_ * columns_; };
+unsigned int Matrix::get_elements_count() {
+  return _eigen_data.rows() * _eigen_data.cols();
+};
 
 Matrix identity_matrix(int size) {
   return Matrix(Eigen::MatrixXf::Identity(size, size));
