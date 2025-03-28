@@ -13,6 +13,7 @@
 // Chapter 9: Shapes and Planes
 Shape::Shape(Matrix t, Material m, bool throws_shadow, Shape* parent) {
   this->transformation = t;
+  this->inverse_transformation = t.inverse();
   this->material = m;
   this->throws_shadow = throws_shadow;
   this->parent = parent;
@@ -27,7 +28,7 @@ Material Shape::get_material() { return material; };
 void Shape::set_material(Material m) { this->material = m; };
 
 Intersections Shape::intersect(Ray r) {
-  Ray local_ray = r.transform(get_transform().inverse());
+  Ray local_ray = r.transform(inverse_transformation);
   return local_intersect(local_ray);
 };
 

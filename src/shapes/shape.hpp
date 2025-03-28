@@ -14,6 +14,7 @@
 class Shape {
  protected:
   Matrix transformation;
+  Matrix inverse_transformation;
   Material material;
   bool throws_shadow;
 

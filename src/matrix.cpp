@@ -50,10 +50,6 @@ Matrix operator*(Matrix lhs, Matrix rhs) {
 };
 
 Tuple operator*(Matrix m, Tuple t) {
-  if (m.get_row_count() != 4 || m.get_column_count() != 4) {
-    throw std::invalid_argument(
-        "Unfit matrix: Matrix must be 4x4 to multiply with a tuple.");
-  };
   return Tuple(m.get_eigen_data() * t.values);
 };
 
