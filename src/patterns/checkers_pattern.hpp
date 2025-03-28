@@ -26,7 +26,7 @@ class CheckersPattern : public Pattern {
                         std::abs(std::floor(p.y())) +
                         std::abs(std::floor(p.z()));
     return abs_distances % 2 == 0
-               ? a->pattern_at(a->get_transform().inverse() * p)
-               : b->pattern_at(b->get_transform().inverse() * p);
+               ? a->pattern_at(a->get_transform_inverse() * p)
+               : b->pattern_at(b->get_transform_inverse() * p);
   };
 };

@@ -27,8 +27,8 @@ class PerlinPattern : public Pattern {
   Pattern *get_a() { return a; };
   Pattern *get_b() { return b; };
   Color pattern_at(Tuple p) {
-    Color a_color = a->pattern_at(a->get_transform().inverse() * p);
-    Color b_color = b->pattern_at(b->get_transform().inverse() * p);
+    Color a_color = a->pattern_at(a->get_transform_inverse() * p);
+    Color b_color = b->pattern_at(b->get_transform_inverse() * p);
     double perlin_value = perlin.noise3D_01(p.x(), p.y(), p.z());
 
     if (fade_together) {

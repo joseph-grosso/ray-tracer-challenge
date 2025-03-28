@@ -25,7 +25,7 @@ class ConicalRingPattern : public Pattern {
     int orig_distance =
         (int)std::floor(std::sqrt(std::pow(p.x(), 2) + std::pow(p.z(), 2)));
     return orig_distance % 2 == 0
-               ? a->pattern_at(a->get_transform().inverse() * p)
-               : b->pattern_at(b->get_transform().inverse() * p);
+               ? a->pattern_at(a->get_transform_inverse() * p)
+               : b->pattern_at(b->get_transform_inverse() * p);
   };
 };

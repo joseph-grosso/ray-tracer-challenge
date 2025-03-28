@@ -8,11 +8,11 @@ project(ray_tracer_challenge VERSION 1.0)
 
 # specify the C++ standard
 # GoogleTest requires at least C++14
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Set the name of the chapter to be built
-set(MAIN_FILE_NAME "ch15.5.cpp")
+set(MAIN_FILE_NAME "ch17.1.cpp")
 
 # TODO: Figure out a better way to download this file
 file(DOWNLOAD

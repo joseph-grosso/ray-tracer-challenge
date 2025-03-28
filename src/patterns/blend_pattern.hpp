@@ -28,8 +28,8 @@ class BlendPattern : public Pattern {
   Pattern *get_a() { return a; };
   Pattern *get_b() { return b; };
   Color pattern_at(Tuple p) {
-    Color a_col = a->pattern_at(a->get_transform().inverse() * p);
-    Color b_col = b->pattern_at(b->get_transform().inverse() * p);
+    Color a_col = a->pattern_at(a->get_transform_inverse() * p);
+    Color b_col = b->pattern_at(b->get_transform_inverse() * p);
 
     return a_col * blend_percent + b_col * (1 - blend_percent);
   };

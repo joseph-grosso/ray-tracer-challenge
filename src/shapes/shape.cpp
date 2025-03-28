@@ -21,7 +21,10 @@ Shape::Shape(Matrix t, Material m, bool throws_shadow, Shape* parent) {
 
 Matrix Shape::get_transform() { return transformation; };
 
-void Shape::set_transform(Matrix m) { this->transformation = m; };
+void Shape::set_transform(Matrix m) {
+  this->transformation = m;
+  inverse_transformation = m.inverse();
+};
 
 Material Shape::get_material() { return material; };
 
@@ -53,11 +56,11 @@ bool Shape::get_throws_shadow() { return throws_shadow; }
 Tuple Shape::world_to_object(Tuple p) {
   Tuple point_ = (parent != nullptr) ? parent->world_to_object(p) : p;
 
-  return transformation.inverse() * point_;
+  return inverse_transformation * point_;
 };
 
 Tuple Shape::normal_to_world(Tuple n) {
-  Tuple normal = transformation.inverse().transpose() * n;
+  Tuple normal = inverse_transformation.transpose() * n;
   Tuple normal_zeroed_w = vector(normal.x(), normal.y(), normal.z());
   normal = normal_zeroed_w.normalize();
 
