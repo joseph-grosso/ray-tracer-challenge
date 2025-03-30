@@ -30,7 +30,7 @@ std::vector<float> Matrix::get_column(unsigned int col) {
                             eigen_col.data() + eigen_col.size());
 };
 
-Eigen::MatrixXf Matrix::get_eigen_data() { return _eigen_data; };
+Eigen::Matrix4f Matrix::get_eigen_data() { return _eigen_data; };
 
 unsigned int Matrix::get_row_count() { return _eigen_data.rows(); };
 
@@ -101,7 +101,7 @@ unsigned int Matrix::get_elements_count() {
 };
 
 Matrix identity_matrix(int size) {
-  return Matrix(Eigen::MatrixXf::Identity(size, size));
+  return Matrix(Eigen::Matrix4f::Identity());
 };
 
 // Chapter 7: Making a Scene

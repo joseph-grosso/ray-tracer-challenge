@@ -37,7 +37,7 @@ class Matrix {
   unsigned int get_row_count();
   unsigned int get_column_count();
   unsigned int get_elements_count();
-  Eigen::MatrixXf get_eigen_data();
+  Eigen::Matrix4f get_eigen_data();
   Matrix transpose();
   float determinant();
   // TODO: Refactor these functions to use Eigen directly
