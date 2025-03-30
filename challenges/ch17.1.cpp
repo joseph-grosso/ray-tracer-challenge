@@ -33,8 +33,8 @@ int main() {
   unsigned int x = ratio * 30;
   unsigned int y = ratio * 30;
   Camera camera(x, y, M_PI / 8);
-  camera.transform =
-      view_transform(point(2, 3, -5), point(1, 1, 0), vector(0, 1, 0));
+  camera.set_transform(
+      view_transform(point(2, 3, -5), point(1, 1, 0), vector(0, 1, 0)));
 
   // Create world
   World w(std::vector<Shape *>{&floor, &s1, &s2}, light);

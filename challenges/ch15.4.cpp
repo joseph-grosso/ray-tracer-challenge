@@ -32,8 +32,8 @@ int main() {
   unsigned int x = ratio * 100;
   unsigned int y = ratio * 100;
   Camera camera(x, y, M_PI / 6);
-  camera.transform =
-      view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0));
+  camera.set_transform(
+      view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0)));
 
   // Create world
   World w(

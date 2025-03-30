@@ -26,6 +26,7 @@ class Shape {
         bool throws_shadow = true, Shape *parent = NULL);
   Shape(Material m) : Shape(identity_matrix(4), m){};
   Matrix get_transform();
+  Matrix get_transform_inverse() { return inverse_transformation; };
   void set_transform(Matrix);
   Material get_material();
   void set_throws_shadow(bool);

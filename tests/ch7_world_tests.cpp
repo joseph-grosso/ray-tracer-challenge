@@ -236,7 +236,7 @@ TEST(TestCamera, ConstructingCamera) {
   EXPECT_EQ(c.hsize, 160);
   EXPECT_EQ(c.vsize, 120);
   EXPECT_TRUE(equalByEpsilon(c.field_of_view, M_PI / 2));
-  EXPECT_EQ(c.transform, Matrix());
+  EXPECT_EQ(c.get_transform(), Matrix());
 }
 
 // Scenario: The pixel size for a horizontal canvas
@@ -281,7 +281,7 @@ TEST(TestCamera, RayThruCornerOfCanvas) {
 // p103
 TEST(TestCamera, RayThruCameraTransformed) {
   Camera c(201, 101, M_PI / 2);
-  c.transform = rotation_y_matrix(M_PI / 4) * translation_matrix(0, -2, 5);
+  c.set_transform(rotation_y_matrix(M_PI / 4) * translation_matrix(0, -2, 5));
 
   Ray r = c.ray_for_pixel(100, 50);
 
@@ -299,7 +299,7 @@ TEST(TestCamera, RenderWorld) {
   Tuple to = point(0, 0, 0);
   Tuple up = vector(0, 1, 0);
 
-  c.transform = view_transform(from, to, up);
+  c.set_transform(view_transform(from, to, up));
 
   Canvas image = c.render(w);
 
@@ -316,7 +316,7 @@ TEST(TestCamera, RenderWorldDifferentWidths) {
   Tuple to = point(0, 0, 0);
   Tuple up = vector(0, 1, 0);
 
-  c.transform = view_transform(from, to, up);
+  c.set_transform(view_transform(from, to, up));
 
   Canvas image = c.render(w);
 
@@ -333,7 +333,7 @@ TEST(TestCamera, RenderWorldDifferentWidths2) {
   Tuple to = point(0, 0, 0);
   Tuple up = vector(0, 1, 0);
 
-  c.transform = view_transform(from, to, up);
+  c.set_transform(view_transform(from, to, up));
 
   Canvas image = c.render(w);
 

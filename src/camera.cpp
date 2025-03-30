@@ -38,8 +38,8 @@ Ray Camera::ray_for_pixel(int px, int py) {
 
   // using the camera matrix, transform the canvas point and the origin,
   // and then compute the the ray's direction vector
-  Tuple pixel = transform.inverse() * point(world_x, world_y, -1);
-  Tuple origin = transform.inverse() * point(0, 0, 0);
+  Tuple pixel = inverse_transform * point(world_x, world_y, -1);
+  Tuple origin = inverse_transform * point(0, 0, 0);
   Tuple direction = (pixel - origin).normalize();
 
   return Ray(origin, direction);

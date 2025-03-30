@@ -47,8 +47,8 @@ int main() {
   unsigned int x = ratio * 10;
   unsigned int y = ratio * 7;
   Camera camera(x, y, M_PI / 2.3);
-  camera.transform =
-      view_transform(point(5, -19, 17), point(3, 0, 6), vector(0, 0, 1));
+  camera.set_transform(
+      view_transform(point(5, -19, 17), point(3, 0, 6), vector(0, 0, 1)));
 
   // Create world
   World w(std::vector<Shape *>{teapot, floor}, light);

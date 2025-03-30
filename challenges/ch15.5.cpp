@@ -45,12 +45,12 @@ int main() {
   PointLight light = PointLight(light_point, Color(1, 1, 1));
 
   // Create camera
-  int ratio = 10;
+  int ratio = 19;
   unsigned int x = ratio * 10;
   unsigned int y = ratio * 5;
   Camera camera(x, y, M_PI / 7.5);
-  camera.transform =
-      view_transform(camera_point, point(0, 0.75, -0.1), vector(0, 1.5, 0));
+  camera.set_transform(
+      view_transform(camera_point, point(0, 0.75, -0.1), vector(0, 1.5, 0)));
 
   // Create world
   World w(std::vector<Shape *>{cowboy_supplies, floor}, light);

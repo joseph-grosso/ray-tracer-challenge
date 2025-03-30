@@ -54,8 +54,8 @@ int main() {
   unsigned int x = ratio * 10;
   unsigned int y = ratio * 10;
   Camera camera(x, y, M_PI / 3);
-  camera.transform =
-      view_transform(camera_point, point(0, 1.1, 0), vector(0, 1, 0));
+  camera.set_transform(
+      view_transform(camera_point, point(0, 1.1, 0), vector(0, 1, 0)));
 
   // Create world
   World w(std::vector<Shape *>{central_mirror_group, floor}, light);
