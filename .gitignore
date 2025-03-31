@@ -10,3 +10,6 @@ src/PerlinNoise.hpp
 # common output files
 values.ppm
 img.png
+
+# svg files
+*.svg
