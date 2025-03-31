@@ -5,6 +5,7 @@ Matrix::Matrix(std::vector<float> data) {
   if (16 != data.size()) {
     throw std::invalid_argument("Input data must have 16 values.");
   };
+  std::cout << "Matrix constructor called with data: " << std::endl;
   _eigen_data = Eigen::Map<Eigen::Matrix<float, 4, 4, Eigen::RowMajor>>(
       data.data(), 4, 4);
 };
@@ -44,8 +45,8 @@ bool operator==(Matrix lhs, Matrix rhs) {
 bool operator!=(Matrix lhs, Matrix rhs) { return !operator==(lhs, rhs); };
 
 Matrix operator*(Matrix lhs, Matrix rhs) {
-  Eigen::MatrixXf lhs_mat = lhs.get_eigen_data();
-  Eigen::MatrixXf rhs_mat = rhs.get_eigen_data();
+  Eigen::Matrix4f lhs_mat = lhs.get_eigen_data();
+  Eigen::Matrix4f rhs_mat = rhs.get_eigen_data();
   return Matrix(lhs_mat * rhs_mat);
 };
 
@@ -76,7 +77,10 @@ std::ostream &operator<<(std::ostream &os, const std::vector<S> &vector) {
 
 Matrix Matrix::transpose() { return Matrix(_eigen_data.transpose()); };
 
-Matrix Matrix::inverse() { return Matrix(_eigen_data.inverse()); };
+Matrix Matrix::inverse() {
+  std::cout << "Matrix inverse called" << std::endl;
+  return Matrix(_eigen_data.inverse());
+};
 
 float Matrix::determinant() {
   if (!is_square()) {
@@ -100,9 +104,7 @@ unsigned int Matrix::get_elements_count() {
   return _eigen_data.rows() * _eigen_data.cols();
 };
 
-Matrix identity_matrix(int size) {
-  return Matrix(Eigen::Matrix4f::Identity());
-};
+Matrix identity_matrix() { return Matrix(Eigen::Matrix4f::Identity()); };
 
 // Chapter 7: Making a Scene
 // Defining a view transform

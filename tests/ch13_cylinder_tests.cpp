@@ -94,7 +94,7 @@ class TestConstrainedCylinder
 // Scenario: Intersecting constrained cylinder
 // p183
 TEST_P(TestConstrainedCylinder, IntersectConstrainedCylinder) {
-  Cylinder cyl = Cylinder(identity_matrix(4), 1, 2);
+  Cylinder cyl = Cylinder(identity_matrix(), 1, 2);
   auto [point_, direction, count] = GetParam();
   direction = direction.normalize();
   Ray r = Ray(point_, direction);
@@ -127,7 +127,7 @@ class TestCappedCylinderNormal
 // Scenario: Normal vector on a cylinder's end caps
 // p187
 TEST_P(TestCappedCylinderNormal, IntersectCappedCylinder) {
-  Cylinder cyl = Cylinder(identity_matrix(4), 1, 2, true);
+  Cylinder cyl = Cylinder(identity_matrix(), 1, 2, true);
   auto [point_, normal] = GetParam();
 
   Tuple n = cyl.local_normal_at(point_);
@@ -150,7 +150,7 @@ class TestCappedCylinder
 // Scenario: Intersecting constrained, capped cylinder
 // p185
 TEST_P(TestCappedCylinder, IntersectCappedCylinder) {
-  Cylinder cyl = Cylinder(identity_matrix(4), 1, 2, true);
+  Cylinder cyl = Cylinder(identity_matrix(), 1, 2, true);
   auto [point_, direction, count] = GetParam();
   direction = direction.normalize();
   Ray r = Ray(point_, direction);
@@ -213,7 +213,7 @@ class TestConeEndCaps
 // Scenario: A ray intersects a cone's end caps
 // p190
 TEST_P(TestConeEndCaps, ConeRayHitsCaps) {
-  Cone c = Cone(identity_matrix(4), -0.5, 0.5, true);
+  Cone c = Cone(identity_matrix(), -0.5, 0.5, true);
   auto [origin, direction, count] = GetParam();
   direction = direction.normalize();
   Ray r = Ray(origin, direction);

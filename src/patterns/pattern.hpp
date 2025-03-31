@@ -14,7 +14,7 @@ class Pattern {
   Matrix transform_inverse;
 
  public:
-  Pattern(Matrix t = identity_matrix(4))
+  Pattern(Matrix t = identity_matrix())
       : transform(t), transform_inverse(t.inverse()){};
   void set_transform(Matrix t) {
     transform = t;

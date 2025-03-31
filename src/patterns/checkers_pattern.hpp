@@ -18,7 +18,7 @@ class CheckersPattern : public Pattern {
     this->b = b;
   };
   CheckersPattern(Pattern *a, Pattern *b)
-      : CheckersPattern(a, b, identity_matrix(4)){};
+      : CheckersPattern(a, b, identity_matrix()){};
   Pattern *get_a() { return a; };
   Pattern *get_b() { return b; };
   Color pattern_at(Tuple p) {

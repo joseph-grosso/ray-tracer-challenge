@@ -27,7 +27,7 @@ class Triangle : public Shape {
   Tuple e2;
   Tuple normal;
   // Methods
-  Triangle(Tuple p1_, Tuple p2_, Tuple p3_, Matrix t = identity_matrix(4),
+  Triangle(Tuple p1_, Tuple p2_, Tuple p3_, Matrix t = identity_matrix(),
            Material m = Material(), bool throws_shadow = true)
       : Shape(t, m, throws_shadow),
         p1{p1_},

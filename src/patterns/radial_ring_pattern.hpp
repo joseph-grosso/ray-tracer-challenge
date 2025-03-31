@@ -18,7 +18,7 @@ class RadialRingPattern : public Pattern {
     this->b = b;
   };
   RadialRingPattern(Pattern* a, Pattern* b)
-      : RadialRingPattern(a, b, identity_matrix(4)){};
+      : RadialRingPattern(a, b, identity_matrix()){};
   Pattern* get_a() { return a; };
   Pattern* get_b() { return b; };
   Color pattern_at(Tuple p) {

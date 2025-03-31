@@ -20,6 +20,7 @@ typedef Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>
 // Chapter 3: Matrix Math
 class Matrix {
  private:
+  // TODO: Refactor to Matrix4f to allocate matrix to stack
   Eigen::MatrixXf _eigen_data;
 
  public:
@@ -61,7 +62,7 @@ Matrix operator*(Matrix m, float f);
 // Helpful functions
 // TODO: Find if there's a better way to use this
 float dot_product(std::vector<float> v1, std::vector<float> v2);
-Matrix identity_matrix(int size = 4);
+Matrix identity_matrix();
 
 // Chapter 7: Making a Scene
 // Defining a view transform

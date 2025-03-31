@@ -20,7 +20,7 @@ class Group : public Shape {
 
  public:
   // Methods
-  Group(Matrix t = identity_matrix(4),
+  Group(Matrix t = identity_matrix(),
         std::vector<Shape *> children = std::vector<Shape *>{})
       : Shape(t) {
     this->children = children;

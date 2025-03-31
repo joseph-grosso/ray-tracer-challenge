@@ -16,7 +16,7 @@
 TEST(TestGroups, CreateNewGroup) {
   Group g = Group();
 
-  EXPECT_EQ(g.get_transform(), identity_matrix(4));
+  EXPECT_EQ(g.get_transform(), identity_matrix());
   EXPECT_EQ(g.get_count(), 0);
   EXPECT_EQ(g.is_empty(), true);
 }
@@ -42,7 +42,7 @@ TEST(TestGroups, AddChildToGroup) {
 
   g.add_child(&s);
 
-  EXPECT_EQ(g.get_transform(), identity_matrix(4));
+  EXPECT_EQ(g.get_transform(), identity_matrix());
   EXPECT_EQ(g.is_empty(), false);
   EXPECT_EQ(&g, s.parent);
 }

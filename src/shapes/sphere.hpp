@@ -19,14 +19,14 @@ class Sphere : public Shape {
 
  public:
   // Methods
-  Sphere(Matrix t = identity_matrix(4), Material m = Material(),
+  Sphere(Matrix t = identity_matrix(), Material m = Material(),
          bool throws_shadow = true)
       : Shape(t, m, throws_shadow) {
     this->center = point(0, 0, 0);
     this->radius = 1.0;
   };
   // Sphere(Matrix t) : Sphere(t, Material()) {};
-  Sphere(Material m) : Sphere(identity_matrix(4), m){};
+  Sphere(Material m) : Sphere(identity_matrix(), m){};
   Tuple get_center();
   float get_radius();
   Tuple local_normal_at(float x, float y, float z);
@@ -38,5 +38,5 @@ class Sphere : public Shape {
 bool operator==(Sphere lhs, Sphere rhs);
 bool operator!=(Sphere lhs, Sphere rhs);
 
-Sphere glass_sphere(Matrix m = identity_matrix(4), float refractive_index = 1.5,
+Sphere glass_sphere(Matrix m = identity_matrix(), float refractive_index = 1.5,
                     float reflective = 0.0);

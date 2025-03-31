@@ -184,7 +184,7 @@ TEST(TestCameraTransform, DefaultOrientation) {
   Tuple up = vector(0, 1, 0);
 
   Matrix t = view_transform(from, to, up);
-  EXPECT_EQ(t, identity_matrix(4));
+  EXPECT_EQ(t, identity_matrix());
 }
 
 // Scenario: The transform matrix looking in the z direction

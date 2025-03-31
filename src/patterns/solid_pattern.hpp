@@ -11,7 +11,7 @@ class SolidPattern : public Pattern {
 
  public:
   SolidPattern(Color color_, Matrix t) : Pattern(t) { this->color_ = color_; };
-  SolidPattern(Color color_) : SolidPattern(color_, identity_matrix(4)){};
+  SolidPattern(Color color_) : SolidPattern(color_, identity_matrix()){};
   SolidPattern(float r, float g, float b) : SolidPattern(Color(r, g, b)){};
   Color get_color() { return color_; };
   Color pattern_at(Tuple p) {

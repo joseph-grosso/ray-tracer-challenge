@@ -18,7 +18,7 @@ class StripePattern : public Pattern {
     this->b = b;
   };
   StripePattern(Pattern* a, Pattern* b)
-      : StripePattern(a, b, identity_matrix(4)){};
+      : StripePattern(a, b, identity_matrix()){};
   Pattern* get_a() { return a; };
   Pattern* get_b() { return b; };
   Color pattern_at(Tuple p) {

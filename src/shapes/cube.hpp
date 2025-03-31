@@ -19,7 +19,7 @@
 class Cube : public Shape {
  public:
   // Methods
-  Cube(Matrix t = identity_matrix(4), Material m = Material(),
+  Cube(Matrix t = identity_matrix(), Material m = Material(),
        bool throws_shadow = true)
       : Shape(t, m, throws_shadow){};
   Tuple local_normal_at(float x, float y, float z);

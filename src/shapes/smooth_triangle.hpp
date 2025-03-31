@@ -31,7 +31,7 @@ class SmoothTriangle : public Shape {
   Tuple e2;
   // Methods
   SmoothTriangle(Tuple p1_, Tuple p2_, Tuple p3_, Tuple n1_, Tuple n2_,
-                 Tuple n3_, Matrix t = identity_matrix(4),
+                 Tuple n3_, Matrix t = identity_matrix(),
                  Material m = Material(), bool throws_shadow = true)
       : Shape(t, m, throws_shadow),
         p1{p1_},

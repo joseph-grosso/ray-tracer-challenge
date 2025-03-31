@@ -17,7 +17,7 @@ class PerlinPattern : public Pattern {
 
  public:
   PerlinPattern(Pattern *a, Pattern *b, long unsigned int seed,
-                Matrix t = identity_matrix(4), bool fade_together = false)
+                Matrix t = identity_matrix(), bool fade_together = false)
       : Pattern(t) {
     this->a = a;
     this->b = b;

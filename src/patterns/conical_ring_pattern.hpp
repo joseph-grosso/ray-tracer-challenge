@@ -18,7 +18,7 @@ class ConicalRingPattern : public Pattern {
     this->b = b;
   };
   ConicalRingPattern(Pattern* a, Pattern* b)
-      : ConicalRingPattern(a, b, identity_matrix(4)){};
+      : ConicalRingPattern(a, b, identity_matrix()){};
   Pattern* get_a() { return a; };
   Pattern* get_b() { return b; };
   Color pattern_at(Tuple p) {

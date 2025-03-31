@@ -17,12 +17,12 @@ int main() {
   // Define the objects
   // Floor Plane
   Sphere s =
-      Sphere(identity_matrix(4), Material(&perl, Color(1, 0.9, 0.9),  // color
-                                          0.1,                        // ambient
-                                          0.5,                        // diffuse
-                                          0,  // specular
-                                          0   // shininess
-                                          ));
+      Sphere(identity_matrix(), Material(&perl, Color(1, 0.9, 0.9),  // color
+                                         0.1,                        // ambient
+                                         0.5,                        // diffuse
+                                         0,                          // specular
+                                         0  // shininess
+                                         ));
 
   // Add a light source
   PointLight light = PointLight(point(10, 10, -10), Color(1, 1, 1));

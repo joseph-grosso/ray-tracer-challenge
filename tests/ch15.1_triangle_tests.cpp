@@ -19,7 +19,7 @@ TEST(TestTriangles, CreateNewTriangle) {
 
   Triangle t = Triangle(p1, p2, p3);
 
-  EXPECT_EQ(t.get_transform(), identity_matrix(4));
+  EXPECT_EQ(t.get_transform(), identity_matrix());
   EXPECT_EQ(t.p1, p1);
   EXPECT_EQ(t.p2, p2);
   EXPECT_EQ(t.p3, p3);
@@ -167,4 +167,3 @@ TEST_F(TestSmoothTriangle, SmoothTriangleComputations) {
 
   EXPECT_EQ(comps.normalv, vector(-0.5547, 0.83205, 0));
 }
-

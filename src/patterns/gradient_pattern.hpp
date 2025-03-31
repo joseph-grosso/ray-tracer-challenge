@@ -18,7 +18,7 @@ class GradientPattern : public Pattern {
     this->b = b;
   };
   GradientPattern(Pattern* a, Pattern* b)
-      : GradientPattern(a, b, identity_matrix(4)){};
+      : GradientPattern(a, b, identity_matrix()){};
   Pattern* get_a() { return a; };
   Pattern* get_b() { return b; };
   Color pattern_at(Tuple p) {

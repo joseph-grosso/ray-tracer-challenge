@@ -25,7 +25,7 @@ class CSG : public Shape {
  public:
   // Methods
   CSG(CSGOperation operation_, Shape *left_, Shape *right_,
-      Matrix t = identity_matrix(4))
+      Matrix t = identity_matrix())
       : Shape(t), operation{operation_}, left{left_}, right{right_} {
     left->parent = this;
     right->parent = this;

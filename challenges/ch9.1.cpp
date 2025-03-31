@@ -11,12 +11,12 @@ using namespace std::chrono;
 int main() {
   // Define the spheres
   // floor
-  Plane floor = Plane(identity_matrix(4), Material(Color(1, 0.9, 0.9),  // color
-                                                   0.1,  // ambient
-                                                   0.5,  // diffuse
-                                                   0,    // specular
-                                                   0     // shininess
-                                                   ));
+  Plane floor = Plane(identity_matrix(), Material(Color(1, 0.9, 0.9),  // color
+                                                  0.1,  // ambient
+                                                  0.5,  // diffuse
+                                                  0,    // specular
+                                                  0     // shininess
+                                                  ));
 
   // First (Large, Green) Sphere
   Sphere middle = Sphere();

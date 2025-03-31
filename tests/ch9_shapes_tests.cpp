@@ -32,7 +32,7 @@ class TestShape : public Shape {
 TEST(TestAbstractShape, DefaultTransform) {
   TestShape s = TestShape();
 
-  EXPECT_EQ(s.get_transform(), identity_matrix(4));
+  EXPECT_EQ(s.get_transform(), identity_matrix());
 }
 
 // Scenario: Assigning a transformation

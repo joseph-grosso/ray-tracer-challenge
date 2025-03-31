@@ -274,7 +274,7 @@ TEST(TestTransparencyAndRefraction, RefractedColorTIR) {
 // repeated testing code taken from ch11, p132
 class TestPattern : public Pattern {
  public:
-  TestPattern(Matrix t = identity_matrix(4)) : Pattern(t){};
+  TestPattern(Matrix t = identity_matrix()) : Pattern(t){};
   Color pattern_at(Tuple p) { return Color(20, p.y(), p.z()); };
 };
 

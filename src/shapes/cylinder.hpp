@@ -26,7 +26,7 @@ class Cylinder : public Shape {
   float maximum;
   bool closed;
   // Methods
-  Cylinder(Matrix t = identity_matrix(4),
+  Cylinder(Matrix t = identity_matrix(),
            float min = -std::numeric_limits<float>::infinity(),
            float max = std::numeric_limits<float>::infinity(),
            bool closed_ = false, Material m = Material(),

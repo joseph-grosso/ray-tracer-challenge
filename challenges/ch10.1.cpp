@@ -25,7 +25,7 @@ int main() {
 
   // Define the objects
   // Floor Plane
-  Plane floor = Plane(identity_matrix(4),
+  Plane floor = Plane(identity_matrix(),
                       Material(&black_stripe, Color(1, 0.9, 0.9),  // color
                                0.1,                                // ambient
                                0.5,                                // diffuse

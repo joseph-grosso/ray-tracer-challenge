@@ -128,7 +128,7 @@ TEST_F(TestPatterns_Fixture, StripesWithBothTransforms) {
 // Abstract class for testing patterns class
 class TestPattern : public Pattern {
  public:
-  TestPattern(Matrix t = identity_matrix(4)) : Pattern(t){};
+  TestPattern(Matrix t = identity_matrix()) : Pattern(t){};
   Color pattern_at(Tuple p) { return Color(p.x(), p.y(), p.z()); };
 };
 
@@ -137,7 +137,7 @@ class TestPattern : public Pattern {
 TEST(TestAbstractPattern, DefaultPatternTransform) {
   TestPattern p = TestPattern();
 
-  EXPECT_EQ(p.get_transform(), identity_matrix(4));
+  EXPECT_EQ(p.get_transform(), identity_matrix());
 }
 
 // Scenario: Assigning a transformation

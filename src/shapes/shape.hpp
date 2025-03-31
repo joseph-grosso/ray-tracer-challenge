@@ -22,9 +22,9 @@ class Shape {
   // Attributes
   Shape *parent;
   // Methods
-  Shape(Matrix t = identity_matrix(4), Material m = Material(),
+  Shape(Matrix t = identity_matrix(), Material m = Material(),
         bool throws_shadow = true, Shape *parent = NULL);
-  Shape(Material m) : Shape(identity_matrix(4), m){};
+  Shape(Material m) : Shape(identity_matrix(), m){};
   Matrix get_transform();
   Matrix get_transform_inverse() { return inverse_transformation; };
   void set_transform(Matrix);

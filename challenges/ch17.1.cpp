@@ -17,7 +17,7 @@ int main() {
 
   // Define the objects
   // Floor Plane
-  Plane floor = Plane(identity_matrix(4), Material(&off_white));
+  Plane floor = Plane(identity_matrix(), Material(&off_white));
 
   // glass_sphere
   Sphere s1 = Sphere(

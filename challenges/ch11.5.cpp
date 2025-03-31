@@ -18,14 +18,14 @@ int main() {
   SolidPattern orange = SolidPattern(Color(1, 0.55, 0));
 
   CheckersPattern floor_pat =
-      CheckersPattern(&green, &orange, identity_matrix(4));
+      CheckersPattern(&green, &orange, identity_matrix());
 
   // wall patterns
-  CheckersPattern wall_pat = CheckersPattern(&white, &grey, identity_matrix(4));
+  CheckersPattern wall_pat = CheckersPattern(&white, &grey, identity_matrix());
 
   // Define the objects
   // Floor Plane
-  Plane floor = Plane(identity_matrix(4),
+  Plane floor = Plane(identity_matrix(),
                       Material(&floor_pat, Color(1, 0.9, 0.9),  // color
                                0.1,                             // ambient
                                0.5,                             // diffuse

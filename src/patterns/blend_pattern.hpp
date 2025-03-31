@@ -22,9 +22,9 @@ class BlendPattern : public Pattern {
   };
   BlendPattern(Pattern *a, Pattern *b, Matrix t) : BlendPattern(a, b, 0.5, t){};
   BlendPattern(Pattern *a, Pattern *b, float blend_percent)
-      : BlendPattern(a, b, blend_percent, identity_matrix(4)){};
+      : BlendPattern(a, b, blend_percent, identity_matrix()){};
   BlendPattern(Pattern *a, Pattern *b)
-      : BlendPattern(a, b, 0.5, identity_matrix(4)){};
+      : BlendPattern(a, b, 0.5, identity_matrix()){};
   Pattern *get_a() { return a; };
   Pattern *get_b() { return b; };
   Color pattern_at(Tuple p) {
