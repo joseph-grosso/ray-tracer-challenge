@@ -23,6 +23,9 @@ Intersections Group::local_intersect(Ray r) {
     xs.insert(xs.end(), intersections.begin(), intersections.end());
   };
 
+  // TODO: optimize by removing sorting from this step as it isn't required.
+  // That work is already done in the World step.
+  // Add/fix tests when this is done.
   std::sort(xs.begin(), xs.end());
   return Intersections(xs);
 };

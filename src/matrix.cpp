@@ -5,7 +5,6 @@ Matrix::Matrix(std::vector<float> data) {
   if (16 != data.size()) {
     throw std::invalid_argument("Input data must have 16 values.");
   };
-  std::cout << "Matrix constructor called with data: " << std::endl;
   _eigen_data = Eigen::Map<Eigen::Matrix<float, 4, 4, Eigen::RowMajor>>(
       data.data(), 4, 4);
 };
@@ -77,10 +76,7 @@ std::ostream &operator<<(std::ostream &os, const std::vector<S> &vector) {
 
 Matrix Matrix::transpose() { return Matrix(_eigen_data.transpose()); };
 
-Matrix Matrix::inverse() {
-  std::cout << "Matrix inverse called" << std::endl;
-  return Matrix(_eigen_data.inverse());
-};
+Matrix Matrix::inverse() { return Matrix(_eigen_data.inverse()); };
 
 float Matrix::determinant() {
   if (!is_square()) {

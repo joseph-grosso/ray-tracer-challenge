@@ -12,15 +12,11 @@
 
 // Chapter 9: Shapes and Planes
 Shape::Shape(Matrix t, Material m, bool throws_shadow, Shape* parent) {
-  std::cout << "Shape constructor called." << std::endl;
   this->transformation = t;
-  std::cout << "Transform end." << std::endl;
   this->inverse_transformation = t.inverse();
-  std::cout << "inverse completed." << std::endl;
   this->material = m;
   this->throws_shadow = throws_shadow;
   this->parent = parent;
-  std::cout << "Shape constructor end." << std::endl;
 };
 
 Matrix Shape::get_transform() { return transformation; };

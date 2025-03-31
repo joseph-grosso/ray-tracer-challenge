@@ -20,9 +20,12 @@ class Group : public Shape {
 
  public:
   // Methods
-  Group(Matrix t = identity_matrix(),
-        std::vector<Shape *> children = std::vector<Shape *>{})
+  Group(Matrix t, std::vector<Shape *> children = std::vector<Shape *>{})
       : Shape(t) {
+    this->children = children;
+  };
+  Group(std::vector<Shape *> children = std::vector<Shape *>{})
+      : Shape(identity_matrix()) {
     this->children = children;
   };
   int get_count() { return children.size(); };
