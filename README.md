@@ -13,13 +13,29 @@ My own implementation of the Ray Tracer from the book [The Ray Tracer Challenge:
  sh ./build.sh && convert values.ppm ./img.png
 ```
 
+### Unit Testing
+
+```bash
+ sh ./testing.sh
+```
+
+### Profiling/Performance Testing
+
+* Build `challenge.out`
+* Run the command below:
+
+```bash
+sh ./profiling.sh
+```
+
+
 ## Sample Images
 
 ### .obj Files
 
 ![Cowboy Hat](outputs/ch15/hr_cowboy_supplies.png "A polygonal cowboy hat, and possible some tools? Laying in the desert. Taken from a freely available 3D model online and converted to .obj format.")
 
-![Polygonal Teapot](outputs/ch15/hhq_teacup.png "An example of the Utah Teapot, generated using a simple .obj file.") ![Smooth Teapot](outputs/ch15/hr_smooth_teapot_.png "An example of the Utah Teapot, with surface smoothing.")
+![Smooth Teapot](outputs/ch15/hr_smooth_teapot_.png "An example of the Utah Teapot, with surface smoothing.")
 
 ### Cubes
 
