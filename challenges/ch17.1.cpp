@@ -7,37 +7,65 @@
 
 using namespace std::chrono;
 
-// Glass ball has no shadow - test
+// Fresnel effect test with walls
 int main() {
   // base patterns
-  SolidPattern off_white = SolidPattern(Color(0.9, 0.9, 0.9));
+  SolidPattern white = SolidPattern(Color(1, 1, 1));
+  SolidPattern grey = SolidPattern(Color(0.85, 0.85, 0.85));
+  SolidPattern light_blue =
+      SolidPattern(Color(78.0 / 100.0, 94.0 / 100.0, 100.0 / 100.0));
+  SolidPattern sky_blue =
+      SolidPattern(Color(67.0 / 100.0, 91.0 / 100.0, 100.0 / 100.0));
+  SolidPattern pastel_purple =
+      SolidPattern(Color(78.0 / 100.0, 72.0 / 100.0, 89.0 / 100.0));
 
-  SolidPattern red_d = SolidPattern(Color(1.0, 0.0, 0.0));
-  SolidPattern blue_d = SolidPattern(Color(0.0, 0.0, 1.0));
+  // floor patterns
+  SolidPattern green = SolidPattern(Color(0.56, 0.91, 0.60));
+  SolidPattern orange = SolidPattern(Color(1, 0.55, 0));
+
+  CheckersPattern floor_pat =
+      CheckersPattern(&green, &orange, identity_matrix());
+
+  // wall patterns
+  CheckersPattern wall_pat =
+      CheckersPattern(&light_blue, &sky_blue, identity_matrix());
+  PermutationPattern permuted_sky = PermutationPattern(&wall_pat);
 
   // Define the objects
   // Floor Plane
-  Plane floor = Plane(identity_matrix(), Material(&off_white));
+  Plane floor = Plane(translation_matrix(0, -1, 0),
+                      Material(&pastel_purple, Color(1, 0.9, 0.9),  // color
+                               0.1,                                 // ambient
+                               0.5,                                 // diffuse
+                               0,                                   // specular
+                               0                                    // shininess
+                               ));
 
-  // glass_sphere
-  Sphere s1 = Sphere(
-      translation_matrix(0.5, 0.75, 0) * scaling_matrix(0.75, 0.75, 0.75),
-      Material(&red_d));
-  Sphere s2 = Sphere(translation_matrix(-1, 1, 0), Material(&blue_d));
+  // Glass floor
+  Plane glass_floor = Plane(identity_matrix(), glass_material(1.5, 0.6), false);
+  // back_wall
+  Plane back_wall =
+      Plane(translation_matrix(0, 0, 50) * rotation_x_matrix(M_PI / 2),
+            Material(&light_blue, Color(0.66, 0, 0.34),  // color
+                     0.1,                                // ambient
+                     0.5,                                // diffuse
+                     0,                                  // specular
+                     0                                   // shininess
+                     ));
 
   // Add a light source
-  PointLight light = PointLight(point(-7, 7, -10), Color(1, 1, 1));
+  PointLight light = PointLight(point(10, 10, -10), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 10;
-  unsigned int x = ratio * 30;
-  unsigned int y = ratio * 30;
-  Camera camera(x, y, M_PI / 8);
+  int ratio = 8;
+  unsigned int x = ratio * 100;
+  unsigned int y = ratio * 33;
+  Camera camera(x, y, M_PI / 2.0);
   camera.set_transform(
-      view_transform(point(2, 3, -5), point(1, 1, 0), vector(0, 1, 0)));
+      view_transform(point(0, 3, -10), point(0, 1, 0), vector(0, 1, 0)));
 
   // Create world
-  World w(std::vector<Shape *>{&floor, &s1, &s2}, light);
+  World w(std::vector<Shape *>{&floor, &back_wall, &glass_floor}, light);
 
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << "New image generation starting!" << std::endl;
