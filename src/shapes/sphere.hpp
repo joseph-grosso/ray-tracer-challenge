@@ -40,3 +40,4 @@ bool operator!=(Sphere lhs, Sphere rhs);
 
 Sphere glass_sphere(Matrix m = identity_matrix(), float refractive_index = 1.5,
                     float reflective = 0.0);
+Sphere metal_sphere(Matrix m);

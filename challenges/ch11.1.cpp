@@ -76,13 +76,13 @@ int main() {
   PointLight light = PointLight(point(10, 10, -10), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 1;
+  int ratio = 20;
   unsigned int x = ratio * 128;
   unsigned int y = ratio * 90;
 
   Camera camera(x, y, M_PI / 3);
-  camera.transform =
-      view_transform(point(0, 1.5, -5), point(0, 0.5, 0), vector(0, 1, 0));
+  camera.set_transform(
+      view_transform(point(0, 1.5, -5), point(0, 0.5, 0), vector(0, 1, 0)));
   // Create world
   World w(
       std::vector<Shape *>{

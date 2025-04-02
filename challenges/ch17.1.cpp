@@ -12,6 +12,9 @@ int main() {
   // base patterns
   SolidPattern white = SolidPattern(Color(1, 1, 1));
   SolidPattern grey = SolidPattern(Color(0.85, 0.85, 0.85));
+
+  SolidPattern v_light_blue =
+      SolidPattern(Color(81.0 / 100.0, 93.0 / 100.0, 93.0 / 100.0));
   SolidPattern light_blue =
       SolidPattern(Color(78.0 / 100.0, 94.0 / 100.0, 100.0 / 100.0));
   SolidPattern sky_blue =
@@ -22,9 +25,6 @@ int main() {
   // floor patterns
   SolidPattern green = SolidPattern(Color(0.56, 0.91, 0.60));
   SolidPattern orange = SolidPattern(Color(1, 0.55, 0));
-
-  CheckersPattern floor_pat =
-      CheckersPattern(&green, &orange, identity_matrix());
 
   // wall patterns
   CheckersPattern wall_pat =
@@ -41,31 +41,55 @@ int main() {
                                0                                    // shininess
                                ));
 
+  Plane sky = Plane(translation_matrix(0, 20, 0), Material(&v_light_blue));
+
+  Sphere metal_ball = metal_sphere(translation_matrix(-1, 1, 0));
   // Glass floor
   Plane glass_floor = Plane(identity_matrix(), glass_material(1.5, 0.6), false);
   // back_wall
-  Plane back_wall =
-      Plane(translation_matrix(0, 0, 50) * rotation_x_matrix(M_PI / 2),
-            Material(&light_blue, Color(0.66, 0, 0.34),  // color
-                     0.1,                                // ambient
-                     0.5,                                // diffuse
-                     0,                                  // specular
-                     0                                   // shininess
-                     ));
+  Sphere walls = Sphere(scaling_matrix(60.0, 60.0, 60.0),
+                        Material(&light_blue, Color(0.66, 0, 0.34),  // color
+                                 0.1,                                // ambient
+                                 0.5,                                // diffuse
+                                 0,                                  // specular
+                                 0  // shininess
+                                 ));
+
+  SolidPattern solid_green = SolidPattern(Color(0, 1, 0));
+  SolidPattern blue = SolidPattern(Color(0.24, 0.51, 0.99));
+  PerlinPattern perl =
+      PerlinPattern(&green, &blue, 12345, scaling_matrix(0.25, 0.25, 0.25));
+
+  // Floor Plane
+  Sphere world_sphere =
+      Sphere(translation_matrix(1, 1, 0), Material(Color(0.5, 0, 0),  // color
+                                                   0.1,               // ambient
+                                                   0.9,               // diffuse
+                                                   0.9,  // specular
+                                                   300,  // shininess
+                                                   0.5));
+
+  // Glass ball
+  Sphere glass_ball = glass_sphere(translation_matrix(0, 1, -2.7));
 
   // Add a light source
   PointLight light = PointLight(point(10, 10, -10), Color(1, 1, 1));
 
   // Create camera
-  int ratio = 8;
+  int ratio = 6;
   unsigned int x = ratio * 100;
-  unsigned int y = ratio * 33;
-  Camera camera(x, y, M_PI / 2.0);
+  unsigned int y = ratio * 70;
+  Camera camera(x, y, M_PI / 5);
   camera.set_transform(
       view_transform(point(0, 3, -10), point(0, 1, 0), vector(0, 1, 0)));
 
   // Create world
-  World w(std::vector<Shape *>{&floor, &back_wall, &glass_floor}, light);
+  World w(
+      std::vector<Shape *>{
+          &floor, &walls, &glass_floor,            // walls
+          &metal_ball, &world_sphere, &glass_ball  // spheres
+      },
+      light);
 
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << "New image generation starting!" << std::endl;
@@ -74,7 +98,7 @@ int main() {
   auto start = high_resolution_clock::now();
 
   // Render the result
-  Canvas image = camera.render(w);
+  Canvas image = camera.render(w, 2);
 
   auto stop = high_resolution_clock::now();
 

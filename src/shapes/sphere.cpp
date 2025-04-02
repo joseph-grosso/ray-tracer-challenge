@@ -53,3 +53,7 @@ Sphere glass_sphere(Matrix m, float refractive_index, float reflective) {
   return Sphere(m, Material(NULL, Color(1, 1, 1), 0.1, 0.1, 0.1, 300.0,
                             reflective, 1.0, refractive_index));
 };
+
+Sphere metal_sphere(Matrix m) {
+  return Sphere(m, Material(Color(0, 0.1, 0), 0.05, 0.3, 0.9, 400.0, 1.0));
+};
