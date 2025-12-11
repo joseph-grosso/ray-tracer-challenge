@@ -1,3 +1,5 @@
+#include <cstdio>
+#include <fstream>
 #include <string>
 
 #include "canvas.hpp"
@@ -98,4 +100,117 @@ TEST(TestCanvas, EndPPMStringWithNewline) {
   Canvas canvas_5(5, 3);
   std::string ppm = canvas_5.canvas_to_ppm();
   EXPECT_TRUE(ppm.back() == '\n');
+}
+
+// PNG Export Tests
+// Test that PNG file is created successfully
+TEST(TestCanvasPNG, WritePNGFileCreated) {
+  Canvas canvas(10, 10);
+  // Fill canvas with a simple color
+  Color red(1, 0, 0);
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++) {
+      canvas.write_pixel(red, i, j);
+    }
+  }
+
+  // Write to PNG
+  std::string filename = "test_canvas.png";
+  canvas.write_to_png(filename);
+
+  // Verify file was created
+  std::ifstream file(filename);
+  EXPECT_TRUE(file.good());
+  file.close();
+
+  // Clean up
+  std::remove(filename.c_str());
+}
+
+// Test PNG with various colors
+TEST(TestCanvasPNG, WritePNGMultipleColors) {
+  Canvas canvas(3, 3);
+
+  // Create a colorful pattern
+  canvas.write_pixel(Color(1, 0, 0), 0, 0);  // Red
+  canvas.write_pixel(Color(0, 1, 0), 1, 1);  // Green
+  canvas.write_pixel(Color(0, 0, 1), 2, 2);  // Blue
+  canvas.write_pixel(Color(1, 1, 0), 0, 2);  // Yellow
+  canvas.write_pixel(Color(1, 0, 1), 2, 0);  // Magenta
+
+  std::string filename = "test_colors.png";
+  canvas.write_to_png(filename);
+
+  std::ifstream file(filename);
+  EXPECT_TRUE(file.good());
+  file.close();
+
+  std::remove(filename.c_str());
+}
+
+// Test PNG with clamped color values
+TEST(TestCanvasPNG, WritePNGClampedColors) {
+  Canvas canvas(2, 2);
+
+  // Colors that need clamping
+  canvas.write_pixel(Color(1.5, 0, 0), 0, 0);    // Should clamp to (1, 0, 0)
+  canvas.write_pixel(Color(-0.5, 0, 0), 1, 0);   // Should clamp to (0, 0, 0)
+  canvas.write_pixel(Color(0.5, 0.5, 0.5), 0, 1);
+  canvas.write_pixel(Color(2, 2, 2), 1, 1);  // Should clamp to (1, 1, 1)
+
+  std::string filename = "test_clamped.png";
+  canvas.write_to_png(filename);
+
+  std::ifstream file(filename);
+  EXPECT_TRUE(file.good());
+  file.close();
+
+  std::remove(filename.c_str());
+}
+
+// Test PNG with default filename
+TEST(TestCanvasPNG, WritePNGDefaultFilename) {
+  Canvas canvas(5, 5);
+  Color blue(0, 0, 1);
+  for (int i = 0; i < 5; i++) {
+    for (int j = 0; j < 5; j++) {
+      canvas.write_pixel(blue, i, j);
+    }
+  }
+
+  canvas.write_to_png();  // Uses default "canvas.png"
+
+  std::ifstream file("canvas.png");
+  EXPECT_TRUE(file.good());
+  file.close();
+
+  std::remove("canvas.png");
+}
+
+// Test PNG file has PNG magic number
+TEST(TestCanvasPNG, WritePNGValidFormat) {
+  Canvas canvas(4, 4);
+  Color white(1, 1, 1);
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      canvas.write_pixel(white, i, j);
+    }
+  }
+
+  std::string filename = "test_format.png";
+  canvas.write_to_png(filename);
+
+  // Check PNG magic number (first 8 bytes)
+  std::ifstream file(filename, std::ios::binary);
+  unsigned char magic[8];
+  file.read(reinterpret_cast<char*>(magic), 8);
+  file.close();
+
+  // PNG magic number is: 89 50 4E 47 0D 0A 1A 0A
+  EXPECT_EQ(magic[0], 0x89);
+  EXPECT_EQ(magic[1], 0x50);  // P
+  EXPECT_EQ(magic[2], 0x4E);  // N
+  EXPECT_EQ(magic[3], 0x47);  // G
+
+  std::remove(filename.c_str());
 }
