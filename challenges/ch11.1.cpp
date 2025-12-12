@@ -104,10 +104,11 @@ int main() {
 
   auto stop = high_resolution_clock::now();
 
-  std::string filename = "values.ppm";
-  image.write_to_ppm(filename);
-
-  std::cout << "Charted at " << filename << std::endl;
+  std::string filename_ppm = "values.ppm";
+  std::string filename_png = "values.png";
+  image.write_to_ppm(filename_ppm);
+  image.write_to_png(filename_png);
+  std::cout << "Charted at " << filename_ppm << " and " << filename_png << std::endl;
 
   auto duration = duration_cast<microseconds>(stop - start);
   std::cout << duration.count() << " microseconds." << std::endl;

@@ -47,7 +47,9 @@ Ray Camera::ray_for_pixel(int px, int py) {
 
 Canvas Camera::render(World w, int reflections) {
   Canvas image(hsize, vsize);
+// #ifdef _OPENMP
 #pragma omp parallel for collapse(2) num_threads(8)
+// #endif
   for (int x = 0; x < hsize; x++) {
     for (int y = 0; y < vsize; y++) {
       Ray r = ray_for_pixel(x, y);

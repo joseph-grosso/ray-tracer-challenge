@@ -18,7 +18,7 @@ class PermutationPattern : public Pattern {
 
  public:
   PermutationPattern(Pattern *base_pattern, float noise_scaling = 1.0,
-                     long unsigned int seed = 0)
+                     unsigned int seed = 0)
       : Pattern(base_pattern->get_transform()) {
     this->base_pattern = base_pattern;
     this->perlin_x = siv::PerlinNoise{seed};

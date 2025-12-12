@@ -1,6 +1,6 @@
 #include "intersection.hpp"
 
-#include <bits/stdc++.h>
+#include <algorithm>
 
 #include <stdexcept>
 #include <tuple>

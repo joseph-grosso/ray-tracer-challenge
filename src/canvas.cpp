@@ -1,3 +1,4 @@
+#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "canvas.hpp"
 
 #include <cmath>
@@ -102,4 +103,33 @@ void Canvas::write_to_ppm(std::string filename) {
   out << ppm_data;
   out.close();
   return;
+};
+
+void Canvas::write_to_png(std::string filename) {
+  // Allocate buffer for 24-bit RGB image (3 bytes per pixel)
+  unsigned char* png_data = new unsigned char[width * height * 3];
+
+  // Fill the buffer with pixel data
+  unsigned int offset = 0;
+  for (unsigned int y = 0; y < height; y++) {
+    for (unsigned int x = 0; x < width; x++) {
+      Color col = _canvas[x][y];
+      png_data[offset] = scale_color(col.red);
+      png_data[offset + 1] = scale_color(col.green);
+      png_data[offset + 2] = scale_color(col.blue);
+      offset += 3;
+    }
+  }
+
+  // Write PNG file using stb_image_write
+  int result =
+      stbi_write_png(filename.c_str(), width, height, 3, png_data, width * 3);
+
+  // Clean up allocated memory
+  delete[] png_data;
+
+  // Handle errors
+  if (!result) {
+    std::cerr << "Error: Failed to write PNG file: " << filename << std::endl;
+  }
 };

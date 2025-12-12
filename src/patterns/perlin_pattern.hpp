@@ -16,7 +16,7 @@ class PerlinPattern : public Pattern {
   bool fade_together;
 
  public:
-  PerlinPattern(Pattern *a, Pattern *b, long unsigned int seed,
+  PerlinPattern(Pattern *a, Pattern *b, unsigned int seed,
                 Matrix t = identity_matrix(), bool fade_together = false)
       : Pattern(t) {
     this->a = a;
