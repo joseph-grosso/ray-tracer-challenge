@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(RayTracer)
 
-find_package(OpenMP REQUIRED)
+find_package(OpenMP)
 find_package(OpenGL REQUIRED)
 
 set(
@@ -50,8 +50,5 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/shapes
 )
 
-find_package (Eigen3 3.3 REQUIRED NO_MODULE)
-
-include_directories(${EIGEN_INCLUDE_DIR})
-
+find_package(Eigen3 REQUIRED NO_MODULE)
 target_link_libraries(raytracer_lib PUBLIC Eigen3::Eigen)
